@@ -19,3 +19,6 @@
 | Developer| Mikaéla Petronilho         |     [![Linkedin Badge](https://img.shields.io/badge/Linkedin-blue?style=flat-square&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/mika%C3%A9la-petronilho-31198a252) [![GitHub Badge](https://img.shields.io/badge/GitHub-111217?style=flat-square&logo=github&logoColor=white)](https://github.com/MikaelaBgtt)
 
 </div>
+
+## O controle do desenvolvimento deste projeto pode ser acompanhado pelo seguinte link:
+[Code Cats's Notion](https://woozy-middle-ae5.notion.site/Code-Cats-76b4fda3c28e4d37918e7d9a0084c974)
