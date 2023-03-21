@@ -20,6 +20,8 @@
 
 ## :white_medium_square: Backlog do produto
 
+<span id="equipe">
+    
 ## :white_medium_square: Equipe
 
 ![Equipe](https://user-images.githubusercontent.com/108769169/226708787-268e9ad5-f93d-4429-b1c3-57eca11ff1e8.gif)
