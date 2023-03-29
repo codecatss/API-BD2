@@ -1,9 +1,30 @@
-# API - Aprendizado por Projeto Integrador
-* FATEC São José dos Campos - Prof. Jessen Vidal
+![Minimalist Typographic Store Header](https://user-images.githubusercontent.com/108769169/226620983-5d4e39bb-0efa-4355-b3d8-6be2d1ea7fcc.gif)
 
-* 2º Período - Banco De Dados
+<br id="topo">
+<p align="center">
+    <a href="#sobre">Projeto</a>  |
+    <a href="#backlogs">Backlogs do produto</a>  |
+    <a href="#entrega">Entrega das Sprints</a>  |
+    <a href="#tecnologias">Tecnologias</a>  |
+    <a href="#equipe">Equipe</a>
+</p>
 
+<span id="sobre">
+
+## :white_medium_square: O Projeto
+<br></br>
+![Minimalist Typographic Store Header (2)](https://user-images.githubusercontent.com/108769169/226636877-f162670e-fb82-4bec-b4ec-f55f39ab2a62.gif)
+> Projeto baseado na metodologia ágil SCRUM.
+
+<span id="backlogs">
+
+## :white_medium_square: Backlog do produto
+
+<span id="equipe">
+    
 ## :white_medium_square: Equipe
+
+![Equipe](https://user-images.githubusercontent.com/108769169/226708787-268e9ad5-f93d-4429-b1c3-57eca11ff1e8.gif)
 
 <div align="center">
 
@@ -20,5 +41,4 @@
 
 </div>
 
-## O controle do desenvolvimento deste projeto pode ser acompanhado pelo seguinte link:
-[Code Cats's Notion](https://woozy-middle-ae5.notion.site/Code-Cats-76b4fda3c28e4d37918e7d9a0084c974)
+
