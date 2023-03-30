@@ -30,6 +30,7 @@
 ## :computer: Protótipo
 <details>
 <summary> Wireframe do produto </summary>
+https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FDAxggRytHW8Hl3kPeTlYQs%2FTelas-do-Projeto-de-Lan%25C3%25A7amento-de-horas%3Fnode-id%3D392-1489%26scaling%3Dscale-down%26page-id%3D392%253A766
 </details>
 
 <span id="tecnologias">
