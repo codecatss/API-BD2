@@ -22,11 +22,13 @@
 
 <span id="tecnologias">
     
-## :white_medium_square: Tecnologias
+## :wrench: Tecnologias  
 
+![Tecnologias Utilizadas](https://user-images.githubusercontent.com/111530654/228836686-9338cf6c-6a5c-4cf2-af19-e48656d7f672.gif) 
 
-![Tecnologias Utilizadas](https://user-images.githubusercontent.com/111530654/228836686-9338cf6c-6a5c-4cf2-af19-e48656d7f672.gif)
-
+- Back-end: Java;
+- Front-end: JavaFX, Scene Builder;
+- Ferramentas: Github, Canva, Visual Studio Code, NetBeans, Figma;
 
 <span id="equipe">
     
