@@ -5,20 +5,32 @@
     <a href="#sobre">Projeto</a>  |
     <a href="#backlogs">Backlogs do produto</a>  |
     <a href="#entrega">Entrega das Sprints</a>  |
+    <a href="#prototipo">Protótipo</a>   |
     <a href="#tecnologias">Tecnologias</a>  |
     <a href="#equipe">Equipe</a>
 </p>
 
 <span id="sobre">
 
-## :white_medium_square: O Projeto
+## :page_with_curl: O Projeto
 <br></br>
 ![Minimalist Typographic Store Header (2)](https://user-images.githubusercontent.com/108769169/226636877-f162670e-fb82-4bec-b4ec-f55f39ab2a62.gif)
 > Projeto baseado na metodologia ágil SCRUM.
 
 <span id="backlogs">
 
-## :white_medium_square: Backlog do produto
+## :dart: Backlog do produto
+
+<span id="entrega">
+
+## :white_check_mark: Entrega das Sprints
+
+<span id="prototipo">
+
+## :computer: Protótipo
+<details>
+<summary> Wireframe do produto </summary>
+</details>
 
 <span id="tecnologias">
     
@@ -32,7 +44,7 @@
 
 <span id="equipe">
     
-## :white_medium_square: Equipe
+## :busts_in_silhouette: Equipe
 
 ![Equipe](https://user-images.githubusercontent.com/108769169/226708787-268e9ad5-f93d-4429-b1c3-57eca11ff1e8.gif)
 
