@@ -48,7 +48,6 @@
 
 ![Equipe](https://user-images.githubusercontent.com/108769169/226708787-268e9ad5-f93d-4429-b1c3-57eca11ff1e8.gif)
 
-<div align="center">
 
 |    Função     | Nome    |    LinkedIn & GitHub      |
 | :-----------: | :------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
@@ -61,6 +60,5 @@
 | Developer| Markus Gomes        |     [![Linkedin Badge](https://img.shields.io/badge/Linkedin-blue?style=flat-square&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/markus-gomes-013b76250) [![GitHub Badge](https://img.shields.io/badge/GitHub-111217?style=flat-square&logo=github&logoColor=white)](https://github.com/markusgomes)              |
 | Developer| Mikaéla Petronilho         |     [![Linkedin Badge](https://img.shields.io/badge/Linkedin-blue?style=flat-square&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/mika%C3%A9la-petronilho-31198a252) [![GitHub Badge](https://img.shields.io/badge/GitHub-111217?style=flat-square&logo=github&logoColor=white)](https://github.com/MikaelaBgtt)
 
-</div>
 
-
+→ [Voltar ao topo](#topo)
