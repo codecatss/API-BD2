@@ -24,7 +24,9 @@
     
 ## :white_medium_square: Tecnologias
 
-![Tecnologias utilizadas](https://user-images.githubusercontent.com/111530654/228835112-8409f6bc-74e6-42fa-b217-075a67830241.gif)
+
+![Tecnologias Utilizadas](https://user-images.githubusercontent.com/111530654/228836686-9338cf6c-6a5c-4cf2-af19-e48656d7f672.gif)
+
 
 <span id="equipe">
     
