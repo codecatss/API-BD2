@@ -20,6 +20,12 @@
 
 ## :white_medium_square: Backlog do produto
 
+<span id="tecnologias">
+    
+## :white_medium_square: Tecnologias
+
+![Tecnologias utilizadas](https://user-images.githubusercontent.com/111530654/228835112-8409f6bc-74e6-42fa-b217-075a67830241.gif)
+
 <span id="equipe">
     
 ## :white_medium_square: Equipe
