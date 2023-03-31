@@ -49,6 +49,10 @@
 <a href= "https://www.figma.com/community/file/1223284617048557184" >   Protótipo Geral </a>
 </details>
 
+
+### Modelo de banco de dados
+![Modelo_BD_Sprint_1](https://user-images.githubusercontent.com/70269831/229245020-421f8bbc-d7d2-4ed6-ad50-2694613c09d4.png)
+
 <span id="tecnologias">
     
 ## :wrench: Tecnologias  
