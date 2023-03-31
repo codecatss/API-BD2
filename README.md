@@ -37,6 +37,10 @@
 
 ## :white_check_mark: Entrega das Sprints
 
+| **SPRINT** | **PERÍODO**| **O QUE SERÁ ENTREGUE** | **BACKLOG DAS SPRINTS** |
+|:-------------:|:-----------------------:|:-------------------------:|:-------------------------:|
+|  01  | 13/03 a 02/04 | Fluxograma da aplicação, wireframe do produto e modelagem de banco de dados | <a href="https://github.com/codecatss/API-BD2/wiki/Sprint-1">Sprint 1</a> |
+
 <span id="prototipo">
 
 ## :computer: Protótipo
