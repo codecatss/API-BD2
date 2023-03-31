@@ -23,7 +23,8 @@
 
 | *COMO UM* |  *EU GOSTARIA*  | *PARA* |
 |-----------------------|-------------------------|-------------------------|
-| Colaborador | De lançar minhas horas extras e sobreavisos | Serem aprovadas por um gerente e serem pagas. |
+| Colaborador | De lançar minhas horas extras | Serem aprovadas por um gerente e serem pagas. |
+| Colaborador | De lançar minhas sobreavisos | Serem aprovadas por um gerente e serem pagas. |    
 | Gestor |  De validar ou não as horas lançadas por um colaborador | Repassar ao RH |
 | Gestor | De lançar minhas horas extras e sobreavisos | Serem pagas |
 | Administrador | De adicionar novos clientes, squads, colaboradores, gestores e projetos | Que a equipe possa utilizar o sistema |
