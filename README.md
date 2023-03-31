@@ -42,6 +42,7 @@
 ## :computer: Protótipo
 <details>
 <summary> Wireframe do produto </summary>
+<a href= "https://www.figma.com/community/file/1223284617048557184" >   Protótipo Geral </a>
 </details>
 
 <span id="tecnologias">
