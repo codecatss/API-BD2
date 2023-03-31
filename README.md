@@ -21,6 +21,17 @@
 
 ## :dart: Backlog do produto
 
+| *COMO UM* |  *EU GOSTARIA*  | *PARA* |
+|-----------------------|-------------------------|-------------------------|
+| Colaborador | De lançar minhas horas extras e sobreavisos | Serem aprovadas por um gerente e serem pagas. |
+| Gestor |  De validar ou não as horas lançadas por um colaborador | Repassar ao RH |
+| Gestor | De lançar minhas horas extras e sobreavisos | Serem pagas |
+| Administrador | De adicionar novos clientes, squads, colaboradores, gestores e projetos | Que a equipe possa utilizar o sistema |
+| Administrador | De exportar um relatório em CSV  | Controle |
+| Administrador | De visualizar um dashboard das horas lançadas | Acompanhamento em tempo real |
+| Administrador | De filtrar meu dashboard  | Montar a equipe |
+| Administrador | De poder acessar as informações de parametrização | Fazer a gestão dos clientes, projetos e colaboradores |
+
 <span id="entrega">
 
 ## :white_check_mark: Entrega das Sprints
