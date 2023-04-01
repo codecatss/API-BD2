@@ -21,17 +21,18 @@
 
 ## :dart: Backlog do produto
 
-| *COMO UM* |  *EU GOSTARIA*  | *PARA* |
-|-----------------------|-------------------------|-------------------------|
-| Colaborador | De lançar minhas horas extras | Serem aprovadas por um gerente e serem pagas. |
-| Colaborador | De lançar minhas sobreavisos | Serem aprovadas por um gerente e serem pagas. |    
-| Gestor |  De validar ou não as horas lançadas por um colaborador | Repassar ao RH |
-| Gestor | De lançar minhas horas extras e sobreavisos | Serem pagas |
-| Administrador | De adicionar novos clientes, squads, colaboradores, gestores e projetos | Que a equipe possa utilizar o sistema |
-| Administrador | De exportar um relatório em CSV  | Controle |
-| Administrador | De visualizar um dashboard das horas lançadas | Acompanhamento em tempo real |
-| Administrador | De filtrar meu dashboard  | Montar a equipe |
-| Administrador | De poder acessar as informações de parametrização | Fazer a gestão dos clientes, projetos e colaboradores |
+| *COMO UM* |  *EU GOSTARIA*  | *PARA* | *PIORIDADE* |
+|-----------------------|-------------------------|-------------------------|-------------------------|
+| Colaborador | De lançar minhas horas extras | Serem aprovadas por um gerente e serem pagas | Imprescindível	|
+| Colaborador | De lançar minhas sobreavisos | Serem aprovadas por um gerente e serem pagas | Imprescindível	| 
+| Gestor |  De validar ou não as horas lançadas por um colaborador | Repassar ao RH | Imprescindível |
+| Gestor | De lançar minhas horas extras e sobreavisos | Serem pagas | Imprescindível |
+| Administrador | De consultar as horas extras e sobreavisos validadas pelos gestores | Serem pagas | Imprescindível |
+| Administrador | De poder acessar as informações de parametrização | Fazer a gestão dos clientes, projetos e colaboradores | Imprescindível |
+| Administrador | De adicionar novos clientes, squads, colaboradores, gestores e projetos | Que a equipe possa utilizar o sistema | Importante |
+| Administrador | De exportar um relatório em CSV  | Controle | Importante |
+| Administrador | De visualizar um dashboard das horas lançadas | Acompanhamento em tempo real | Desejável |
+| Administrador | De filtrar meu dashboard  | Montar a equipe | Desejável |
 
 <span id="entrega">
 
@@ -40,14 +41,13 @@
 | **SPRINT** | **PERÍODO**| **O QUE SERÁ ENTREGUE** | **BACKLOG DAS SPRINTS** |
 |:-------------:|:-----------------------:|:-------------------------:|:-------------------------:|
 |  01  | 13/03 a 02/04 | Fluxograma da aplicação, wireframe do produto e modelagem de banco de dados | <a href="https://github.com/codecatss/API-BD2/wiki/Sprint-1">Sprint 1</a> |
+|  02  | 03/04 a 23/04 | Sistema de lançamento de horas e sistema de aprovação de horas | <a href="https://github.com/codecatss/API-BD2/wiki/Backlog-Sprint-2">Sprint 2</a>
 
 <span id="prototipo">
 
 ## :computer: Protótipo
-<details>
-<summary> Wireframe do produto </summary>
-<a href= "https://www.figma.com/community/file/1223284617048557184" >   Protótipo Geral </a>
-</details>
+- <a href= "https://www.figma.com/community/file/1223284617048557184" >   Wireframe do produto </a>
+
 
 <span id="tecnologias">
     
