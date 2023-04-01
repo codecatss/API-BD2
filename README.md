@@ -40,7 +40,7 @@
 
 | **SPRINT** | **PERÍODO**| **O QUE SERÁ ENTREGUE** | **BACKLOG DAS SPRINTS** |
 |:-------------:|:-----------------------:|:-------------------------:|:-------------------------:|
-|  01  | 13/03 a 02/04 | Fluxograma da aplicação, wireframe do produto e modelagem de banco de dados | <a href="https://github.com/codecatss/API-BD2/wiki/Sprint-1">Sprint 1</a> |
+|  01  | 13/03 a 02/04 | Fluxograma da aplicação, wireframe do produto e modelagem de banco de dados | <a href="https://github.com/codecatss/API-BD2/wiki/Backlog-Sprint-1">Sprint 1</a> |
 |  02  | 03/04 a 23/04 | Sistema de lançamento de horas e sistema de aprovação de horas | <a href="https://github.com/codecatss/API-BD2/wiki/Backlog-Sprint-2">Sprint 2</a>
 
 <span id="prototipo">
