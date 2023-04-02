@@ -3,12 +3,10 @@ module com.mycompany.api.bd2 {
     requires javafx.controls;
     requires javafx.fxml;
 
-    opens com.mycompany.api.bd2 to javafx.fxml;
+    opens com.mycompany.api.bd2 to javafx.fxml;'
     exports com.mycompany.api.bd2;
 }
-*/
-import javafx.scene.Parent;
-import javafx.stage.Stage;
+*/  
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
