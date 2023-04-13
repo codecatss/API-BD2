@@ -14,3 +14,19 @@ create table
         ) NOT NULL,
         status VARCHAR(10) not NULL
     );
+
+create table
+    hora(
+        id int not null AUTO_INCREMENT PRIMARY KEY,
+        username_lancador VARCHAR(20) not null,
+        data_hora_inicio DATETIME not NULL,
+        data_hora_fim DATETIME not NULL,
+        tipo VARCHAR(15) NOT NULL,
+        Foreign Key (username_lancador) REFERENCES usuarios(username)
+    );
+
+create table
+    centro_de_resultado(
+        nome VARCHAR(30) NOT NULL PRIMARY KEY,
+        status_aprovacao ENUM('ativo', 'inativo') NOT NULL
+    );
