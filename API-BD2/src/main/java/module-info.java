@@ -3,10 +3,12 @@ module com.mycompany.api.bd2 {
     requires javafx.controls;
     requires javafx.fxml;
 
-    opens com.mycompany.api.bd2 to javafx.fxml;'
+    opens com.mycompany.api.bd2 to javafx.fxml;
     exports com.mycompany.api.bd2;
 }
-*/  
+*/
+import javafx.scene.Parent;
+import javafx.stage.Stage;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -15,14 +17,15 @@ module com.mycompany.api.bd2 {
 
 /**
  *
- * @author danko
+ * @author dankoS
  */
 public class Main {
-    public static void main(String[] args) {
-        Parent root = FXMLLoader.load(getClass().getResource("tela_grafico.fxml"));
-        TelaBrancaComBotao tela = new TelaBrancaComBotao();
-        Stage stage = new Stage();
-        tela.start("tela_grafico.fxml");
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Ola.fxml"));
+    Parent root = fxmlLoader.load();
+    Scene scene = new Scene(root);  
+    Stage stage = new Stage();
+    stage.setScene(scene);
+    stage.show();
     }
 }
 
