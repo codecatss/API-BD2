@@ -30,3 +30,15 @@ create table
         nome VARCHAR(30) NOT NULL PRIMARY KEY,
         status_aprovacao ENUM('ativo', 'inativo') NOT NULL
     );
+    
+create table
+    aprovacao (
+        username_aprovador VARCHAR(20) not null NULL PRIMARY KEY,
+        id_hora int PRIMARY KEY,
+        status_aprovacao ENUM(
+            'pendente',
+            'aprovado',
+            'reprovado'
+        ) NOT NULL,
+        justificativa Foreign Key (username_aprovador) REFERENCES usuarios(username)
+    );
