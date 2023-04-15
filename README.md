@@ -23,16 +23,15 @@
 
 | *COMO UM* |  *EU GOSTARIA*  | *PARA* | *PIORIDADE* |
 |-----------------------|-------------------------|-------------------------|-------------------------|
-| Colaborador | De lançar minhas horas extras | Serem aprovadas por um gerente e serem pagas | Imprescindível	|
-| Colaborador | De lançar minhas sobreavisos | Serem aprovadas por um gerente e serem pagas | Imprescindível	| 
-| Gestor |  De validar ou não as horas lançadas por um colaborador | Repassar ao RH | Imprescindível |
-| Gestor | De lançar minhas horas extras e sobreavisos | Serem pagas | Imprescindível |
-| Administrador | De consultar as horas extras e sobreavisos validadas pelos gestores | Serem pagas | Imprescindível |
-| Administrador | De poder acessar as informações de parametrização | Fazer a gestão dos clientes, projetos e colaboradores | Imprescindível |
-| Administrador | De adicionar novos clientes, squads, colaboradores, gestores e projetos | Que a equipe possa utilizar o sistema | Importante |
-| Administrador | De exportar um relatório em CSV  | Controle | Importante |
-| Administrador | De visualizar um dashboard das horas lançadas | Acompanhamento em tempo real | Desejável |
-| Administrador | De filtrar meu dashboard  | Montar a equipe | Desejável |
+| Colaborador | De lançar minhas horas extras e de sobreaviso | Serem aprovadas por um gerente e serem pagas |1|
+| Gestor |  De validar ou não as horas lançadas por um colaborador | Repassar ao RH |1|
+| Gestor | De lançar minhas horas extras e sobreavisos | Serem pagas |1|
+| Administrador | De consultar as horas extras e sobreavisos validadas pelos gestores | Serem pagas |2|
+| Administrador | De poder acessar as informações de parametrização | Fazer a gestão dos clientes, projetos e colaboradores |1|
+| Administrador | De adicionar novos clientes, squads, colaboradores, gestores e projetos | Que a equipe possa utilizar o sistema |2|
+| Administrador | De exportar um relatório em CSV  | Controle |2|
+| Administrador | De visualizar um dashboard das horas lançadas | Acompanhamento em tempo real |3|
+| Administrador | De filtrar meu dashboard  | Montar a equipe |3|
 
 <span id="entrega">
 
