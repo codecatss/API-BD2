@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 public class HomeColabController {
 
     @FXML
-    private void switchToPrimary() throws IOException {
+    private void comandoGenerico2() throws IOException {
         App.setRoot("primary");
     }
 }

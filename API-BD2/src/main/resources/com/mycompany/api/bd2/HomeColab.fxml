@@ -9,7 +9,7 @@
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.api.bd2.HomeColabController">
    <children>
       <Label text="Primary View" />
-      <Button fx:id="primaryButton" onAction="#switchToSecondary" text="Switch to Secondary View">
+      <Button fx:id="primaryButton" onAction="#comandoGenerico2" text="Switch to Secondary View">
          <font>
             <Font name="Arial" size="12.0" />
          </font></Button>

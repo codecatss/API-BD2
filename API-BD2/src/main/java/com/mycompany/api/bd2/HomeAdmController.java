@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 public class HomeAdmController {
 
     @FXML
-    private void switchToSecondary() throws IOException {
+    private void comandoGenerico1() throws IOException {
         App.setRoot("secondary");
     }
 }
