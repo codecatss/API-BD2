@@ -19,10 +19,6 @@ module com.mycompany.api.bd2 {
  */
 public class Main {
     public static void main(String[] args) {
-        Parent root = FXMLLoader.load(getClass().getResource("tela_grafico.fxml"));
-        TelaBrancaComBotao tela = new TelaBrancaComBotao();
-        Stage stage = new Stage();
-        tela.start("tela_grafico.fxml");
     }
 }
 
