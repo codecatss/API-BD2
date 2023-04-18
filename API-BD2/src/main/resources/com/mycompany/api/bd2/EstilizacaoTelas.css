@@ -1,4 +1,11 @@
-
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 18 de abr. de 2023, 10:51:01
+    Author     : nicol
+*/
 
 .top-form{
     -fx-background-color:#fff;
@@ -36,8 +43,17 @@
     -fx-background-color:transparent;
     -fx-cursor:hand;
     -fx-font-family:"Arial";
+    -fx-font-size:20px;
+    -fx-text-fill:#ffffff;
+    -fx-alignment:CENTER-LEFT;
+}
+
+.cr-btn{
+    -fx-background-color:transparent;
+    -fx-cursor:hand;
+    -fx-font-family:"Arial";
     -fx-font-size:14px;
-    -fx-text-fill:#fff;
+    -fx-text-fill:#ffffff;
     -fx-alignment:CENTER-LEFT;
 }
 
@@ -103,18 +119,6 @@
     -fx-background-color:#991a1a;
 }
 
-.textfield{
-    -fx-background-color:linear-gradient(to bottom, #efefef, #eee);
-    -fx-border-color:linear-gradient(to bottom right, #272b3f, #256b51);
-    -fx-border-width:.8px;
-    -fx-font-family:"Tahoma";
-    -fx-border-radius:4px;
-}
-.textfield:focused{
-    -fx-border-width:1.8px;
-    -fx-background-color:#fff;
-}
-
 .search{
     -fx-background-color:transparent;
     -fx-border-color:linear-gradient(to bottom right, #272b3f, #256b51);
@@ -126,65 +130,4 @@
 }
 .search:focused{
     -fx-border-width:2px;
-}
-
-.import-btn{
-    -fx-background-color:#ddd;
-    -fx-text-fill:red;
-    -fx-cursor:hand;
-}
-
-.add-btn{
-    -fx-background-color:#304575;
-    -fx-background-radius:8px;
-    -fx-text-fill:#fff;
-    -fx-font-size:14px;
-    -fx-font-family:"Arial";
-    -fx-cursor:hand;
-}
-.add-btn:hover{
-    -fx-background-color:#3357a4;
-}
-
-.update-btn{
-    -fx-background-color:#327252;
-    -fx-background-radius:8px;
-    -fx-text-fill:#fff;
-    -fx-font-size:14px;
-    -fx-font-family:"Arial";
-    -fx-cursor:hand;
-}
-.update-btn:hover{
-    -fx-background-color:#309a65;
-}
-
-.delete-btn{
-    -fx-background-color:#86253f;
-    -fx-background-radius:8px;
-    -fx-text-fill:#fff;
-    -fx-font-size:14px;
-    -fx-font-family:"Arial";
-    -fx-cursor:hand;
-}
-.delete-btn:hover{
-    -fx-background-color:#ae1d46;
-}
-
-.clear-btn{
-    -fx-background-color:#753566;
-    -fx-background-radius:8px;
-    -fx-text-fill:#fff;
-    -fx-font-size:14px;
-    -fx-font-family:"Arial";
-    -fx-cursor:hand;
-}
-.clear-btn:hover{
-    -fx-background-color:#9d3485;
-}
-
-.label-info{
-    -fx-background-color:transparent;
-    -fx-border-color:linear-gradient(to bottom right, #272b3f, #256b51);
-    -fx-border-radius:4px;
-    -fx-padding:0px 0px 0px 8px;
 }

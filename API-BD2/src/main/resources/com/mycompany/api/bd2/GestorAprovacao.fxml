@@ -16,8 +16,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -25,14 +24,14 @@
                <top>
                   <AnchorPane prefHeight="45.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane layoutX="168.0" layoutY="-54.0" prefHeight="35.0" prefWidth="1100.0" styleClass="top-form" stylesheets="@../../../../../../../../../EmployeeManagementSystem/employeeManagementSystem/src/employeemanagementsystem/dashboardDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane layoutX="168.0" layoutY="-54.0" prefHeight="35.0" prefWidth="1100.0" styleClass="top-form" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Button layoutX="1042.0" layoutY="9.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="50.0" styleClass="close" stylesheets="@../../../../../../../../../EmployeeManagementSystem/employeeManagementSystem/src/employeemanagementsystem/dashboardDesign.css" text="X" textAlignment="CENTER" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
+                              <Button layoutX="1236.0" layoutY="9.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="50.0" styleClass="close" stylesheets="@EstilizacaoTelas.css" text="X" textAlignment="CENTER" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="9.0">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="989.0" layoutY="2.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="50.0" styleClass="minimize" stylesheets="@../../../../../../../../../EmployeeManagementSystem/employeeManagementSystem/src/employeemanagementsystem/dashboardDesign.css" text="-" textAlignment="CENTER">
+                              <Button layoutX="1186.0" layoutY="9.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="50.0" styleClass="minimize" stylesheets="@EstilizacaoTelas.css" text="-" textAlignment="CENTER" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="9.0">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
@@ -50,11 +49,11 @@
                <left>
                   <AnchorPane prefHeight="555.0" prefWidth="211.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane layoutY="93.0" prefHeight="554.4" prefWidth="211.2" styleClass="nav-form" stylesheets="@../../../../../../../../../EmployeeManagementSystem/employeeManagementSystem/src/employeemanagementsystem/dashboardDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane layoutY="93.0" prefHeight="554.4" prefWidth="211.2" styleClass="nav-form" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <ImageView fitHeight="34.0" fitWidth="35.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../../../Downloads/user-48.png" />
+                                    <Image url="@user-48.png" />
                                  </image>
                               </ImageView>
                               <Label layoutX="71.0" layoutY="17.0" text="Usuário" textFill="WHITE">
@@ -64,7 +63,7 @@
                               </Label>
                               <ImageView fitHeight="43.0" fitWidth="38.0" layoutX="12.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../../../Downloads/conference-call-48.png" />
+                                    <Image url="@conference-call-48.png" />
                                  </image>
                               </ImageView>
                               <Label layoutX="71.0" layoutY="74.0" text="CR | GESTOR" textAlignment="CENTER" textFill="WHITE">
@@ -74,7 +73,7 @@
                               </Label>
                               <Line endX="100.0" layoutX="106.0" layoutY="62.0" startX="-100.0" stroke="WHITE" />
                               <Line endX="100.0" layoutX="106.0" layoutY="143.0" startX="-100.0" stroke="WHITE" />
-                              <MenuButton layoutX="21.0" layoutY="185.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="131.0" styleClass="nav-btn" stylesheets="@../../../../../../../../../EmployeeManagementSystem/employeeManagementSystem/src/employeemanagementsystem/dashboardDesign.css" text="Apontamentos" textFill="WHITE">
+                              <MenuButton accessibleRole="LIST_VIEW" blendMode="LIGHTEN" cache="true" layoutX="11.0" layoutY="185.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="192.0" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Apontamentos" textFill="WHITE">
                                 <items>
                                   <MenuItem mnemonicParsing="false" text="Para aprovação" />
                                   <MenuItem mnemonicParsing="false" text="Meus apontamentos" />
@@ -83,26 +82,30 @@
                                     <Font name="Arial" size="14.0" />
                                  </font>
                               </MenuButton>
-                              <Button layoutX="21.0" layoutY="154.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="131.0" styleClass="nav-btn" stylesheets="@../../../../../../../../../EmployeeManagementSystem/employeeManagementSystem/src/employeemanagementsystem/dashboardDesign.css" text="Projetos" textFill="WHITE">
+                              <Button layoutX="11.0" layoutY="154.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="131.0" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Projetos" textFill="WHITE">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="21.0" layoutY="215.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="131.0" styleClass="nav-btn" stylesheets="@../../../../../../../../../EmployeeManagementSystem/employeeManagementSystem/src/employeemanagementsystem/dashboardDesign.css" text="Relatórios" textFill="WHITE">
+                              <Button layoutX="11.0" layoutY="222.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="131.0" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Relatórios" textFill="WHITE">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="9.0" layoutY="515.0" mnemonicParsing="false" stylesheets="@../../../../../../../../../EmployeeManagementSystem/employeeManagementSystem/src/employeemanagementsystem/dashboardDesign.css" text="Sair" textFill="WHITE">
+                              <Button layoutX="11.0" layoutY="712.0" mnemonicParsing="false" stylesheets="@EstilizacaoTelas.css" text="Sair" textFill="WHITE" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="11.0">
                                  <font>
-                                    <Font size="13.0" />
+                                    <Font size="14.0" />
                                  </font>
                                  <styleClass>
                                     <String fx:value="logout" />
                                     <String fx:value="shadow" />
                                  </styleClass>
                               </Button>
-                              <Button layoutX="70.0" layoutY="104.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@../../../../../../../../../EmployeeManagementSystem/employeeManagementSystem/src/employeemanagementsystem/dashboardDesign.css" text="Mudar de CR" textFill="WHITE" />
+                              <Button layoutX="68.0" layoutY="102.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="132.0" styleClass="cr-btn" stylesheets="@EstilizacaoTelas.css" text="Mudar de CR" textFill="WHITE">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
                            </children>
                         </AnchorPane>
                      </children>
@@ -113,21 +116,17 @@
                      <children>
                         <AnchorPane layoutX="143.0" layoutY="100.0" prefHeight="554.4" prefWidth="888.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <AnchorPane layoutX="9.0" layoutY="10.0" prefHeight="534.0" prefWidth="871.0" stylesheets="@../../../../../../../../../EmployeeManagementSystem/employeeManagementSystem/src/employeemanagementsystem/dashboardDesign.css">
-                                 <styleClass>
-                                    <String fx:value="white-bg" />
-                                    <String fx:value="shadow" />
-                                 </styleClass>
+                              <AnchorPane layoutX="8.0" layoutY="9.0" prefHeight="731.0" prefWidth="1067.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="9.0">
                                  <children>
-                                    <TableView layoutX="14.0" layoutY="57.0" prefHeight="454.0" prefWidth="841.0">
+                                    <TableView layoutX="14.0" layoutY="57.0" prefHeight="665.0" prefWidth="1044.0">
                                       <columns>
                                         <TableColumn prefWidth="75.0" text="Username" />
                                         <TableColumn prefWidth="232.8000030517578" text="Nome" />
                                           <TableColumn prefWidth="98.39996337890625" text="Função" />
-                                          <TableColumn prefWidth="108.79998779296875" text="CR" />
-                                          <TableColumn prefWidth="72.800048828125" text="Gestor" />
-                                          <TableColumn prefWidth="119.199951171875" text="Empresa" />
-                                          <TableColumn prefWidth="140.79998779296875" text="Projeto" />
+                                          <TableColumn prefWidth="159.99996948242188" text="CR" />
+                                          <TableColumn prefWidth="173.5999755859375" text="Gestor" />
+                                          <TableColumn prefWidth="155.2000732421875" text="Empresa" />
+                                          <TableColumn prefWidth="160.0" text="Projeto" />
                                       </columns>
                                     </TableView>
                                     <Label layoutX="14.0" layoutY="14.0" text="Pendentes">
@@ -135,10 +134,14 @@
                                           <Font size="24.0" />
                                        </font>
                                     </Label>
-                                    <Button layoutX="436.0" layoutY="20.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="66.0" styleClass="aprove" stylesheets="@../../../../../../../../../EmployeeManagementSystem/employeeManagementSystem/src/employeemanagementsystem/dashboardDesign.css" text="Aprovar" textFill="WHITE" />
-                                    <Button layoutX="517.0" layoutY="20.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="64.0" styleClass="reprove" stylesheets="@../../../../../../../../../EmployeeManagementSystem/employeeManagementSystem/src/employeemanagementsystem/dashboardDesign.css" text="Reprovar" textFill="WHITE" />
-                                    <TextField layoutX="136.0" layoutY="19.0" prefHeight="30.0" prefWidth="277.0" promptText="Pesquisar" styleClass="search" stylesheets="@../../../../../../../../../EmployeeManagementSystem/employeeManagementSystem/src/employeemanagementsystem/dashboardDesign.css" />
+                                    <Button layoutX="436.0" layoutY="20.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="66.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Aprovar" textFill="WHITE" />
+                                    <Button layoutX="517.0" layoutY="20.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="64.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Reprovar" textFill="WHITE" />
+                                    <TextField layoutX="136.0" layoutY="19.0" prefHeight="30.0" prefWidth="277.0" promptText="Pesquisar" />
                                  </children>
+                                 <styleClass>
+                                    <String fx:value="white-bg" />
+                                    <String fx:value="shadow" />
+                                 </styleClass>
                               </AnchorPane>
                            </children>
                         </AnchorPane>
