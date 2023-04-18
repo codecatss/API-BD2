@@ -60,6 +60,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .logout{
     -fx-background-color:#0A2647;
     -fx-background-radius:10px;
+    -fx-font-family:"Arial";
     -fx-cursor:hand;
 }
 .logout:hover{
@@ -105,6 +106,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 .aprove{
     -fx-background-color:#2b913c;
+    -fx-font-family:"Arial";
     -fx-cursor:hand;
 }
 .aprove:hover{
@@ -113,6 +115,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 .reprove{
     -fx-background-color:#df1a1a;
+    -fx-font-family:"Arial";
     -fx-cursor:hand;
 }
 .reprove:hover{
