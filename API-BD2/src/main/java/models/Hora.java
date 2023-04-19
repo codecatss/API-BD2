@@ -44,14 +44,15 @@ public class Hora {
      * @return the data_hora_inicio
      */
     public Date getData_hora_inicio() {
-        return data_hora_inicio;
+        return (Date) data_hora_inicio;
     }
 
     /**
      * @param data_hora_inicio the data_hora_inicio to set
      */
-    public void setData_hora_inicio(int dia, int mes, int ano, int hora, int min) {
-        this.data_hora_inicio = new Date(dia,mes,ano,hora,min);
+    public void setData_hora_inicio(Long time) {
+        
+        this.data_hora_inicio.setTime(time);
     }
 
     /**
