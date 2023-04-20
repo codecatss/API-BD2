@@ -52,7 +52,7 @@ public class Hora {
      * @param data_hora_inicio the data_hora_inicio to set
      */
     public void setData_hora_inicio(Calendar time) {
-        
+
         this.data_hora_inicio = time;
     }
 
