@@ -57,24 +57,24 @@
                                     <Image url="@user-48.png" />
                                  </image>
                               </ImageView>
-                              <Label id="usuario" fx:id="usuario" layoutX="70.0" layoutY="15.0" text="Usuário" textFill="WHITE">
+                              <Label id="usuario" fx:id="usuario" layoutX="70.0" layoutY="15.0" text="Usuário" textFill="WHITE" AnchorPane.bottomAnchor="715.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="20.0">
                                  <font>
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
-                              <ImageView id="iconeCR" fx:id="iconeCR" fitHeight="43.0" fitWidth="38.0" layoutX="15.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView id="iconeCR" fx:id="iconeCR" fitHeight="43.0" fitWidth="38.0" layoutX="15.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="640.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="80.0">
                                  <image>
                                     <Image url="@conference-call-48.png" />
                                  </image>
                               </ImageView>
-                              <Label id="CR_FUNCAO" fx:id="CR_FUNCAO" layoutX="60.0" layoutY="75.0" text="CR | FUNÇÃO" textAlignment="CENTER" textFill="WHITE">
+                              <Label id="CR_FUNCAO" fx:id="CR_FUNCAO" layoutX="60.0" layoutY="75.0" text="CR | FUNÇÃO" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="660.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="75.0">
                                  <font>
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
-                              <Line endX="100.0" layoutX="105.0" layoutY="65.0" startX="-100.0" stroke="WHITE" />
-                              <Line endX="100.0" layoutX="105.0" layoutY="150.0" startX="-100.0" stroke="WHITE" />
-                              <Button id="mudarCR" fx:id="mudarCR" layoutX="60.0" layoutY="100.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="132.0" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Mudar CR" textFill="WHITE">
+                              <Line endX="100.0" layoutX="105.0" layoutY="65.0" startX="-100.0" stroke="WHITE" AnchorPane.bottomAnchor="695.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="60.0" />
+                              <Line endX="100.0" layoutX="105.0" layoutY="150.0" startX="-100.0" stroke="WHITE" AnchorPane.bottomAnchor="615.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="145.0" />
+                              <Button id="mudarCR" fx:id="mudarCR" layoutX="60.0" layoutY="100.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="132.0" styleClass="cr-btn" stylesheets="@EstilizacaoTelas.css" text="Mudar CR" textFill="WHITE" AnchorPane.bottomAnchor="625.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="100.0">
                                  <font>
                                     <Font name="Arial" size="14.0" />
                                  </font>

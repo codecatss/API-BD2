@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.api.bd2.GestorAprovacaoController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -46,9 +46,9 @@
                <left>
                   <AnchorPane prefHeight="555.0" prefWidth="211.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane layoutY="93.0" prefHeight="554.4" prefWidth="211.2" styleClass="nav-form" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane layoutY="93.0" styleClass="nav-form" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Button fx:id="para_aprovacao" layoutX="26.0" layoutY="222.0" mnemonicParsing="false" styleClass="appointments-btn" stylesheets="@EstilizacaoTelas.css" text="Para aprovação" />
+                              <Button fx:id="para_aprovacao" layoutX="26.0" layoutY="222.0" mnemonicParsing="false" styleClass="appointments-btn" stylesheets="@EstilizacaoTelas.css" text="Para aprovação" AnchorPane.bottomAnchor="500.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="220.0" />
                               <ImageView fitHeight="34.0" fitWidth="35.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="706.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="162.0" AnchorPane.topAnchor="15.0">
                                  <image>
                                     <Image url="@user-48.png" />
@@ -71,7 +71,7 @@
                               </Label>
                               <Line endX="100.0" layoutX="106.0" layoutY="62.0" startX="-100.0" stroke="WHITE" AnchorPane.bottomAnchor="695.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="60.0" />
                               <Line endX="100.0" layoutX="106.0" layoutY="143.0" startX="-100.0" stroke="WHITE" AnchorPane.bottomAnchor="615.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="145.0" />
-                              <Button fx:id="relatorios_gestor" layoutX="5.0" layoutY="314.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="131.0" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Relatórios" textFill="WHITE">
+                              <Button fx:id="relatorios_gestor" layoutX="18.0" layoutY="315.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Relatórios" textFill="WHITE" AnchorPane.bottomAnchor="415.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="310.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -90,12 +90,12 @@
                                     <Font size="14.0" />
                                  </font>
                               </Button>
-                              <Label layoutX="18.0" layoutY="183.0" text="Apontamentos:" textFill="WHITE">
+                              <Label layoutX="18.0" layoutY="185.0" text="Apontamentos:" textFill="WHITE" AnchorPane.bottomAnchor="545.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="180.0">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="meus_apontamentos" layoutX="26.0" layoutY="264.0" mnemonicParsing="false" styleClass="appointments-btn" text="Meus apontamentos" />
+                              <Button fx:id="meus_apontamentos" layoutX="26.0" layoutY="264.0" mnemonicParsing="false" styleClass="appointments-btn" text="Meus apontamentos" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="260.0" />
                            </children>
                         </AnchorPane>
                      </children>
