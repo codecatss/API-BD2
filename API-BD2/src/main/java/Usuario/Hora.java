@@ -1,6 +1,7 @@
 
 package models;
 
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -8,8 +9,8 @@ public class Hora {
     
     private int id;
     private String username_lancador;
-    private Date data_hora_inicio; 
-    private Date data_hora_fim;
+    private Calendar data_hora_inicio; 
+    private Calendar data_hora_fim;
     private String tipo; 
 
     /**
@@ -43,30 +44,30 @@ public class Hora {
     /**
      * @return the data_hora_inicio
      */
-    public Date getData_hora_inicio() {
-        return (Date) data_hora_inicio;
+    public Calendar getData_hora_inicio() {
+        return (Calendar) data_hora_inicio;
     }
 
     /**
      * @param data_hora_inicio the data_hora_inicio to set
      */
-    public void setData_hora_inicio(Long time) {
+    public void setData_hora_inicio(Calendar time) {
         
-        this.data_hora_inicio.setTime(time);
+        this.data_hora_inicio = time;
     }
 
     /**
      * @return the data_hora_fim
      */
-    public Date getData_hora_fim() {
+    public Calendar getData_hora_fim() {
         return data_hora_fim;
     }
 
     /**
      * @param data_hora_fim the data_hora_fim to set
      */
-    public void setData_hora_fim(int dia, int mes, int ano, int hora, int min) {
-        this.data_hora_fim = new Date(dia,mes,ano,hora,min);
+    public void setData_hora_fim(Calendar time) {
+        this.data_hora_fim = time;
     }
 
     /**
