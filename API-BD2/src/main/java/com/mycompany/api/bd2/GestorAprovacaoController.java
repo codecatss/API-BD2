@@ -15,7 +15,7 @@ import javafx.scene.control.TableColumn;
 /**
  * FXML Controller class
  *
- * @author csous
+ * @author conta
  */
 public class GestorAprovacaoController implements Initializable {
 
