@@ -17,10 +17,14 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("GestorAprovacao"), 1300, 800);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LancamentoColaborador.fxml"));
+        Parent root = fxmlLoader.load();
+        scene = new Scene(root, 1300, 800);
         stage.setScene(scene);
+        
         stage.show();
-    }
+}
+
 
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
