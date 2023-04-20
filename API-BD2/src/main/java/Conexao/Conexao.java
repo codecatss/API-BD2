@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.concurrent.ExecutionException;
 
 public class Conexao {
-    private static final String USERNAME = "admin@localhost"; //usuário do seu banco
+    private static final String USERNAME = "admin"; //usuário do seu banco
     private static final String PASSWORD = "admin123"; //senha do seu banco
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/2rp"; //porta do seu banco
     
