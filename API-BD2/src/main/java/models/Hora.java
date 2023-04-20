@@ -16,7 +16,7 @@ public class Hora {
     private Timestamp data_hora_inicio; 
     private Timestamp data_hora_fim;
     private String tipo; 
-    private String cod_cr;
+    private String centro_resultado;
     private String justificativa;
     private String projeto;
 
@@ -101,15 +101,15 @@ public class Hora {
     /**
      * @return the cod_cr
      */
-    public String getCod_cr() {
-        return cod_cr;
+    public String getCentro_resultado() {
+        return centro_resultado;
     }
 
     /**
      * @param cod_cr the cod_cr to set
      */
-    public void setCod_cr(String cod_cr) {
-        this.cod_cr = cod_cr;
+    public void setCentro_resultado(String centro_resultado) {
+        this.centro_resultado = centro_resultado;
     }
 
     /**

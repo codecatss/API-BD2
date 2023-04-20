@@ -32,7 +32,7 @@ public class testeintegracao {
       hora.setData_hora_inicio("2023-04-15 12:30:00");
       hora.setData_hora_fim("2023-04-15 13:30:00");
       hora.setTipo("Hora extra");
-      hora.setCod_cr("dssfusefh");
+      hora.setCentro_resultado("dssfusefh");
       horaDao.save(hora);
       horaDao.getHoras();
     }
