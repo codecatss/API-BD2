@@ -1,6 +1,14 @@
--- Active: 1679361494775@@127.0.0.1@3306
+-- Configurando user e password padrão do banco de dados para conectar ao JDbC
+
+CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin123';
+
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost';
+
+FLUSH PRIVILEGES;
 
 create database 2rp;
+
+use 2rp;
 
 create table
     usuarios(
@@ -18,27 +26,46 @@ create table
 create table
     hora(
         id int not null AUTO_INCREMENT PRIMARY KEY,
-        username_lancador VARCHAR(20) not null,
         data_hora_inicio DATETIME not NULL,
         data_hora_fim DATETIME not NULL,
         tipo VARCHAR(15) NOT NULL,
-        Foreign Key (username_lancador) REFERENCES usuarios(username)
+        username_lancador VARCHAR(20) not null,
+        cod_cr VARCHAR(30) NOT NULL,
+        justificativa VARCHAR(500),
+        projeto VARCHAR(100),
+        Foreign Key (username_lancador) REFERENCES usuarios(username),
+        Foreign Key (cod_cr) REFERENCES centro_resultado(codigo_cr)
     );
 
 create table
-    centro_de_resultado(
-        nome VARCHAR(30) NOT NULL PRIMARY KEY,
-        status_aprovacao ENUM('ativo', 'inativo') NOT NULL
+    centro_resultado(
+        nome VARCHAR(30) NOT NULL,
+        status_aprovacao ENUM('ativo', 'inativo') NOT NULL,
+        codigo_cr VARCHAR(10) not NULL PRIMARY KEY,
+        sigla VARCHAR (10) NOT NULL UNIQUE
     );
-    
+
 create table
-    aprovacao (
-        username_aprovador VARCHAR(20) not null NULL PRIMARY KEY,
-        id_hora int PRIMARY KEY,
-        status_aprovacao ENUM(
-            'pendente',
-            'aprovado',
-            'reprovado'
-        ) NOT NULL,
-        justificativa Foreign Key (username_aprovador) REFERENCES usuarios(username)
+    cliente (
+        razao_social VARCHAR(70) NOT NULL,
+        status_clientes ENUM('ativo', 'inativo') NOT NULL,
+        cpnj BIGINT PRIMARY KEY NOT NULL
     );
+
+INSERT INTO
+    usuarios(
+        username,
+        nome,
+        senha,
+        funcao,
+        status
+    )
+VALUES (
+        'admin',
+        'Admin',
+        'admin123',
+        'admin',
+        'Ativo'
+    );
+
+SELECT * FROM usuarios;
