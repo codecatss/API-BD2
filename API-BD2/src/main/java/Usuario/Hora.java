@@ -1,7 +1,11 @@
 
 package models;
 
-import java.util.Calendar;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -9,9 +13,12 @@ public class Hora {
     
     private int id;
     private String username_lancador;
-    private Calendar data_hora_inicio; 
-    private Calendar data_hora_fim;
+    private Timestamp data_hora_inicio; 
+    private Timestamp data_hora_fim;
     private String tipo; 
+    private String centro_resultado;
+    private String justificativa;
+    private String projeto;
 
     /**
      * @return the id
@@ -44,30 +51,37 @@ public class Hora {
     /**
      * @return the data_hora_inicio
      */
-    public Calendar getData_hora_inicio() {
-        return (Calendar) data_hora_inicio;
+    public Timestamp getData_hora_inicio() throws ParseException{
+        return data_hora_inicio;
     }
 
     /**
      * @param data_hora_inicio the data_hora_inicio to set
      */
-    public void setData_hora_inicio(Calendar time) {
-        
-        this.data_hora_inicio = time;
+    public void setData_hora_inicio(String time) throws ParseException{
+        String dataHoraString = time;
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date dataHoraDate = dateFormat.parse(dataHoraString);
+        Timestamp timestamp = new Timestamp(dataHoraDate.getTime());
+        this.data_hora_inicio = timestamp;
     }
 
     /**
      * @return the data_hora_fim
      */
-    public Calendar getData_hora_fim() {
+    public Timestamp getData_hora_fim() throws ParseException{
         return data_hora_fim;
     }
 
     /**
      * @param data_hora_fim the data_hora_fim to set
      */
-    public void setData_hora_fim(Calendar time) {
-        this.data_hora_fim = time;
+    public void setData_hora_fim(String time) throws ParseException {
+        String dataHoraString = time;
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date dataHoraDate = dateFormat.parse(dataHoraString);
+        Timestamp timestamp = new Timestamp(dataHoraDate.getTime());
+        this.data_hora_fim = timestamp;
     }
 
     /**
@@ -82,6 +96,48 @@ public class Hora {
      */
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    /**
+     * @return the cod_cr
+     */
+    public String getCentro_resultado() {
+        return centro_resultado;
+    }
+
+    /**
+     * @param cod_cr the cod_cr to set
+     */
+    public void setCentro_resultado(String centro_resultado) {
+        this.centro_resultado = centro_resultado;
+    }
+
+    /**
+     * @return the justificativa
+     */
+    public String getJustificativa() {
+        return justificativa;
+    }
+
+    /**
+     * @param justificativa the justificativa to set
+     */
+    public void setJustificativa(String justificativa) {
+        this.justificativa = justificativa;
+    }
+
+    /**
+     * @return the projeto
+     */
+    public String getProjeto() {
+        return projeto;
+    }
+
+    /**
+     * @param projeto the projeto to set
+     */
+    public void setProjeto(String projeto) {
+        this.projeto = projeto;
     }
     
     
