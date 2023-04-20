@@ -23,8 +23,8 @@ public class testeintegracao {
      horaDAO horaDao = new horaDAO();
       Hora hora = new Hora();
       hora.setUsername_lancador("Estacius VanderGraaf");
-      hora.setData_hora_inicio(010420231230);
-      hora.setData_hora_fim(010420231330);
+      hora.setData_hora_inicio(new Date(2023,04,12));
+      hora.setData_hora_fim(new Date(2023,04,12));
       hora.setTipo("Hora extra");
       horaDao.save(hora);
       horaDao.getHoras();
