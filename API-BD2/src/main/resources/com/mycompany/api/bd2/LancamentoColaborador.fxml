@@ -175,7 +175,7 @@
                                        </font>
                                     </Label>
                                     <Spinner id="minutoFim" fx:id="minutoFim" layoutX="675.0" layoutY="570.0" prefHeight="30.0" prefWidth="70.0" />
-                                    <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutX="850.0" layoutY="500.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE" onActon="#salvarLacamento">
+                                    <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutX="850.0" layoutY="500.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE">
                                        <font>
                                           <Font name="Arial Bold" size="15.0" />
                                        </font>

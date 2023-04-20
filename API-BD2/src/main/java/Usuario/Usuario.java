@@ -1,4 +1,4 @@
-package models;
+package Usuario;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -13,7 +13,6 @@ public class Usuario {
     private String user_name = "";
     private String nome = "";
     private String senha = "";
-    private String status = "";
     private Funcao cargo;
 
     public String getUser_name() {
@@ -40,27 +39,12 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public Funcao getCargoObj() {
+    public Funcao getCargo() {
         return cargo;
     }
-    public String getCargo() {
-        return cargo.name();
-    }
-    
-    
 
-    public void setCargo(String cargo) {
-        this.cargo = Funcao.valueOf(cargo.toLowerCase());
-    }
-
-    
-    public String getStatus() {
-        return status;
-    }
-
-    
-    public void setStatus(String status) {
-        this.status = status;
+    public void setCargo(Funcao cargo) {
+        this.cargo = cargo;
     }
 
     

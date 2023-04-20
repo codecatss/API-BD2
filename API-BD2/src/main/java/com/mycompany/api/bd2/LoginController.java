@@ -1,7 +1,7 @@
 package com.mycompany.api.bd2;
 
-import models.Funcao;
-import models.Usuario;
+import Usuario.Funcao;
+import Usuario.Usuario;
 import java.io.IOException;
 import javafx.fxml.FXML;
 
@@ -11,13 +11,13 @@ public class LoginController {
 
     @FXML
     private void login() throws IOException {  
-        if(cargo.equals(user.getCargoObj(), Funcao.admin)){
+        if(cargo.equals(user.getCargo(), Funcao.ADMINISTRADOR)){
             App.setRoot("HomeAdm"); 
         }
-        if (cargo.equals(user.getCargoObj(), Funcao.colaborador)){
+        if (cargo.equals(user.getCargo(), Funcao.COLABORADOR)){
             App.setRoot("HomeColab"); 
         }
-        if (cargo.equals(user.getCargoObj(), Funcao.gestor)){
+        if (cargo.equals(user.getCargo(), Funcao.GESTOR)){
             App.setRoot("HomeGest"); 
         }
     }
