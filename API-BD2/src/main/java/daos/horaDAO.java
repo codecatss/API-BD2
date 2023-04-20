@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import models.Hora;
@@ -18,8 +20,8 @@ import models.Hora;
  */
 public class horaDAO {
     
-    public void save(Hora hora){
-        String sql = "INSERT INTO HORA(username_lancador,data_hora_inicio,data_hora_fim,tipo) VALUES (?, ?, ?, ?)";
+    public void save(Hora hora) throws ParseException{
+        String sql = "INSERT INTO HORA(username_lancador,data_hora_inicio,data_hora_fim,tipo,cod_cr,justificativa,projeto) VALUES (?, ?, ?, ?, ?, ?, ?)";
         Connection conn = null;
         PreparedStatement pstm = null;
         
@@ -28,9 +30,12 @@ public class horaDAO {
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
             pstm.setString(1,hora.getUsername_lancador());
-            pstm.setDate(2, new Date(hora.getData_hora_inicio().getTime()));
-            pstm.setDate(3, new Date(hora.getData_hora_fim().getTime()));
+            pstm.setTimestamp(2, (Timestamp) new Timestamp(hora.getData_hora_inicio().getTime()));
+            pstm.setTimestamp(3, new Timestamp(hora.getData_hora_fim().getTime()));
             pstm.setString(4, hora.getTipo());
+            pstm.setString(5, hora.getCod_cr());
+            pstm.setString(6,hora.getJustificativa());
+            pstm.setString(7,hora.getProjeto());
             
             pstm.execute();
         }
@@ -105,10 +110,12 @@ public class horaDAO {
 				
 				hora.setUsername_lancador(rset.getString("username_lancador"));
 				
-				hora.setData_hora_inicio(rset.getDate("data_hora_inicio"));
-				hora.setData_hora_fim(rset.getDate("data_hora_fim"));
+				hora.setData_hora_inicio(rset.getString("data_hora_inicio"));
+				hora.setData_hora_fim(rset.getString("data_hora_fim"));
 				hora.setTipo(rset.getString("tipo"));
-                                
+                                hora.setCod_cr(rset.getString("cod_cr"));
+                                hora.setJustificativa("justificativa");
+                                hora.setProjeto("projeto");
 				horas.add(hora);
 				
 			}
