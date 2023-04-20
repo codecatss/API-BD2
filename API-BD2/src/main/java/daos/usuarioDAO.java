@@ -75,7 +75,7 @@ public class usuarioDAO {
         }
         
     }
-    public List<Usuario> getContatos(){
+    public List<Usuario> getUsuarios(){
 		
 		String sql = "SELECT * FROM 2rp.usuarios";
 		
@@ -97,14 +97,11 @@ public class usuarioDAO {
 				
 				Usuario usuario = new Usuario();
 				
-				//Recuperar o id
+				
 				usuario.setUser_name(rset.getString("username"));
-				//Recuperar o nome
 				usuario.setNome(rset.getString("nome"));
-				//Recuperar a idade
                                 usuario.setSenha(rset.getString("senha"));
 				usuario.setCargo(rset.getString("funcao"));
-				//Recuperar a data de cadastrado
 				usuario.setStatus(rset.getString("status"));
 				
 				usuarios.add(usuario);

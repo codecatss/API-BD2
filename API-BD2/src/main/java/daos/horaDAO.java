@@ -80,7 +80,7 @@ public class horaDAO {
         }
         
     }
-    public List<Hora> getContatos(){
+    public List<Hora> getHoras(){
 		
 		String sql = "SELECT * FROM 2rp.hora";
 		
@@ -105,8 +105,8 @@ public class horaDAO {
 				
 				hora.setUsername_lancador(rset.getString("username_lancador"));
 				
-				hora.setData_hora_inicio(rset.getDate("data_hora_inicio"));
-				hora.setData_hora_fim(rset.getDate("data_hora_fim"));
+				hora.setData_hora_inicio(rset.getInt("data_hora_inicio"));
+				hora.setData_hora_fim(rset.getInt("data_hora_fim"));
 				hora.setTipo(rset.getString("tipo"));
                                 
 				horas.add(hora);

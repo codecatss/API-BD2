@@ -19,22 +19,14 @@ import models.Usuario;
 public class testeintegracao {
 
     public static void main(String[] args) {
-      usuarioDAO usuarioDao = new usuarioDAO();
-      Usuario usuario = new Usuario();
-      usuario.setUser_name("mikela@20");
-      usuario.setCargo("colaborador");
-      usuario.setNome("mikao");
-      usuario.setSenha("miskamus");
-      usuario.setStatus("inativo");
-      usuarioDao.save(usuario);
-      usuarioDao.getContatos();
       
      horaDAO horaDao = new horaDAO();
       Hora hora = new Hora();
       hora.setUsername_lancador("Estacius VanderGraaf");
-      
-      hora.setData_hora_inicio(01,04,2023,12,30);
-      hora.setData_hora_fim(01,04,2023,13,30);
+      hora.setData_hora_inicio(010420231230);
+      hora.setData_hora_fim(010420231330);
       hora.setTipo("Hora extra");
+      horaDao.save(hora);
+      horaDao.getHoras();
     }
 }
