@@ -57,6 +57,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-alignment:CENTER-LEFT;
 }
 
+.appointments-btn{
+    -fx-background-color:transparent;
+    -fx-cursor:hand;
+    -fx-font-family:"Arial";
+    -fx-font-size:18px;
+    -fx-text-fill:#ffffff;
+    -fx-alignment:CENTER-LEFT;
+}
+
 .logout{
     -fx-background-color:#0A2647;
     -fx-background-radius:10px;
@@ -120,17 +129,4 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 }
 .reprove:hover{
     -fx-background-color:#991a1a;
-}
-
-.search{
-    -fx-background-color:transparent;
-    -fx-border-color:linear-gradient(to bottom right, #272b3f, #256b51);
-    -fx-border-radius:5px;
-    -fx-font-size:13px;
-    -fx-font-family:"Arial";
-    -fx-border-width:1px;
-    -fx-padding:0px 0px 0px 28px;
-}
-.search:focused{
-    -fx-border-width:2px;
 }
