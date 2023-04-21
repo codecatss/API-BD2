@@ -165,5 +165,16 @@ VALUES (
         'CCTS'
     );
 
+-- Adição de Clientes
+
+INSERT INTO
+    cliente (
+        razao_social,
+        status_clientes,
+        cnpj
+    )
+VALUES ('Fatec', 'ativo', 123456789), 
+('2RP', 'ativo', 987654321);
+
 -- Seleção de dados na tabela
 SELECT * FROM usuarios;
