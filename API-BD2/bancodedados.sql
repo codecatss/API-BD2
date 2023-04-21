@@ -199,7 +199,35 @@ INSERT INTO
     contrato (cod_cr, cnpj_cliente)
 VALUES ("13652", 987654321);
 
+-- Adição de dados à tabela hora
 
+INSERT INTO
+    hora(
+        data_hora_inicio,
+        data_hora_fim,
+        tipo,
+        username_lancador,
+        cod_cr,
+        justificativa,
+        projeto
+    )
+VALUES (
+        "2023-04-15 23:30:00",
+        "2023-04-16 01:20:00",
+        "hora-extra",
+        "larissa",
+        13652,
+        "Correção de bugs",
+        "Projeto Integrador"
+    ), (
+        "2023-04-15 23:30:00",
+        "2023-04-16 01:20:00",
+        "hora-extra",
+        "laroy",
+        13652,
+        "Conexão de banco de dados JDBC",
+        "Projeto Integrador"
+    );
 
 -- Seleção de dados na tabela
 
