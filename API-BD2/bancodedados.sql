@@ -91,5 +91,63 @@ VALUES (
         'Ativo'
     );
 
+INSERT INTO
+    usuarios(
+        username,
+        nome,
+        senha,
+        funcao,
+        status
+    )
+VALUES (
+        'brendel',
+        'Brendel Marques',
+        'dev123',
+        'colaborador',
+        'Ativo'
+    ), (
+        'caio',
+        'Caio Sousa',
+        'dev123',
+        'colaborador',
+        'Ativo'
+    ), (
+        'larissa',
+        'Larissa Fernanda',
+        'dev123',
+        'colaborador',
+        'Ativo'
+    ), (
+        'laroy',
+        'Laroy Prado',
+        'dev123',
+        'colaborador',
+        'Ativo'
+    ), (
+        'markus',
+        'Markus Gomes',
+        'dev123',
+        'colaborador',
+        'Ativo'
+    ), (
+        'mikaela',
+        'Mikaela Petronilho',
+        'dev123',
+        'colaborador',
+        'Ativo'
+    ), (
+        'nicole',
+        'Nicole Souza',
+        'dev123',
+        'gestor',
+        'Ativo'
+    ), (
+        'willian',
+        'Willian Danko',
+        'dev123',
+        'colaborador',
+        'Ativo'
+    );
+
 -- Seleção de dados na tabela
 SELECT * FROM usuarios;
