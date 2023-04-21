@@ -91,5 +91,154 @@ VALUES (
         'Ativo'
     );
 
+INSERT INTO
+    usuarios(
+        username,
+        nome,
+        senha,
+        funcao,
+        status
+    )
+VALUES (
+        'brendel',
+        'Brendel Marques',
+        'dev123',
+        'colaborador',
+        'Ativo'
+    ), (
+        'caio',
+        'Caio Sousa',
+        'dev123',
+        'colaborador',
+        'Ativo'
+    ), (
+        'larissa',
+        'Larissa Fernanda',
+        'dev123',
+        'colaborador',
+        'Ativo'
+    ), (
+        'laroy',
+        'Laroy Prado',
+        'dev123',
+        'colaborador',
+        'Ativo'
+    ), (
+        'markus',
+        'Markus Gomes',
+        'dev123',
+        'colaborador',
+        'Ativo'
+    ), (
+        'mikaela',
+        'Mikaela Petronilho',
+        'dev123',
+        'colaborador',
+        'Ativo'
+    ), (
+        'nicole',
+        'Nicole Souza',
+        'dev123',
+        'gestor',
+        'Ativo'
+    ), (
+        'willian',
+        'Willian Danko',
+        'dev123',
+        'colaborador',
+        'Ativo'
+    );
+
+-- Adição de centro de resultados
+
+INSERT INTO
+    centro_resultado (
+        nome,
+        status_aprovacao,
+        codigo_cr,
+        sigla
+    )
+VALUES (
+        'Codecats',
+        'ativo',
+        '13652',
+        'CCTS'
+    );
+
+-- Adição de Clientes
+
+INSERT INTO
+    cliente (
+        razao_social,
+        status_clientes,
+        cnpj
+    )
+VALUES ('Fatec', 'ativo', 123456789), 
+('2RP', 'ativo', 987654321);
+
+-- Adição de integrantes no centro de resultado
+
+INSERT INTO
+    integrantes (
+        gestor,
+        username_integrante,
+        cod_cr
+    )
+VALUES (true, "nicole", 13652),
+(false, "brendel", 13652),
+(false, "caio", 13652),
+(false, "larissa", 13652),
+(false, "laroy", 13652),
+(false, "markus", 13652), 
+(false, "mikaela", 13652),
+(false, "willian", 13652);
+
+-- Adição dados de contrato
+
+INSERT INTO
+    contrato (cod_cr, cnpj_cliente)
+VALUES ("13652", 987654321);
+
+-- Adição de dados à tabela hora
+
+INSERT INTO
+    hora(
+        data_hora_inicio,
+        data_hora_fim,
+        tipo,
+        username_lancador,
+        cod_cr,
+        justificativa,
+        projeto
+    )
+VALUES (
+        "2023-04-15 23:30:00",
+        "2023-04-16 01:20:00",
+        "hora-extra",
+        "larissa",
+        13652,
+        "Correção de bugs",
+        "Projeto Integrador"
+    ), (
+        "2023-04-15 23:30:00",
+        "2023-04-16 01:20:00",
+        "hora-extra",
+        "laroy",
+        13652,
+        "Conexão de banco de dados JDBC",
+        "Projeto Integrador"
+    );
+
 -- Seleção de dados na tabela
+
 SELECT * FROM usuarios;
+
+SELECT * FROM centro_resultado;
+
+SELECT * FROM cliente;
+
+SELECT * FROM integrantes;
+
+SELECT * FROM contrato;
+
+SELECT * FROM hora;
