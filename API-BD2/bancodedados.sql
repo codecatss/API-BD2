@@ -1,13 +1,17 @@
+-- Configuração de usuário e senha padrão do banco de dados para conectar ao JDbC
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin123';
 
 GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost';
 
 FLUSH PRIVILEGES;
 
+-- Criação do banco de dados
 create database 2rp;
 
+-- Define o banco de dados 2rp como o padrão
 use 2rp;
 
+-- Criação de tabelas
 create table
     usuarios(
         username VARCHAR(20) not null PRIMARY KEY,
@@ -69,6 +73,7 @@ create table
         PRIMARY KEY (username_integrante, cod_cr)
     );
 
+-- Inserção de dados na tabela
 INSERT INTO
     usuarios(
         username,
@@ -85,4 +90,5 @@ VALUES (
         'Ativo'
     );
 
+-- Seleção de dados na tabela
 SELECT * FROM usuarios;
