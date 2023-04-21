@@ -1,7 +1,8 @@
 -- Configuração de usuário e senha padrão do banco de dados para conectar ao JDbC
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin123';
 
-GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON 2rp.* TO 'admin'@'localhost';
+
 
 FLUSH PRIVILEGES;
 
