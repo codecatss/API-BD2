@@ -4,25 +4,21 @@
  */
 package daos;
 
-import models.Cliente;
 import Conexao.Conexao;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import models.Hora;
+import models.Centro_resultado;
+
 /**
  *
  * @author mikaela.begotti
  */
-public class clienteDAO {
-    
-    public void save(Cliente cliente){
-        String sql = "INSERT INTO cliente(razao_social, status_aprovacao, cnpj) VALUES (?, ?, ?)";
+public class crDAO {
+    public void save(Centro_resultado cr){
+        String sql = "INSERT INTO centro_resultado(nome, status_aprovacao, codigo_cr, sigla) VALUES (?, ?, ?, ?)";
         Connection conn = null;
         PreparedStatement pstm = null;
         
@@ -30,9 +26,10 @@ public class clienteDAO {
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setString(1,cliente.getRazao_social());
-            pstm.setString(2, cliente.getStatus_clientes());
-            pstm.setLong(3, cliente.getCnpj());
+            pstm.setString(1,cr.getNome());
+            pstm.setString(3, cr.getCodigo_cr());
+            pstm.setString(2, cr.getStatus_aprovacao());
+            pstm.setString(4, cr.getSigla());
             
             pstm.execute();
         }
@@ -53,8 +50,8 @@ public class clienteDAO {
         
     }
 
-    public void delete(Cliente cliente){
-        String sql = "DELETE FROM cliente "+"WHERE cnpj";
+    public void delete(Centro_resultado cr){
+        String sql = "DELETE FROM centro_resultado "+"WHERE codigo_cr";
         Connection conn = null;
         PreparedStatement pstm = null; 
         
@@ -62,7 +59,7 @@ public class clienteDAO {
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setLong(1,cliente.getCnpj());
+            pstm.setString(3,cr.getCodigo_cr());
             
             pstm.execute();
         }
@@ -82,11 +79,11 @@ public class clienteDAO {
         }
         
     }
-    public List<Cliente> getCliente(){
+    public List<Centro_resultado> getCliente(){
 		
-		String sql = "SELECT * FROM 2rp.cliente";
+		String sql = "SELECT * FROM 2rp.centro_resultado";
 		
-		List<Cliente> clientes = new ArrayList<Cliente>();
+		List<Centro_resultado> crs = new ArrayList<Centro_resultado>();
 		
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -102,15 +99,16 @@ public class clienteDAO {
 			
 			while (rset.next()) {
 				
-				Cliente cliente = new Cliente();
+				Centro_resultado cr = new Centro_resultado();
 				
 				
-				cliente.setRazao_social(rset.getString("razao_social"));
+				cr.setCodigo_cr(rset.getString("codigo_cr"));
 				
-				cliente.setStatus_clientes(rset.getString("status_clientes"));
-				cliente.setCnpj(rset.getLong("cnpj"));
+				cr.setNome(rset.getString("nome"));
+				cr.setSigla(rset.getString("sigla"));
+                                cr.setStatus_clientes(rset.getString("status_aprovacao"));
 			
-				clientes.add(cliente);
+				crs.add(cr);
 				
 			}
 		}catch (Exception e) {
@@ -132,9 +130,7 @@ public class clienteDAO {
 					e.printStackTrace();
 				}
 			}
-                        System.out.println(clientes);
-			return clientes;
+                        System.out.println(crs);
+			return crs;
 	}
-    
 }
-

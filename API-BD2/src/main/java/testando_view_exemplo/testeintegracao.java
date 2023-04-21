@@ -5,6 +5,7 @@
 package testando_view_exemplo;
 
 import daos.clienteDAO;
+import daos.crDAO;
 import daos.horaDAO;
 import daos.usuarioDAO;
 import java.sql.Date;
@@ -13,6 +14,7 @@ import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import models.Centro_resultado;
 import models.Cliente;
 import models.Hora;
 import models.Usuario;
@@ -27,13 +29,15 @@ public class testeintegracao {
 
     public static void main(String[] args) throws ParseException{
       
-      clienteDAO clienteDao = new clienteDAO();
-      Cliente cliente = new Cliente();
-      cliente.setRazao_social("trampos");
-      cliente.setStatus_clientes("ATIVO");
-      cliente.setCnpj(2355768);
-      clienteDao.save(cliente);
-      clienteDao.getCliente();
+      crDAO crDao = new crDAO();
+      Centro_resultado centro = new Centro_resultado();
+      centro.setCodigo_cr("37475");
+      centro.setNome("Nome");
+      centro.setSigla("PSDB");
+      centro.setStatus_clientes("inativo");
+      crDao.save(centro);
+      crDao.getCliente();
+      
       
       
     }

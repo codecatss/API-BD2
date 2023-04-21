@@ -29,13 +29,13 @@ public class horaDAO {
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setString(1,hora.getUsername_lancador());
-            pstm.setTimestamp(2, (Timestamp) new Timestamp(hora.getData_hora_inicio().getTime()));
-            pstm.setTimestamp(3, new Timestamp(hora.getData_hora_fim().getTime()));
-            pstm.setString(4, hora.getTipo());
-            pstm.setString(5, hora.getCentro_resultado());
-            pstm.setString(6,hora.getJustificativa());
-            pstm.setString(7,hora.getProjeto());
+            pstm.setString(2,hora.getUsername_lancador());
+            pstm.setTimestamp(3, (Timestamp) new Timestamp(hora.getData_hora_inicio().getTime()));
+            pstm.setTimestamp(4, new Timestamp(hora.getData_hora_fim().getTime()));
+            pstm.setString(5, hora.getTipo());
+            pstm.setString(6, hora.getCentro_resultado());
+            pstm.setString(7,hora.getJustificativa());
+            pstm.setString(8,hora.getProjeto());
             
             pstm.execute();
         }
@@ -65,7 +65,7 @@ public class horaDAO {
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setString(1,hora.getUsername_lancador());
+            pstm.setString(2,hora.getUsername_lancador());
             
             pstm.execute();
         }
