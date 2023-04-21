@@ -176,7 +176,7 @@ INSERT INTO
 VALUES ('Fatec', 'ativo', 123456789), 
 ('2RP', 'ativo', 987654321);
 
-- Adição de integrantes no centro de resultado
+-- Adição de integrantes no centro de resultado
 
 INSERT INTO
     integrantes (
@@ -193,8 +193,24 @@ VALUES (true, "nicole", 13652),
 (false, "mikaela", 13652),
 (false, "willian", 13652);
 
+-- Adição dados de contrato
+
+INSERT INTO
+    contrato (cod_cr, cnpj_cliente)
+VALUES ("13652", 987654321);
 
 
 
 -- Seleção de dados na tabela
+
 SELECT * FROM usuarios;
+
+SELECT * FROM centro_resultado;
+
+SELECT * FROM cliente;
+
+SELECT * FROM integrantes;
+
+SELECT * FROM contrato;
+
+SELECT * FROM hora;
