@@ -176,5 +176,25 @@ INSERT INTO
 VALUES ('Fatec', 'ativo', 123456789), 
 ('2RP', 'ativo', 987654321);
 
+- Adição de integrantes no centro de resultado
+
+INSERT INTO
+    integrantes (
+        gestor,
+        username_integrante,
+        cod_cr
+    )
+VALUES (true, "nicole", 13652),
+(false, "brendel", 13652),
+(false, "caio", 13652),
+(false, "larissa", 13652),
+(false, "laroy", 13652),
+(false, "markus", 13652), 
+(false, "mikaela", 13652),
+(false, "willian", 13652);
+
+
+
+
 -- Seleção de dados na tabela
 SELECT * FROM usuarios;
