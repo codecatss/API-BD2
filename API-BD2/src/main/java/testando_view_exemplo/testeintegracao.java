@@ -29,15 +29,17 @@ public class testeintegracao {
 
     public static void main(String[] args) throws ParseException{
       
-      crDAO crDao = new crDAO();
-      Centro_resultado centro = new Centro_resultado();
-      centro.setCodigo_cr("37475");
-      centro.setNome("Nome");
-      centro.setSigla("PSDB");
-      centro.setStatus_clientes("inativo");
-      crDao.save(centro);
-      crDao.getCliente();
+      Hora hora = new Hora();
+      horaDAO horaDao = new horaDAO();
+      hora.setUsername_lancador("Geniscleita");
+      hora.setData_hora_inicio("2023-02-12 13:34:01");
+      hora.setData_hora_fim("2023-02-12 13:34:01");
+      hora.setTipo("ajajs");
+      hora.setCentro_resultado("euffdg");
+      hora.setJustificativa("just");
+      hora.setProjeto("trampos");
       
+      horaDao.save(hora);
       
       
     }

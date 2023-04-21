@@ -4,6 +4,8 @@
  */
 package com.mycompany.api.bd2;
 
+import daos.horaDAO;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -23,6 +25,7 @@ import javafx.scene.layout.VBox;
 
 import models.TipoHora;
 import javafx.collections.ObservableList;
+import models.Hora;
 
 
 
@@ -92,19 +95,30 @@ public class LancamentoColaboradorController {
     private List<String> obs = new ArrayList<>();
     private String a = "a";
     private ObservableList<String> opcoes = FXCollections.observableArrayList();
-
+    /*horaDAO horaDao = new horaDAO();
+    Hora hora = new Hora();*/
 @FXML
-public void BotaoAdicionar() {
+public void BotaoAdicionar() throws ParseException {
     label_usuario.setText("oi");
     System.out.println("foi");
+    /*horaDao.save(hora);*/
 }
     
     @FXML
-    public void tipoFuncao(){
+    public void tipoFuncao() throws ParseException{
     obs.add("Hora "+ TipoHora.EXTRA.name().toLowerCase());
     obs.add(TipoHora.SOBREAVISO.name().toLowerCase());
     opcoes.setAll(obs);
     tipo_funcao.setItems(opcoes);
+    /*hora.setUsername_lancador("Geniscleita");
+    hora.setData_hora_inicio("2023-02-12 13:34:01");
+    hora.setData_hora_fim("2023-02-12 13:34:01");
+    hora.setTipo(obs.get(1));
+    hora.setCentro_resultado("euffdg");
+    hora.setJustificativa("just");
+    hora.setProjeto("trampos");*/
     }
+    
+    
     
 }
