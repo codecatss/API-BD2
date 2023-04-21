@@ -10,6 +10,6 @@ package models;
  */
 public enum Status_clientes {
     
-    ATIVO, INATIVO;
+    ativo, inativo;
 
 }

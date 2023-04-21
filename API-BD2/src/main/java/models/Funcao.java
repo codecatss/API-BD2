@@ -9,7 +9,7 @@ package models;
  * @author danko
  */
 public enum Funcao {
-    ADMIN, COLABORADOR, GESTOR;    
+    admin, colaborador, gestor;    
 
     public boolean equals(Funcao cargo_usuario, Funcao cargo_desejado) {
         return cargo_desejado == cargo_usuario;

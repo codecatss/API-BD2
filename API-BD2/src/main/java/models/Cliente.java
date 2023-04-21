@@ -50,6 +50,6 @@ public class Cliente {
 
   
     public void setStatus_clientes(String status_clientes) {
-        this.status_clientes = Status_clientes.valueOf(status_clientes);
+        this.status_clientes = Status_clientes.valueOf(status_clientes.toLowerCase());
     }
 }
