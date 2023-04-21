@@ -4,12 +4,13 @@
  */
 package com.mycompany.api.bd2;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.ArrayList;
+import java.util.List;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
@@ -17,21 +18,22 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
-/**
- * FXML Controller class
- *
- * @author conta
- */
-public class LancamentoColaboradorController implements Initializable {
+import models.TipoHora;
+import javafx.collections.ObservableList;
 
+
+
+public class LancamentoColaboradorController {
+    
+    @FXML
+    private VBox node;
     @FXML
     private ImageView iconeUsuario;
     @FXML
-    private Label usuario;
-    @FXML
-    private ImageView iconeCR;
+    private Label label_usuario;
     @FXML
     private Label CR_FUNCAO;
     @FXML
@@ -71,7 +73,7 @@ public class LancamentoColaboradorController implements Initializable {
     @FXML
     private ComboBox<?> selecaoJustificativa;
     @FXML
-    private ComboBox<?> tipoFuncao;
+    private ComboBox<String> tipo_funcao;
     @FXML
     private TextField stringProjeto;
     @FXML
@@ -87,15 +89,22 @@ public class LancamentoColaboradorController implements Initializable {
     @FXML
     private Button botaoLimpar;
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
+    private List<String> obs = new ArrayList<>();
+    private String a = "a";
+    private ObservableList<String> opcoes = FXCollections.observableArrayList();
 
-    public void setStage(Stage stage) {
-    }    
+@FXML
+public void BotaoAdicionar() {
+    label_usuario.setText("oi");
+    System.out.println("foi");
+}
+    
+    @FXML
+    public void tipoFuncao(){
+    obs.add("Hora"+ TipoHora.EXTRA.name().toLowerCase());
+    obs.add(TipoHora.SOBREAVISO.name().toLowerCase());
+    opcoes.setAll(obs);
+    tipo_funcao.setItems(opcoes);
+    }
     
 }

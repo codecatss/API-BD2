@@ -13,13 +13,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="node" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.api.bd2.LancamentoColaboradorController">
    <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane fx:id="painelPrincipal" prefHeight="200.0" prefWidth="200.0">
          <children>
             <BorderPane layoutX="90.0" layoutY="124.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <top>
@@ -57,7 +57,7 @@
                                     <Image url="@user-48.png" />
                                  </image>
                               </ImageView>
-                              <Label id="usuario" fx:id="usuario" layoutX="64.0" layoutY="21.0" text="Usuário" textFill="WHITE">
+                              <Label id="usuario" fx:id="label_usuario" layoutX="64.0" layoutY="21.0" textFill="WHITE">
                                  <font>
                                     <Font name="Arial" size="18.0" />
                                  </font>
@@ -164,10 +164,15 @@
                                        </font>
                                     </Label>
                                     <ComboBox id="selecaoJustificativa" fx:id="selecaoJustificativa" layoutX="220.0" layoutY="620.0" prefHeight="30.0" prefWidth="155.0" />
-                                    <ComboBox id="tipoFuncao" fx:id="tipoFuncao" layoutX="220.0" layoutY="470.0" prefHeight="30.0" prefWidth="155.0" />
+                                    <ComboBox id="tipoFuncao" fx:id="tipo_funcao" layoutX="220.0" layoutY="470.0" onMouseClicked="#tipoFuncao" prefHeight="30.0" prefWidth="155.0" />
                                     <TextField id="stringProjeto" fx:id="stringProjeto" layoutX="590.0" layoutY="620.0" prefHeight="30.0" prefWidth="155.0" />
                                     <ComboBox id="selecaoCliente" fx:id="selecaoCliente" layoutX="590.0" layoutY="470.0" prefHeight="30.0" prefWidth="155.0" />
                                     <DatePicker id="dataFim" fx:id="dataFim" layoutX="590.0" layoutY="520.0" prefHeight="30.0" prefWidth="155.0" />
+                                    <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutX="850.0" layoutY="500.0" mnemonicParsing="false" onAction="#BotaoAdicionar" prefHeight="40.0" prefWidth="100.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial Bold" size="15.0" />
+                                       </font>
+                                    </Button>
                                     <Spinner id="horaFim" fx:id="horaFim" layoutX="590.0" layoutY="570.0" prefHeight="30.0" prefWidth="70.0" />
                                     <Label layoutX="665.0" layoutY="575.0" prefWidth="5.0" text=":">
                                        <font>
@@ -175,11 +180,6 @@
                                        </font>
                                     </Label>
                                     <Spinner id="minutoFim" fx:id="minutoFim" layoutX="675.0" layoutY="570.0" prefHeight="30.0" prefWidth="70.0" />
-                                    <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutX="850.0" layoutY="500.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE">
-                                       <font>
-                                          <Font name="Arial Bold" size="15.0" />
-                                       </font>
-                                    </Button>
                                     <Button id="botaoLimpar" fx:id="botaoLimpar" layoutX="850.0" layoutY="575.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Limpar" textFill="WHITE">
                                        <font>
                                           <Font name="Arial Bold" size="15.0" />
@@ -200,4 +200,4 @@
          </children>
       </AnchorPane>
    </children>
-</StackPane>
+</VBox>
