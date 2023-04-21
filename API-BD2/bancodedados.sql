@@ -1,5 +1,3 @@
--- Configurando user e password padrão do banco de dados para conectar ao JDbC
-
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin123';
 
 GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost';
@@ -24,6 +22,21 @@ create table
     );
 
 create table
+    centro_resultado(
+        nome VARCHAR(30) NOT NULL,
+        status_aprovacao ENUM('ativo', 'inativo') NOT NULL,
+        codigo_cr VARCHAR(10) not NULL PRIMARY KEY,
+        sigla VARCHAR (10) NOT NULL UNIQUE
+    );
+
+create table
+    cliente (
+        razao_social VARCHAR(70) NOT NULL,
+        status_clientes ENUM('ativo', 'inativo') NOT NULL,
+        cnpj BIGINT PRIMARY KEY NOT NULL
+    );
+
+create table
     hora(
         id int not null AUTO_INCREMENT PRIMARY KEY,
         data_hora_inicio DATETIME not NULL,
@@ -38,18 +51,22 @@ create table
     );
 
 create table
-    centro_resultado(
-        nome VARCHAR(30) NOT NULL,
-        status_aprovacao ENUM('ativo', 'inativo') NOT NULL,
-        codigo_cr VARCHAR(10) not NULL PRIMARY KEY,
-        sigla VARCHAR (10) NOT NULL UNIQUE
+    contrato(
+		id int(10) auto_increment primary key,
+        cod_cr VARCHAR(10) not NULL,
+        cnpj_cliente BIGINT NOT NULL,
+        Foreign Key (cod_cr) REFERENCES centro_resultado(codigo_cr),
+        Foreign KEY (cnpj_cliente) REFERENCES cliente(cnpj)
     );
 
 create table
-    cliente (
-        razao_social VARCHAR(70) NOT NULL,
-        status_clientes ENUM('ativo', 'inativo') NOT NULL,
-        cpnj BIGINT PRIMARY KEY NOT NULL
+    integrantes (
+        gestor BOOLEAN NOT NULL,
+        username_integrante VARCHAR(20) not null,
+        cod_cr VARCHAR(10) not NULL,
+        Foreign Key (username_integrante) REFERENCES usuarios(username),
+        Foreign Key (cod_cr) REFERENCES centro_resultado(codigo_cr),
+        PRIMARY KEY (username_integrante, cod_cr)
     );
 
 INSERT INTO
