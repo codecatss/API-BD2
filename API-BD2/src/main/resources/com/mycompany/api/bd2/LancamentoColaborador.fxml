@@ -13,13 +13,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="node" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.api.bd2.LancamentoColaboradorController">
    <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane fx:id="painelPrincipal" prefHeight="200.0" prefWidth="200.0">
          <children>
             <BorderPane layoutX="90.0" layoutY="124.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <top>
@@ -39,7 +39,7 @@
                               </Button>
                               <Label layoutX="14.0" layoutY="15.0" text="Lançamento de Horas">
                                  <font>
-                                    <Font name="Arial Bold" size="14.0" />
+                                    <Font size="15.0" />
                                  </font>
                               </Label>
                            </children>
@@ -52,34 +52,34 @@
                      <children>
                         <AnchorPane layoutY="93.0" prefHeight="554.4" prefWidth="211.2" styleClass="nav-form" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <ImageView id="iconeUsuario" fx:id="iconeUsuario" fitHeight="34.0" fitWidth="35.0" layoutX="15.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="706.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="162.0" AnchorPane.topAnchor="15.0">
+                              <ImageView id="iconeUsuario" fx:id="iconeUsuario" fitHeight="34.0" fitWidth="35.0" layoutX="15.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@user-48.png" />
                                  </image>
                               </ImageView>
-                              <Label id="usuario" fx:id="usuario" layoutX="70.0" layoutY="15.0" text="Usuário" textFill="WHITE" AnchorPane.bottomAnchor="715.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="20.0">
+                              <Label id="usuario" fx:id="label_usuario" layoutX="64.0" layoutY="21.0" textFill="WHITE">
                                  <font>
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
-                              <ImageView id="iconeCR" fx:id="iconeCR" fitHeight="43.0" fitWidth="38.0" layoutX="15.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="640.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="80.0">
+                              <ImageView id="iconeCR" fx:id="iconeCR" fitHeight="43.0" fitWidth="38.0" layoutX="14.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@conference-call-48.png" />
                                  </image>
                               </ImageView>
-                              <Label id="CR_FUNCAO" fx:id="CR_FUNCAO" layoutX="60.0" layoutY="75.0" text="CR | FUNÇÃO" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="660.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="75.0">
+                              <Label id="CR_FUNCAO" fx:id="CR_FUNCAO" layoutX="64.0" layoutY="81.0" text="CR | FUNÇÃO" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
-                              <Line endX="100.0" layoutX="105.0" layoutY="65.0" startX="-100.0" stroke="WHITE" AnchorPane.bottomAnchor="695.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="60.0" />
-                              <Line endX="100.0" layoutX="105.0" layoutY="150.0" startX="-100.0" stroke="WHITE" AnchorPane.bottomAnchor="615.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="145.0" />
-                              <Button id="mudarCR" fx:id="mudarCR" layoutX="60.0" layoutY="100.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="132.0" styleClass="cr-btn" stylesheets="@EstilizacaoTelas.css" text="Mudar CR" textFill="WHITE" AnchorPane.bottomAnchor="625.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="100.0">
+                              <Line endX="100.0" layoutX="105.0" layoutY="65.0" startX="-100.0" stroke="WHITE" />
+                              <Line endX="100.0" layoutX="105.0" layoutY="150.0" startX="-100.0" stroke="WHITE" />
+                              <Button id="mudarCR" fx:id="mudarCR" layoutX="74.0" layoutY="104.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" styleClass="cr-btn" stylesheets="@EstilizacaoTelas.css" text="Mudar CR" textFill="WHITE">
                                  <font>
                                     <Font name="Arial" size="14.0" />
                                  </font>
                               </Button>
-                              <Button id="botaoSair" fx:id="botaoSair" layoutX="11.0" layoutY="712.0" mnemonicParsing="false" stylesheets="@EstilizacaoTelas.css" text="Sair" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="720.0">
+                              <Button id="botaoSair" fx:id="botaoSair" layoutX="11.0" layoutY="712.0" mnemonicParsing="false" stylesheets="@EstilizacaoTelas.css" text="Sair" textFill="WHITE" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="11.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -100,7 +100,7 @@
                            <children>
                               <AnchorPane layoutX="8.0" layoutY="9.0" prefHeight="731.0" prefWidth="1067.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="9.0">
                                  <children>
-                                    <TableView id="tabelaLancamento" fx:id="tabelaLancamento" layoutX="10.0" layoutY="15.0" prefHeight="400.0" prefWidth="1050.0" AnchorPane.bottomAnchor="320.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="15.0">
+                                    <TableView id="tabelaLancamento" fx:id="tabelaLancamento" layoutX="10.0" layoutY="15.0" prefHeight="400.0" prefWidth="1050.0">
                                       <columns>
                                         <TableColumn fx:id="tabelaId" maxWidth="45.0" minWidth="35.0" prefWidth="40.0" text="ID" />
                                         <TableColumn fx:id="tabelaNome" maxWidth="160.0" minWidth="150.0" prefWidth="155.0" text="Nome" />
@@ -164,10 +164,15 @@
                                        </font>
                                     </Label>
                                     <ComboBox id="selecaoJustificativa" fx:id="selecaoJustificativa" layoutX="220.0" layoutY="620.0" prefHeight="30.0" prefWidth="155.0" />
-                                    <ComboBox id="tipoFuncao" fx:id="tipoFuncao" layoutX="220.0" layoutY="470.0" prefHeight="30.0" prefWidth="155.0" />
+                                    <ComboBox id="tipoFuncao" fx:id="tipo_funcao" layoutX="220.0" layoutY="470.0" onMouseClicked="#tipoFuncao" prefHeight="30.0" prefWidth="155.0" />
                                     <TextField id="stringProjeto" fx:id="stringProjeto" layoutX="590.0" layoutY="620.0" prefHeight="30.0" prefWidth="155.0" />
                                     <ComboBox id="selecaoCliente" fx:id="selecaoCliente" layoutX="590.0" layoutY="470.0" prefHeight="30.0" prefWidth="155.0" />
                                     <DatePicker id="dataFim" fx:id="dataFim" layoutX="590.0" layoutY="520.0" prefHeight="30.0" prefWidth="155.0" />
+                                    <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutX="850.0" layoutY="500.0" mnemonicParsing="false" onAction="#BotaoAdicionar" prefHeight="40.0" prefWidth="100.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial Bold" size="15.0" />
+                                       </font>
+                                    </Button>
                                     <Spinner id="horaFim" fx:id="horaFim" layoutX="590.0" layoutY="570.0" prefHeight="30.0" prefWidth="70.0" />
                                     <Label layoutX="665.0" layoutY="575.0" prefWidth="5.0" text=":">
                                        <font>
@@ -175,11 +180,6 @@
                                        </font>
                                     </Label>
                                     <Spinner id="minutoFim" fx:id="minutoFim" layoutX="675.0" layoutY="570.0" prefHeight="30.0" prefWidth="70.0" />
-                                    <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutX="850.0" layoutY="500.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE">
-                                       <font>
-                                          <Font name="Arial Bold" size="15.0" />
-                                       </font>
-                                    </Button>
                                     <Button id="botaoLimpar" fx:id="botaoLimpar" layoutX="850.0" layoutY="575.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Limpar" textFill="WHITE">
                                        <font>
                                           <Font name="Arial Bold" size="15.0" />
@@ -200,4 +200,4 @@
          </children>
       </AnchorPane>
    </children>
-</StackPane>
+</VBox>
