@@ -101,7 +101,7 @@ public void BotaoAdicionar() {
     
     @FXML
     public void tipoFuncao(){
-    obs.add("Hora"+ TipoHora.EXTRA.name().toLowerCase());
+    obs.add("Hora "+ TipoHora.EXTRA.name().toLowerCase());
     obs.add(TipoHora.SOBREAVISO.name().toLowerCase());
     opcoes.setAll(obs);
     tipo_funcao.setItems(opcoes);
