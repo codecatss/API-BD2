@@ -90,7 +90,8 @@ public class LancamentoColaboradorController {
     private List<String> cli = new ArrayList<>();
     private ObservableList<String> opCli = FXCollections.observableArrayList();
     
-        public void initialize() {
+    public void initialize() {
+        label_usuario.setText("*nome do usuário*");
         minutoInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59));
         horaInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 24));
         minutoFim.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59));
@@ -99,7 +100,7 @@ public class LancamentoColaboradorController {
 
     @FXML
     public void BotaoAdicionar() {
-        label_usuario.setText("*nome do usuário*");
+        
         System.out.println("foi");
     }
     
