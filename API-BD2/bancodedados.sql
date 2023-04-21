@@ -149,5 +149,21 @@ VALUES (
         'Ativo'
     );
 
+-- Adição de centro de resultados
+
+INSERT INTO
+    centro_resultado (
+        nome,
+        status_aprovacao,
+        codigo_cr,
+        sigla
+    )
+VALUES (
+        'Codecats',
+        'ativo',
+        '13652',
+        'CCTS'
+    );
+
 -- Seleção de dados na tabela
 SELECT * FROM usuarios;
