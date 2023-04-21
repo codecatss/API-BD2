@@ -4,25 +4,20 @@
  */
 package com.mycompany.api.bd2;
 
+import daos.horaDAO;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-
-import models.TipoHora;
 import javafx.collections.ObservableList;
+import models.Hora;
+
+import models.*;
 
 
 
@@ -67,44 +62,73 @@ public class LancamentoColaboradorController {
     @FXML
     private DatePicker dataInicio;
     @FXML
-    private Spinner<?> horaInicio;
+    private Spinner<Integer> horaInicio;
     @FXML
-    private Spinner<?> minutoInicio;
-    @FXML
-    private ComboBox<?> selecaoJustificativa;
+    private Spinner<Integer> minutoInicio;
+ 
+    private ComboBox<String> selecaoJustificativa;
     @FXML
     private ComboBox<String> tipo_funcao;
     @FXML
     private TextField stringProjeto;
     @FXML
-    private ComboBox<?> selecaoCliente;
+    private ComboBox<String> selecaoCliente;
     @FXML
     private DatePicker dataFim;
     @FXML
-    private Spinner<?> horaFim;
+    private Spinner<Integer> horaFim;
     @FXML
-    private Spinner<?> minutoFim;
+    private Spinner<Integer> minutoFim;
     @FXML
     private Button botaoAdicionar;
     @FXML
     private Button botaoLimpar;
 
     private List<String> obs = new ArrayList<>();
-    private String a = "a";
     private ObservableList<String> opcoes = FXCollections.observableArrayList();
+    
+    private List<String> cli = new ArrayList<>();
+    private ObservableList<String> opCli = FXCollections.observableArrayList();
+    
+        public void initialize() {
+        minutoInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59));
+        horaInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 24));
+        minutoFim.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59));
+        horaFim.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 24));
+    }
 
-@FXML
-public void BotaoAdicionar() {
-    label_usuario.setText("oi");
-    System.out.println("foi");
-}
+    @FXML
+    public void BotaoAdicionar() {
+        label_usuario.setText("*nome do usuário*");
+        System.out.println("foi");
+    }
     
     @FXML
-    public void tipoFuncao(){
+    public void tipoFuncao() throws ParseException{
     obs.add("Hora "+ TipoHora.EXTRA.name().toLowerCase());
     obs.add(TipoHora.SOBREAVISO.name().toLowerCase());
     opcoes.setAll(obs);
     tipo_funcao.setItems(opcoes);
     }
     
+    @FXML
+    public void forneceCliente(){
+        cli.add("EMBRAER");
+        cli.add("ITAU");
+        cli.add("SANSUNG");
+        opCli.setAll(cli);
+        selecaoCliente.setItems(opCli); 
+    }
+    
+    @FXML
+    public void limpaCampos(){
+        dataInicio.setValue(null);
+        dataFim.setValue(null);
+        selecaoCliente.getSelectionModel().clearSelection();
+        tipo_funcao.getSelectionModel().clearSelection();
+        minutoInicio.getValueFactory().setValue(null);
+        horaInicio.getValueFactory().setValue(null);
+        minutoFim.getValueFactory().setValue(null);
+        horaFim.getValueFactory().setValue(null);
+    }
 }

@@ -6,22 +6,19 @@ package daos;
 
 import Conexao.Conexao;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import models.Hora;
+import models.Centro_resultado;
+
 /**
  *
  * @author mikaela.begotti
  */
-public class horaDAO {
-    
-    public void save(Hora hora) throws ParseException{
-        String sql = "INSERT INTO HORA(username_lancador,data_hora_inicio,data_hora_fim,tipo,cod_cr,justificativa,projeto) VALUES (?, ?, ?, ?, ?, ?, ?)";
+public class crDAO {
+    public void save(Centro_resultado cr){
+        String sql = "INSERT INTO centro_resultado(nome, status_aprovacao, codigo_cr, sigla) VALUES (?, ?, ?, ?)";
         Connection conn = null;
         PreparedStatement pstm = null;
         
@@ -29,13 +26,10 @@ public class horaDAO {
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setString(1,hora.getUsername_lancador());
-            pstm.setTimestamp(2, new Timestamp(hora.getData_hora_inicio().getTime()));
-            pstm.setTimestamp(3, new Timestamp(hora.getData_hora_fim().getTime()));
-            pstm.setString(4, hora.getTipo());
-            pstm.setString(5, hora.getCentro_resultado());
-            pstm.setString(6,hora.getJustificativa());
-            pstm.setString(7,hora.getProjeto());
+            pstm.setString(1,cr.getNome());
+            pstm.setString(3, cr.getCodigo_cr());
+            pstm.setString(2, cr.getStatus_aprovacao());
+            pstm.setString(4, cr.getSigla());
             
             pstm.execute();
         }
@@ -56,8 +50,8 @@ public class horaDAO {
         
     }
 
-    public void delete(Hora hora){
-        String sql = "DELETE FROM hora "+"WHERE username_lancador=?";
+    public void delete(Centro_resultado cr){
+        String sql = "DELETE FROM centro_resultado "+"WHERE codigo_cr";
         Connection conn = null;
         PreparedStatement pstm = null; 
         
@@ -65,7 +59,7 @@ public class horaDAO {
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setString(1,hora.getUsername_lancador());
+            pstm.setString(3,cr.getCodigo_cr());
             
             pstm.execute();
         }
@@ -85,11 +79,11 @@ public class horaDAO {
         }
         
     }
-    public List<Hora> getHoras(){
+    public List<Centro_resultado> getCliente(){
 		
-		String sql = "SELECT * FROM 2rp.hora";
+		String sql = "SELECT * FROM 2rp.centro_resultado";
 		
-		List<Hora> horas = new ArrayList<Hora>();
+		List<Centro_resultado> crs = new ArrayList<Centro_resultado>();
 		
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -105,18 +99,16 @@ public class horaDAO {
 			
 			while (rset.next()) {
 				
-				Hora hora = new Hora();
+				Centro_resultado cr = new Centro_resultado();
 				
 				
-				hora.setUsername_lancador(rset.getString("username_lancador"));
+				cr.setCodigo_cr(rset.getString("codigo_cr"));
 				
-				hora.setData_hora_inicio(rset.getString("data_hora_inicio"));
-				hora.setData_hora_fim(rset.getString("data_hora_fim"));
-				hora.setTipo(rset.getString("tipo"));
-                                hora.setCentro_resultado(rset.getString("cod_cr"));
-                                hora.setJustificativa("justificativa");
-                                hora.setProjeto("projeto");
-				horas.add(hora);
+				cr.setNome(rset.getString("nome"));
+				cr.setSigla(rset.getString("sigla"));
+                                cr.setStatus_clientes(rset.getString("status_aprovacao"));
+			
+				crs.add(cr);
 				
 			}
 		}catch (Exception e) {
@@ -138,8 +130,7 @@ public class horaDAO {
 					e.printStackTrace();
 				}
 			}
-                        System.out.println(horas);
-			return horas;
+                        System.out.println(crs);
+			return crs;
 	}
-    
 }

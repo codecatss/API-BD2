@@ -11,13 +11,13 @@ public class LoginController {
 
     @FXML
     private void login() throws IOException {  
-        if(cargo.equals(user.getCargoObj(), Funcao.ADMIN)){
+        if(cargo.equals(user.getCargoObj(), Funcao.admin)){
             App.setRoot("HomeAdm"); 
         }
-        if (cargo.equals(user.getCargoObj(), Funcao.COLABORADOR)){
+        if (cargo.equals(user.getCargoObj(), Funcao.colaborador)){
             App.setRoot("HomeColab"); 
         }
-        if (cargo.equals(user.getCargoObj(), Funcao.GESTOR)){
+        if (cargo.equals(user.getCargoObj(), Funcao.gestor)){
             App.setRoot("HomeGest"); 
         }
     }

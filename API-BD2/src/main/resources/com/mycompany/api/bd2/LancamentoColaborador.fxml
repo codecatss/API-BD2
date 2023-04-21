@@ -158,15 +158,9 @@
                                           <Font name="Arial" size="18.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="100.0" layoutY="625.0" prefHeight="22.0" prefWidth="95.0" text="Justificativa">
-                                       <font>
-                                          <Font name="Arial" size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <ComboBox id="selecaoJustificativa" fx:id="selecaoJustificativa" layoutX="220.0" layoutY="620.0" prefHeight="30.0" prefWidth="155.0" />
                                     <ComboBox id="tipoFuncao" fx:id="tipo_funcao" layoutX="220.0" layoutY="470.0" onMouseClicked="#tipoFuncao" prefHeight="30.0" prefWidth="155.0" />
                                     <TextField id="stringProjeto" fx:id="stringProjeto" layoutX="590.0" layoutY="620.0" prefHeight="30.0" prefWidth="155.0" />
-                                    <ComboBox id="selecaoCliente" fx:id="selecaoCliente" layoutX="590.0" layoutY="470.0" prefHeight="30.0" prefWidth="155.0" />
+                                    <ComboBox id="selecaoCliente" fx:id="selecaoCliente" layoutX="590.0" layoutY="470.0" onMouseClicked="#forneceCliente" prefHeight="30.0" prefWidth="155.0" />
                                     <DatePicker id="dataFim" fx:id="dataFim" layoutX="590.0" layoutY="520.0" prefHeight="30.0" prefWidth="155.0" />
                                     <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutX="850.0" layoutY="500.0" mnemonicParsing="false" onAction="#BotaoAdicionar" prefHeight="40.0" prefWidth="100.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE">
                                        <font>
@@ -180,7 +174,7 @@
                                        </font>
                                     </Label>
                                     <Spinner id="minutoFim" fx:id="minutoFim" layoutX="675.0" layoutY="570.0" prefHeight="30.0" prefWidth="70.0" />
-                                    <Button id="botaoLimpar" fx:id="botaoLimpar" layoutX="850.0" layoutY="575.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Limpar" textFill="WHITE">
+                                    <Button id="botaoLimpar" fx:id="botaoLimpar" layoutX="866.0" layoutY="566.0" mnemonicParsing="false" onAction="#limpaCampos" prefHeight="40.0" prefWidth="100.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Limpar" textFill="WHITE">
                                        <font>
                                           <Font name="Arial Bold" size="15.0" />
                                        </font>

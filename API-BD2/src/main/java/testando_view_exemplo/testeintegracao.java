@@ -4,6 +4,8 @@
 
 package testando_view_exemplo;
 
+import daos.clienteDAO;
+import daos.crDAO;
 import daos.horaDAO;
 import daos.usuarioDAO;
 import java.sql.Date;
@@ -12,6 +14,8 @@ import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import models.Centro_resultado;
+import models.Cliente;
 import models.Hora;
 import models.Usuario;
 
@@ -25,15 +29,18 @@ public class testeintegracao {
 
     public static void main(String[] args) throws ParseException{
       
-     
-     horaDAO horaDao = new horaDAO();
       Hora hora = new Hora();
+      horaDAO horaDao = new horaDAO();
       hora.setUsername_lancador("Geniscleita");
-      hora.setData_hora_inicio("2023-04-15 12:30:00");
-      hora.setData_hora_fim("2023-04-15 13:30:00");
-      hora.setTipo("Hora extra");
-      hora.setCentro_resultado("dssfusefh");
+      hora.setData_hora_inicio("2023-02-12 13:34:01");
+      hora.setData_hora_fim("2023-02-12 13:34:01");
+      hora.setTipo("ajajs");
+      hora.setCentro_resultado("euffdg");
+      hora.setJustificativa("just");
+      hora.setProjeto("trampos");
+      
       horaDao.save(hora);
-      horaDao.getHoras();
+      
+      
     }
 }

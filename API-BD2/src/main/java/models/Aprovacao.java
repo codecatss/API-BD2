@@ -6,12 +6,8 @@ package models;
 
 /**
  *
- * @author danko
+ * @author mikaela.begotti
  */
-public enum Funcao {
-    admin, colaborador, gestor;    
-
-    public boolean equals(Funcao cargo_usuario, Funcao cargo_desejado) {
-        return cargo_desejado == cargo_usuario;
-    }
+public class Aprovacao {
+    
 }

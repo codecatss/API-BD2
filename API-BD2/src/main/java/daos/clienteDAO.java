@@ -4,6 +4,7 @@
  */
 package daos;
 
+import models.Cliente;
 import Conexao.Conexao;
 import java.sql.Connection;
 import java.sql.Date;
@@ -18,10 +19,10 @@ import models.Hora;
  *
  * @author mikaela.begotti
  */
-public class horaDAO {
+public class clienteDAO {
     
-    public void save(Hora hora) throws ParseException{
-        String sql = "INSERT INTO HORA(username_lancador,data_hora_inicio,data_hora_fim,tipo,cod_cr,justificativa,projeto) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public void save(Cliente cliente){
+        String sql = "INSERT INTO cliente(razao_social, status_aprovacao, cnpj) VALUES (?, ?, ?)";
         Connection conn = null;
         PreparedStatement pstm = null;
         
@@ -29,13 +30,9 @@ public class horaDAO {
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setString(1,hora.getUsername_lancador());
-            pstm.setTimestamp(2, new Timestamp(hora.getData_hora_inicio().getTime()));
-            pstm.setTimestamp(3, new Timestamp(hora.getData_hora_fim().getTime()));
-            pstm.setString(4, hora.getTipo());
-            pstm.setString(5, hora.getCentro_resultado());
-            pstm.setString(6,hora.getJustificativa());
-            pstm.setString(7,hora.getProjeto());
+            pstm.setString(1,cliente.getRazao_social());
+            pstm.setString(2, cliente.getStatus_clientes());
+            pstm.setLong(3, cliente.getCnpj());
             
             pstm.execute();
         }
@@ -56,8 +53,8 @@ public class horaDAO {
         
     }
 
-    public void delete(Hora hora){
-        String sql = "DELETE FROM hora "+"WHERE username_lancador=?";
+    public void delete(Cliente cliente){
+        String sql = "DELETE FROM cliente "+"WHERE cnpj";
         Connection conn = null;
         PreparedStatement pstm = null; 
         
@@ -65,7 +62,7 @@ public class horaDAO {
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setString(1,hora.getUsername_lancador());
+            pstm.setLong(1,cliente.getCnpj());
             
             pstm.execute();
         }
@@ -85,11 +82,11 @@ public class horaDAO {
         }
         
     }
-    public List<Hora> getHoras(){
+    public List<Cliente> getCliente(){
 		
-		String sql = "SELECT * FROM 2rp.hora";
+		String sql = "SELECT * FROM 2rp.cliente";
 		
-		List<Hora> horas = new ArrayList<Hora>();
+		List<Cliente> clientes = new ArrayList<Cliente>();
 		
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -105,18 +102,15 @@ public class horaDAO {
 			
 			while (rset.next()) {
 				
-				Hora hora = new Hora();
+				Cliente cliente = new Cliente();
 				
 				
-				hora.setUsername_lancador(rset.getString("username_lancador"));
+				cliente.setRazao_social(rset.getString("razao_social"));
 				
-				hora.setData_hora_inicio(rset.getString("data_hora_inicio"));
-				hora.setData_hora_fim(rset.getString("data_hora_fim"));
-				hora.setTipo(rset.getString("tipo"));
-                                hora.setCentro_resultado(rset.getString("cod_cr"));
-                                hora.setJustificativa("justificativa");
-                                hora.setProjeto("projeto");
-				horas.add(hora);
+				cliente.setStatus_clientes(rset.getString("status_clientes"));
+				cliente.setCnpj(rset.getLong("cnpj"));
+			
+				clientes.add(cliente);
 				
 			}
 		}catch (Exception e) {
@@ -138,8 +132,9 @@ public class horaDAO {
 					e.printStackTrace();
 				}
 			}
-                        System.out.println(horas);
-			return horas;
+                        System.out.println(clientes);
+			return clientes;
 	}
     
 }
+
