@@ -1,4 +1,3 @@
-
 package models;
 
 import java.sql.Timestamp;
@@ -7,15 +6,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
-
+import models.TipoHora;
 
 public class Hora {
-    
+
     private int id;
     private String username_lancador;
-    private Timestamp data_hora_inicio; 
+    private Timestamp data_hora_inicio;
     private Timestamp data_hora_fim;
-    private String tipo; 
+    private String tipo;
     private String centro_resultado;
     private String justificativa;
     private String projeto;
@@ -51,14 +50,14 @@ public class Hora {
     /**
      * @return the data_hora_inicio
      */
-    public Timestamp getData_hora_inicio() throws ParseException{
+    public Timestamp getData_hora_inicio() throws ParseException {
         return data_hora_inicio;
     }
 
     /**
      * @param data_hora_inicio the data_hora_inicio to set
      */
-    public void setData_hora_inicio(String time) throws ParseException{
+    public void setData_hora_inicio(String time) throws ParseException {
         String dataHoraString = time;
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date dataHoraDate = dateFormat.parse(dataHoraString);
@@ -69,7 +68,7 @@ public class Hora {
     /**
      * @return the data_hora_fim
      */
-    public Timestamp getData_hora_fim() throws ParseException{
+    public Timestamp getData_hora_fim() throws ParseException {
         return data_hora_fim;
     }
 
@@ -95,7 +94,9 @@ public class Hora {
      * @param tipo the tipo to set
      */
     public void setTipo(String tipo) {
-        this.tipo = tipo;
+        if (tipo.equals(TipoHora.EXTRA.name()) || tipo.equals(TipoHora.SOBREAVISO.name())) {
+            this.tipo = tipo;
+        }
     }
 
     /**
@@ -139,7 +140,5 @@ public class Hora {
     public void setProjeto(String projeto) {
         this.projeto = projeto;
     }
-    
-    
-    
+
 }
