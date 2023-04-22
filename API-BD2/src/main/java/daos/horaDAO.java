@@ -105,7 +105,7 @@ public class horaDAO {
 			
 			while (rset.next()) {
 				
-				Hora hora = new Hora();
+				Hora hora = new Hora(null, null, null, null, null, null, null);
 				
 				
 				hora.setUsername_lancador(rset.getString("username_lancador"));

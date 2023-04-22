@@ -28,9 +28,10 @@ import models.Usuario;
 public class testeintegracao {
 
     public static void main(String[] args) throws ParseException{
+        
+      /*horaDAO horaDao = new horaDAO();
+      Hora hora = new Hora(null, "Geniscleita","2023-02-12 13:34:01","2023-02-12 13:34:01","ajajs","euffdg","euffdg","just","trampos");
       
-      Hora hora = new Hora();
-      horaDAO horaDao = new horaDAO();
       hora.setUsername_lancador("Geniscleita");
       hora.setData_hora_inicio("2023-02-12 13:34:01");
       hora.setData_hora_fim("2023-02-12 13:34:01");
@@ -41,6 +42,6 @@ public class testeintegracao {
       
       horaDao.save(hora);
       
-      
+      */
     }
 }

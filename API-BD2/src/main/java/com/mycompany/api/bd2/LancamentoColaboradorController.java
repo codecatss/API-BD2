@@ -16,6 +16,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.collections.ObservableList;
 import models.Hora;
+import daos.horaDAO;
+
 
 import models.*;
 
@@ -30,7 +32,9 @@ public class LancamentoColaboradorController {
     @FXML
     private Label label_usuario;
     @FXML
-    private Label CR_FUNCAO;
+    private Label FUNCAO;
+    @FXML
+    private Label CR;
     @FXML
     private Button mudarCR;
     @FXML
@@ -100,8 +104,15 @@ public class LancamentoColaboradorController {
 
     @FXML
     public void BotaoAdicionar() {
-        
-        System.out.println("foi");
+        try{
+            Hora hora = new Hora(label_usuario.getText(),null, null, tipo_funcao.getValue(),CR.getText(),stringProjeto.getText());
+            horaDAO daoH = new horaDAO();
+            daoH.save(hora);
+            System.out.println("foi");
+
+        }catch (Exception e){
+            System.out.println("N-foi");
+        }
     }
     
     @FXML
