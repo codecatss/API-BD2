@@ -10,14 +10,31 @@ import models.TipoHora;
 
 public class Hora {
 
-    private int id;
+    private Integer id;
     private String username_lancador;
     private Timestamp data_hora_inicio;
     private Timestamp data_hora_fim;
     private String tipo;
+    private String status;
     private String centro_resultado;
+    private String cliente;
     private String justificativa;
     private String projeto;
+
+    public Hora(String username_lancador, Timestamp data_hora_inicio, Timestamp data_hora_fim, String tipo, String centro_resultado, String projeto) {
+        this.username_lancador = username_lancador;
+        this.data_hora_inicio = data_hora_inicio;
+        this.data_hora_fim = data_hora_fim;
+        this.tipo = tipo;
+        this.centro_resultado = centro_resultado;
+        this.projeto = projeto;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+    
+    
 
     /**
      * @return the id
@@ -29,7 +46,7 @@ public class Hora {
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -140,5 +157,10 @@ public class Hora {
     public void setProjeto(String projeto) {
         this.projeto = projeto;
     }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
 
 }

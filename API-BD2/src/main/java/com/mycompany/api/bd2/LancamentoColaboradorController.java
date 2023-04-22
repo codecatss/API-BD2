@@ -4,7 +4,7 @@
  */
 package com.mycompany.api.bd2;
 
-import daos.horaDAO;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,9 @@ import javafx.scene.layout.VBox;
 import javafx.collections.ObservableList;
 import models.Hora;
 import daos.horaDAO;
+import java.sql.Timestamp;
+import javafx.scene.control.cell.PropertyValueFactory;
+
 
 
 import models.*;
@@ -40,29 +43,29 @@ public class LancamentoColaboradorController {
     @FXML
     private Button botaoSair;
     @FXML
-    private TableView<?> tabelaLancamento;
+    private TableView<Hora> tabelaLancamento;
     @FXML
-    private TableColumn<?, ?> tabelaId;
+    private TableColumn<Hora, Integer> tabelaId;
     @FXML
-    private TableColumn<?, ?> tabelaNome;
+    private TableColumn<Hora, String> tabelaNome;
     @FXML
-    private TableColumn<?, ?> tabelaTipo;
+    private TableColumn<Hora, String> tabelaTipo;
     @FXML
-    private TableColumn<?, ?> tabelaStatus;
+    private TableColumn<Hora, String> tabelaStatus;
     @FXML
-    private TableColumn<?, ?> tabelaDHInicio;
+    private TableColumn<Hora, Timestamp > tabelaDHInicio;
     @FXML
-    private TableColumn<?, ?> tabelaDHFim;
+    private TableColumn<Hora, Timestamp > tabelaDHFim;
     @FXML
-    private TableColumn<?, ?> tabelaCR;
+    private TableColumn<Hora, String> tabelaCR;
     @FXML
-    private TableColumn<?, ?> tabelaCliente;
+    private TableColumn<Hora, String> tabelaCliente;
     @FXML
-    private TableColumn<?, ?> tabelaProjeto;
+    private TableColumn<Hora, String> tabelaProjeto;
     @FXML
-    private TableColumn<?, ?> tabelaJustificativa;
+    private TableColumn<Hora, String> tabelaJustificativa;
     @FXML
-    private TableColumn<?, ?> tabelaResp;
+    private TableColumn<Hora, String  > tabelaResp;
     @FXML
     private DatePicker dataInicio;
     @FXML
@@ -94,12 +97,16 @@ public class LancamentoColaboradorController {
     private List<String> cli = new ArrayList<>();
     private ObservableList<String> opCli = FXCollections.observableArrayList();
     
+    private List<Hora> lishoras = new ArrayList<>();
+    private ObservableList<Hora> observablelisthoras = FXCollections.observableArrayList();
+    
     public void initialize() {
         label_usuario.setText("*nome do usuário*");
         minutoInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59));
         horaInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 24));
         minutoFim.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59));
         horaFim.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 24));
+        carregaTabela();
     }
 
     @FXML
@@ -142,5 +149,31 @@ public class LancamentoColaboradorController {
         horaInicio.getValueFactory().setValue(null);
         minutoFim.getValueFactory().setValue(null);
         horaFim.getValueFactory().setValue(null);
+    }
+    
+    @FXML
+    public void carregaTabela(){
+        
+        Hora hora = new Hora("jao", null, null, "Extra", "time do jão", "embratel");
+        hora.setId(2);
+        lishoras.add(hora);
+        observablelisthoras.setAll(lishoras);
+        tabelaLancamento.setItems(observablelisthoras);
+        
+        tabelaId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tabelaNome.setCellValueFactory(new PropertyValueFactory<>("username_lancador")); 
+        tabelaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo")); 
+        tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status")); 
+        tabelaDHInicio.setCellValueFactory(new PropertyValueFactory<>("data_hora_inicio")); 
+        tabelaDHFim.setCellValueFactory(new PropertyValueFactory<>("data_hora_fim")); 
+        tabelaCR.setCellValueFactory(new PropertyValueFactory<>("centro_resultado")); 
+        tabelaCliente.setCellValueFactory(new PropertyValueFactory<>("cliente")); 
+        tabelaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto")); 
+        tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa")); 
+        tabelaResp.setCellValueFactory(new PropertyValueFactory<>("status")); 
+
+
+        
+        
     }
 }
