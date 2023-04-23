@@ -115,7 +115,7 @@ public class LancamentoColaboradorController {
 
     @FXML
     public void BotaoAdicionar() {
-        if(dataInicio==null||horaInicio==null||minutoInicio==null||dataFim==null||horaFim==null||minutoFim==null){
+        if(dataInicio.getValue()==null||horaInicio.getValue()==null||minutoInicio.getValue()==null||dataFim.getValue()==null||horaFim.getValue()==null||minutoFim.getValue()==null){
         System.out.println("Preencha todos os campos - tela de lançamento");}
         else{
         try{
