@@ -129,6 +129,7 @@ public class Hora {
     /**
      * @return the cod_cr
      */
+
     public String getCod_cr() {
         return cod_cr;
     }
@@ -136,6 +137,7 @@ public class Hora {
     /**
      * @param cod_cr the cod_cr to set
      */
+
     public void setCod_cr(String cod_cr) {
         this.cod_cr = cod_cr;
     }

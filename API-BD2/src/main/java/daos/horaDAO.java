@@ -40,6 +40,7 @@ public class horaDAO {
             pstm.setTimestamp(1, hora.getData_hora_inicio());
             pstm.setTimestamp(2, hora.getData_hora_fim());
             pstm.setString(3, hora.getTipo());
+
             pstm.setString(4, hora.getJustificativa_lancamento()); //X
             pstm.setString(5, hora.getProjeto());
             //pstm.setString(6, hora.getUsername_aprovador());
