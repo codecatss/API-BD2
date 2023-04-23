@@ -158,7 +158,7 @@ public class LancamentoColaboradorController {
     public void forneceCliente(){
         cli.add("EMBRAER");
         cli.add("ITAU");
-        cli.add("SANSUNG");
+        cli.add("SAMSUNG");
         opCli.setAll(cli);
         selecaoCliente.setItems(opCli); 
     }

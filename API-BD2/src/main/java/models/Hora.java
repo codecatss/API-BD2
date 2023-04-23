@@ -17,7 +17,6 @@ public class Hora {
     private String tipo;
     private String status;
     private String centro_resultado;
-    private String cliente;
     private String justificativa;
     private String projeto;
 
