@@ -18,7 +18,7 @@ import models.Centro_resultado;
  */
 public class crDAO {
     public void save(Centro_resultado cr){
-        String sql = "INSERT INTO centro_resultado(nome, status_aprovacao, codigo_cr, sigla) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO centro_resultado(nome, codigo_cr, sigla, status_cr,) VALUES (?, ?, ?, ?)";
         Connection conn = null;
         PreparedStatement pstm = null;
         
@@ -27,9 +27,9 @@ public class crDAO {
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
             pstm.setString(1,cr.getNome());
-            pstm.setString(3, cr.getCodigo_cr());
-            pstm.setString(2, cr.getStatus_aprovacao());
-            pstm.setString(4, cr.getSigla());
+            pstm.setString(2, cr.getCodigo_cr());
+            pstm.setString(3, cr.getSigla());
+            pstm.setString(4, cr.getStatus_cr());
             
             pstm.execute();
         }
@@ -59,7 +59,7 @@ public class crDAO {
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setString(3,cr.getCodigo_cr());
+            pstm.setString(2,cr.getCodigo_cr());
             
             pstm.execute();
         }
@@ -106,7 +106,7 @@ public class crDAO {
 				
 				cr.setNome(rset.getString("nome"));
 				cr.setSigla(rset.getString("sigla"));
-                                cr.setStatus_clientes(rset.getString("status_aprovacao"));
+                                cr.setStatus_cr(rset.getString("status_cr"));
 			
 				crs.add(cr);
 				

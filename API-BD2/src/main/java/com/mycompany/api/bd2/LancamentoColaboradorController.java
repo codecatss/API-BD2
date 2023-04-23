@@ -5,7 +5,7 @@
 package com.mycompany.api.bd2;
 
 
-import static com.sun.corba.se.impl.util.Utility.printStackTrace;
+//import static com.sun.corba.se.impl.util.Utility.printStackTrace;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -141,7 +141,7 @@ public class LancamentoColaboradorController {
             System.out.println("foi");
             
         }catch (Exception e){
-            printStackTrace();
+            //printStackTrace();
             System.out.println("N-foi");
         }
     }

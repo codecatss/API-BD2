@@ -10,21 +10,21 @@ package models;
  */
 public class Centro_resultado {
     private String nome;
-    private Status_clientes status_aprovacao; //reutilizando o enum do status clientes.
     private String codigo_cr;
     private String sigla;
+    private Status_clientes status_cr; //reutilizando o enum do status clientes.
     
-    public Status_clientes getStatus_aprovacaoObj() {
-        return status_aprovacao;
+    public Status_clientes getStatus_crObj() {
+        return status_cr;
     }
     
-    public String getStatus_aprovacao() {
-        return status_aprovacao.name();
+    public String getStatus_cr() {
+        return status_cr.name();
     }
 
   
-    public void setStatus_clientes(String status_aprovacao) {
-        this.status_aprovacao = Status_clientes.valueOf(status_aprovacao.toLowerCase());
+    public void setStatus_cr(String status_cr) {
+        this.status_cr = Status_clientes.valueOf(status_cr.toLowerCase());
     }
 
     /**
