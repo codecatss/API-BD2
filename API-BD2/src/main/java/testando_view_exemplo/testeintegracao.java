@@ -28,7 +28,7 @@ import models.Usuario;
 public class testeintegracao {
 
     public static void main(String[] args) throws ParseException{
-      
+    /*  
         horaDAO horaDao = new horaDAO();
         Hora hora = new Hora();
         
@@ -37,6 +37,6 @@ public class testeintegracao {
         hora.setTipo("extra");
         hora.setProjeto("é o projeto.");
         horaDao.save(hora);
-      
+     */ 
     }
 }

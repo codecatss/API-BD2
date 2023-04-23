@@ -22,6 +22,8 @@ public class Hora {
     private String username_aprovador;
     private String justificativa_negacao;
     private String status_aprovacao;    
+    
+    
 
     public String getStatus_aprovacao() {
         return status_aprovacao;
