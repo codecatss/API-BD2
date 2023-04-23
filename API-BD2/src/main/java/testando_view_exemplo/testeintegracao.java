@@ -28,20 +28,15 @@ import models.Usuario;
 public class testeintegracao {
 
     public static void main(String[] args) throws ParseException{
+    /*  
+        horaDAO horaDao = new horaDAO();
+        Hora hora = new Hora();
         
-      /*horaDAO horaDao = new horaDAO();
-      Hora hora = new Hora(null, "Geniscleita","2023-02-12 13:34:01","2023-02-12 13:34:01","ajajs","euffdg","euffdg","just","trampos");
-      
-      hora.setUsername_lancador("Geniscleita");
-      hora.setData_hora_inicio("2023-02-12 13:34:01");
-      hora.setData_hora_fim("2023-02-12 13:34:01");
-      hora.setTipo("ajajs");
-      hora.setCentro_resultado("euffdg");
-      hora.setJustificativa("just");
-      hora.setProjeto("trampos");
-      
-      horaDao.save(hora);
-      
-      */
+        hora.setData_hora_inicio("2023-04-12 13:30:00");
+        hora.setData_hora_fim("2023-04-12 14:30:02");
+        hora.setTipo("extra");
+        hora.setProjeto("é o projeto.");
+        horaDao.save(hora);
+     */ 
     }
 }

@@ -10,27 +10,23 @@ import models.TipoHora;
 
 public class Hora {
 
-    private Integer id;
+    private int id;
+    private String cod_cr;
     private String username_lancador;
+    private long cnpj_cliente;
     private Timestamp data_hora_inicio;
     private Timestamp data_hora_fim;
     private String tipo;
-    private String status;
-    private Integer centro_resultado;
-    private String justificativa;
+    private String justificativa_lancamento;
     private String projeto;
+    private String username_aprovador;
+    private String justificativa_negacao;
+    private String status_aprovacao;    
+    
+    
 
-    public Hora(String username_lancador, Timestamp data_hora_inicio, Timestamp data_hora_fim, String tipo, Integer centro_resultado, String projeto) {
-        this.username_lancador = username_lancador;
-        this.data_hora_inicio = data_hora_inicio;
-        this.data_hora_fim = data_hora_fim;
-        this.tipo = tipo;
-        this.centro_resultado = centro_resultado;
-        this.projeto = projeto;
-    }
-
-    public String getStatus() {
-        return status;
+    public String getStatus_aprovacao() {
+        return status_aprovacao;
     }
     
     
@@ -115,37 +111,6 @@ public class Hora {
         }
     }
 
-    /**
-     * @return the cod_cr
-     */
-    public int getCentro_resultado() {
-        return centro_resultado;
-    }
-
-    /**
-     * @param cod_cr the cod_cr to set
-     */
-    public void setCentro_resultado(int centro_resultado) {
-        this.centro_resultado = centro_resultado;
-    }
-
-    /**
-     * @return the justificativa
-     */
-    public String getJustificativa() {
-        return justificativa;
-    }
-
-    /**
-     * @param justificativa the justificativa to set
-     */
-    public void setJustificativa(String justificativa) {
-        this.justificativa = justificativa;
-    }
-
-    /**
-     * @return the projeto
-     */
     public String getProjeto() {
         return projeto;
     }
@@ -157,8 +122,80 @@ public class Hora {
         this.projeto = projeto;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus_aprovacao(String status_aprovacao) {
+        this.status_aprovacao = status_aprovacao;
+    }
+
+    /**
+     * @return the cod_cr
+     */
+
+    public String getCod_cr() {
+        return cod_cr;
+    }
+
+    /**
+     * @param cod_cr the cod_cr to set
+     */
+
+    public void setCod_cr(String cod_cr) {
+        this.cod_cr = cod_cr;
+    }
+
+    /**
+     * @return the cnpj_cliente
+     */
+    public long getCnpj_cliente() {
+        return cnpj_cliente;
+    }
+
+    /**
+     * @param cnpj_cliente the cnpj_cliente to set
+     */
+    public void setCnpj_cliente(long cnpj_cliente) {
+        this.cnpj_cliente = cnpj_cliente;
+    }
+
+    /**
+     * @return the justificativa_lancamento
+     */
+    public String getJustificativa_lancamento() {
+        return justificativa_lancamento;
+    }
+
+    /**
+     * @param justificativa_lancamento the justificativa_lancamento to set
+     */
+    public void setJustificativa_lancamento(String justificativa_lancamento) {
+        this.justificativa_lancamento = justificativa_lancamento;
+    }
+
+    /**
+     * @return the username_aprovador
+     */
+    public String getUsername_aprovador() {
+        return username_aprovador;
+    }
+
+    /**
+     * @param username_aprovador the username_aprovador to set
+     */
+    public void setUsername_aprovador(String username_aprovador) {
+        this.username_aprovador = username_aprovador;
+    }
+
+    /**
+     * @return the justificativa_negacao
+     */
+    public String getJustificativa_negacao() {
+        return justificativa_negacao;
+    }
+
+    /**
+     * @param justificativa_negacao the justificativa_negacao to set
+     */
+    public void setJustificativa_negacao(String justificativa_negacao) {
+        this.justificativa_negacao = justificativa_negacao;
     }
     
 

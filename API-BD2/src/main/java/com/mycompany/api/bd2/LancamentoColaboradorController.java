@@ -132,7 +132,14 @@ public class LancamentoColaboradorController {
             Timestamp timestamp_fim = Timestamp.valueOf(data_hora_fim);
 
             
-            Hora hora = new Hora("teste",timestamp_inicio, timestamp_fim, tipo_funcao.getValue(),13652,stringProjeto.getText());
+
+            Hora hora = new Hora();
+            hora.setCod_cr("Cr");
+            hora.setData_hora_inicio(timestamp_inicio.toString());
+            hora.setData_hora_fim(timestamp_fim.toString());
+            hora.setUsername_lancador("Joazinho");
+            
+
             horaDAO daoH = new horaDAO();
             daoH.save(hora);
             
@@ -174,7 +181,8 @@ public class LancamentoColaboradorController {
     @FXML
     public void carregaTabela(){
         
-        Hora hora = new Hora("Exemplo", null, null, "Extra", 13652, "embratel");
+
+        Hora hora = new Hora(); //removi daqui também
         hora.setId(2);
         lishoras.add(hora);
         observablelisthoras.setAll(lishoras);
