@@ -1,5 +1,6 @@
 package com.mycompany.api.bd2;
 
+import testando_view_exemplo.testeLeitura;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,22 +18,30 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("Login"), 640, 480);
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LancamentoColaborador.fxml"));
+        Parent root = fxmlLoader.load();
+        scene = new Scene(root, 1300, 800);
         stage.setScene(scene);
         stage.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
-
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
-    }
-
     public static void main(String[] args) {
         launch();
+    }
+    
+    public static Scene getScene() {
+        return scene;
+    }
+
+    public static void setRoot(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        Parent root = fxmlLoader.load();
+        scene.setRoot(root);
+    }
+    
+    public static void setScene(Scene newScene) {
+        scene = newScene;
     }
 
 }
