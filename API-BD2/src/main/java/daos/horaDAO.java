@@ -22,22 +22,30 @@ public class horaDAO {
     
     public void save(Hora hora) throws ParseException{
         
-        String sql = "INSERT INTO hora(data_hora_inicio,data_hora_fim, tipo, username_lancador,cod_cr,justificativa,projeto) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO hora(data_hora_inicio, data_hora_fim, tipo, justificativa_lancamento, projeto, justificativa_negacao, status_aprovacao) VALUES (?, ?, ?, ?, ?, ?, ?)";
         Connection conn = null;
         PreparedStatement pstm = null;
-        
+        //para fazer funcionar os outros campos, digital na query acima o nome da coluna e mais um ponto de '?', e tirar do comentário o campo que você inseriu na query.
+        //obs: todos os campos do meu banco local tiveram o NOT NULL removido.
+        //Campos com um X do lado, indica que não existe isso no front ou não tem campo para ele como entrada
+        // campos em comentário indicam chaves estrangeiras
         try{
             
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
+            //pstm.setString(1, hora.getCod_cr());
+            //pstm.setString(2, hora.getUsername_lancador());
+            //pstm.setLong(3, hora.getCnpj_cliente());
             pstm.setTimestamp(1, hora.getData_hora_inicio());
             pstm.setTimestamp(2, hora.getData_hora_fim());
             pstm.setString(3, hora.getTipo());
-            pstm.setString(4,hora.getUsername_lancador());
-            pstm.setString(5, hora.getCentro_resultado());
-            pstm.setString(6,hora.getJustificativa());
-            pstm.setString(7,hora.getProjeto());
+            pstm.setString(4, hora.getJustificativa_lancamento()); //X
+            pstm.setString(5, hora.getProjeto());
+            //pstm.setString(6, hora.getUsername_aprovador());
+            pstm.setString(6, hora.getJustificativa_negacao()); //X
+            pstm.setString(7, hora.getStatus_aprovacao()); //X
+            
             
             pstm.execute();
         }
@@ -68,7 +76,7 @@ public class horaDAO {
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setString(1,hora.getUsername_lancador());
+            pstm.setString(2,hora.getUsername_lancador());
             
             pstm.execute();
         }
@@ -108,17 +116,20 @@ public class horaDAO {
 			
 			while (rset.next()) {
 				
-				Hora hora = new Hora(null, null, null, null, null, null);
+				Hora hora = new Hora();
 				
-				
-				hora.setUsername_lancador(rset.getString("username_lancador"));
-				
-				hora.setData_hora_inicio(rset.getString("data_hora_inicio"));
-				hora.setData_hora_fim(rset.getString("data_hora_fim"));
-				hora.setTipo(rset.getString("tipo"));
-                                hora.setCentro_resultado(rset.getString("cod_cr"));
-                                hora.setJustificativa("justificativa");
-                                hora.setProjeto("projeto");
+				hora.setCod_cr(rset.getString("cod_cr"));
+                                hora.setUsername_lancador(rset.getString("username_lancador"));
+                                hora.setCnpj_cliente(rset.getLong("cnpj_cliente"));
+                                hora.setData_hora_inicio(rset.getString("data_hora_inicio"));
+                                hora.setData_hora_fim(rset.getString("data_hora_fim"));
+                                hora.setTipo(rset.getString("tipo"));
+                                hora.setJustificativa_lancamento(rset.getString("justificativa_lancamento"));
+				hora.setProjeto(rset.getString("projeto"));
+                                hora.setUsername_aprovador(rset.getString("username_aprovador"));
+                                hora.setJustificativa_negacao(rset.getString("justificativa_negacao"));
+                                hora.setStatus_aprovacao(rset.getString("status_aprovacao"));
+                                
 				horas.add(hora);
 				
 			}

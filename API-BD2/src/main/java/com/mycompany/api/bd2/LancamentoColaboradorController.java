@@ -135,7 +135,7 @@ public class LancamentoColaboradorController {
             Timestamp timestamp_fim = Timestamp.valueOf(data_hora_fim);
 
             
-            Hora hora = new Hora("caboski",timestamp_inicio, timestamp_fim, tipo_funcao.getValue(),"CodeCats",stringProjeto.getText());
+            Hora hora = new Hora(); //alterar aqui, tinha atributos incializados, mas removi
             horaDAO daoH = new horaDAO();
             daoH.save(hora);
             System.out.println("foi");
@@ -178,7 +178,7 @@ public class LancamentoColaboradorController {
     @FXML
     public void carregaTabela(){
         
-        Hora hora = new Hora("jao", null, null, "Extra", "time do jão", "embratel");
+        Hora hora = new Hora(); //removi daqui também
         hora.setId(2);
         lishoras.add(hora);
         observablelisthoras.setAll(lishoras);
