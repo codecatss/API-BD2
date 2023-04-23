@@ -5,6 +5,7 @@
 package com.mycompany.api.bd2;
 
 
+import static com.sun.corba.se.impl.util.Utility.printStackTrace;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,13 +13,16 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.collections.ObservableList;
 import models.Hora;
 import daos.horaDAO;
 import java.sql.Timestamp;
 import javafx.scene.control.cell.PropertyValueFactory;
+import java.time.LocalDate;
+
+
+
 
 
 
@@ -112,12 +116,32 @@ public class LancamentoColaboradorController {
     @FXML
     public void BotaoAdicionar() {
         try{
-            Hora hora = new Hora(label_usuario.getText(),null, null, tipo_funcao.getValue(),CR.getText(),stringProjeto.getText());
+            LocalDate data_inicio = dataInicio.getValue();
+            //System.out.println(data_inicio.toString());
+            int hora_inicio = horaInicio.getValue();
+            int min_inicio = minutoInicio.getValue();
+            //LocalTime tempo_inicio = LocalTime.parse(hora_inicio);
+            //LocalDateTime data_tempo_inicio = LocalDateTime.of(data_inicio.getYear(), data_inicio.getMonthValue(), data_inicio.getDayOfMonth(), hora_inicio, min_fim);
+            String data_hora_inicio = data_inicio.getYear() + "-" + data_inicio.getMonthValue() + "-" + data_inicio.getDayOfMonth() + " " + hora_inicio + ":" + min_inicio + ":00";
+            Timestamp timestamp_inicio = Timestamp.valueOf(data_hora_inicio);
+            
+            LocalDate data_fim = dataFim.getValue();
+            //String hora_fim = horaFim.toString() + ":" + minutoFim.toString();
+            //LocalTime tempo_fim = LocalTime.parse(hora_fim);
+            //LocalDateTime data_tempo_fim = LocalDateTime.of(data_fim, tempo_fim);
+            int hora_fim = horaFim.getValue();
+            int min_fim = minutoFim.getValue();
+            String data_hora_fim = data_fim.getYear() + "-" + data_fim.getMonthValue() + "-" + data_fim.getDayOfMonth() + " " + hora_fim + ":" + min_fim + ":00";
+            Timestamp timestamp_fim = Timestamp.valueOf(data_hora_fim);
+
+            
+            Hora hora = new Hora("caboski",timestamp_inicio, timestamp_fim, tipo_funcao.getValue(),"CodeCats",stringProjeto.getText());
             horaDAO daoH = new horaDAO();
             daoH.save(hora);
             System.out.println("foi");
-
+            
         }catch (Exception e){
+            printStackTrace();
             System.out.println("N-foi");
         }
     }

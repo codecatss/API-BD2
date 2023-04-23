@@ -21,18 +21,20 @@ import models.Hora;
 public class horaDAO {
     
     public void save(Hora hora) throws ParseException{
-        String sql = "INSERT INTO HORA(username_lancador,data_hora_inicio,data_hora_fim,tipo,cod_cr,justificativa,projeto) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        
+        String sql = "INSERT INTO hora(data_hora_inicio,data_hora_fim, tipo, username_lancador,cod_cr,justificativa,projeto) VALUES (?, ?, ?, ?, ?, ?, ?)";
         Connection conn = null;
         PreparedStatement pstm = null;
         
         try{
+            
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setString(1,hora.getUsername_lancador());
-            pstm.setTimestamp(2, new Timestamp(hora.getData_hora_inicio().getTime()));
-            pstm.setTimestamp(3, new Timestamp(hora.getData_hora_fim().getTime()));
-            pstm.setString(4, hora.getTipo());
+            pstm.setTimestamp(1, hora.getData_hora_inicio());
+            pstm.setTimestamp(2, hora.getData_hora_fim());
+            pstm.setString(3, hora.getTipo());
+            pstm.setString(4,hora.getUsername_lancador());
             pstm.setString(5, hora.getCentro_resultado());
             pstm.setString(6,hora.getJustificativa());
             pstm.setString(7,hora.getProjeto());
@@ -43,6 +45,7 @@ public class horaDAO {
             e.printStackTrace();
         }finally{
             try{
+                System.out.println("void save");
                 if(pstm!=null){
                     pstm.close();
                 }
