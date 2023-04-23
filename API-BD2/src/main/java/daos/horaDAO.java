@@ -35,7 +35,7 @@ public class horaDAO {
             pstm.setTimestamp(2, hora.getData_hora_fim());
             pstm.setString(3, hora.getTipo());
             pstm.setString(4,hora.getUsername_lancador());
-            pstm.setString(5, hora.getCentro_resultado());
+            pstm.setInt(5, hora.getCentro_resultado());
             pstm.setString(6,hora.getJustificativa());
             pstm.setString(7,hora.getProjeto());
             
@@ -116,7 +116,7 @@ public class horaDAO {
 				hora.setData_hora_inicio(rset.getString("data_hora_inicio"));
 				hora.setData_hora_fim(rset.getString("data_hora_fim"));
 				hora.setTipo(rset.getString("tipo"));
-                                hora.setCentro_resultado(rset.getString("cod_cr"));
+                                hora.setCentro_resultado(rset.getInt("cod_cr"));
                                 hora.setJustificativa("justificativa");
                                 hora.setProjeto("projeto");
 				horas.add(hora);

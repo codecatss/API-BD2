@@ -16,11 +16,11 @@ public class Hora {
     private Timestamp data_hora_fim;
     private String tipo;
     private String status;
-    private String centro_resultado;
+    private Integer centro_resultado;
     private String justificativa;
     private String projeto;
 
-    public Hora(String username_lancador, Timestamp data_hora_inicio, Timestamp data_hora_fim, String tipo, String centro_resultado, String projeto) {
+    public Hora(String username_lancador, Timestamp data_hora_inicio, Timestamp data_hora_fim, String tipo, Integer centro_resultado, String projeto) {
         this.username_lancador = username_lancador;
         this.data_hora_inicio = data_hora_inicio;
         this.data_hora_fim = data_hora_fim;
@@ -118,14 +118,14 @@ public class Hora {
     /**
      * @return the cod_cr
      */
-    public String getCentro_resultado() {
+    public int getCentro_resultado() {
         return centro_resultado;
     }
 
     /**
      * @param cod_cr the cod_cr to set
      */
-    public void setCentro_resultado(String centro_resultado) {
+    public void setCentro_resultado(int centro_resultado) {
         this.centro_resultado = centro_resultado;
     }
 
