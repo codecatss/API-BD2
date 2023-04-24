@@ -183,8 +183,7 @@ public class LancamentoColaboradorController {
         minutoFim.getValueFactory().setValue(null);
         horaFim.getValueFactory().setValue(null);
     }
-    
-    private LocalDateTime agora = LocalDateTime.now();
+  private LocalDateTime agora = LocalDateTime.now();
 
     // Criar um LocalDateTime para 13h e outro para 16h do dia atual
     private LocalDateTime dataHora13h = LocalDateTime.of(agora.getYear(), agora.getMonth(), agora.getDayOfMonth(), 13, 0);
