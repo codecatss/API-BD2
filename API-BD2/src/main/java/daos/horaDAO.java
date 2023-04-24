@@ -22,7 +22,7 @@ public class horaDAO {
     
     public void save(Hora hora) throws ParseException{
         
-        String sql = "INSERT INTO hora(data_hora_inicio, data_hora_fim, tipo, justificativa_lancamento, projeto, justificativa_negacao, status_aprovacao) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO hora(cod_cr, username_lancador, cnpj_cliente, data_hora_inicio, data_hora_fim, tipo, justificativa_lancamento, projeto, justificativa_negacao, status_aprovacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Connection conn = null;
         PreparedStatement pstm = null;
         //para fazer funcionar os outros campos, digital na query acima o nome da coluna e mais um ponto de '?', e tirar do comentário o campo que você inseriu na query.
@@ -34,18 +34,18 @@ public class horaDAO {
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            //pstm.setString(1, hora.getCod_cr());
-            //pstm.setString(2, hora.getUsername_lancador());
-            //pstm.setLong(3, hora.getCnpj_cliente());
-            pstm.setTimestamp(1, hora.getData_hora_inicio());
-            pstm.setTimestamp(2, hora.getData_hora_fim());
-            pstm.setString(3, hora.getTipo());
+            pstm.setString(1, hora.getCod_cr());
+            pstm.setString(2, hora.getUsername_lancador());
+            pstm.setLong(3, hora.getCnpj_cliente());
+            pstm.setTimestamp(4, hora.getData_hora_inicio());
+            pstm.setTimestamp(5, hora.getData_hora_fim());
+            pstm.setString(6, hora.getTipo());
 
-            pstm.setString(4, hora.getJustificativa_lancamento()); //X
-            pstm.setString(5, hora.getProjeto());
+            pstm.setString(7, hora.getJustificativa_lancamento()); //X
+            pstm.setString(8, hora.getProjeto());
             //pstm.setString(6, hora.getUsername_aprovador());
-            pstm.setString(6, hora.getJustificativa_negacao()); //X
-            pstm.setString(7, hora.getStatus_aprovacao()); //X
+            pstm.setString(9, hora.getJustificativa_negacao()); //X
+            pstm.setString(10, hora.getStatus_aprovacao()); //X
             
             
             pstm.execute();
