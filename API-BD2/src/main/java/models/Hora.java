@@ -10,7 +10,7 @@ import models.TipoHora;
 
 public class Hora {
 
-    private int id;
+    private Integer id;
     private String cod_cr;
     private String username_lancador;
     private long cnpj_cliente;

@@ -104,6 +104,11 @@ public class LancamentoColaboradorController {
     private List<Hora> lishoras = new ArrayList<>();
     private ObservableList<Hora> observablelisthoras = FXCollections.observableArrayList();
     
+    private String tipo_da_hora;
+    
+    private Hora hora;
+
+    
     public void initialize() {
         label_usuario.setText("*nome do usuário*");
         minutoInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59));
@@ -115,7 +120,7 @@ public class LancamentoColaboradorController {
 
     @FXML
     public void BotaoAdicionar() {
-        if(dataInicio.getValue()==null||horaInicio.getValue()==null||minutoInicio.getValue()==null||dataFim.getValue()==null||horaFim.getValue()==null||minutoFim.getValue()==null){
+        if(tipo_funcao.getValue()==null || dataInicio.getValue()==null||horaInicio.getValue()==null||minutoInicio.getValue()==null||dataFim.getValue()==null||horaFim.getValue()==null||minutoFim.getValue()==null){
         System.out.println("Preencha todos os campos - tela de lançamento");}
         else{
         try{
@@ -133,7 +138,7 @@ public class LancamentoColaboradorController {
 
             
 
-            Hora hora = new Hora();
+            hora = new Hora();
             hora.setProjeto(stringProjeto.getText());
             hora.setCod_cr("Cr");
             hora.setData_hora_inicio(timestamp_inicio.toString());
@@ -142,6 +147,7 @@ public class LancamentoColaboradorController {
             hora.setCnpj_cliente(987654321);
             hora.setJustificativa_lancamento("Muita demanda");
             hora.setStatus_aprovacao("pendente");
+            hora.setTipo(tipo_da_hora);
             
 
             horaDAO daoH = new horaDAO();
@@ -154,11 +160,16 @@ public class LancamentoColaboradorController {
     }
     
     @FXML
-    public void tipoFuncao() throws ParseException{
+    public void tipoFuncao(){
     obs.add("Hora "+ TipoHora.EXTRA.name().toLowerCase());
     obs.add(TipoHora.SOBREAVISO.name().toLowerCase());
     opcoes.setAll(obs);
     tipo_funcao.setItems(opcoes);
+    }
+    
+    @FXML
+    public void captura_tipo(){
+     tipo_da_hora = tipo_funcao.getValue();
     }
     
     @FXML
@@ -186,9 +197,10 @@ public class LancamentoColaboradorController {
     public void carregaTabela(){
         
 
-        Hora hora = new Hora(); //removi daqui também
-        hora.setId(2);
-        lishoras.add(hora);
+        Hora hora_tabela = new Hora(); //removi daqui também
+        hora_tabela.setId(2);
+        hora_tabela.setCod_cr("13652");
+        lishoras.add(hora_tabela);
         observablelisthoras.setAll(lishoras);
         tabelaLancamento.setItems(observablelisthoras);
         
