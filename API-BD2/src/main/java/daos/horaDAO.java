@@ -97,7 +97,7 @@ public class horaDAO {
         }
         
     }
-    public List<Hora> getHoras(){
+    /*public List<Hora> getHoras(){
 		
 		String sql = "SELECT * FROM 2rp.hora";
 		
@@ -155,6 +155,6 @@ public class horaDAO {
 			}
                         System.out.println(horas);
 			return horas;
-	}
+	}*/
     
 }

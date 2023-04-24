@@ -6,6 +6,8 @@ package com.mycompany.api.bd2;
 
 
 //import static com.sun.corba.se.impl.util.Utility.printStackTrace;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -136,8 +138,8 @@ public class LancamentoColaboradorController {
             Hora hora = new Hora();
             hora.setProjeto(stringProjeto.getText());
             hora.setCod_cr("Cr");
-            hora.setData_hora_inicio(timestamp_inicio.toString());
-            hora.setData_hora_fim(timestamp_fim.toString());
+            hora.setData_hora_inicio(timestamp_inicio);
+            hora.setData_hora_fim(timestamp_fim);
             hora.setUsername_lancador("Joazinho");
             hora.setCnpj_cliente(987654321);
             hora.setJustificativa_lancamento("Muita demanda");
@@ -182,27 +184,50 @@ public class LancamentoColaboradorController {
         horaFim.getValueFactory().setValue(null);
     }
     
+    private LocalDateTime agora = LocalDateTime.now();
+
+    // Criar um LocalDateTime para 13h e outro para 16h do dia atual
+    private LocalDateTime dataHora13h = LocalDateTime.of(agora.getYear(), agora.getMonth(), agora.getDayOfMonth(), 13, 0);
+    private LocalDateTime dataHora16h = LocalDateTime.of(agora.getYear(), agora.getMonth(), agora.getDayOfMonth(), 16, 0);
+
     @FXML
     public void carregaTabela(){
-        
 
-        Hora hora = new Hora(); //removi daqui também
-        hora.setId(2);
-        lishoras.add(hora);
+
+        // Converter os LocalDateTime para Timestamp
+        Timestamp timestamp13h = Timestamp.valueOf(dataHora13h);
+        Timestamp timestamp16h = Timestamp.valueOf(dataHora16h);
+
+        Hora hora_tabela = new Hora(); //removi daqui também
+        hora_tabela.setId(2);
+        hora_tabela.setCod_cr("13652");
+        hora_tabela.setUsername_lancador("Clarissa");
+        hora_tabela.setStatus_aprovacao("Aprovado");
+        hora_tabela.setTipo("EXTRA");
+        hora_tabela.setCod_cr("CodeCats");
+        hora_tabela.setProjeto("União");
+        hora_tabela.setData_hora_inicio(timestamp13h);
+        hora_tabela.setData_hora_fim(timestamp16h);     
+        hora_tabela.setJustificativa_lancamento("Demanda");
+        lishoras.add(hora_tabela);
         observablelisthoras.setAll(lishoras);
         tabelaLancamento.setItems(observablelisthoras);
-        
+
         tabelaId.setCellValueFactory(new PropertyValueFactory<>("id"));
         tabelaNome.setCellValueFactory(new PropertyValueFactory<>("username_lancador")); 
         tabelaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo")); 
         tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status")); 
+        tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao")); 
         tabelaDHInicio.setCellValueFactory(new PropertyValueFactory<>("data_hora_inicio")); 
         tabelaDHFim.setCellValueFactory(new PropertyValueFactory<>("data_hora_fim")); 
         tabelaCR.setCellValueFactory(new PropertyValueFactory<>("centro_resultado")); 
+        tabelaCR.setCellValueFactory(new PropertyValueFactory<>("cod_cr")); 
         tabelaCliente.setCellValueFactory(new PropertyValueFactory<>("cliente")); 
         tabelaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto")); 
         tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa")); 
         tabelaResp.setCellValueFactory(new PropertyValueFactory<>("status")); 
+        tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento")); 
+        tabelaResp.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao")); 
 
 
         

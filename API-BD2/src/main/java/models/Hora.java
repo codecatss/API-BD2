@@ -69,13 +69,10 @@ public class Hora {
     /**
      * @param data_hora_inicio the data_hora_inicio to set
      */
-    public void setData_hora_inicio(String time) throws ParseException {
-        String dataHoraString = time;
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date dataHoraDate = dateFormat.parse(dataHoraString);
-        Timestamp timestamp = new Timestamp(dataHoraDate.getTime());
-        this.data_hora_inicio = timestamp;
+    public void setData_hora_inicio(Timestamp time){
+        this.data_hora_fim = time;
     }
+
 
     /**
      * @return the data_hora_fim
@@ -87,12 +84,8 @@ public class Hora {
     /**
      * @param data_hora_fim the data_hora_fim to set
      */
-    public void setData_hora_fim(String time) throws ParseException {
-        String dataHoraString = time;
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date dataHoraDate = dateFormat.parse(dataHoraString);
-        Timestamp timestamp = new Timestamp(dataHoraDate.getTime());
-        this.data_hora_fim = timestamp;
+    public void setData_hora_fim(Timestamp time){
+        this.data_hora_fim = time;
     }
 
     /**
