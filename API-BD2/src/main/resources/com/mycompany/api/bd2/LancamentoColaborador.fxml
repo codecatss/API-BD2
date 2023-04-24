@@ -113,7 +113,7 @@
                                           <TableColumn fx:id="tabelaStatus" maxWidth="65.0" minWidth="55.0" prefWidth="60.0" text="Status" />
                                           <TableColumn fx:id="tabelaDHInicio" maxWidth="135.0" minWidth="120.0" prefWidth="130.0" text="Data/Hora Início" />
                                           <TableColumn fx:id="tabelaDHFim" maxWidth="135.0" minWidth="120.0" prefWidth="130.0" text="Data/Hora Fim" />
-                                          <TableColumn fx:id="tabelaCR" maxWidth="65.0" minWidth="55.0" prefWidth="60.0" text="CR" />
+                                          <TableColumn fx:id="tabelaCR" maxWidth="120.0" minWidth="70.0" prefWidth="100.0" text="CR" />
                                           <TableColumn fx:id="tabelaCliente" maxWidth="60.0" minWidth="50.0" prefWidth="55.0" text="Cliente" />
                                           <TableColumn fx:id="tabelaProjeto" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" text="Projeto" />
                                           <TableColumn fx:id="tabelaJustificativa" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="Justificativa" />
@@ -163,7 +163,7 @@
                                           <Font name="Arial" size="18.0" />
                                        </font>
                                     </Label>
-                                    <ComboBox id="tipoFuncao" fx:id="tipo_funcao" layoutX="220.0" layoutY="470.0" onMouseClicked="#tipoFuncao" onAction="#captura_tipo" prefHeight="30.0" prefWidth="155.0" />
+                                    <ComboBox id="tipoFuncao" fx:id="tipo_funcao" layoutX="220.0" layoutY="470.0" onAction="#captura_tipo" onMouseClicked="#tipoFuncao" prefHeight="30.0" prefWidth="155.0" />
                                     <TextField id="stringProjeto" fx:id="stringProjeto" layoutX="590.0" layoutY="620.0" prefHeight="30.0" prefWidth="155.0" />
                                     <ComboBox id="selecaoCliente" fx:id="selecaoCliente" layoutX="590.0" layoutY="470.0" onMouseClicked="#forneceCliente" prefHeight="30.0" prefWidth="155.0" />
                                     <DatePicker id="dataFim" fx:id="dataFim" layoutX="590.0" layoutY="520.0" prefHeight="30.0" prefWidth="155.0" />
