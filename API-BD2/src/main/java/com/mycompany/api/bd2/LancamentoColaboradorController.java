@@ -136,8 +136,8 @@ public class LancamentoColaboradorController {
             Hora hora = new Hora();
             hora.setProjeto(stringProjeto.getText());
             hora.setCod_cr("Cr");
-            hora.setData_hora_inicio(timestamp_inicio);
-            hora.setData_hora_fim(timestamp_fim);
+            hora.setData_hora_inicio(timestamp_inicio.toString());
+            hora.setData_hora_fim(timestamp_fim.toString());
             hora.setUsername_lancador("Joazinho");
             hora.setCnpj_cliente(987654321);
             hora.setJustificativa_lancamento("Muita demanda");
