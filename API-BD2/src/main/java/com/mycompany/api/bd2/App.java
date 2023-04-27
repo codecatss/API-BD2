@@ -22,6 +22,7 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LancamentoColaborador.fxml"));
         Parent root = fxmlLoader.load();
         scene = new Scene(root, 1300, 800);
+        stage.setTitle("API-BD2");
         stage.setScene(scene);
         stage.show();
     }

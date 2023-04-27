@@ -4,99 +4,111 @@
  */
 package com.mycompany.api.bd2;
 
-
-//import static com.sun.corba.se.impl.util.Utility.printStackTrace;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.text.ParseException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
 import javafx.collections.ObservableList;
+import java.time.LocalDate;
+import java.sql.Timestamp;
 import models.Hora;
 import daos.horaDAO;
-import java.sql.Timestamp;
-import javafx.scene.control.cell.PropertyValueFactory;
-import java.time.LocalDate;
-
-
-
-
 
 
 import models.*;
 
 
-
 public class LancamentoColaboradorController {
-    
+
     @FXML
-    private VBox node;
+    private Button fecharTela;
     @FXML
-    private ImageView iconeUsuario;
+    private Button minimizarTela;
     @FXML
-    private Label label_usuario;
+    private Label nometelaatual;
     @FXML
-    private Label FUNCAO;
+    private ImageView imagemUser;
     @FXML
-    private Label CR;
+    private ImageView imagemCR;
     @FXML
-    private Button mudarCR;
+    private Label nomeUsuario;
+    @FXML
+    private Label CR_Funcao;
+    @FXML
+    private Label Acionamento;
     @FXML
     private Button botaoSair;
     @FXML
-    private TableView<Hora> tabelaLancamento;
+    private Button botaoAlterarCR;
     @FXML
-    private TableColumn<Hora, Integer> tabelaId;
+    private TableView<?> tabelaLancamento;
     @FXML
-    private TableColumn<Hora, String> tabelaNome;
+    private TableColumn<?, ?> tabelaId;
     @FXML
-    private TableColumn<Hora, String> tabelaTipo;
+    private TableColumn<?, ?> tabelaNome;
     @FXML
-    private TableColumn<Hora, String> tabelaStatus;
+    private TableColumn<?, ?> tabelaTipo;
     @FXML
-    private TableColumn<Hora, Timestamp > tabelaDHInicio;
+    private TableColumn<?, ?> tabelaStatus;
     @FXML
-    private TableColumn<Hora, Timestamp > tabelaDHFim;
+    private TableColumn<?, ?> tabelaDHInicio;
     @FXML
-    private TableColumn<Hora, String> tabelaCR;
+    private TableColumn<?, ?> tabelaDHFim;
     @FXML
-    private TableColumn<Hora, String> tabelaCliente;
+    private TableColumn<?, ?> tabelaCR;
     @FXML
-    private TableColumn<Hora, String> tabelaProjeto;
+    private TableColumn<?, ?> tabelaCliente;
     @FXML
-    private TableColumn<Hora, String> tabelaJustificativa;
+    private TableColumn<?, ?> tabelaProjeto;
     @FXML
-    private TableColumn<Hora, String  > tabelaResp;
+    private TableColumn<?, ?> tabelaJustificativa;
+    @FXML
+    private TableColumn<?, ?> tabelaResp;
     @FXML
     private DatePicker dataInicio;
+    @FXML
+    private DatePicker dataFim;
     @FXML
     private Spinner<Integer> horaInicio;
     @FXML
     private Spinner<Integer> minutoInicio;
- 
-    private ComboBox<String> selecaoJustificativa;
-    @FXML
-    private ComboBox<String> tipo_funcao;
-    @FXML
-    private TextField stringProjeto;
-    @FXML
-    private ComboBox<String> selecaoCliente;
-    @FXML
-    private DatePicker dataFim;
     @FXML
     private Spinner<Integer> horaFim;
     @FXML
     private Spinner<Integer> minutoFim;
     @FXML
+    private ComboBox<String> horaTipo;
+    @FXML
+    private ComboBox<String> selecaoCliente;
+    @FXML
     private Button botaoAdicionar;
     @FXML
     private Button botaoLimpar;
-
+    @FXML
+    private TextField entradaProjeto;
+    @FXML
+    private TextField entradaAcionamento;
+    
+    
     private List<String> obs = new ArrayList<>();
     private ObservableList<String> opcoes = FXCollections.observableArrayList();
     
@@ -105,18 +117,63 @@ public class LancamentoColaboradorController {
     
     private List<Hora> lishoras = new ArrayList<>();
     private ObservableList<Hora> observablelisthoras = FXCollections.observableArrayList();
-    
-    public void initialize() {
-        label_usuario.setText("*nome do usuário*");
-        minutoInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59));
-        horaInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 24));
-        minutoFim.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59));
-        horaFim.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 24));
-        carregaTabela();
-    }
 
+
+    public void initialize() {
+        nomeUsuario.setText("*nome do usuário*");
+        
+        horaInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0, 1));
+        minutoInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59));
+        horaInicio.getValueFactory().setWrapAround(true);
+        minutoInicio.getValueFactory().setWrapAround(true);
+        
+        horaFim.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0, 1));
+        minutoFim.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59));
+        horaFim.getValueFactory().setWrapAround(true);
+        minutoFim.getValueFactory().setWrapAround(true);
+        
+        horaTipo.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+        if (newVal != null && newVal.equals(TipoHora.SOBREAVISO.name().toLowerCase())) {
+            entradaAcionamento.setVisible(true);
+            Acionamento.setVisible(true);
+ 
+        } else {
+            entradaAcionamento.setVisible(false);
+            Acionamento.setVisible(false);
+        }
+        });
+    }
+    
+    
     @FXML
-    public void BotaoAdicionar() {
+    public void limparCampos(){
+        dataInicio.setValue(null);
+        dataFim.setValue(null);
+        horaInicio.getValueFactory().setValue(0);
+        minutoInicio.getValueFactory().setValue(0);
+        horaFim.getValueFactory().setValue(0);
+        minutoFim.getValueFactory().setValue(0);
+        horaTipo.getSelectionModel().clearSelection();
+        selecaoCliente.getSelectionModel().clearSelection();
+        entradaProjeto.clear();
+        entradaAcionamento.clear();
+        Acionamento.setVisible(false);
+        
+    }
+    
+    
+    @FXML
+    public void tipoHora() throws ParseException{
+    obs.add("Hora "+ TipoHora.EXTRA.name().toLowerCase());
+    obs.add(TipoHora.SOBREAVISO.name().toLowerCase());
+    opcoes.setAll(obs);
+    horaTipo.setItems(opcoes);
+    }
+    
+    
+    @FXML
+    private void BotaoAdicionar() {
+        
         if(dataInicio.getValue()==null||horaInicio.getValue()==null||minutoInicio.getValue()==null||dataFim.getValue()==null||horaFim.getValue()==null||minutoFim.getValue()==null){
         System.out.println("Preencha todos os campos - tela de lançamento");}
         else{
@@ -136,7 +193,7 @@ public class LancamentoColaboradorController {
             
 
             Hora hora = new Hora();
-            hora.setProjeto(stringProjeto.getText());
+            hora.setProjeto(entradaProjeto.getText());
             hora.setCod_cr("Cr");
             hora.setData_hora_inicio(timestamp_inicio);
             hora.setData_hora_fim(timestamp_fim);
@@ -155,13 +212,6 @@ public class LancamentoColaboradorController {
         }
     }
     
-    @FXML
-    public void tipoFuncao() throws ParseException{
-    obs.add("Hora "+ TipoHora.EXTRA.name().toLowerCase());
-    obs.add(TipoHora.SOBREAVISO.name().toLowerCase());
-    opcoes.setAll(obs);
-    tipo_funcao.setItems(opcoes);
-    }
     
     @FXML
     public void forneceCliente(){
@@ -169,8 +219,9 @@ public class LancamentoColaboradorController {
         cli.add("ITAU");
         cli.add("SAMSUNG");
         opCli.setAll(cli);
-        selecaoCliente.setItems(opCli); 
+        selecaoCliente.setItems(opCli);
     }
+<<<<<<< Updated upstream
     
     @FXML
     public void limpaCampos(){
@@ -232,4 +283,6 @@ public class LancamentoColaboradorController {
         
         
     }
+=======
+>>>>>>> Stashed changes
 }
