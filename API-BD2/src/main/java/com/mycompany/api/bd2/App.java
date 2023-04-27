@@ -20,7 +20,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LancamentoColaborador.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CadastroUsuarioADM.fxml"));
         Parent root = fxmlLoader.load();
         scene = new Scene(root, 1300, 650);
         stage.setScene(scene);
