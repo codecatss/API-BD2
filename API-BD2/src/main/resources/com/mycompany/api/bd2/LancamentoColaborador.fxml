@@ -158,7 +158,7 @@
                               <ComboBox id="selecaoCliente" fx:id="selecaoCliente" layoutX="475.0" layoutY="20.0" onMouseClicked="#forneceCliente" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="475.0" AnchorPane.topAnchor="20.0" />
                               <ComboBox id="selecaoCR" fx:id="selecaoCR" layoutX="875.0" layoutY="20.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="875.0" AnchorPane.topAnchor="20.0" />
                               <ComboBox id="selecaoAcionamento" fx:id="selecaoAcionamento" layoutX="875.0" layoutY="170.0" prefHeight="30.0" prefWidth="155.0" visible="false" AnchorPane.leftAnchor="875.0" AnchorPane.topAnchor="170.0" />
-                              <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutX="350.0" layoutY="235.0" mnemonicParsing="false" onAction="#BotaoAdicionar" prefHeight="35.0" prefWidth="110.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="350.0">
+                              <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutX="350.0" layoutY="235.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="110.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="350.0">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>

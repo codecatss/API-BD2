@@ -27,7 +27,7 @@ import javafx.collections.ObservableList;
 import java.time.LocalDate;
 import java.sql.Timestamp;
 import models.Hora;
-import daos.horaDAO;
+//import daos.horaDAO;
 
 
 import models.*;
@@ -120,7 +120,7 @@ public class LancamentoColaboradorController {
         minutoFim.getValueFactory().setWrapAround(true);
         
         botaoLimpar.setOnAction(event -> limparCampos());
-        carregarTabelaLancamento();
+        //carregarTabelaLancamento();
         
         horaTipo.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
         if (newVal != null && newVal.equals(TipoHora.SOBREAVISO.name().toLowerCase())) {
@@ -161,7 +161,7 @@ public class LancamentoColaboradorController {
     horaTipo.setItems(opcoes);
     }
     
-    
+    /*
     @FXML
     public void BotaoAdicionar() {
         if(dataInicio.getValue()==null||horaInicio.getValue()==null||minutoInicio.getValue()==null||dataFim.getValue()==null||horaFim.getValue()==null||minutoFim.getValue()==null){
@@ -182,7 +182,7 @@ public class LancamentoColaboradorController {
 
             
 
-            /*Hora hora = new Hora();
+            Hora hora = new Hora();
             hora.setProjeto(entradaProjeto.getText());
             hora.setCod_cr(entradaProjeto.getText());("Cr");
             hora.setData_hora_inicio(timestamp_inicio);
@@ -195,7 +195,6 @@ public class LancamentoColaboradorController {
 
             horaDAO daoH = new horaDAO();
             daoH.save(hora);
-           */
             
         }catch (Exception e){
             System.out.println("Houve um erro");
@@ -220,21 +219,21 @@ public class LancamentoColaboradorController {
 
         Hora hora_tabela = new Hora(); //removi daqui também
         hora_tabela.setId(2);
-        //hora_tabela.setCod_cr("13652");
+        hora_tabela.setCod_cr("13652");
         hora_tabela.setUsername_lancador("Clarissa");
-       // hora_tabela.setStatus_aprovacao("Aprovado");
+        hora_tabela.setStatus_aprovacao("Aprovado");
         hora_tabela.setTipo("EXTRA");
-        //hora_tabela.setCod_cr("CodeCats");
+        hora_tabela.setCod_cr("CodeCats");
         hora_tabela.setProjeto("União");
-        //hora_tabela.setData_hora_inicio(timestamp13h);
-        //hora_tabela.setData_hora_fim(timestamp16h);     
-        //hora_tabela.setJustificativa_lancamento("Demanda");
+        hora_tabela.setData_hora_inicio(timestamp13h);
+        hora_tabela.setData_hora_fim(timestamp16h);     
+        hora_tabela.setJustificativa_lancamento("Demanda");
         lishoras.add(hora_tabela);
         observablelisthoras.setAll(lishoras);
-        //tabelaLancamento.setItems(observablelisthoras);
+        tabelaLancamento.setItems(observablelisthoras);
 
         tabelaId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        //tabelaNome.setCellValueFactory(new PropertyValueFactory<>("username_lancador")); 
+        tabelaNome.setCellValueFactory(new PropertyValueFactory<>("username_lancador")); 
         tabelaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo")); 
         tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status")); 
         tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao")); 
@@ -244,15 +243,13 @@ public class LancamentoColaboradorController {
         tabelaCR.setCellValueFactory(new PropertyValueFactory<>("cod_cr")); 
         tabelaCliente.setCellValueFactory(new PropertyValueFactory<>("cliente")); 
         tabelaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto")); 
-        /*tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa")); 
+        tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa")); 
         tabelaResp.setCellValueFactory(new PropertyValueFactory<>("status")); 
         tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento")); 
         tabelaResp.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao"));
-        */
+        
     }
-<<<<<<< Updated upstream
-=======
-    
+    */
     
     @FXML
     public void forneceCliente(){
@@ -262,5 +259,4 @@ public class LancamentoColaboradorController {
         opCli.setAll(cli);
         selecaoCliente.setItems(opCli);
     }
->>>>>>> Stashed changes
 }
