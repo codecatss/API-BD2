@@ -80,14 +80,14 @@
                            <children>
                               <TableView id="tabelaLancamento" fx:id="tabelaLancamento" layoutX="5.0" prefHeight="300.0" prefWidth="1060.0" AnchorPane.leftAnchor="7.5" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="2.5">
                                  <columns>
-                                    <TableColumn id="tabelaId" fx:id="tabelaId" maxWidth="-Infinity" minWidth="50.0" prefWidth="-1.0" text="Nº" />
-                                    <TableColumn id="tabelaTipo" fx:id="tabelaTipo" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="-1.0" text="Tipo" />
-                                    <TableColumn id="tabelaStatus" fx:id="tabelaStatus" maxWidth="-Infinity" minWidth="150.0" prefWidth="200.0" text="Status" />
-                                    <TableColumn id="tabelaDHInicio" fx:id="tabelaDHInicio" maxWidth="-Infinity" minWidth="200.0" prefWidth="150.0" text="Início" />
-                                    <TableColumn id="tabelaDHFim" fx:id="tabelaDHFim" maxWidth="-Infinity" minWidth="200.0" prefWidth="-1.0" text="Fim" />
-                                    <TableColumn id="tabelaCR" fx:id="tabelaCR" maxWidth="-Infinity" minWidth="150.0" prefWidth="-1.0" text="CR" />
-                                    <TableColumn id="tabelaCliente" fx:id="tabelaCliente" maxWidth="-Infinity" minWidth="175.0" prefWidth="-1.0" text="Cliente" />
-                                    <TableColumn id="tabelaProjeto" fx:id="tabelaProjeto" maxWidth="-1.0" minWidth="150.0" prefWidth="-1.0" text="Projeto" />
+                                    <TableColumn id="tabelaId" fx:id="tabelaId" maxWidth="-1.0" minWidth="30.0" prefWidth="-1.0" text="Nº" />
+                                    <TableColumn id="tabelaTipo" fx:id="tabelaTipo" maxWidth="-1.0" minWidth="75.0" prefWidth="-1.0" text="Tipo" />
+                                    <TableColumn id="tabelaStatus" fx:id="tabelaStatus" maxWidth="-1.0" minWidth="75.0" prefWidth="-1.0" text="Status" />
+                                    <TableColumn id="tabelaDHInicio" fx:id="tabelaDHInicio" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Início" />
+                                    <TableColumn id="tabelaDHFim" fx:id="tabelaDHFim" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Fim" />
+                                    <TableColumn id="tabelaCR" fx:id="tabelaCR" maxWidth="-1.0" minWidth="75.0" prefWidth="-1.0" text="CR" />
+                                    <TableColumn id="tabelaCliente" fx:id="tabelaCliente" maxWidth="-1.0" minWidth="75.0" prefWidth="-1.0" text="Cliente" />
+                                    <TableColumn id="tabelaProjeto" fx:id="tabelaProjeto" maxWidth="-Infinity" minWidth="100.0" prefWidth="-1.0" text="Projeto" />
                                  </columns>
                               </TableView>
                            </children>
@@ -108,68 +108,68 @@
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="25.0" layoutY="100.0" prefHeight="22.0" prefWidth="90.0" text="Data Início" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="100.0">
+                              <Label layoutX="25.0" layoutY="100.0" prefHeight="22.0" prefWidth="90.0" text="Data Início">
                                  <font>
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="25.0" layoutY="175.0" prefHeight="22.0" prefWidth="90.0" text="Data Fim" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="175.0">
+                              <Label layoutX="25.0" layoutY="175.0" prefHeight="22.0" prefWidth="90.0" text="Data Fim">
                                  <font>
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="375.0" layoutY="100.0" prefHeight="22.0" prefWidth="90.0" text="Hora Início" AnchorPane.leftAnchor="375.0" AnchorPane.topAnchor="100.0">
+                              <Label layoutX="375.0" layoutY="100.0" prefHeight="22.0" prefWidth="90.0" text="Hora Início">
                                  <font>
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="550.0" layoutY="175.0" prefWidth="5.0" text=":" AnchorPane.leftAnchor="550.0" AnchorPane.topAnchor="175.0">
+                              <Label layoutX="550.0" layoutY="175.0" prefWidth="5.0" text=":">
                                  <font>
                                     <Font name="Arial Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="375.0" layoutY="175.0" prefHeight="22.0" prefWidth="90.0" text="Hora Fim" AnchorPane.leftAnchor="375.0" AnchorPane.topAnchor="175.0">
+                              <Label layoutX="375.0" layoutY="175.0" prefHeight="22.0" prefWidth="90.0" text="Hora Fim">
                                  <font>
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="550.0" layoutY="100.0" prefWidth="5.0" text=":" AnchorPane.leftAnchor="550.0" AnchorPane.topAnchor="100.0">
+                              <Label layoutX="550.0" layoutY="100.0" prefWidth="5.0" text=":">
                                  <font>
                                     <Font name="Arial Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="725.0" layoutY="100.0" prefHeight="22.0" prefWidth="60.0" text="Projeto" AnchorPane.leftAnchor="725.0" AnchorPane.topAnchor="100.0">
+                              <Label layoutX="725.0" layoutY="100.0" prefHeight="22.0" prefWidth="60.0" text="Projeto" AnchorPane.leftAnchor="725.0">
                                  <font>
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
-                              <Label id="Acionamento" fx:id="Acionamento" layoutX="725.0" layoutY="175.0" prefHeight="22.0" prefWidth="135.0" text="Acionamento(s)" visible="false" AnchorPane.leftAnchor="725.0" AnchorPane.topAnchor="175.0">
+                              <Label id="Acionamento" fx:id="Acionamento" layoutX="725.0" layoutY="175.0" prefHeight="22.0" prefWidth="135.0" text="Acionamento(s)" visible="false">
                                  <font>
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
-                              <DatePicker id="dataInicio" fx:id="dataInicio" layoutX="125.0" layoutY="95.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="95.0" />
-                              <DatePicker id="dataFim" fx:id="dataFim" layoutX="125.0" layoutY="170.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="170.0" />
-                              <Spinner id="horaInicio" fx:id="horaInicio" layoutX="475.0" layoutY="95.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.leftAnchor="475.0" AnchorPane.topAnchor="95.0" />
-                              <Spinner id="minutoInicio" fx:id="minutoInicio" layoutX="560.0" layoutY="170.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.leftAnchor="560.0" AnchorPane.topAnchor="170.0" />
-                              <Spinner id="horaFim" fx:id="horaFim" layoutX="475.0" layoutY="170.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.leftAnchor="475.0" AnchorPane.topAnchor="170.0" />
-                              <Spinner id="minutoFim" fx:id="minutoFim" layoutX="560.0" layoutY="95.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.leftAnchor="560.0" AnchorPane.topAnchor="95.0" />
+                              <DatePicker id="dataInicio" fx:id="dataInicio" layoutX="125.0" layoutY="95.0" prefHeight="30.0" prefWidth="155.0" />
+                              <DatePicker id="dataFim" fx:id="dataFim" layoutX="125.0" layoutY="170.0" prefHeight="30.0" prefWidth="155.0" />
+                              <Spinner id="horaInicio" fx:id="horaInicio" layoutX="475.0" layoutY="95.0" prefHeight="30.0" prefWidth="70.0" />
+                              <Spinner id="minutoInicio" fx:id="minutoInicio" layoutX="560.0" layoutY="170.0" prefHeight="30.0" prefWidth="70.0" />
+                              <Spinner id="horaFim" fx:id="horaFim" layoutX="475.0" layoutY="170.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.leftAnchor="475.0" />
+                              <Spinner id="minutoFim" fx:id="minutoFim" layoutX="560.0" layoutY="95.0" prefHeight="30.0" prefWidth="70.0" />
                               <ComboBox id="horaTipo" fx:id="horaTipo" layoutX="125.0" layoutY="20.0" onMouseClicked="#tipoHora" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="20.0" />
                               <ComboBox id="selecaoCliente" fx:id="selecaoCliente" layoutX="475.0" layoutY="20.0" onMouseClicked="#forneceCliente" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="475.0" AnchorPane.topAnchor="20.0" />
-                              <ComboBox id="selecaoCR" fx:id="selecaoCR" layoutX="875.0" layoutY="20.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="875.0" AnchorPane.topAnchor="20.0" />
-                              <ComboBox id="selecaoAcionamento" fx:id="selecaoAcionamento" layoutX="875.0" layoutY="170.0" prefHeight="30.0" prefWidth="155.0" visible="false" AnchorPane.leftAnchor="875.0" AnchorPane.topAnchor="170.0" />
-                              <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutX="350.0" layoutY="235.0" mnemonicParsing="false" onAction="#BotaoAdicionar" prefHeight="35.0" prefWidth="110.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="350.0">
+                              <ComboBox id="selecaoCR" fx:id="selecaoCR" layoutX="875.0" layoutY="20.0" prefHeight="30.0" prefWidth="155.0" />
+                              <ComboBox id="selecaoAcionamento" fx:id="selecaoAcionamento" layoutX="875.0" layoutY="170.0" prefHeight="30.0" prefWidth="155.0" visible="false" />
+                              <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutX="350.0" layoutY="235.0" mnemonicParsing="false" onAction="#BotaoAdicionar" prefHeight="35.0" prefWidth="110.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
                               </Button>
-                              <Button id="botaoLimpar" fx:id="botaoLimpar" layoutX="500.0" layoutY="235.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="35.0" prefWidth="110.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Limpar" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="500.0">
+                              <Button id="botaoLimpar" fx:id="botaoLimpar" layoutX="500.0" layoutY="235.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="35.0" prefWidth="110.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Limpar" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
                               </Button>
-                              <TextField id="entradaProjeto" fx:id="entradaProjeto" layoutX="875.0" layoutY="95.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="875.0" AnchorPane.topAnchor="95.0" />
-                              <Label layoutX="725.0" layoutY="25.0" prefHeight="22.0" prefWidth="60.0" text="CR" textAlignment="JUSTIFY" AnchorPane.leftAnchor="725.0" AnchorPane.topAnchor="25.0">
+                              <TextField id="entradaProjeto" fx:id="entradaProjeto" layoutX="875.0" layoutY="95.0" prefHeight="30.0" prefWidth="155.0" />
+                              <Label layoutX="725.0" layoutY="25.0" prefHeight="22.0" prefWidth="60.0" text="CR" textAlignment="JUSTIFY">
                                  <font>
                                     <Font name="Arial" size="18.0" />
                                  </font>

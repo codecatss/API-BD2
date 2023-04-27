@@ -1,101 +1,102 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
+ */
 package com.mycompany.api.bd2;
 
+
+//import static com.sun.corba.se.impl.util.Utility.printStackTrace;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.text.ParseException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.collections.ObservableList;
-import java.time.LocalDate;
-import java.sql.Timestamp;
 import models.Hora;
 import daos.horaDAO;
+import java.sql.Timestamp;
+import javafx.scene.control.cell.PropertyValueFactory;
+import java.time.LocalDate;
+
+
+
+
 
 
 import models.*;
 
 
-public class LancamentoColaboradorController {
 
+public class LancamentoColaboradorControllerANTIGO {
+    
     @FXML
-    private Button fecharTela;
+    private VBox node;
     @FXML
-    private Button minimizarTela;
+    private ImageView iconeUsuario;
     @FXML
-    private Label nometelaatual;
+    private Label label_usuario;
     @FXML
-    private ImageView imagemUser;
+    private Label FUNCAO;
     @FXML
-    private Label nomeUsuario;
+    private Label CR;
     @FXML
-    private Label Acionamento;
+    private Button mudarCR;
     @FXML
     private Button botaoSair;
     @FXML
-    private TableView<?> tabelaLancamento;
+    private TableView<Hora> tabelaLancamento;
     @FXML
-    private TableColumn<?, ?> tabelaId;
+    private TableColumn<Hora, Integer> tabelaId;
     @FXML
-    private TableColumn<?, ?> tabelaTipo;
+    private TableColumn<Hora, String> tabelaNome;
     @FXML
-    private TableColumn<?, ?> tabelaStatus;
+    private TableColumn<Hora, String> tabelaTipo;
     @FXML
-    private TableColumn<?, ?> tabelaDHInicio;
+    private TableColumn<Hora, String> tabelaStatus;
     @FXML
-    private TableColumn<?, ?> tabelaDHFim;
+    private TableColumn<Hora, Timestamp > tabelaDHInicio;
     @FXML
-    private TableColumn<?, ?> tabelaCR;
+    private TableColumn<Hora, Timestamp > tabelaDHFim;
     @FXML
-    private TableColumn<?, ?> tabelaCliente;
+    private TableColumn<Hora, String> tabelaCR;
     @FXML
-    private TableColumn<?, ?> tabelaProjeto;
+    private TableColumn<Hora, String> tabelaCliente;
+    @FXML
+    private TableColumn<Hora, String> tabelaProjeto;
+    @FXML
+    private TableColumn<Hora, String> tabelaJustificativa;
+    @FXML
+    private TableColumn<Hora, String  > tabelaResp;
     @FXML
     private DatePicker dataInicio;
-    @FXML
-    private DatePicker dataFim;
     @FXML
     private Spinner<Integer> horaInicio;
     @FXML
     private Spinner<Integer> minutoInicio;
+ 
+    private ComboBox<String> selecaoJustificativa;
+    @FXML
+    private ComboBox<String> tipo_funcao;
+    @FXML
+    private TextField stringProjeto;
+    @FXML
+    private ComboBox<String> selecaoCliente;
+    @FXML
+    private DatePicker dataFim;
     @FXML
     private Spinner<Integer> horaFim;
     @FXML
     private Spinner<Integer> minutoFim;
     @FXML
-    private ComboBox<String> horaTipo;
-    @FXML
-    private ComboBox<String> selecaoCliente;
-    @FXML
-    private ComboBox<String> selecaoCR;
-    @FXML
-    private ComboBox<String> selecaoAcionamento;
-    @FXML
     private Button botaoAdicionar;
     @FXML
     private Button botaoLimpar;
-    @FXML
-    private TextField entradaProjeto;
-    
-    
-    
+
     private List<String> obs = new ArrayList<>();
     private ObservableList<String> opcoes = FXCollections.observableArrayList();
     
@@ -104,64 +105,16 @@ public class LancamentoColaboradorController {
     
     private List<Hora> lishoras = new ArrayList<>();
     private ObservableList<Hora> observablelisthoras = FXCollections.observableArrayList();
-
-
+    
     public void initialize() {
-        nomeUsuario.setText("*nome do usuário*");
-        
-        horaInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0, 1));
+        label_usuario.setText("*nome do usuário*");
         minutoInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59));
-        horaInicio.getValueFactory().setWrapAround(true);
-        minutoInicio.getValueFactory().setWrapAround(true);
-        
-        horaFim.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0, 1));
+        horaInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 24));
         minutoFim.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59));
-        horaFim.getValueFactory().setWrapAround(true);
-        minutoFim.getValueFactory().setWrapAround(true);
-        
-        botaoLimpar.setOnAction(event -> limparCampos());
-        carregarTabelaLancamento();
-        
-        horaTipo.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-        if (newVal != null && newVal.equals(TipoHora.SOBREAVISO.name().toLowerCase())) {
-            selecaoAcionamento.setVisible(true);
-            Acionamento.setVisible(true);
- 
-        } else {
-            selecaoAcionamento.setVisible(false);
-            Acionamento.setVisible(false);
-        }
-        });
+        horaFim.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 24));
+        carregaTabela();
     }
-    
-    
-    @FXML
-    public void limparCampos(){
-        dataInicio.setValue(null);
-        dataFim.setValue(null);
-        horaInicio.getValueFactory().setValue(0);
-        minutoInicio.getValueFactory().setValue(0);
-        horaFim.getValueFactory().setValue(0);
-        minutoFim.getValueFactory().setValue(0);
-        horaTipo.getSelectionModel().clearSelection();
-        selecaoCliente.getSelectionModel().clearSelection();
-        selecaoAcionamento.getSelectionModel().clearSelection();
-        selecaoCR.getSelectionModel().clearSelection();
-        entradaProjeto.clear();
-        Acionamento.setVisible(false);
-        
-    }
-    
-    
-    @FXML
-    public void tipoHora() throws ParseException{
-    obs.add("Hora "+ TipoHora.EXTRA.name().toLowerCase());
-    obs.add(TipoHora.SOBREAVISO.name().toLowerCase());
-    opcoes.setAll(obs);
-    horaTipo.setItems(opcoes);
-    }
-    
-    
+
     @FXML
     public void BotaoAdicionar() {
         if(dataInicio.getValue()==null||horaInicio.getValue()==null||minutoInicio.getValue()==null||dataFim.getValue()==null||horaFim.getValue()==null||minutoFim.getValue()==null){
@@ -182,9 +135,9 @@ public class LancamentoColaboradorController {
 
             
 
-            /*Hora hora = new Hora();
-            hora.setProjeto(entradaProjeto.getText());
-            hora.setCod_cr(entradaProjeto.getText());("Cr");
+            Hora hora = new Hora();
+            hora.setProjeto(stringProjeto.getText());
+            hora.setCod_cr("Cr");
             hora.setData_hora_inicio(timestamp_inicio);
             hora.setData_hora_fim(timestamp_fim);
             hora.setUsername_lancador("Joazinho");
@@ -195,7 +148,6 @@ public class LancamentoColaboradorController {
 
             horaDAO daoH = new horaDAO();
             daoH.save(hora);
-           */
             
         }catch (Exception e){
             System.out.println("Houve um erro");
@@ -203,15 +155,42 @@ public class LancamentoColaboradorController {
         }
     }
     
+    @FXML
+    public void tipoFuncao() throws ParseException{
+    obs.add("Hora "+ TipoHora.EXTRA.name().toLowerCase());
+    obs.add(TipoHora.SOBREAVISO.name().toLowerCase());
+    opcoes.setAll(obs);
+    tipo_funcao.setItems(opcoes);
+    }
     
-    private LocalDateTime agora = LocalDateTime.now();
+    @FXML
+    public void forneceCliente(){
+        cli.add("EMBRAER");
+        cli.add("ITAU");
+        cli.add("SAMSUNG");
+        opCli.setAll(cli);
+        selecaoCliente.setItems(opCli); 
+    }
+    
+    @FXML
+    public void limpaCampos(){
+        dataInicio.setValue(null);
+        dataFim.setValue(null);
+        selecaoCliente.getSelectionModel().clearSelection();
+        tipo_funcao.getSelectionModel().clearSelection();
+        minutoInicio.getValueFactory().setValue(null);
+        horaInicio.getValueFactory().setValue(null);
+        minutoFim.getValueFactory().setValue(null);
+        horaFim.getValueFactory().setValue(null);
+    }
+  private LocalDateTime agora = LocalDateTime.now();
 
     // Criar um LocalDateTime para 13h e outro para 16h do dia atual
     private LocalDateTime dataHora13h = LocalDateTime.of(agora.getYear(), agora.getMonth(), agora.getDayOfMonth(), 13, 0);
     private LocalDateTime dataHora16h = LocalDateTime.of(agora.getYear(), agora.getMonth(), agora.getDayOfMonth(), 16, 0);
 
     @FXML
-    public void carregarTabelaLancamento(){
+    public void carregaTabela(){
 
 
         // Converter os LocalDateTime para Timestamp
@@ -220,21 +199,21 @@ public class LancamentoColaboradorController {
 
         Hora hora_tabela = new Hora(); //removi daqui também
         hora_tabela.setId(2);
-        //hora_tabela.setCod_cr("13652");
+        hora_tabela.setCod_cr("13652");
         hora_tabela.setUsername_lancador("Clarissa");
-       // hora_tabela.setStatus_aprovacao("Aprovado");
+        hora_tabela.setStatus_aprovacao("Aprovado");
         hora_tabela.setTipo("EXTRA");
-        //hora_tabela.setCod_cr("CodeCats");
+        hora_tabela.setCod_cr("CodeCats");
         hora_tabela.setProjeto("União");
-        //hora_tabela.setData_hora_inicio(timestamp13h);
-        //hora_tabela.setData_hora_fim(timestamp16h);     
-        //hora_tabela.setJustificativa_lancamento("Demanda");
+        hora_tabela.setData_hora_inicio(timestamp13h);
+        hora_tabela.setData_hora_fim(timestamp16h);     
+        hora_tabela.setJustificativa_lancamento("Demanda");
         lishoras.add(hora_tabela);
         observablelisthoras.setAll(lishoras);
-        //tabelaLancamento.setItems(observablelisthoras);
+        tabelaLancamento.setItems(observablelisthoras);
 
         tabelaId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        //tabelaNome.setCellValueFactory(new PropertyValueFactory<>("username_lancador")); 
+        tabelaNome.setCellValueFactory(new PropertyValueFactory<>("username_lancador")); 
         tabelaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo")); 
         tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status")); 
         tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao")); 
@@ -244,23 +223,13 @@ public class LancamentoColaboradorController {
         tabelaCR.setCellValueFactory(new PropertyValueFactory<>("cod_cr")); 
         tabelaCliente.setCellValueFactory(new PropertyValueFactory<>("cliente")); 
         tabelaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto")); 
-        /*tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa")); 
+        tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa")); 
         tabelaResp.setCellValueFactory(new PropertyValueFactory<>("status")); 
         tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento")); 
-        tabelaResp.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao"));
-        */
+        tabelaResp.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao")); 
+
+
+        
+        
     }
-<<<<<<< Updated upstream
-=======
-    
-    
-    @FXML
-    public void forneceCliente(){
-        cli.add("EMBRAER");
-        cli.add("ITAU");
-        cli.add("SAMSUNG");
-        opCli.setAll(cli);
-        selecaoCliente.setItems(opCli);
-    }
->>>>>>> Stashed changes
 }
