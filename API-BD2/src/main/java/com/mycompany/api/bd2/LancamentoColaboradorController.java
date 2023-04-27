@@ -221,14 +221,13 @@ public class LancamentoColaboradorController {
         opCli.setAll(cli);
         selecaoCliente.setItems(opCli);
     }
-<<<<<<< Updated upstream
     
     @FXML
     public void limpaCampos(){
         dataInicio.setValue(null);
         dataFim.setValue(null);
         selecaoCliente.getSelectionModel().clearSelection();
-        tipo_funcao.getSelectionModel().clearSelection();
+        horaTipo.getSelectionModel().clearSelection();
         minutoInicio.getValueFactory().setValue(null);
         horaInicio.getValueFactory().setValue(null);
         minutoFim.getValueFactory().setValue(null);
@@ -241,48 +240,5 @@ public class LancamentoColaboradorController {
     private LocalDateTime dataHora16h = LocalDateTime.of(agora.getYear(), agora.getMonth(), agora.getDayOfMonth(), 16, 0);
 
     @FXML
-    public void carregaTabela(){
-
-
-        // Converter os LocalDateTime para Timestamp
-        Timestamp timestamp13h = Timestamp.valueOf(dataHora13h);
-        Timestamp timestamp16h = Timestamp.valueOf(dataHora16h);
-
-        Hora hora_tabela = new Hora(); //removi daqui também
-        hora_tabela.setId(2);
-        hora_tabela.setCod_cr("13652");
-        hora_tabela.setUsername_lancador("Clarissa");
-        hora_tabela.setStatus_aprovacao("Aprovado");
-        hora_tabela.setTipo("EXTRA");
-        hora_tabela.setCod_cr("CodeCats");
-        hora_tabela.setProjeto("União");
-        hora_tabela.setData_hora_inicio(timestamp13h);
-        hora_tabela.setData_hora_fim(timestamp16h);     
-        hora_tabela.setJustificativa_lancamento("Demanda");
-        lishoras.add(hora_tabela);
-        observablelisthoras.setAll(lishoras);
-        tabelaLancamento.setItems(observablelisthoras);
-
-        tabelaId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        tabelaNome.setCellValueFactory(new PropertyValueFactory<>("username_lancador")); 
-        tabelaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo")); 
-        tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status")); 
-        tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao")); 
-        tabelaDHInicio.setCellValueFactory(new PropertyValueFactory<>("data_hora_inicio")); 
-        tabelaDHFim.setCellValueFactory(new PropertyValueFactory<>("data_hora_fim")); 
-        tabelaCR.setCellValueFactory(new PropertyValueFactory<>("centro_resultado")); 
-        tabelaCR.setCellValueFactory(new PropertyValueFactory<>("cod_cr")); 
-        tabelaCliente.setCellValueFactory(new PropertyValueFactory<>("cliente")); 
-        tabelaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto")); 
-        tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa")); 
-        tabelaResp.setCellValueFactory(new PropertyValueFactory<>("status")); 
-        tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento")); 
-        tabelaResp.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao")); 
-
-
-        
-        
-    }
-=======
->>>>>>> Stashed changes
+    public void carregaTabela(){}
 }
