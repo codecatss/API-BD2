@@ -8,7 +8,7 @@ package models;
  *
  * @author mikaela.begotti
  */
-public enum Status_clientes {
+public enum Status_cliente {
     
     ativo, inativo;
 

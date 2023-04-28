@@ -12,7 +12,7 @@ package models;
 public class Cliente {
     private long cnpj;
     private String razao_social;
-    private Status_clientes status_clientes;
+    private Status_cliente status_cliente;
 
     /**
      * @return the razao_social
@@ -40,16 +40,16 @@ public class Cliente {
     }
 
     
-    public Status_clientes getStatus_clientesObj() {
-        return status_clientes;
+    public Status_cliente getStatus_clienteObj() {
+        return status_cliente;
     }
     
-    public String getStatus_clientes() {
-        return status_clientes.name();
+    public String getStatus_cliente() {
+        return status_cliente.name();
     }
 
   
-    public void setStatus_clientes(String status_clientes) {
-        this.status_clientes = Status_clientes.valueOf(status_clientes.toLowerCase());
+    public void setStatus_cliente(String status_clientes) {
+        this.status_cliente = Status_cliente.valueOf(status_clientes.toLowerCase());
     }
 }
