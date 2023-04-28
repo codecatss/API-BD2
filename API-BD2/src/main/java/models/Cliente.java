@@ -10,9 +10,9 @@ package models;
  * @author mikaela.begotti
  */
 public class Cliente {
+    private long cnpj;
     private String razao_social;
     private Status_clientes status_clientes;
-    private long cnpj;
 
     /**
      * @return the razao_social
