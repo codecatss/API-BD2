@@ -10,18 +10,18 @@ package models;
  * @author danko
  */
 public class Usuario {
-    private String user_name = "";
+    private String username = "";
     private String nome = "";
     private String senha = "";
-    private String status = "";
     private Funcao cargo;
+    private Status_user status_user;
 
-    public String getUser_name() {
-        return user_name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getNome() {
@@ -54,13 +54,17 @@ public class Usuario {
     }
 
     
-    public String getStatus() {
-        return status;
+    public String getStatus_user() {
+        return status_user.name();
+    }
+    
+    public Status_user getStatus_userObj() {
+        return status_user;
     }
 
     
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus(String status_user) {
+        this.status_user = Status_user.valueOf(status_user);
     }
 
     

@@ -10,10 +10,8 @@ import models.Usuario;
 
 public class usuarioDAO {
     
-    
-    
     public void save(Usuario usuario){
-        String sql = "INSERT INTO USUARIOS(username, nome, senha, funcao, status) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO USUARIOS(username, nome, senha, funcao, status_user) VALUES (?, ?, ?, ?, ?)";
         Connection conn = null;
         PreparedStatement pstm = null; 
         
@@ -21,11 +19,11 @@ public class usuarioDAO {
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setString(1,usuario.getUser_name());
+            pstm.setString(1,usuario.getUsername());
             pstm.setString(2, usuario.getNome());
             pstm.setString(3,usuario.getSenha());
             pstm.setString(4, usuario.getCargo());
-            pstm.setString(5,usuario.getStatus());
+            pstm.setString(5,usuario.getStatus_user());
             
             pstm.execute();
         }
@@ -55,7 +53,7 @@ public class usuarioDAO {
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setString(1,usuario.getUser_name());
+            pstm.setString(1,usuario.getUsername());
             
             pstm.execute();
         }
@@ -98,11 +96,11 @@ public class usuarioDAO {
 				Usuario usuario = new Usuario();
 				
 				
-				usuario.setUser_name(rset.getString("username"));
+				usuario.setUsername(rset.getString("username"));
 				usuario.setNome(rset.getString("nome"));
                                 usuario.setSenha(rset.getString("senha"));
 				usuario.setCargo(rset.getString("funcao"));
-				usuario.setStatus(rset.getString("status"));
+				usuario.setStatus(rset.getString("status_user"));
 				
 				usuarios.add(usuario);
 				
