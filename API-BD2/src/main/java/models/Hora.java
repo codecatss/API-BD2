@@ -21,15 +21,20 @@ public class Hora {
     private String projeto;
     private String username_aprovador;
     private String justificativa_negacao;
-    private String status_aprovacao;    
+    private StatusAprovacao status_aprovacao;    
     
     
-
-    public String getStatus_aprovacao() {
+    public StatusAprovacao getStatus_aprovacaoObj() {
         return status_aprovacao;
     }
     
+    public String getStatus_aprovacao() {
+        return status_aprovacao.name();
+    }
     
+    public void setStatus_aprovacao(String status_aprovacao){
+        this.status_aprovacao = StatusAprovacao.valueOf(status_aprovacao);
+    }
 
     /**
      * @return the id
@@ -114,9 +119,6 @@ public class Hora {
         this.projeto = projeto;
     }
 
-    public void setStatus_aprovacao(String status_aprovacao) {
-        this.status_aprovacao = status_aprovacao;
-    }
 
     /**
      * @return the cod_cr

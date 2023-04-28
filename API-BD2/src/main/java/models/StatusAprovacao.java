@@ -8,6 +8,6 @@ package models;
  *
  * @author mikaela.begotti
  */
-public class Aprovacao {
-    
+public enum StatusAprovacao {
+    pendente, aprovado, negado;
 }
