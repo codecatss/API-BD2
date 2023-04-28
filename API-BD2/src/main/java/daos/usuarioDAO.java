@@ -11,7 +11,7 @@ import models.Usuario;
 public class usuarioDAO {
     
     public void save(Usuario usuario){
-        String sql = "INSERT INTO USUARIOS(username, nome, senha, funcao, status_user) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO USUARIO(username, nome, senha, funcao, status_user) VALUES (?, ?, ?, ?, ?)";
         Connection conn = null;
         PreparedStatement pstm = null; 
         
@@ -75,7 +75,7 @@ public class usuarioDAO {
     }
     public List<Usuario> getUsuarios(){
 		
-		String sql = "SELECT * FROM 2rp.usuarios";
+		String sql = "SELECT * FROM 2rp.usuario";
 		
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		
