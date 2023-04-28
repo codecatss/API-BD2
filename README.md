@@ -24,8 +24,8 @@
 | *COMO UM* |  *EU GOSTARIA*  | *PARA* | *PIORIDADE* |
 |-----------------------|-------------------------|-------------------------|-------------------------|
 | Colaborador | De lançar minhas horas extras e de sobreaviso | Serem aprovadas por um gerente e serem pagas |1|
-| Gestor |  De validar ou não as horas lançadas por um colaborador | Repassar ao RH |2|
-| Gestor | De lançar minhas horas extras e sobreavisos | Serem pagas |3|
+| Gestor | De lançar minhas horas extras e sobreavisos | Serem pagas |2|
+| Gestor |  De validar ou não as horas lançadas por um colaborador | Repassar ao RH |3|
 | Administrador | De consultar as horas extras e sobreavisos validadas pelos gestores | Serem pagas |4|
 | Administrador | De poder acessar as informações de parametrização | Fazer a gestão dos clientes, projetos e colaboradores |5|
 | Administrador | De adicionar novos clientes, squads, colaboradores, gestores e projetos | Que a equipe possa utilizar o sistema |6|
@@ -40,7 +40,8 @@
 | **SPRINT** | **PERÍODO**| **O QUE SERÁ ENTREGUE** | **BACKLOG DAS SPRINTS** |
 |:-------------:|:-----------------------:|:-------------------------:|:-------------------------:|
 |  01  | 13/03 a 02/04 | Fluxograma da aplicação, wireframe do produto e modelagem de banco de dados | <a href="https://github.com/codecatss/API-BD2/wiki/Backlog-Sprint-1">Sprint 1</a> |
-|  02  | 03/04 a 23/04 | Sistema de lançamento de horas e sistema de aprovação de horas | <a href="https://github.com/codecatss/API-BD2/wiki/Backlog-Sprint-2">Sprint 2</a>
+|  02  | 03/04 a 23/04 | Sistema de lançamento de horas  | <a href="https://github.com/codecatss/API-BD2/wiki/Backlog-Sprint-2">Sprint 2</a>
+|  03  | 24/04 a 14/05 | Sistema de aprovação de horas, Sistema de cadastro e Sistema de login | <a href="https://github.com/codecatss/API-BD2/wiki/Backlog-Sprint-3">Sprint 3</a>
 
 <span id="prototipo">
 

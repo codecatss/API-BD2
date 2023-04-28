@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package daos;
 
 import Conexao.Conexao;
@@ -6,26 +10,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import models.Usuario;
+import models.Centro_resultado;
 
-public class usuarioDAO {
-    
-    
-    
-    public void save(Usuario usuario){
-        String sql = "INSERT INTO USUARIOS(username, nome, senha, funcao, status) VALUES (?, ?, ?, ?, ?)";
+/**
+ *
+ * @author mikaela.begotti
+ */
+public class crDAO {
+    public void save(Centro_resultado cr){
+        String sql = "INSERT INTO centro_resultado(nome, codigo_cr, sigla, status_cr,) VALUES (?, ?, ?, ?)";
         Connection conn = null;
-        PreparedStatement pstm = null; 
+        PreparedStatement pstm = null;
         
         try{
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setString(1,usuario.getUser_name());
-            pstm.setString(2, usuario.getNome());
-            pstm.setString(3,usuario.getSenha());
-            pstm.setString(4, usuario.getCargo());
-            pstm.setString(5,usuario.getStatus());
+            pstm.setString(1,cr.getNome());
+            pstm.setString(2, cr.getCodigo_cr());
+            pstm.setString(3, cr.getSigla());
+            pstm.setString(4, cr.getStatus_cr());
             
             pstm.execute();
         }
@@ -46,8 +50,8 @@ public class usuarioDAO {
         
     }
 
-    public void delete(Usuario usuario){
-        String sql = "DELETE FROM USUARIOS "+"WHERE username=?";
+    public void delete(Centro_resultado cr){
+        String sql = "DELETE FROM centro_resultado "+"WHERE codigo_cr";
         Connection conn = null;
         PreparedStatement pstm = null; 
         
@@ -55,7 +59,7 @@ public class usuarioDAO {
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setString(1,usuario.getUser_name());
+            pstm.setString(2,cr.getCodigo_cr());
             
             pstm.execute();
         }
@@ -75,11 +79,11 @@ public class usuarioDAO {
         }
         
     }
-    public List<Usuario> getUsuarios(){
+    public List<Centro_resultado> getCliente(){
 		
-		String sql = "SELECT * FROM 2rp.usuarios";
+		String sql = "SELECT * FROM 2rp.centro_resultado";
 		
-		List<Usuario> usuarios = new ArrayList<Usuario>();
+		List<Centro_resultado> crs = new ArrayList<Centro_resultado>();
 		
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -95,16 +99,16 @@ public class usuarioDAO {
 			
 			while (rset.next()) {
 				
-				Usuario usuario = new Usuario();
+				Centro_resultado cr = new Centro_resultado();
 				
 				
-				usuario.setUser_name(rset.getString("username"));
-				usuario.setNome(rset.getString("nome"));
-                                usuario.setSenha(rset.getString("senha"));
-				usuario.setCargo(rset.getString("funcao"));
-				usuario.setStatus(rset.getString("status"));
+				cr.setCodigo_cr(rset.getString("codigo_cr"));
 				
-				usuarios.add(usuario);
+				cr.setNome(rset.getString("nome"));
+				cr.setSigla(rset.getString("sigla"));
+                                cr.setStatus_cr(rset.getString("status_cr"));
+			
+				crs.add(cr);
 				
 			}
 		}catch (Exception e) {
@@ -126,7 +130,7 @@ public class usuarioDAO {
 					e.printStackTrace();
 				}
 			}
-                        System.out.println(usuarios);
-			return usuarios;
+                        System.out.println(crs);
+			return crs;
 	}
 }

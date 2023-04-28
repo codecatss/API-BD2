@@ -6,7 +6,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
@@ -24,7 +23,7 @@
                            </font>
                         </Button>
                         <Button id="minimizarTela" fx:id="minimizarTela" layoutX="1245.0" layoutY="5.0" mnemonicParsing="false" styleClass="minimize" stylesheets="@EstilizacaoTelas.css" text="-" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="5.0" />
-                        <Label id="nometelaatual" fx:id="nometelaatual" layoutX="10.0" layoutY="10.0" text="Apontamento de Horas" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                        <Label id="nometelaatual" fx:id="nometelaatual" layoutX="10.0" layoutY="10.0" text="TelaAtual" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font>
@@ -60,32 +59,6 @@
                </children>
             </AnchorPane>
          </left>
-         <center>
-            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-               <children>
-                  <AnchorPane prefHeight="50.0" prefWidth="200.0">
-                     <children>
-                        <Label layoutX="15.0" layoutY="10.0" text="Pendentes" textAlignment="CENTER">
-                           <font>
-                              <Font name="Arial" size="24.0" />
-                           </font>
-                        </Label>
-                        <Button fx:id="botaoAprovar" layoutX="150.0" layoutY="10.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="82.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Aprovar" textAlignment="CENTER" textFill="WHITE">
-                           <font>
-                              <Font name="Arial" size="12.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="botaoReprovar" layoutX="250.0" layoutY="10.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="76.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Reprovar" textAlignment="CENTER" textFill="WHITE">
-                           <font>
-                              <Font name="Arial" size="12.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-               </children>
-            </VBox>
-         </center>
       </BorderPane>
    </children>
 </AnchorPane>
