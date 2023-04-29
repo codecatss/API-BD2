@@ -34,12 +34,12 @@ public class massatestedao {
         hora.setStatus_aprovacao("aprovado");
         horaDao.save(hora);*/
         
-        Integrante integrante = new Integrante();
+        /*Integrante integrante = new Integrante();
         integranteDAO integranteDao = new integranteDAO();
         integrante.setGestor(3);
         integrante.setUsername_integrante("brendel");
         integrante.setCod_cr("13652");
-        integranteDao.delete(integrante);
+        integranteDao.delete(integrante);*/
         
     }
 }

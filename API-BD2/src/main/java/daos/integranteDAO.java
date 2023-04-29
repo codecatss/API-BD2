@@ -58,7 +58,7 @@ public class integranteDAO {
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setString(2,integrante.getUsername_integrante());
+            pstm.setString(1,integrante.getUsername_integrante());
             
             pstm.execute();
         }
