@@ -26,12 +26,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.collections.ObservableList;
 import java.time.LocalDate;
 import java.sql.Timestamp;
+import com.mycompany.api.bd2.models.Hora;
 import javafx.scene.control.Alert.AlertType;
-import models.Hora;
 //import daos.horaDAO;
 
 
-import models.*;
+import com.mycompany.api.bd2.models.*;
 
 
 public class LancamentoColaboradorController {

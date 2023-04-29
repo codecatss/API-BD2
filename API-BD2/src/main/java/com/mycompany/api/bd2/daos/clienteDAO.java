@@ -1,31 +1,38 @@
-package daos;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.api.bd2.daos;
 
+import com.mycompany.api.bd2.models.Cliente;
 import Conexao.Conexao;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import models.Usuario;
-
-public class usuarioDAO {
+import com.mycompany.api.bd2.models.Hora;
+/**
+ *
+ * @author mikaela.begotti
+ */
+public class clienteDAO {
     
-    
-    
-    public void save(Usuario usuario){
-        String sql = "INSERT INTO USUARIOS(username, nome, senha, funcao, status) VALUES (?, ?, ?, ?, ?)";
+    public void save(Cliente cliente){
+        String sql = "INSERT INTO cliente(razao_social, status_aprovacao, cnpj) VALUES (?, ?, ?)";
         Connection conn = null;
-        PreparedStatement pstm = null; 
+        PreparedStatement pstm = null;
         
         try{
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setString(1,usuario.getUser_name());
-            pstm.setString(2, usuario.getNome());
-            pstm.setString(3,usuario.getSenha());
-            pstm.setString(4, usuario.getCargo());
-            pstm.setString(5,usuario.getStatus());
+            pstm.setString(1,cliente.getRazao_social());
+            pstm.setString(2, cliente.getStatus_clientes());
+            pstm.setLong(3, cliente.getCnpj());
             
             pstm.execute();
         }
@@ -46,8 +53,8 @@ public class usuarioDAO {
         
     }
 
-    public void delete(Usuario usuario){
-        String sql = "DELETE FROM USUARIOS "+"WHERE username=?";
+    public void delete(Cliente cliente){
+        String sql = "DELETE FROM cliente "+"WHERE cnpj";
         Connection conn = null;
         PreparedStatement pstm = null; 
         
@@ -55,7 +62,7 @@ public class usuarioDAO {
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setString(1,usuario.getUser_name());
+            pstm.setLong(1,cliente.getCnpj());
             
             pstm.execute();
         }
@@ -75,11 +82,11 @@ public class usuarioDAO {
         }
         
     }
-    public List<Usuario> getUsuarios(){
+    public List<Cliente> getCliente(){
 		
-		String sql = "SELECT * FROM 2rp.usuarios";
+		String sql = "SELECT * FROM 2rp.cliente";
 		
-		List<Usuario> usuarios = new ArrayList<Usuario>();
+		List<Cliente> clientes = new ArrayList<Cliente>();
 		
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -95,16 +102,15 @@ public class usuarioDAO {
 			
 			while (rset.next()) {
 				
-				Usuario usuario = new Usuario();
+				Cliente cliente = new Cliente();
 				
 				
-				usuario.setUser_name(rset.getString("username"));
-				usuario.setNome(rset.getString("nome"));
-                                usuario.setSenha(rset.getString("senha"));
-				usuario.setCargo(rset.getString("funcao"));
-				usuario.setStatus(rset.getString("status"));
+				cliente.setRazao_social(rset.getString("razao_social"));
 				
-				usuarios.add(usuario);
+				cliente.setStatus_clientes(rset.getString("status_clientes"));
+				cliente.setCnpj(rset.getLong("cnpj"));
+			
+				clientes.add(cliente);
 				
 			}
 		}catch (Exception e) {
@@ -126,7 +132,9 @@ public class usuarioDAO {
 					e.printStackTrace();
 				}
 			}
-                        System.out.println(usuarios);
-			return usuarios;
+                        System.out.println(clientes);
+			return clientes;
 	}
+    
 }
+

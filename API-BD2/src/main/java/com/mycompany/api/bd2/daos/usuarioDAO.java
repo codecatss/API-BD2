@@ -1,60 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package daos;
+package com.mycompany.api.bd2.daos;
 
-import models.Cliente;
 import Conexao.Conexao;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import models.Hora;
-/**
- *
- * @author mikaela.begotti
- */
-public class clienteDAO {
-    
-    public void save(Cliente cliente){
-        String sql = "INSERT INTO cliente(razao_social, status_aprovacao, cnpj) VALUES (?, ?, ?)";
-        Connection conn = null;
-        PreparedStatement pstm = null;
-        
-        try{
-            conn = Conexao.createConnectionToMySQL();
-            
-            pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setString(1,cliente.getRazao_social());
-            pstm.setString(2, cliente.getStatus_clientes());
-            pstm.setLong(3, cliente.getCnpj());
-            
-            pstm.execute();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }finally{
-            try{
-                if(pstm!=null){
-                    pstm.close();
-                }
-                if(conn!=null){
-                    conn.close();
-                }
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-        
-    }
+import com.mycompany.api.bd2.models.Usuario;
 
-    public void delete(Cliente cliente){
-        String sql = "DELETE FROM cliente "+"WHERE cnpj";
+public class usuarioDAO {
+
+    public void save(Usuario usuario){
+        String sql = "INSERT INTO USUARIOS(username, nome, senha, funcao, status) VALUES (?, ?, ?, ?, ?)";
         Connection conn = null;
         PreparedStatement pstm = null; 
         
@@ -62,7 +19,11 @@ public class clienteDAO {
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setLong(1,cliente.getCnpj());
+            pstm.setString(1,usuario.getUser_name());
+            pstm.setString(2, usuario.getNome());
+            pstm.setString(3,usuario.getSenha());
+            pstm.setString(4, usuario.getCargo());
+            pstm.setString(5,usuario.getStatus());
             
             pstm.execute();
         }
@@ -82,11 +43,41 @@ public class clienteDAO {
         }
         
     }
-    public List<Cliente> getCliente(){
+
+    public void delete(Usuario usuario){
+        String sql = "DELETE FROM USUARIOS "+"WHERE username=?";
+        Connection conn = null;
+        PreparedStatement pstm = null; 
+        
+        try{
+            conn = Conexao.createConnectionToMySQL();
+            
+            pstm = (PreparedStatement) conn.prepareStatement(sql);
+            pstm.setString(1,usuario.getUser_name());
+            
+            pstm.execute();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }finally{
+            try{
+                if(pstm!=null){
+                    pstm.close();
+                }
+                if(conn!=null){
+                    conn.close();
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        
+    }
+    public List<Usuario> getUsuarios(){
 		
-		String sql = "SELECT * FROM 2rp.cliente";
+		String sql = "SELECT * FROM 2rp.usuarios";
 		
-		List<Cliente> clientes = new ArrayList<Cliente>();
+		List<Usuario> usuarios = new ArrayList<Usuario>();
 		
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -102,15 +93,16 @@ public class clienteDAO {
 			
 			while (rset.next()) {
 				
-				Cliente cliente = new Cliente();
+				Usuario usuario = Usuario.getInstance();
 				
 				
-				cliente.setRazao_social(rset.getString("razao_social"));
+				usuario.setUser_name(rset.getString("username"));
+				usuario.setNome(rset.getString("nome"));
+                                usuario.setSenha(rset.getString("senha"));
+				usuario.setCargo(rset.getString("funcao"));
+				usuario.setStatus(rset.getString("status"));
 				
-				cliente.setStatus_clientes(rset.getString("status_clientes"));
-				cliente.setCnpj(rset.getLong("cnpj"));
-			
-				clientes.add(cliente);
+				usuarios.add(usuario);
 				
 			}
 		}catch (Exception e) {
@@ -132,9 +124,7 @@ public class clienteDAO {
 					e.printStackTrace();
 				}
 			}
-                        System.out.println(clientes);
-			return clientes;
+                        System.out.println(usuarios);
+			return usuarios;
 	}
-    
 }
-
