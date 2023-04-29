@@ -26,7 +26,7 @@ public class massatestedao {
         hora.setTipo("tipo");
         hora.setJustificativa_lancamento("gostaria de lançar");
         hora.setProjeto("Integrador 2.0");
-        hora.setUsername_aprovador("mauricia");
+        hora.setUsername_aprovador("larissa");
         hora.setJustificativa_negacao(null);
         hora.setStatus_aprovacao("aprovado");
         horaDao.save(hora);
