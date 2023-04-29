@@ -26,11 +26,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.collections.ObservableList;
 import java.time.LocalDate;
 import java.sql.Timestamp;
-import models.Hora;
+import com.mycompany.api.bd2.models.Hora;
 //import daos.horaDAO;
 
 
-import models.*;
+import com.mycompany.api.bd2.models.*;
 
 
 public class LancamentoColaboradorController {

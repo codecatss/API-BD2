@@ -1,6 +1,7 @@
 package com.mycompany.api.bd2;
 
 import Conexao.Conexao;
+import com.mycompany.api.bd2.models.Usuario;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,17 +34,22 @@ public class TelaLoginController implements Initializable {
 
     @FXML
     private void handleLoginButtonAction(ActionEvent event) {
-        String usuario = LoginUsuário.getText();
+        String user = LoginUsuário.getText();
         String senha = LoginSenha.getText();
 
         try (Connection connection = Conexao.createConnectionToMySQL()) {
             String query = "SELECT * FROM usuario WHERE username = ? AND senha = ?";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, usuario);
+            statement.setString(1, user);
             statement.setString(2, senha);
 
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
+                System.out.println("oiiiii");
+                Usuario usuario = Usuario.getInstance();
+                usuario.setUser_name(user);
+                usuario.setSenha(senha);
+                System.out.println(usuario.getUser_name());
                 
                 // Usuário e senha são válidos, exibir próxima tela
             } else {

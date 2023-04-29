@@ -1,4 +1,4 @@
-package daos;
+package com.mycompany.api.bd2.daos;
 
 import Conexao.Conexao;
 import java.sql.Connection;
@@ -6,12 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import models.Usuario;
+import com.mycompany.api.bd2.models.Usuario;
 
 public class usuarioDAO {
-    
-    
-    
+
     public void save(Usuario usuario){
         String sql = "INSERT INTO USUARIOS(username, nome, senha, funcao, status) VALUES (?, ?, ?, ?, ?)";
         Connection conn = null;
@@ -95,7 +93,7 @@ public class usuarioDAO {
 			
 			while (rset.next()) {
 				
-				Usuario usuario = new Usuario();
+				Usuario usuario = Usuario.getInstance();
 				
 				
 				usuario.setUser_name(rset.getString("username"));
