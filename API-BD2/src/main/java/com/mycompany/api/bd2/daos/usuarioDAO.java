@@ -1,13 +1,12 @@
-package com.mycompany.api.bd2.daos;
+package daos;
 
-import com.mycompany.api.bd2.models.Usuario;
 import Conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
+import models.Usuario;
 
 public class usuarioDAO {
     
@@ -96,7 +95,7 @@ public class usuarioDAO {
 			
 			while (rset.next()) {
 				
-				Usuario usuario = Usuario.getInstance();
+				Usuario usuario = new Usuario();
 				
 				
 				usuario.setUser_name(rset.getString("username"));

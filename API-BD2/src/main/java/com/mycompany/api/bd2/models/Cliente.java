@@ -1,4 +1,4 @@
-package com.mycompany.api.bd2.models;
+package models;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

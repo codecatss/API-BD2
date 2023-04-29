@@ -1,6 +1,5 @@
 package com.mycompany.api.bd2;
 
-import com.mycompany.api.bd2.models.TipoHora;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.text.ParseException;
@@ -27,7 +26,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.collections.ObservableList;
 import java.time.LocalDate;
 import java.sql.Timestamp;
-import com.mycompany.api.bd2.models.Hora;
+import models.Hora;
+//import daos.horaDAO;
+
+
+import models.*;
 
 
 public class LancamentoColaboradorController {

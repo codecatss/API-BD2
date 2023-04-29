@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.api.bd2.daos;
+package daos;
 
-import com.mycompany.api.bd2.models.Cliente;
+import models.Cliente;
 import Conexao.Conexao;
 import java.sql.Connection;
 import java.sql.Date;
@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import com.mycompany.api.bd2.models.Hora;
+import models.Hora;
 /**
  *
  * @author mikaela.begotti
