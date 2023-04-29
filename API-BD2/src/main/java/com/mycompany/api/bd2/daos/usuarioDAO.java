@@ -127,4 +127,57 @@ public class usuarioDAO {
                         System.out.println(usuarios);
 			return usuarios;
 	}
+
+    public Usuario getUsuario(String username, String senha){
+		
+                String sql = "SELECT * FROM usuario WHERE username = ? AND senha = ?";
+				
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		//Classe que vai recuperar os dados do banco. ***SELECT****
+		ResultSet rset = null;
+                Usuario usuario = Usuario.getInstance();
+		
+		try {
+			conn = Conexao.createConnectionToMySQL();
+			
+			pstm = (PreparedStatement) conn.prepareStatement(sql);
+                        pstm.setString(1, username);
+                        pstm.setString(2, senha);			
+			rset = pstm.executeQuery();
+                        
+			
+                        if (rset.next()) {
+				
+				usuario.setUsername(rset.getString("username"));
+				usuario.setNome(rset.getString("nome"));
+                                usuario.setSenha(rset.getString("senha"));
+				usuario.setCargo(rset.getString("funcao"));
+				usuario.setStatus(rset.getString("status_user"));
+				                                
+			} else {
+                            return null;
+                        }
+                        
+		}catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(rset!=null) {
+						rset.close();
+					}
+					
+					if(pstm!=null) {
+						pstm.close();
+					}
+					
+					if(conn!=null) {
+						conn.close();
+					}
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			return usuario;
+	}
 }

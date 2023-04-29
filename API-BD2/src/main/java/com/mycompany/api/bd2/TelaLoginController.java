@@ -1,6 +1,7 @@
 package com.mycompany.api.bd2;
 
 import Conexao.Conexao;
+import com.mycompany.api.bd2.daos.usuarioDAO;
 import com.mycompany.api.bd2.models.Usuario;
 import java.net.URL;
 import java.sql.Connection;
@@ -38,22 +39,14 @@ public class TelaLoginController implements Initializable {
         String senha = LoginSenha.getText();
 
         try (Connection connection = Conexao.createConnectionToMySQL()) {
-            String query = "SELECT * FROM usuario WHERE username = ? AND senha = ?";
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, user);
-            statement.setString(2, senha);
-
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                Usuario usuario = Usuario.getInstance();
-                usuario.setUsername(resultSet.getString("username"));
-                usuario.setNome(resultSet.getString("nome"));
-                usuario.setSenha(resultSet.getString("senha"));
-                usuario.setCargo(resultSet.getString("funcao"));
-                usuario.setStatus(resultSet.getString("status_user"));
+            Usuario usuario = new usuarioDAO().getUsuario(user, senha);
+            if (usuario.getUsername().equals( user) && usuario.getSenha().equals(senha)) {
+                
                 System.out.println("Logado");
+                System.out.println(usuario.getNome());
 
                 // Usuário e senha são válidos, exibir próxima tela
+                
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Erro");
