@@ -19,7 +19,7 @@ public class usuarioDAO {
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setString(1,usuario.getUser_name());
+            pstm.setString(1,usuario.getUsername());
             pstm.setString(2, usuario.getNome());
             pstm.setString(3,usuario.getSenha());
             pstm.setString(4, usuario.getCargo());
@@ -53,7 +53,7 @@ public class usuarioDAO {
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setString(1,usuario.getUser_name());
+            pstm.setString(1,usuario.getUsername());
             
             pstm.execute();
         }
@@ -96,7 +96,7 @@ public class usuarioDAO {
 				Usuario usuario = Usuario.getInstance();
 				
 				
-				usuario.setUser_name(rset.getString("username"));
+				usuario.setUsername(rset.getString("username"));
 				usuario.setNome(rset.getString("nome"));
                                 usuario.setSenha(rset.getString("senha"));
 				usuario.setCargo(rset.getString("funcao"));
