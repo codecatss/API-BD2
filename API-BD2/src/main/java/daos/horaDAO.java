@@ -18,7 +18,7 @@ import models.Hora;
  */
 public class horaDAO {
     public void save(Hora hora){
-    String sql = "INSERT INTO hora(cod_cr, username_lancador, cnpj_cliente, data_hora_inicio, data_hora_fim, tipo, justificativa_lancamento, projeto, username_aprovador, justificativa_negacao, status_aprovacao) VALUES (?, ?, ?, ?, ?,?,?,?,?,?)";
+    String sql = "INSERT INTO hora(cod_cr, username_lancador, cnpj_cliente, data_hora_inicio, data_hora_fim, tipo, justificativa_lancamento, projeto, username_aprovador, justificativa_negacao, status_aprovacao) VALUES (?, ?, ?, ?, ?,?,?,?,?,?,?)";
     Connection conn = null;
     PreparedStatement pstm = null; 
         
@@ -111,8 +111,8 @@ public class horaDAO {
 				hora.setCod_cr(rset.getString("cod_cr"));
                                 hora.setUsername_lancador(rset.getString("username_lancador"));
                                 hora.setCnpj_cliente(rset.getLong("cnpj_cliente"));
-                                hora.setData_hora_inicio(rset.getTimestamp("data_hora_inicio"));
-                                hora.setData_hora_fim(rset.getTimestamp("data_hora_fim"));
+                                hora.setData_hora_inicio(rset.getString("data_hora_inicio"));
+                                hora.setData_hora_fim(rset.getString("data_hora_fim"));
                                 hora.setTipo(rset.getString("tipo"));
                                 hora.setJustificativa_lancamento(rset.getString("justificativa_lancamento"));
                                 hora.setProjeto(rset.getString("projeto"));

@@ -67,15 +67,17 @@ public class Hora {
     /**
      * @return the data_hora_inicio
      */
-    public Timestamp getData_hora_inicio() throws ParseException {
+    public Timestamp getData_hora_inicio(){
         return data_hora_inicio;
     }
 
     /**
      * @param data_hora_inicio the data_hora_inicio to set
      */
-    public void setData_hora_inicio(Timestamp time){
-        this.data_hora_inicio = time;
+    public void setData_hora_inicio(String time) throws ParseException{
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        java.util.Date date = formatter.parse(time);
+        this.data_hora_inicio = new Timestamp(date.getTime());
     }
 
     /**
@@ -88,8 +90,10 @@ public class Hora {
     /**
      * @param data_hora_fim the data_hora_fim to set
      */
-    public void setData_hora_fim(Timestamp time){
-        this.data_hora_fim = time;
+    public void setData_hora_fim(String time) throws ParseException{
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        java.util.Date date = formatter.parse(time);
+        this.data_hora_fim = new Timestamp(date.getTime());
     }
 
     /**
