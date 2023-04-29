@@ -197,9 +197,8 @@ public class LancamentoColaboradorController {
         alert.setContentText("Um dos campos não foi preenchido");
         alert.showAndWait();}
         else{
-            Boolean testedata = false;
-            Boolean testehora = false;
-            Boolean salvar = true;
+            boolean testedata = false;
+            boolean salvar = true;
             boolean testeseq = false;
             if(dataInicio.getValue().isEqual(dataFim.getValue())){
                 testedata = true;
