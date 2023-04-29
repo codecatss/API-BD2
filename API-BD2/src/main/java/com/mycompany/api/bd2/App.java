@@ -1,6 +1,5 @@
 package com.mycompany.api.bd2;
 
-import testando_view_exemplo.testeLeitura;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,18 +8,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-/**
- * JavaFX App
- */
 public class App extends Application {
-    
 
     private static Scene scene;
 
     @Override
     public void start(Stage stage) throws IOException {
-
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CadastroUsuarioADM.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
         Parent root = fxmlLoader.load();
         scene = new Scene(root, 1300, 650);
         stage.setScene(scene);
@@ -44,5 +38,4 @@ public class App extends Application {
     public static void setScene(Scene newScene) {
         scene = newScene;
     }
-
 }
