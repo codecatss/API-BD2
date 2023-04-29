@@ -6,6 +6,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -45,12 +46,14 @@ public class TelaLoginController implements Initializable {
 
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                System.out.println("oiiiii");
                 Usuario usuario = Usuario.getInstance();
-                usuario.setUser_name(user);
-                usuario.setSenha(senha);
-                System.out.println(usuario.getUser_name());
-                
+                usuario.setUsername(resultSet.getString("username"));
+                usuario.setNome(resultSet.getString("nome"));
+                usuario.setSenha(resultSet.getString("senha"));
+                usuario.setCargo(resultSet.getString("funcao"));
+                usuario.setStatus(resultSet.getString("status_user"));
+                System.out.println("Logado");
+
                 // Usuário e senha são válidos, exibir próxima tela
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
