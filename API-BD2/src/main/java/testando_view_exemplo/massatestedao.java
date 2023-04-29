@@ -5,9 +5,12 @@
 package testando_view_exemplo;
 
 import daos.horaDAO;
+import daos.integranteDAO;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import models.Hora;
+import models.Integrante;
+import models.Usuario;
 
 /**
  *
@@ -16,7 +19,7 @@ import models.Hora;
 public class massatestedao {
     
     public static void main(String[] args) throws ParseException {
-        Hora hora = new Hora();
+        /*Hora hora = new Hora();
         horaDAO horaDao = new horaDAO();
         hora.setCod_cr("123844");
         hora.setUsername_lancador("brendel");
@@ -29,7 +32,14 @@ public class massatestedao {
         hora.setUsername_aprovador("larissa");
         hora.setJustificativa_negacao(null);
         hora.setStatus_aprovacao("aprovado");
-        horaDao.save(hora);
+        horaDao.save(hora);*/
+        
+        Integrante integrante = new Integrante();
+        integranteDAO integranteDao = new integranteDAO();
+        integrante.setGestor(3);
+        integrante.setUsername_integrante("brendel");
+        integrante.setCod_cr("13652");
+        integranteDao.delete(integrante);
         
     }
 }
