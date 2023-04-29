@@ -83,7 +83,7 @@ public class CadastroUsuarioADMController {
     
     @FXML
     public void tipoFuncao(){
-        obs.add("ADM");
+        obs.add("Administrador");
         obs.add("Gestor");
         obs.add("Colaborador");
         opcoes.setAll(obs);

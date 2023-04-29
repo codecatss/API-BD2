@@ -72,7 +72,7 @@
                <children>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <AnchorPane prefHeight="310.0" prefWidth="1075.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+                        <AnchorPane prefHeight="310.0" prefWidth="1075.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                            <styleClass>
                               <String fx:value="white-bg" />
                               <String fx:value="shadow" />
@@ -80,14 +80,15 @@
                            <children>
                               <TableView id="tabelaLancamento" fx:id="tabelaLancamento" layoutX="5.0" prefHeight="300.0" prefWidth="1060.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                  <columns>
-                                    <TableColumn id="tabelaId" fx:id="tabelaId" maxWidth="-Infinity" minWidth="50.0" prefWidth="-1.0" text="Nº" />
+                                    <TableColumn id="tabelaId" fx:id="tabelaId" maxWidth="350.0" minWidth="50.0" prefWidth="50.0" text="Nº" />
                                     <TableColumn id="tabelaTipo" fx:id="tabelaTipo" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="-1.0" text="Tipo" />
-                                    <TableColumn id="tabelaStatus" fx:id="tabelaStatus" maxWidth="-Infinity" minWidth="150.0" prefWidth="200.0" text="Status" />
-                                    <TableColumn id="tabelaDHInicio" fx:id="tabelaDHInicio" maxWidth="-Infinity" minWidth="200.0" prefWidth="150.0" text="Início" />
-                                    <TableColumn id="tabelaDHFim" fx:id="tabelaDHFim" maxWidth="-Infinity" minWidth="200.0" prefWidth="-1.0" text="Fim" />
-                                    <TableColumn id="tabelaCR" fx:id="tabelaCR" maxWidth="-Infinity" minWidth="150.0" prefWidth="-1.0" text="CR" />
-                                    <TableColumn id="tabelaCliente" fx:id="tabelaCliente" maxWidth="-Infinity" minWidth="175.0" prefWidth="-1.0" text="Cliente" />
-                                    <TableColumn id="tabelaProjeto" fx:id="tabelaProjeto" maxWidth="-1.0" minWidth="150.0" prefWidth="-1.0" text="Projeto" />
+                                    <TableColumn id="tabelaStatus" fx:id="tabelaStatus" maxWidth="1250.0" minWidth="125.0" prefWidth="125.0" text="Tipo" />
+                                    <TableColumn id="tabelaDHInicio" fx:id="tabelaDHInicio" maxWidth="1250.0" minWidth="125.0" prefWidth="125.0" text="Status" />
+                                    <TableColumn id="tabelaDHFim" fx:id="tabelaDHFim" maxWidth="1750.0" minWidth="175.0" prefWidth="175.0" text="Início" />
+                                    <TableColumn id="tabelaCR" fx:id="tabelaCR" maxWidth="1750.0" minWidth="175.0" prefWidth="175.0" text="Fim" />
+                                    <TableColumn id="tabelaCliente" fx:id="tabelaCliente" maxWidth="1250.0" minWidth="125.0" prefWidth="125.0" text="CR" />
+                                    <TableColumn id="tabelaProjeto" fx:id="tabelaProjeto" maxWidth="1500.0" minWidth="150.0" prefWidth="150.0" text="Cliente" />
+                                    <TableColumn id="tabelaProjeto" fx:id="tabelaProjeto1" maxWidth="1500.0" minWidth="150.0" prefWidth="150.0" text="Projeto" />
                                  </columns>
                               </TableView>
                            </children>
