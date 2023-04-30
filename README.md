@@ -63,7 +63,7 @@
     
 ## :busts_in_silhouette: Equipe
 
-![Equipe](https://user-images.githubusercontent.com/108769169/226708787-268e9ad5-f93d-4429-b1c3-57eca11ff1e8.gif)
+![Equipe](https://user-images.githubusercontent.com/108769169/235360271-ab1a398b-cb9c-497e-aa64-4ed41f669a27.gif)
 
 
 |    Função     | Nome    |    LinkedIn & GitHub      |
