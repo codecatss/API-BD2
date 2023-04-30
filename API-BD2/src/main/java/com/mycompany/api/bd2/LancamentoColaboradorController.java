@@ -1,5 +1,6 @@
 package com.mycompany.api.bd2;
 
+import com.mycompany.api.bd2.daos.horaDAO;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.text.ParseException;
@@ -55,7 +56,7 @@ public class LancamentoColaboradorController {
     @FXML
     private Button botaoSair;
     @FXML
-    private TableView<?> tabelaLancamento;
+    private TableView<Hora> tabelaLancamento;
     @FXML
     private TableColumn<?, ?> tabelaId;
     @FXML
@@ -110,10 +111,6 @@ public class LancamentoColaboradorController {
     
     private List<String> cli = new ArrayList<>();
     private ObservableList<String> opCli = FXCollections.observableArrayList();
-    
-    private List<Hora> lishoras = new ArrayList<>();
-    private ObservableList<Hora> observablelisthoras = FXCollections.observableArrayList();
-
 
     public void initialize() {
         
@@ -130,7 +127,7 @@ public class LancamentoColaboradorController {
         minutoFim.getValueFactory().setWrapAround(true);
         
         botaoLimpar.setOnAction(event -> limparCampos());
-        //carregarTabelaLancamento();
+        carregarTabelaLancamento();
         
         horaTipo.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
         if (newVal != null && newVal.equals(TipoHora.SOBREAVISO.name().toLowerCase())) {
@@ -276,39 +273,17 @@ public class LancamentoColaboradorController {
          
     }
     
+    private List<Hora> lishoras = new ArrayList<>();
+    private ObservableList<Hora> observablelisthoras = FXCollections.observableArrayList();
     
-    /*
-    private LocalDateTime agora = LocalDateTime.now();
-
-    // Criar um LocalDateTime para 13h e outro para 16h do dia atual
-    private LocalDateTime dataHora13h = LocalDateTime.of(agora.getYear(), agora.getMonth(), agora.getDayOfMonth(), 13, 0);
-    private LocalDateTime dataHora16h = LocalDateTime.of(agora.getYear(), agora.getMonth(), agora.getDayOfMonth(), 16, 0);
-
     @FXML
     public void carregarTabelaLancamento(){
-
-
-        // Converter os LocalDateTime para Timestamp
-        Timestamp timestamp13h = Timestamp.valueOf(dataHora13h);
-        Timestamp timestamp16h = Timestamp.valueOf(dataHora16h);
-
-        Hora hora_tabela = new Hora(); //removi daqui também
-        hora_tabela.setId(2);
-        hora_tabela.setCod_cr("13652");
-        hora_tabela.setUsername_lancador("Clarissa");
-        hora_tabela.setStatus_aprovacao("Aprovado");
-        hora_tabela.setTipo("EXTRA");
-        hora_tabela.setCod_cr("CodeCats");
-        hora_tabela.setProjeto("União");
-        hora_tabela.setData_hora_inicio(timestamp13h);
-        hora_tabela.setData_hora_fim(timestamp16h);     
-        hora_tabela.setJustificativa_lancamento("Demanda");
-        lishoras.add(hora_tabela);
+        horaDAO horadao = new horaDAO();
+        lishoras.addAll(horadao.getHorasFromUser());
         observablelisthoras.setAll(lishoras);
         tabelaLancamento.setItems(observablelisthoras);
 
         tabelaId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        tabelaNome.setCellValueFactory(new PropertyValueFactory<>("username_lancador")); 
         tabelaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo")); 
         tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status")); 
         tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao")); 
@@ -317,14 +292,9 @@ public class LancamentoColaboradorController {
         tabelaCR.setCellValueFactory(new PropertyValueFactory<>("centro_resultado")); 
         tabelaCR.setCellValueFactory(new PropertyValueFactory<>("cod_cr")); 
         tabelaCliente.setCellValueFactory(new PropertyValueFactory<>("cliente")); 
-        tabelaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto")); 
-        tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa")); 
-        tabelaResp.setCellValueFactory(new PropertyValueFactory<>("status")); 
-        tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento")); 
-        tabelaResp.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao"));
+        tabelaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto"));
         
     }
-    */
     
     @FXML
     public void forneceCliente(){
