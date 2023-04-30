@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package daos;
+package com.mycompany.api.bd2.daos;
 
 import Conexao.Conexao;
 import java.sql.Connection;
@@ -10,25 +10,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import models.Integrante;
+import com.mycompany.api.bd2.models.Centro_resultado;
 
 /**
  *
  * @author mikaela.begotti
  */
-public class integranteDAO {
-    public void save(Integrante integrante){
-        String sql = "INSERT INTO integrante(gestor, username_integrante, cod_cr) VALUES (?, ?, ?)";
+public class crDAO {
+    public void save(Centro_resultado cr){
+        String sql = "INSERT INTO centro_resultado(nome, codigo_cr, sigla, status_cr,) VALUES (?, ?, ?, ?)";
         Connection conn = null;
-        PreparedStatement pstm = null; 
+        PreparedStatement pstm = null;
         
         try{
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setInt(1,integrante.getGestor());
-            pstm.setString(2,integrante.getUsername_integrante());
-            pstm.setString(3,integrante.getCod_cr());
+            pstm.setString(1,cr.getNome());
+            pstm.setString(2, cr.getCodigo_cr());
+            pstm.setString(3, cr.getSigla());
+            pstm.setString(4, cr.getStatus_cr());
             
             pstm.execute();
         }
@@ -49,8 +50,8 @@ public class integranteDAO {
         
     }
 
-    public void delete(Integrante integrante){
-        String sql = "DELETE FROM integrante "+"WHERE username_integrante=?";
+    public void delete(Centro_resultado cr){
+        String sql = "DELETE FROM centro_resultado "+"WHERE codigo_cr";
         Connection conn = null;
         PreparedStatement pstm = null; 
         
@@ -58,7 +59,7 @@ public class integranteDAO {
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setString(1,integrante.getUsername_integrante());
+            pstm.setString(2,cr.getCodigo_cr());
             
             pstm.execute();
         }
@@ -78,11 +79,11 @@ public class integranteDAO {
         }
         
     }
-    public List<Integrante> getIntegrantes(){
+    public List<Centro_resultado> getCliente(){
 		
-		String sql = "SELECT * FROM 2rp.integrante";
+		String sql = "SELECT * FROM 2rp.centro_resultado";
 		
-		List<Integrante> integrantes = new ArrayList<Integrante>();
+		List<Centro_resultado> crs = new ArrayList<Centro_resultado>();
 		
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -98,14 +99,16 @@ public class integranteDAO {
 			
 			while (rset.next()) {
 				
-				Integrante integrante = new Integrante();
+				Centro_resultado cr = new Centro_resultado();
 				
 				
-				integrante.setGestor(rset.getInt("gestor"));
-				integrante.setUsername_integrante(rset.getString("username_integrante"));
-                                integrante.setCod_cr(rset.getString("cod_cr"));
+				cr.setCodigo_cr(rset.getString("codigo_cr"));
 				
-				integrantes.add(integrante);
+				cr.setNome(rset.getString("nome"));
+				cr.setSigla(rset.getString("sigla"));
+                                cr.setStatus_cr(rset.getString("status_cr"));
+			
+				crs.add(cr);
 				
 			}
 		}catch (Exception e) {
@@ -127,7 +130,7 @@ public class integranteDAO {
 					e.printStackTrace();
 				}
 			}
-                        System.out.println(integrantes);
-			return integrantes;
+                        System.out.println(crs);
+			return crs;
 	}
 }

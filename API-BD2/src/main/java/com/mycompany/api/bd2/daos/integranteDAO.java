@@ -2,59 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package daos;
+package com.mycompany.api.bd2.daos;
 
-import models.Cliente;
 import Conexao.Conexao;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import models.Hora;
+import com.mycompany.api.bd2.models.Integrante;
+
 /**
  *
  * @author mikaela.begotti
  */
-public class clienteDAO {
-    
-    public void save(Cliente cliente){
-        String sql = "INSERT INTO cliente(cnpj, razao_social, status_cliente) VALUES (?, ?, ?)";
-        Connection conn = null;
-        PreparedStatement pstm = null;
-        
-        try{
-            conn = Conexao.createConnectionToMySQL();
-            
-            pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setLong(1,cliente.getCnpj());
-            pstm.setString(2, cliente.getRazao_social());
-            pstm.setString(3, cliente.getStatus_cliente());
-            
-            pstm.execute();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }finally{
-            try{
-                if(pstm!=null){
-                    pstm.close();
-                }
-                if(conn!=null){
-                    conn.close();
-                }
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-        
-    }
-
-    public void delete(Cliente cliente){
-        String sql = "DELETE FROM cliente "+"WHERE cnpj";
+public class integranteDAO {
+    public void save(Integrante integrante){
+        String sql = "INSERT INTO integrante(gestor, username_integrante, cod_cr) VALUES (?, ?, ?)";
         Connection conn = null;
         PreparedStatement pstm = null; 
         
@@ -62,7 +26,9 @@ public class clienteDAO {
             conn = Conexao.createConnectionToMySQL();
             
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setLong(1,cliente.getCnpj());
+            pstm.setInt(1,integrante.getGestor());
+            pstm.setString(2,integrante.getUsername_integrante());
+            pstm.setString(3,integrante.getCod_cr());
             
             pstm.execute();
         }
@@ -82,11 +48,41 @@ public class clienteDAO {
         }
         
     }
-    public List<Cliente> getCliente(){
+
+    public void delete(Integrante integrante){
+        String sql = "DELETE FROM integrante "+"WHERE username_integrante=?";
+        Connection conn = null;
+        PreparedStatement pstm = null; 
+        
+        try{
+            conn = Conexao.createConnectionToMySQL();
+            
+            pstm = (PreparedStatement) conn.prepareStatement(sql);
+            pstm.setString(1,integrante.getUsername_integrante());
+            
+            pstm.execute();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }finally{
+            try{
+                if(pstm!=null){
+                    pstm.close();
+                }
+                if(conn!=null){
+                    conn.close();
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        
+    }
+    public List<Integrante> getIntegrantes(){
 		
-		String sql = "SELECT * FROM 2rp.cliente";
+		String sql = "SELECT * FROM 2rp.integrante";
 		
-		List<Cliente> clientes = new ArrayList<Cliente>();
+		List<Integrante> integrantes = new ArrayList<Integrante>();
 		
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -102,12 +98,14 @@ public class clienteDAO {
 			
 			while (rset.next()) {
 				
-				Cliente cliente = new Cliente();
+				Integrante integrante = new Integrante();
 				
-				cliente.setCnpj(rset.getLong("cnpj"));
-				cliente.setRazao_social(rset.getString("razao_social"));
-				cliente.setStatus_cliente(rset.getString("status_cliente"));
-				clientes.add(cliente);
+				
+				integrante.setGestor(rset.getInt("gestor"));
+				integrante.setUsername_integrante(rset.getString("username_integrante"));
+                                integrante.setCod_cr(rset.getString("cod_cr"));
+				
+				integrantes.add(integrante);
 				
 			}
 		}catch (Exception e) {
@@ -129,9 +127,7 @@ public class clienteDAO {
 					e.printStackTrace();
 				}
 			}
-                        System.out.println(clientes);
-			return clientes;
+                        System.out.println(integrantes);
+			return integrantes;
 	}
-    
 }
-

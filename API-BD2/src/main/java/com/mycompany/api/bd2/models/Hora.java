@@ -1,4 +1,4 @@
-package models;
+package com.mycompany.api.bd2.models;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -6,7 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
-import models.TipoHora;
+import com.mycompany.api.bd2.models.TipoHora;
 
 public class Hora {
 
