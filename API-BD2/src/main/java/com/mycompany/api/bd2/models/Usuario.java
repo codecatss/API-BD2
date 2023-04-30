@@ -19,6 +19,8 @@ public class Usuario {
     private String status = "";
     private Funcao cargo;
 
+    private Usuario() {}
+    
     public static Usuario getInstance() {
         if (instancia == null) {
             instancia = new Usuario();
