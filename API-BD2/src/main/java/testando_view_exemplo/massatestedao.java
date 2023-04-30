@@ -6,6 +6,7 @@ package testando_view_exemplo;
 
 import daos.horaDAO;
 import daos.integranteDAO;
+import daos.usuarioDAO;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import models.Hora;
@@ -40,6 +41,15 @@ public class massatestedao {
         integrante.setUsername_integrante("brendel");
         integrante.setCod_cr("13652");
         integranteDao.delete(integrante);*/
+        
+        Usuario usuario = new Usuario();
+        usuarioDAO usuarioDao = new usuarioDAO();
+        usuario.setUsername("brendel");
+        usuario.setNome("Brendel Marques");
+        usuario.setSenha("dev123");
+        usuario.setCargo("colaborador");
+        usuario.setStatus("ativo");
+        usuarioDao.recuperarUsuario(usuario);
         
     }
 }

@@ -43,6 +43,7 @@ public class usuarioDAO {
         }
         
     }
+     
 
     public void delete(Usuario usuario){
         String sql = "DELETE FROM USUARIOS "+"WHERE username=?";
@@ -73,6 +74,50 @@ public class usuarioDAO {
         }
         
     }
+    
+        public Usuario recuperarUsuario(Usuario usuario){
+        String sql = "SELECT * FROM 2rp.usuario WHERE username = ? and senha = ?";
+        usuario = new Usuario();
+        Connection conn = null;
+        PreparedStatement pstm = null; 
+        ResultSet rset = null;
+        try {
+            conn = Conexao.createConnectionToMySQL();	
+            pstm = (PreparedStatement) conn.prepareStatement(sql);
+            pstm.setString(1,usuario.getUsername());
+            pstm.setString(2,usuario.getSenha());
+            rset = pstm.executeQuery();
+            if (rset.next()) {
+            
+            usuario.setUsername(rset.getString("username"));
+            usuario.setSenha(rset.getString("senha"));
+            // outros atributos
+        }
+            }catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(rset!=null) {
+						rset.close();
+					}
+					
+					if(pstm!=null) {
+						pstm.close();
+					}
+					
+					if(conn!=null) {
+						conn.close();
+					}
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+                        System.out.println(usuario);
+			return usuario;
+	
+        }
+
+        
     public List<Usuario> getUsuarios(){
 		
 		String sql = "SELECT * FROM 2rp.usuario";
