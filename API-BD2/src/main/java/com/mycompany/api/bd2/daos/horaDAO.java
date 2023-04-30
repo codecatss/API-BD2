@@ -106,7 +106,7 @@ public class horaDAO {
 			
 			while (rset.next()) {
 				
-				Hora hora = new Hora();
+				Hora hora = Hora.getInstance();
 				
 				hora.setCod_cr(rset.getString("cod_cr"));
                                 hora.setUsername_lancador(rset.getString("username_lancador"));
@@ -146,5 +146,53 @@ public class horaDAO {
 			}
                         System.out.println(horas);
 			return horas;
+	}
+    
+    public Hora getHora(String username_lancador){
+	
+                String sql = "SELECT * FROM 2rp.hora WHERE username_lancador = ?";
+				
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		//Classe que vai recuperar os dados do banco. ***SELECT****
+		ResultSet rset = null;
+                Hora hora = Hora.getInstance();
+		
+		try {
+			conn = Conexao.createConnectionToMySQL();
+			
+			pstm = (PreparedStatement) conn.prepareStatement(sql);
+                        pstm.setString(1, username_lancador);			
+			rset = pstm.executeQuery();
+                        
+			
+                        if (rset.next()) {
+				
+				hora.setUsername_lancador(rset.getString("username_lancador"));
+				                                
+			} else {
+                            return null;
+                        }
+                        
+		}catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(rset!=null) {
+						rset.close();
+					}
+					
+					if(pstm!=null) {
+						pstm.close();
+					}
+					
+					if(conn!=null) {
+						conn.close();
+					}
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			return hora;
 	}
 }

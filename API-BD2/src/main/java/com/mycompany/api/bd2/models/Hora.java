@@ -9,7 +9,7 @@ import java.util.Date;
 import com.mycompany.api.bd2.models.TipoHora;
 
 public class Hora {
-
+    private static Hora instancia = null;
     private int id;
     private String cod_cr;
     private String username_lancador;
@@ -21,7 +21,16 @@ public class Hora {
     private String projeto;
     private String username_aprovador;
     private String justificativa_negacao;
-    private StatusAprovacao status_aprovacao;    
+    private StatusAprovacao status_aprovacao;   
+    
+    private Hora() {}
+    
+    public static Hora getInstance() {
+        if (instancia == null) {
+            instancia = new Hora();
+        }
+        return instancia;
+    }
     
     
     public StatusAprovacao getStatus_aprovacaoObj() {
