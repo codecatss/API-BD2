@@ -59,6 +59,31 @@
                               <Font name="Arial Bold" size="14.0" />
                            </font>
                         </Button>
+                        <Button layoutX="4.0" layoutY="121.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="225.0" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Cadastrar usuários">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                           </graphic>
+                        </Button>
+                        <Button layoutY="175.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Cadastrar CR">
+                           <graphic>
+                              <ImageView fitHeight="29.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
+                           </graphic>
+                        </Button>
+                        <Button layoutX="4.0" layoutY="228.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Cadastrar cliente">
+                           <graphic>
+                              <ImageView fitHeight="28.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" />
+                           </graphic>
+                        </Button>
+                        <Button layoutX="7.0" layoutY="287.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Apontamentos">
+                           <graphic>
+                              <ImageView fitHeight="26.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" />
+                           </graphic>
+                        </Button>
+                        <Button layoutX="7.0" layoutY="340.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Relatórios">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" />
+                           </graphic>
+                        </Button>
                      </children>
                   </AnchorPane>
                </children>
