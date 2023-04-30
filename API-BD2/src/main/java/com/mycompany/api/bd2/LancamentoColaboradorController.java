@@ -279,6 +279,12 @@ public class LancamentoColaboradorController {
     @FXML
     public void carregarTabelaLancamento(){
         horaDAO horadao = new horaDAO();
+        /*essa é a config que eu usei pra exibir horas lançadas pelo user logado na tabela*/
+        /*Usuario usuario = Usuario.getInstance();
+        String nome = usuario.getUsername().toString();
+        lishoras.addAll(horadao.getHora(nome));*/
+        
+        /*original*/
         lishoras.addAll(horadao.getHorasFromUser());
         observablelisthoras.setAll(lishoras);
         tabelaLancamento.setItems(observablelisthoras);

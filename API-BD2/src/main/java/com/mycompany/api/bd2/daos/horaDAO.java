@@ -148,10 +148,10 @@ public class horaDAO {
 			return horas;
 	}
     
-    public Hora getHora(String username_lancador){
+    public List<Hora> getHora(String username_lancador){
 	
                 String sql = "SELECT * FROM 2rp.hora WHERE username_lancador = ?";
-				
+		List<Hora> horasUser = new ArrayList<Hora>();
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		//Classe que vai recuperar os dados do banco. ***SELECT****
@@ -166,13 +166,24 @@ public class horaDAO {
 			rset = pstm.executeQuery();
                         
 			
-                        if (rset.next()) {
+                        while (rset.next()) {
 				
-				hora.setUsername_lancador(rset.getString("username_lancador"));
-				                                
-			} else {
-                            return null;
-                        }
+				hora.setCod_cr(rset.getString("cod_cr"));
+                                hora.setUsername_lancador(rset.getString("username_lancador"));
+                                hora.setCnpj_cliente(rset.getLong("cnpj_cliente"));
+                                hora.setData_hora_inicio(rset.getString("data_hora_inicio"));
+                                hora.setData_hora_fim(rset.getString("data_hora_fim"));
+                                hora.setTipo(rset.getString("tipo"));
+                                hora.setJustificativa_lancamento(rset.getString("justificativa_lancamento"));
+                                hora.setProjeto(rset.getString("projeto"));
+                                hora.setUsername_aprovador(rset.getString("username_aprovador"));
+                                hora.setJustificativa_negacao(rset.getString("justificativa_negacao"));
+                                hora.setStatus_aprovacao(rset.getString("status_aprovacao"));
+				
+				
+                                horasUser.add(hora);
+			} 
+                        
                         
 		}catch (Exception e) {
 				e.printStackTrace();
@@ -193,6 +204,6 @@ public class horaDAO {
 					e.printStackTrace();
 				}
 			}
-			return hora;
+			return horasUser;
 	}
 }
