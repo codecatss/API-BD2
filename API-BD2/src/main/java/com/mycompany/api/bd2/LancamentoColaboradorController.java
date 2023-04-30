@@ -116,7 +116,8 @@ public class LancamentoColaboradorController {
 
 
     public void initialize() {
-        nomeUsuario.setText("*nome do usuário*");
+        
+        nomeUsuario.setText(Usuario.getInstance().getUsername());
         
         horaInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0, 1));
         minutoInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59));
@@ -194,7 +195,7 @@ public class LancamentoColaboradorController {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Preencha todos os campos");
         alert.setHeaderText(null);
-        alert.setContentText("Um dos campos não foi preenchido");
+        alert.setContentText("Alguns dos campos não foi preenchido");
         alert.showAndWait();}
         else{
             boolean testedata = false;
@@ -253,7 +254,7 @@ public class LancamentoColaboradorController {
                     hora.setCod_cr(entradaProjeto.getText());
                     hora.setData_hora_inicio(timestamp_inicio);
                     hora.setData_hora_fim(timestamp_fim);
-                    hora.setUsername_lancador("Joazinho");
+                    hora.setUsername_lancador(nomeUsuario.getText());
                     hora.setCnpj_cliente(987654321);
                     hora.setJustificativa_lancamento("Muita demanda");
                     hora.setStatus_aprovacao("pendente");

@@ -1,20 +1,21 @@
 package com.mycompany.api.bd2;
 
 import Conexao.Conexao;
+import com.mycompany.api.bd2.daos.usuarioDAO;
 import com.mycompany.api.bd2.models.Usuario;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class TelaLoginController implements Initializable {
 
@@ -38,22 +39,15 @@ public class TelaLoginController implements Initializable {
         String senha = LoginSenha.getText();
 
         try (Connection connection = Conexao.createConnectionToMySQL()) {
-            String query = "SELECT * FROM usuario WHERE username = ? AND senha = ?";
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, user);
-            statement.setString(2, senha);
-
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                Usuario usuario = Usuario.getInstance();
-                usuario.setUsername(resultSet.getString("username"));
-                usuario.setNome(resultSet.getString("nome"));
-                usuario.setSenha(resultSet.getString("senha"));
-                usuario.setCargo(resultSet.getString("funcao"));
-                usuario.setStatus(resultSet.getString("status_user"));
+            Usuario usuario = new usuarioDAO().getUsuario(user, senha);
+            if (usuario!=null && usuario.getUsername().equals( user) && usuario.getSenha().equals(senha)) {
+                
                 System.out.println("Logado");
-
+                System.out.println(usuario.getNome());
+                LoginSenha.setText("");
                 // Usuário e senha são válidos, exibir próxima tela
+                App.setRoot("LancamentoColaborador");
+                
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Erro");
@@ -80,6 +74,10 @@ public class TelaLoginController implements Initializable {
 
     @FXML
     private void handleFecharButtonAction(ActionEvent event) {
-        // Fechar a tela de login
+        // Obtém a janela atual
+       Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+       // Fecha a janela atual
+       stage.close();
     }
 }
