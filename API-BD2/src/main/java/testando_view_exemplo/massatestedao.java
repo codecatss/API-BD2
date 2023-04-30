@@ -42,14 +42,7 @@ public class massatestedao {
         integrante.setCod_cr("13652");
         integranteDao.delete(integrante);*/
         
-        Usuario usuario = new Usuario();
-        usuarioDAO usuarioDao = new usuarioDAO();
-        usuario.setUsername("brendel");
-        usuario.setNome("Brendel Marques");
-        usuario.setSenha("dev123");
-        usuario.setCargo("colaborador");
-        usuario.setStatus("ativo");
-        usuarioDao.recuperarUsuario(usuario);
+       
         
     }
 }
