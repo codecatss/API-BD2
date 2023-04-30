@@ -10,14 +10,23 @@ package models;
  * @author danko
  */
 public class Usuario {
-
     
+ private static Usuario instancia = null;
     private String username = "";
     private String nome = "";
     private String senha = "";
+    private String status = "";
     private Funcao cargo;
-    private Status_user status_user;
 
+    public Usuario() {}
+
+    public static Usuario getInstance() {
+        if (instancia == null) {
+            instancia = new Usuario();
+        }
+        return instancia;
+    }
+    
     public String getUsername() {
         return username;
     }
@@ -56,19 +65,21 @@ public class Usuario {
     }
 
     
-    public String getStatus_user() {
-        return status_user.name();
-    }
-    
-    public Status_user getStatus_userObj() {
-        return status_user;
+    public String getStatus() {
+        return status;
     }
 
     
-    public void setStatus(String status_user) {
-        this.status_user = Status_user.valueOf(status_user);
+    public void setStatus(String status) {
+        this.status = status;
     }
 
+    public void logout(){
+        this.username = "";
+        this.nome = "";
+        this.senha = "";
+        this.status = "";   
+    }
     
         
 }

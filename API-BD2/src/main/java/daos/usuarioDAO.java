@@ -23,7 +23,7 @@ public class usuarioDAO {
             pstm.setString(2, usuario.getNome());
             pstm.setString(3,usuario.getSenha());
             pstm.setString(4, usuario.getCargo());
-            pstm.setString(5,usuario.getStatus_user());
+            pstm.setString(5,usuario.getStatus());
             
             pstm.execute();
         }
