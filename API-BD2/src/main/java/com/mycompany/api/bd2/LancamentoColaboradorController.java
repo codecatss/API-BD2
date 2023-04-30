@@ -246,11 +246,11 @@ public class LancamentoColaboradorController {
                     String data_hora_fim = data_fim.getYear() + "-" + data_fim.getMonthValue() + "-" + data_fim.getDayOfMonth() + " " + hora_fim + ":" + min_fim + ":00";
                     Timestamp timestamp_fim = Timestamp.valueOf(data_hora_fim);
 
-                    Hora hora = new Hora();
+                    Hora hora = Hora.getInstance();
                     hora.setProjeto(entradaProjeto.getText());
                     hora.setCod_cr(entradaProjeto.getText());
-                    hora.setData_hora_inicio(timestamp_inicio);
-                    hora.setData_hora_fim(timestamp_fim);
+                    hora.setData_hora_inicio(timestamp_inicio.toString());
+                    hora.setData_hora_fim(timestamp_fim.toString());
                     hora.setUsername_lancador(nomeUsuario.getText());
                     hora.setCnpj_cliente(987654321);
                     hora.setJustificativa_lancamento("Muita demanda");
@@ -280,12 +280,12 @@ public class LancamentoColaboradorController {
     public void carregarTabelaLancamento(){
         horaDAO horadao = new horaDAO();
         /*essa é a config que eu usei pra exibir horas lançadas pelo user logado na tabela*/
-        /*Usuario usuario = Usuario.getInstance();
+        Usuario usuario = Usuario.getInstance();
         String nome = usuario.getUsername().toString();
-        lishoras.addAll(horadao.getHora(nome));*/
+        lishoras.addAll(horadao.getHora(nome));
         
         /*original*/
-        lishoras.addAll(horadao.getHorasFromUser());
+        /*lishoras.addAll(horadao.getHorasFromUser());*/
         observablelisthoras.setAll(lishoras);
         tabelaLancamento.setItems(observablelisthoras);
 
