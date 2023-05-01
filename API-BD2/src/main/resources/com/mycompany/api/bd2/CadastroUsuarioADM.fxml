@@ -44,7 +44,7 @@
                <children>
                   <AnchorPane prefHeight="610.0" prefWidth="225.0" styleClass="nav-form" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Line endX="100.0" layoutX="15.0" layoutY="85.0" startX="-100.0" stroke="WHITE" strokeWidth="2.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="85.0" />
+                        <Line endX="93.88575744628906" layoutX="15.0" layoutY="85.0" startX="-100.0" stroke="WHITE" strokeWidth="2.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="85.0" />
                         <ImageView id="imagemUser" fx:id="imagemUser" fitHeight="40.0" fitWidth="40.0" layoutX="15.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="25.0">
                            <image>
                               <Image url="@user-48.png" />
@@ -59,6 +59,51 @@
                            <font>
                               <Font name="Arial Bold" size="14.0" />
                            </font>
+                        </Button>
+                        <Button fx:id="menuAddUsuario" layoutX="-1.0" layoutY="141.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="225.0" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Cadastrar usuários">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@adicionar-usuario.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="MenuAddCR" layoutX="-4.0" layoutY="194.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Cadastrar CR">
+                           <graphic>
+                              <ImageView fitHeight="26.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@adicionar-produto.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="menuAddCliente" layoutX="-4.0" layoutY="247.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Cadastrar cliente">
+                           <graphic>
+                              <ImageView fitHeight="29.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@adicionar-ficheiro.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="menuAprovar" layoutX="-3.0" layoutY="303.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Aprovar">
+                           <graphic>
+                              <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@aprovacao%20(1).png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="menuRelatorio" layoutX="-3.0" layoutY="357.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Relatórios">
+                           <graphic>
+                              <ImageView fitHeight="28.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@relatorio.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Button>
                      </children>
                   </AnchorPane>

@@ -43,7 +43,7 @@
                <children>
                   <AnchorPane prefHeight="610.0" prefWidth="225.0" styleClass="nav-form" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Line endX="100.0" layoutX="15.0" layoutY="85.0" startX="-100.0" stroke="WHITE" strokeWidth="2.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="85.0" />
+                        <Line endX="109.88587951660156" endY="-0.41422879695892334" layoutX="15.0" layoutY="85.0" startX="-100.0" stroke="WHITE" strokeWidth="2.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="85.0" />
                         <ImageView id="imagemUser" fx:id="imagemUser" fitHeight="40.0" fitWidth="40.0" layoutX="15.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="25.0">
                            <image>
                               <Image url="@user-48.png" />
@@ -61,6 +61,51 @@
                         </Button>
                      </children>
                   </AnchorPane>
+                  <Button fx:id="menuAddUsuario" layoutX="13.0" layoutY="132.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="225.0" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Cadastrar usuários">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@adicionar-usuario.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="MenuAddCR" layoutX="10.0" layoutY="185.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Cadastrar CR">
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@adicionar-produto.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="menuAddCliente" layoutX="10.0" layoutY="238.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Cadastrar cliente">
+                     <graphic>
+                        <ImageView fitHeight="29.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@adicionar-ficheiro.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="menuAprovar" layoutX="11.0" layoutY="294.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Aprovar">
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@aprovacao%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="menuRelatorio" layoutX="11.0" layoutY="348.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Relatórios">
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@relatorio.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </AnchorPane>
          </left>
@@ -76,13 +121,13 @@
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
-                              <TextField id="entradaNome" fx:id="entradaNome" layoutX="115.0" layoutY="10.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="10.0" />
+                              <TextField id="entradaNome" fx:id="entradaNome" layoutX="105.0" layoutY="11.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="11.0" />
                               <Label layoutX="15.0" layoutY="65.0" prefHeight="22.0" prefWidth="50.0" text="Nome" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="65.0">
                                  <font>
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
-                              <TextField id="entradaMatricula" fx:id="entradaMatricula" layoutX="115.0" layoutY="60.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="60.0" />
+                              <TextField id="entradaMatricula" fx:id="entradaMatricula" layoutX="105.0" layoutY="61.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="61.0" />
                               <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutY="200.0" mnemonicParsing="false" onAction="#BotaoAdicionar" prefHeight="35.0" prefWidth="110.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="225.0">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
@@ -108,12 +153,12 @@
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
                               </Button>
-                              <Label layoutX="15.0" layoutY="115.0" prefHeight="22.0" prefWidth="50.0" text="Sigla" textAlignment="CENTER">
+                              <Label layoutX="10.0" layoutY="115.0" prefHeight="22.0" prefWidth="50.0" text="Sigla" textAlignment="CENTER">
                                  <font>
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
-                              <TextField id="entradaMatricula" fx:id="entradaMatricula1" layoutX="115.0" layoutY="110.0" prefHeight="30.0" prefWidth="155.0" />
+                              <TextField id="entradaMatricula" fx:id="entradaMatricula1" layoutX="105.0" layoutY="111.0" prefHeight="30.0" prefWidth="155.0" />
                            </children>
                            <styleClass>
                               <String fx:value="white-bg" />
