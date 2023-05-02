@@ -176,7 +176,7 @@
                               <Spinner id="minutoFim" fx:id="minutoFim" layoutX="560.0" layoutY="95.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.leftAnchor="560.0" AnchorPane.topAnchor="95.0" />
                               <ComboBox id="horaTipo" fx:id="horaTipo" layoutX="125.0" layoutY="20.0" onMouseClicked="#tipoHora" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="20.0" />
                               <ComboBox id="selecaoCliente" fx:id="selecaoCliente" layoutX="475.0" layoutY="20.0" onMouseClicked="#forneceCliente" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="475.0" AnchorPane.topAnchor="20.0" />
-                              <ComboBox id="selecaoCR" fx:id="selecaoCR" layoutX="875.0" layoutY="20.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="875.0" AnchorPane.topAnchor="20.0" />
+                              <ComboBox id="selecaoCR" fx:id="selecaoCR" layoutX="875.0" layoutY="20.0" onMouseClicked="#forneceCR" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="875.0" AnchorPane.topAnchor="20.0" />
                               <ComboBox id="selecaoAcionamento" fx:id="selecaoAcionamento" layoutX="875.0" layoutY="170.0" prefHeight="30.0" prefWidth="155.0" visible="false" AnchorPane.leftAnchor="875.0" AnchorPane.topAnchor="170.0" />
                               <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutX="350.0" layoutY="235.0" mnemonicParsing="false" onAction="#botaoAdicionar" prefHeight="35.0" prefWidth="110.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="350.0">
                                  <font>
