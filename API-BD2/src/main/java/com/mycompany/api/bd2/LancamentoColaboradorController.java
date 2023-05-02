@@ -1,5 +1,7 @@
 package com.mycompany.api.bd2;
 
+import com.mycompany.api.bd2.daos.clienteDAO;
+import com.mycompany.api.bd2.daos.crDAO;
 import com.mycompany.api.bd2.daos.horaDAO;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -112,6 +114,9 @@ public class LancamentoColaboradorController {
     private List<String> cli = new ArrayList<>();
     private ObservableList<String> opCli = FXCollections.observableArrayList();
 
+    private List<String> centro_r = new ArrayList<>();
+    private ObservableList<String> opCr = FXCollections.observableArrayList();
+    
     public void initialize() {
         
         nomeUsuario.setText(Usuario.getInstance().getUsername());
@@ -162,7 +167,7 @@ public class LancamentoColaboradorController {
     
     @FXML
     public void tipoHora() throws ParseException{
-    obs.add("Hora "+ TipoHora.EXTRA.name().toLowerCase());
+    obs.add("Hora-"+ TipoHora.EXTRA.name().toLowerCase());
     obs.add(TipoHora.SOBREAVISO.name().toLowerCase());
     opcoes.setAll(obs);
     horaTipo.setItems(opcoes);
@@ -245,18 +250,26 @@ public class LancamentoColaboradorController {
                     int min_fim = minutoFim.getValue();
                     String data_hora_fim = data_fim.getYear() + "-" + data_fim.getMonthValue() + "-" + data_fim.getDayOfMonth() + " " + hora_fim + ":" + min_fim + ":00";
                     Timestamp timestamp_fim = Timestamp.valueOf(data_hora_fim);
-
-                    Hora hora = new Hora();
+                    
+                    String nome_cliente = selecaoCliente.getSelectionModel().getSelectedItem();
+                    clienteDAO cliente = new clienteDAO();
+                    
+                    String nome_cr = selecaoCR.getSelectionModel().getSelectedItem();
+                    crDAO cr = new crDAO();
+                    
+                    Hora hora = Hora.getInstance();
                     hora.setProjeto(entradaProjeto.getText());
-                    hora.setCod_cr(entradaProjeto.getText());
-                    hora.setData_hora_inicio(timestamp_inicio);
-                    hora.setData_hora_fim(timestamp_fim);
+                    hora.setCod_cr(cr.getCr(nome_cr).getCodigo_cr());
+                    hora.setData_hora_inicio(timestamp_inicio.toString());
+                    hora.setData_hora_fim(timestamp_fim.toString());
                     hora.setUsername_lancador(nomeUsuario.getText());
-                    hora.setCnpj_cliente(987654321);
+                    hora.setCnpj_cliente(cliente.getCliente(nome_cliente).getCnpj());
                     hora.setJustificativa_lancamento("Muita demanda");
                     hora.setStatus_aprovacao("pendente");
+                    hora.setTipo(horaTipo.getSelectionModel().getSelectedItem());
+                    horaDAO horaDAO = new horaDAO();
 
-                    //hora.save(hora);
+                    horaDAO.save(hora);
 
                     System.out.println("Foi");
 
@@ -285,7 +298,7 @@ public class LancamentoColaboradorController {
         lishoras.addAll(horadao.getHora(nome));*/
         
         /*original*/
-        lishoras.addAll(horadao.getHorasFromUser());
+        lishoras.addAll(horadao.getHora(nomeUsuario.getText()));
         observablelisthoras.setAll(lishoras);
         tabelaLancamento.setItems(observablelisthoras);
 
@@ -304,10 +317,23 @@ public class LancamentoColaboradorController {
     
     @FXML
     public void forneceCliente(){
-        cli.add("EMBRAER");
-        cli.add("ITAU");
-        cli.add("SAMSUNG");
+        clienteDAO clienteDAO = new clienteDAO();
+        cli.clear();
+        for (Cliente cliente: clienteDAO.getClientes()){
+            cli.add(cliente.getRazao_social());
+        }
         opCli.setAll(cli);
         selecaoCliente.setItems(opCli);
+    }
+    
+    @FXML
+    public void forneceCR(){
+        crDAO crDAO = new crDAO();
+        centro_r.clear();
+        for (Centro_resultado cr: crDAO.getCrs()){
+            centro_r.add(cr.getNome());
+        }
+        opCr.setAll(centro_r);
+        selecaoCR.setItems(opCr);
     }
 }
