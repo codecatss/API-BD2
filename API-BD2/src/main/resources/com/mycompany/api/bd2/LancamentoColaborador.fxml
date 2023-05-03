@@ -150,7 +150,7 @@
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="errohoraI" layoutX="475.0" layoutY="71.0" prefHeight="22.0" prefWidth="155.0" textFill="RED"
+                              <Label fx:id="errohoraI" layoutX="475.0" layoutY="71.0" prefHeight="22.0" prefWidth="155.0" textFill="RED">
                                  <font>
                                     <Font name="Arial" size="18.0" />
                                  </font>

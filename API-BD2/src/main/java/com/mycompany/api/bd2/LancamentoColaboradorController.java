@@ -280,9 +280,6 @@ public class LancamentoColaboradorController {
          
     }
     
-    private List<Hora> lishoras = new ArrayList<>();
-    private ObservableList<Hora> observablelisthoras = FXCollections.observableArrayList();
-    
     @FXML
     public void carregarTabelaLancamento(){
         horaDAO horadao = new horaDAO();
@@ -296,12 +293,12 @@ public class LancamentoColaboradorController {
         observablelisthoras.setAll(lishoras);
         tabelaLancamento.setItems(observablelisthoras);
 
-        tabelaId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tabelaN.setCellValueFactory(new PropertyValueFactory<>("id"));
         tabelaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo")); 
         tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status")); 
         tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao")); 
-        tabelaDHInicio.setCellValueFactory(new PropertyValueFactory<>("data_hora_inicio")); 
-        tabelaDHFim.setCellValueFactory(new PropertyValueFactory<>("data_hora_fim")); 
+        tabelaInicio.setCellValueFactory(new PropertyValueFactory<>("data_hora_inicio")); 
+        tabelaFim.setCellValueFactory(new PropertyValueFactory<>("data_hora_fim")); 
         tabelaCR.setCellValueFactory(new PropertyValueFactory<>("centro_resultado")); 
         tabelaCR.setCellValueFactory(new PropertyValueFactory<>("cod_cr")); 
         tabelaCliente.setCellValueFactory(new PropertyValueFactory<>("cliente")); 
