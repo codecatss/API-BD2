@@ -64,6 +64,39 @@
                         </Button>
                      </children>
                   </AnchorPane>
+                  <Button id="menuLancamento" fx:id="menuLancamento" layoutX="25.0" layoutY="150.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text=" Lançamentos" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="150.0">
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icon-lancamento.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="menuApontamento" fx:id="menuApontamento" layoutX="15.0" layoutY="225.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Apontamentos" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="225.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icon-apontamento.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="menuRelatorio" fx:id="menuRelatorio" layoutX="25.0" layoutY="305.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text=" Relatórios" textFill="WHITE" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="300.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icon-relatorio.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </AnchorPane>
          </left>
@@ -150,27 +183,7 @@
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="errohoraI" layoutX="475.0" layoutY="71.0" prefHeight="22.0" prefWidth="155.0" textFill="RED"
-                                 <font>
-                                    <Font name="Arial" size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="erroproj" layoutX="875.0" layoutY="71.0" prefHeight="22.0" prefWidth="155.0" textFill="RED">
-                                 <font>
-                                    <Font name="Arial" size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="errohoraII" layoutX="475.0" layoutY="150.0" prefHeight="22.0" prefWidth="155.0" textFill="RED">
-                                 <font>
-                                    <Font name="Arial" size="18.0" />
-                                 </font>
-                              </Label>
                               <DatePicker id="dataInicio" fx:id="dataInicio" layoutX="125.0" layoutY="95.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="95.0" />
-                              <Label fx:id="errodata" layoutX="126.0" layoutY="150.0" prefHeight="22.0" prefWidth="155.0" textFill="RED">
-                                 <font>
-                                    <Font name="Arial" size="18.0" />
-                                 </font>
-                              </Label>
                               <DatePicker id="dataFim" fx:id="dataFim" layoutX="125.0" layoutY="170.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="170.0" />
                               <Spinner id="horaInicio" fx:id="horaInicio" layoutX="475.0" layoutY="95.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.leftAnchor="475.0" AnchorPane.topAnchor="95.0" />
                               <Spinner id="minutoInicio" fx:id="minutoInicio" layoutX="560.0" layoutY="170.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.leftAnchor="560.0" AnchorPane.topAnchor="170.0" />
@@ -178,9 +191,9 @@
                               <Spinner id="minutoFim" fx:id="minutoFim" layoutX="560.0" layoutY="95.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.leftAnchor="560.0" AnchorPane.topAnchor="95.0" />
                               <ComboBox id="horaTipo" fx:id="horaTipo" layoutX="125.0" layoutY="20.0" onMouseClicked="#tipoHora" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="20.0" />
                               <ComboBox id="selecaoCliente" fx:id="selecaoCliente" layoutX="475.0" layoutY="20.0" onMouseClicked="#forneceCliente" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="475.0" AnchorPane.topAnchor="20.0" />
-                              <ComboBox id="selecaoCR" fx:id="selecaoCR" layoutX="875.0" layoutY="20.0" onMouseClicked="#forneceCR" prefHeight="30.0" prefWidth="200.0" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="20.0" />
+                              <ComboBox id="selecaoCR" fx:id="selecaoCR" layoutX="875.0" layoutY="20.0" prefHeight="30.0" prefWidth="200.0" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="20.0" />
                               <ComboBox id="selecaoAcionamento" fx:id="selecaoAcionamento" layoutX="875.0" layoutY="170.0" prefHeight="30.0" prefWidth="200.0" visible="false" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="245.0" />
-                              <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutX="350.0" layoutY="235.0" mnemonicParsing="false" onAction="#botaoAdicionar" prefHeight="35.0" prefWidth="110.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="350.0">
+                              <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutX="350.0" layoutY="235.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="110.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="350.0">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>

@@ -57,6 +57,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-alignment:CENTER-LEFT;
 }
 
+.atv-btn{
+    -fx-background-color:linear-gradient(to bottom right, #0A2647,#2C74B3);
+    -fx-cursor:hand;
+}
+
 .appointments-btn{
     -fx-background-color:transparent;
     -fx-cursor:hand;

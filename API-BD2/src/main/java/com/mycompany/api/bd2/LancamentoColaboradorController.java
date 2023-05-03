@@ -60,21 +60,23 @@ public class LancamentoColaboradorController {
     @FXML
     private TableView<Hora> tabelaLancamento;
     @FXML
-    private TableColumn<?, ?> tabelaId;
+    private TableColumn<?, ?> tabelaN;
     @FXML
     private TableColumn<?, ?> tabelaTipo;
     @FXML
     private TableColumn<?, ?> tabelaStatus;
     @FXML
-    private TableColumn<?, ?> tabelaDHInicio;
+    private TableColumn<?, ?> tabelaInicio;
     @FXML
-    private TableColumn<?, ?> tabelaDHFim;
+    private TableColumn<?, ?> tabelaFim;
     @FXML
     private TableColumn<?, ?> tabelaCR;
     @FXML
     private TableColumn<?, ?> tabelaCliente;
     @FXML
-    private TableColumn<?, ?> tabelaProjeto;
+    private TableColumn<?, ?> tabelaProjeto;   
+    @FXML
+    private TableColumn<?, ?> tabelaJustificativa;
     @FXML
     private Label errohoraI;
     @FXML
@@ -105,7 +107,8 @@ public class LancamentoColaboradorController {
     private Button botaoLimpar;
     @FXML
     private TextField entradaProjeto;
-    
+    @FXML
+    private TextField entradaJustificativa;
     
     
     private List<String> obs = new ArrayList<>();
@@ -113,6 +116,9 @@ public class LancamentoColaboradorController {
     
     private List<String> cli = new ArrayList<>();
     private ObservableList<String> opCli = FXCollections.observableArrayList();
+    
+    private List<Hora> lishoras = new ArrayList<>();
+    private ObservableList<Hora> observablelisthoras = FXCollections.observableArrayList();
 
     private List<String> centro_r = new ArrayList<>();
     private ObservableList<String> opCr = FXCollections.observableArrayList();
@@ -160,6 +166,7 @@ public class LancamentoColaboradorController {
         selecaoAcionamento.getSelectionModel().clearSelection();
         selecaoCR.getSelectionModel().clearSelection();
         entradaProjeto.clear();
+        entradaJustificativa.clear();
         Acionamento.setVisible(false);
         
     }

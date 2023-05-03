@@ -21,15 +21,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import com.mycompany.api.bd2.models.TipoHora;
-
 
 /**
  * FXML Controller class
  *
  * @author conta
  */
-public class CadastroUsuarioADMController {
+public class CadastroClienteADMController {
 
     @FXML
     private Button fecharTela;
@@ -54,10 +52,9 @@ public class CadastroUsuarioADMController {
     @FXML
     private Button menuRelatorio;
     @FXML
-    private TextField entradaNome;
+    private TextField entradaCNPJ;
     @FXML
-    private TextField entradaMatricula;
-    private ComboBox<String> selecaoFuncao;
+    private TextField entradaRS;
     @FXML
     private Button botaoAdicionar;
     @FXML
@@ -69,9 +66,11 @@ public class CadastroUsuarioADMController {
     @FXML
     private Button botaoAtivar;
     @FXML
-    private TableView<?> tabelaCadastroUsuarios;
+    private TableView<?> tabelaCadastroCliente;
     @FXML
-    private TableColumn<?, ?> colunaNome;
+    private TableColumn<?, ?> colunaCNPJ;
+    @FXML
+    private TableColumn<?, ?> colunaRS;
     
     
     private List<String> obs = new ArrayList<>();
@@ -91,19 +90,8 @@ public class CadastroUsuarioADMController {
 
     
     @FXML
-    public void limparCampos(){
-        selecaoFuncao.getSelectionModel().clearSelection();        
-    }
-    
-    
-    public void tipoFuncao(){
-        obs.add("Administrador");
-        obs.add("Gestor");
-        obs.add("Colaborador");
-        opcoes.setAll(obs);
-        selecaoFuncao.setItems(opcoes);
-    }
-    
+    public void limparCampos(){      
+    }    
 }
 
 
