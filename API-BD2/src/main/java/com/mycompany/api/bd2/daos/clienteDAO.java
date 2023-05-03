@@ -82,7 +82,7 @@ public class clienteDAO {
         }
         
     }
-    public List<Cliente> getCliente(){
+    public List<Cliente> getClientes(){
 		
 		String sql = "SELECT * FROM 2rp.cliente";
 		
@@ -132,6 +132,51 @@ public class clienteDAO {
                         System.out.println(clientes);
 			return clientes;
 	}
-    
+    public Cliente getCliente(String nome_cliente){
+		String sql = "SELECT * FROM 2rp.cliente where razao_social = ?";
+				
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		//Classe que vai recuperar os dados do banco. ***SELECT****
+		ResultSet rset = null;
+                Cliente cliente = new Cliente();
+
+		try {
+			conn = Conexao.createConnectionToMySQL();
+			
+			pstm = (PreparedStatement) conn.prepareStatement(sql);
+                        pstm.setString(1,nome_cliente);
+
+			rset = pstm.executeQuery();
+			
+			if (rset.next()) {
+				
+				cliente.setCnpj(rset.getLong("cnpj"));
+				cliente.setRazao_social(rset.getString("razao_social"));
+				cliente.setStatus_cliente(rset.getString("status_cliente"));
+				
+			}
+		}catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(rset!=null) {
+						rset.close();
+					}
+					
+					if(pstm!=null) {
+						pstm.close();
+					}
+					
+					if(conn!=null) {
+						conn.close();
+					}
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+                        System.out.println(cliente);
+        return cliente;
+    }
 }
 

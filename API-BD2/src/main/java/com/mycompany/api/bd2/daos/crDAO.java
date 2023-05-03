@@ -79,7 +79,7 @@ public class crDAO {
         }
         
     }
-    public List<Centro_resultado> getCliente(){
+    public List<Centro_resultado> getCrs(){
 		
 		String sql = "SELECT * FROM 2rp.centro_resultado";
 		
@@ -133,4 +133,51 @@ public class crDAO {
                         System.out.println(crs);
 			return crs;
 	}
+        public Centro_resultado getCr(String nome_cr){
+		String sql = "SELECT * FROM 2rp.centro_resultado where nome = ?";
+				
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		//Classe que vai recuperar os dados do banco. ***SELECT****
+		ResultSet rset = null;
+                Centro_resultado cr = new Centro_resultado();
+
+		try {
+			conn = Conexao.createConnectionToMySQL();
+			
+			pstm = (PreparedStatement) conn.prepareStatement(sql);
+                        pstm.setString(1,nome_cr);
+
+			rset = pstm.executeQuery();
+			
+			if (rset.next()) {
+				
+				cr.setCodigo_cr(rset.getString("codigo_cr"));
+				cr.setNome(rset.getString("nome"));
+				cr.setSigla(rset.getString("sigla"));
+                                cr.setStatus_cr(rset.getString("status_cr"));
+			}
+		}catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(rset!=null) {
+						rset.close();
+					}
+					
+					if(pstm!=null) {
+						pstm.close();
+					}
+					
+					if(conn!=null) {
+						conn.close();
+					}
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+                        System.out.println(cr.getNome());
+        return cr;
+    }
+
 }

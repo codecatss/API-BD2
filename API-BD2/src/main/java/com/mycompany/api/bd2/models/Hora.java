@@ -114,9 +114,15 @@ public class Hora {
      * @param tipo the tipo to set
      */
     public void setTipo(String tipo) {
-        if (tipo.equals(TipoHora.EXTRA.name()) || tipo.equals(TipoHora.SOBREAVISO.name())) {
-            this.tipo = tipo;
+        if (tipo.equals("Hora-extra")) {
+            this.tipo = TipoHora.EXTRA.name();
+        }else if(tipo.equals(TipoHora.SOBREAVISO.name().toLowerCase())){
+            this.tipo = TipoHora.SOBREAVISO.name();            
         }
+        else{
+            System.out.println(tipo);
+        }
+        
     }
 
     public String getProjeto() {
