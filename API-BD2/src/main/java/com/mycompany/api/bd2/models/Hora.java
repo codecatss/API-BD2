@@ -1,4 +1,4 @@
-package models;
+package com.mycompany.api.bd2.models;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -6,10 +6,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
-import models.TipoHora;
+import com.mycompany.api.bd2.models.TipoHora;
 
 public class Hora {
-
+    private static Hora instancia = null;
     private int id;
     private String cod_cr;
     private String username_lancador;
@@ -21,15 +21,27 @@ public class Hora {
     private String projeto;
     private String username_aprovador;
     private String justificativa_negacao;
-    private String status_aprovacao;    
+    private StatusAprovacao status_aprovacao;
     
-    
-
-    public String getStatus_aprovacao() {
-        return status_aprovacao;
+    public static Hora getInstance() {
+        if (instancia == null) {
+            instancia = new Hora();
+        }
+        return instancia;
     }
     
     
+    public StatusAprovacao getStatus_aprovacaoObj() {
+        return status_aprovacao;
+    }
+    
+    public String getStatus_aprovacao() {
+        return status_aprovacao.name();
+    }
+    
+    public void setStatus_aprovacao(String status_aprovacao){
+        this.status_aprovacao = StatusAprovacao.valueOf(status_aprovacao);
+    }
 
     /**
      * @return the id
@@ -62,15 +74,17 @@ public class Hora {
     /**
      * @return the data_hora_inicio
      */
-    public Timestamp getData_hora_inicio() throws ParseException {
+    public Timestamp getData_hora_inicio(){
         return data_hora_inicio;
     }
 
     /**
      * @param data_hora_inicio the data_hora_inicio to set
      */
-    public void setData_hora_inicio(Timestamp time){
-        this.data_hora_inicio = time;
+    public void setData_hora_inicio(String time) throws ParseException{
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        java.util.Date date = formatter.parse(time);
+        this.data_hora_inicio = new Timestamp(date.getTime());
     }
 
     /**
@@ -83,8 +97,10 @@ public class Hora {
     /**
      * @param data_hora_fim the data_hora_fim to set
      */
-    public void setData_hora_fim(Timestamp time){
-        this.data_hora_fim = time;
+    public void setData_hora_fim(String time) throws ParseException{
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        java.util.Date date = formatter.parse(time);
+        this.data_hora_fim = new Timestamp(date.getTime());
     }
 
     /**
@@ -98,9 +114,15 @@ public class Hora {
      * @param tipo the tipo to set
      */
     public void setTipo(String tipo) {
-        if (tipo.equals(TipoHora.EXTRA.name()) || tipo.equals(TipoHora.SOBREAVISO.name())) {
-            this.tipo = tipo;
+        if (tipo.equals("Hora-extra")) {
+            this.tipo = TipoHora.EXTRA.name();
+        }else if(tipo.equals(TipoHora.SOBREAVISO.name().toLowerCase())){
+            this.tipo = TipoHora.SOBREAVISO.name();            
         }
+        else{
+            System.out.println(tipo);
+        }
+        
     }
 
     public String getProjeto() {
@@ -114,9 +136,6 @@ public class Hora {
         this.projeto = projeto;
     }
 
-    public void setStatus_aprovacao(String status_aprovacao) {
-        this.status_aprovacao = status_aprovacao;
-    }
 
     /**
      * @return the cod_cr
