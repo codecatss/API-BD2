@@ -21,9 +21,7 @@ public class Hora {
     private String projeto;
     private String username_aprovador;
     private String justificativa_negacao;
-    private StatusAprovacao status_aprovacao;   
-    
-    private Hora() {}
+    private StatusAprovacao status_aprovacao;
     
     public static Hora getInstance() {
         if (instancia == null) {

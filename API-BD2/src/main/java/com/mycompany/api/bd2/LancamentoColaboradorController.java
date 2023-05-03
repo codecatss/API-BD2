@@ -144,8 +144,8 @@ public class LancamentoColaboradorController {
     
     @FXML
     public void limparCampos(){
-        dataInicio.setValue(null);
-        dataFim.setValue(null);
+        limmparFormatacao();
+        
         horaInicio.getValueFactory().setValue(0);
         minutoInicio.getValueFactory().setValue(0);
         horaFim.getValueFactory().setValue(0);
@@ -172,20 +172,7 @@ public class LancamentoColaboradorController {
     private String erro = "-fx-border-color:#E06469";
     @FXML
     public void botaoAdicionar() {
-        dataInicio.setStyle(null);
-        dataFim.setStyle(null);
-        errodata.setText(null);
-        
-        errohoraI.setText(null);
-        errohoraII.setText(null);
-        
-        erroproj.setText(null);
-        entradaProjeto.setStyle(null);
-        
-        horaInicio.setStyle(null);
-        minutoInicio.setStyle(null);
-        horaFim.setStyle(null);
-        minutoFim.setStyle(null);
+        limmparFormatacao();
 
         if(dataInicio.getValue()==null||horaInicio.getValue()==null||minutoInicio.getValue()==null||dataFim.getValue()==null||horaFim.getValue()==null||minutoFim.getValue()==null){
         System.out.println("Preencha todos os campos - tela de lançamento");
@@ -249,8 +236,8 @@ public class LancamentoColaboradorController {
                     Hora hora = Hora.getInstance();
                     hora.setProjeto(entradaProjeto.getText());
                     hora.setCod_cr(entradaProjeto.getText());
-                    hora.setData_hora_inicio(timestamp_inicio.toString());
-                    hora.setData_hora_fim(timestamp_fim.toString());
+                    //hora.setData_hora_inicio(timestamp_inicio);
+                    //hora.setData_hora_fim(timestamp_fim);
                     hora.setUsername_lancador(nomeUsuario.getText());
                     hora.setCnpj_cliente(987654321);
                     hora.setJustificativa_lancamento("Muita demanda");
@@ -300,6 +287,24 @@ public class LancamentoColaboradorController {
         tabelaCliente.setCellValueFactory(new PropertyValueFactory<>("cliente")); 
         tabelaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto"));
         
+    }
+    
+    @FXML
+    public void limmparFormatacao(){
+        dataInicio.setStyle(null);
+        dataFim.setStyle(null);
+        errodata.setText(null);
+        
+        errohoraI.setText(null);
+        errohoraII.setText(null);
+        
+        erroproj.setText(null);
+        entradaProjeto.setStyle(null);
+        
+        horaInicio.setStyle(null);
+        minutoInicio.setStyle(null);
+        horaFim.setStyle(null);
+        minutoFim.setStyle(null);  
     }
     
     @FXML
