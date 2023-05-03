@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
+    "java.configuration.updateBuildConfiguration": "interactive"
+=======
 "java.project.referencedLibraries": [
     "C:\\Users\\conta\\Downloads\\openjfx-17.0.6_windows-x64_bin-sdk\\javafx-sdk-17.0.6\\lib\\*.jar"
 ]
+>>>>>>> developing
 }

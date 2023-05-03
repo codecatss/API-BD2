@@ -1,5 +1,6 @@
-package models;
+package com.mycompany.api.bd2.models;
 
+import com.mycompany.api.bd2.models.Funcao;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -10,18 +11,29 @@ package models;
  * @author danko
  */
 public class Usuario {
-    private String user_name = "";
+ 
+ private static Usuario instancia = null;
+    private String username = "";
     private String nome = "";
     private String senha = "";
     private String status = "";
     private Funcao cargo;
 
-    public String getUser_name() {
-        return user_name;
+    private Usuario() {}
+    
+    public static Usuario getInstance() {
+        if (instancia == null) {
+            instancia = new Usuario();
+        }
+        return instancia;
+    }
+    
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getNome() {
@@ -63,6 +75,11 @@ public class Usuario {
         this.status = status;
     }
 
-    
-        
+    public void logout(){
+        this.username = "";
+        this.nome = "";
+        this.senha = "";
+        this.status = "";   
+    }
+
 }

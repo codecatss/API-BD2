@@ -21,6 +21,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import com.mycompany.api.bd2.models.TipoHora;
+
 
 /**
  * FXML Controller class

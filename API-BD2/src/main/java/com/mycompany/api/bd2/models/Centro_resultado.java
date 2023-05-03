@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package models;
+package com.mycompany.api.bd2.models;
 
 /**
  *
@@ -12,9 +12,9 @@ public class Centro_resultado {
     private String nome;
     private String codigo_cr;
     private String sigla;
-    private Status_clientes status_cr; //reutilizando o enum do status clientes.
+    private Status_cliente status_cr; //reutilizando o enum do status clientes.
     
-    public Status_clientes getStatus_crObj() {
+    public Status_cliente getStatus_crObj() {
         return status_cr;
     }
     
@@ -24,7 +24,7 @@ public class Centro_resultado {
 
   
     public void setStatus_cr(String status_cr) {
-        this.status_cr = Status_clientes.valueOf(status_cr.toLowerCase());
+        this.status_cr = Status_cliente.valueOf(status_cr.toLowerCase());
     }
 
     /**

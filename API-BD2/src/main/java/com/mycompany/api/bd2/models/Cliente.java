@@ -1,4 +1,4 @@
-package models;
+package com.mycompany.api.bd2.models;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -10,9 +10,9 @@ package models;
  * @author mikaela.begotti
  */
 public class Cliente {
-    private String razao_social;
-    private Status_clientes status_clientes;
     private long cnpj;
+    private String razao_social;
+    private Status_cliente status_cliente;
 
     /**
      * @return the razao_social
@@ -40,16 +40,16 @@ public class Cliente {
     }
 
     
-    public Status_clientes getStatus_clientesObj() {
-        return status_clientes;
+    public Status_cliente getStatus_clienteObj() {
+        return status_cliente;
     }
     
-    public String getStatus_clientes() {
-        return status_clientes.name();
+    public String getStatus_cliente() {
+        return status_cliente.name();
     }
 
   
-    public void setStatus_clientes(String status_clientes) {
-        this.status_clientes = Status_clientes.valueOf(status_clientes.toLowerCase());
+    public void setStatus_cliente(String status_clientes) {
+        this.status_cliente = Status_cliente.valueOf(status_clientes.toLowerCase());
     }
 }
