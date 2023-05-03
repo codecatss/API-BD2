@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -54,44 +55,56 @@
                               <Font name="Arial Bold" size="14.0" />
                            </font>
                         </Button>
+                        <Button id="menuLancamento" fx:id="menuLancamento" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text=" Lançamentos" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="150.0">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icon-lancamento.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button id="menuApontamento" fx:id="menuApontamento" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Apontamentos" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="225.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icon-apontamento.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button id="menuRelatorio" fx:id="menuRelatorio" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text=" Relatórios" textFill="WHITE" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="300.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icon-relatorio.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
                      </children>
                   </AnchorPane>
-                  <Button id="menuLancamento" fx:id="menuLancamento" layoutX="25.0" layoutY="150.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text=" Lançamentos" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="150.0">
-                     <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@icon-lancamento.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button id="menuApontamento" fx:id="menuApontamento" layoutX="15.0" layoutY="225.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Apontamentos" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="225.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@icon-apontamento.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button id="menuRelatorio" fx:id="menuRelatorio" layoutX="25.0" layoutY="305.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="187.0" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text=" Relatórios" textFill="WHITE" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="305.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@icon-relatorio.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
                </children>
             </AnchorPane>
          </left>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="746.0" prefWidth="1080.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="0.0">
+                     <styleClass>
+                        <String fx:value="white-bg" />
+                        <String fx:value="shadow" />
+                     </styleClass>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </center>
       </BorderPane>
    </children>
 </AnchorPane>
