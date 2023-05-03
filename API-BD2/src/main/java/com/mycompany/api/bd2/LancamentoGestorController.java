@@ -33,7 +33,7 @@ import models.Hora;
 import models.*;
 
 
-public class LancamentoColaboradorController {
+public class LancamentoGestorController {
 
     @FXML
     private Button fecharTela;
@@ -97,6 +97,12 @@ public class LancamentoColaboradorController {
     private TextField entradaProjeto;
     @FXML
     private TextField entradaJustificativa;
+    @FXML
+    private Button menuLancamento;
+    @FXML
+    private Button menuApontamento;
+    @FXML
+    private Button menuRelatorio;
     
     
     private List<String> obs = new ArrayList<>();
@@ -107,7 +113,7 @@ public class LancamentoColaboradorController {
     
     private List<Hora> lishoras = new ArrayList<>();
     private ObservableList<Hora> observablelisthoras = FXCollections.observableArrayList();
- 
+    
 
     public void initialize() {
         nomeUsuario.setText("*nome do usuário*");
@@ -153,7 +159,6 @@ public class LancamentoColaboradorController {
         entradaProjeto.clear();
         entradaJustificativa.clear();
         Acionamento.setVisible(false);
-        
     }
     
     
@@ -164,96 +169,7 @@ public class LancamentoColaboradorController {
     opcoes.setAll(obs);
     horaTipo.setItems(opcoes);
     }
-    
-    /*
-    @FXML
-    public void BotaoAdicionar() {
-        if(dataInicio.getValue()==null||horaInicio.getValue()==null||minutoInicio.getValue()==null||dataFim.getValue()==null||horaFim.getValue()==null||minutoFim.getValue()==null){
-        System.out.println("Preencha todos os campos - tela de lançamento");}
-        else{
-        try{
-            LocalDate data_inicio = dataInicio.getValue();
-            int hora_inicio = horaInicio.getValue();
-            int min_inicio = minutoInicio.getValue();
-            String data_hora_inicio = data_inicio.getYear() + "-" + data_inicio.getMonthValue() + "-" + data_inicio.getDayOfMonth() + " " + hora_inicio + ":" + min_inicio + ":00";
-            Timestamp timestamp_inicio = Timestamp.valueOf(data_hora_inicio);
-            
-            LocalDate data_fim = dataFim.getValue();            
-            int hora_fim = horaFim.getValue();
-            int min_fim = minutoFim.getValue();
-            String data_hora_fim = data_fim.getYear() + "-" + data_fim.getMonthValue() + "-" + data_fim.getDayOfMonth() + " " + hora_fim + ":" + min_fim + ":00";
-            Timestamp timestamp_fim = Timestamp.valueOf(data_hora_fim);
-
-            
-
-            Hora hora = new Hora();
-            hora.setProjeto(entradaProjeto.getText());
-            hora.setCod_cr(entradaProjeto.getText());("Cr");
-            hora.setData_hora_inicio(timestamp_inicio);
-            hora.setData_hora_fim(timestamp_fim);
-            hora.setUsername_lancador("Joazinho");
-            hora.setCnpj_cliente(987654321);
-            hora.setJustificativa_lancamento("Muita demanda");
-            hora.setStatus_aprovacao("pendente");
-            
-
-            horaDAO daoH = new horaDAO();
-            daoH.save(hora);
-            
-        }catch (Exception e){
-            System.out.println("Houve um erro");
-        }
-        }
-    }
-    
-    
-    private LocalDateTime agora = LocalDateTime.now();
-
-    // Criar um LocalDateTime para 13h e outro para 16h do dia atual
-    private LocalDateTime dataHora13h = LocalDateTime.of(agora.getYear(), agora.getMonth(), agora.getDayOfMonth(), 13, 0);
-    private LocalDateTime dataHora16h = LocalDateTime.of(agora.getYear(), agora.getMonth(), agora.getDayOfMonth(), 16, 0);
-
-    @FXML
-    public void carregarTabelaLancamento(){
-
-
-        // Converter os LocalDateTime para Timestamp
-        Timestamp timestamp13h = Timestamp.valueOf(dataHora13h);
-        Timestamp timestamp16h = Timestamp.valueOf(dataHora16h);
-
-        Hora hora_tabela = new Hora(); //removi daqui também
-        hora_tabela.setId(2);
-        hora_tabela.setCod_cr("13652");
-        hora_tabela.setUsername_lancador("Clarissa");
-        hora_tabela.setStatus_aprovacao("Aprovado");
-        hora_tabela.setTipo("EXTRA");
-        hora_tabela.setCod_cr("CodeCats");
-        hora_tabela.setProjeto("União");
-        hora_tabela.setData_hora_inicio(timestamp13h);
-        hora_tabela.setData_hora_fim(timestamp16h);     
-        hora_tabela.setJustificativa_lancamento("Demanda");
-        lishoras.add(hora_tabela);
-        observablelisthoras.setAll(lishoras);
-        tabelaLancamento.setItems(observablelisthoras);
-
-        tabelaId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        tabelaNome.setCellValueFactory(new PropertyValueFactory<>("username_lancador")); 
-        tabelaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo")); 
-        tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status")); 
-        tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao")); 
-        tabelaDHInicio.setCellValueFactory(new PropertyValueFactory<>("data_hora_inicio")); 
-        tabelaDHFim.setCellValueFactory(new PropertyValueFactory<>("data_hora_fim")); 
-        tabelaCR.setCellValueFactory(new PropertyValueFactory<>("centro_resultado")); 
-        tabelaCR.setCellValueFactory(new PropertyValueFactory<>("cod_cr")); 
-        tabelaCliente.setCellValueFactory(new PropertyValueFactory<>("cliente")); 
-        tabelaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto")); 
-        tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa")); 
-        tabelaResp.setCellValueFactory(new PropertyValueFactory<>("status")); 
-        tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento")); 
-        tabelaResp.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao"));
-        
-    }
-    */
+   
     
     @FXML
     public void forneceCliente(){

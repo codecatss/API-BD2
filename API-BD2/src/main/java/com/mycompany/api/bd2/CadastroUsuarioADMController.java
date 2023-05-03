@@ -5,7 +5,6 @@
 package com.mycompany.api.bd2;
 
 import java.net.URL;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -17,11 +16,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import models.TipoHora;
 
 /**
  * FXML Controller class
@@ -39,19 +38,25 @@ public class CadastroUsuarioADMController {
     @FXML
     private ImageView imagemUser;
     @FXML
-    private ImageView imagemCR;
-    @FXML
     private Label nomeUsuario;
-    @FXML
-    private Label CR_Funcao;
     @FXML
     private Button botaoSair;
     @FXML
-    private Button botaoAlterarCR;
+    private Button menuUsuario;
+    @FXML
+    private Button menuCR;
+    @FXML
+    private Button menuCliente;
+    @FXML
+    private Button menuAprovar;
+    @FXML
+    private Button menuRelatorio;
     @FXML
     private TextField entradaNome;
     @FXML
     private TextField entradaMatricula;
+    @FXML
+    private TextField entradaUsername;
     @FXML
     private ComboBox<String> selecaoFuncao;
     @FXML
@@ -65,21 +70,41 @@ public class CadastroUsuarioADMController {
     @FXML
     private Button botaoAtivar;
     @FXML
-    private TableView<?> tabelaUsuarios;
+    private TableView<?> tabelaCadastroUsuarios;
+    @FXML
+    private TableColumn<?, ?> colunaNome;
+    @FXML
+    private TableColumn<?, ?> colunaUsername;
+    @FXML
+    private TableColumn<?, ?> colunaFuncao;
+    @FXML
+    private TableColumn<?, ?> colunaMatricula;
     
-        
+    
     private List<String> obs = new ArrayList<>();
     private ObservableList<String> opcoes = FXCollections.observableArrayList();
+    
+    
+    
     
     
     public void initialize() {
         nomeUsuario.setText("*nome do usuário*");
         
         botaoLimpar.setOnAction(event -> limparCampos());
-        
-        
-    }    
+    }
+  
 
+    @FXML
+    private void BotaoAdicionar(ActionEvent event) {
+    }
+
+    
+    @FXML
+    public void limparCampos(){
+        selecaoFuncao.getSelectionModel().clearSelection();        
+    }
+    
     
     @FXML
     public void tipoFuncao(){
@@ -90,14 +115,13 @@ public class CadastroUsuarioADMController {
         selecaoFuncao.setItems(opcoes);
     }
     
-
-    @FXML
-    public void limparCampos(){
-        selecaoFuncao.getSelectionModel().clearSelection();        
-    }
-    
-    
-    @FXML
-    private void BotaoAdicionar(ActionEvent event) {
-    }
 }
+
+
+
+        
+        
+
+    
+    
+ 

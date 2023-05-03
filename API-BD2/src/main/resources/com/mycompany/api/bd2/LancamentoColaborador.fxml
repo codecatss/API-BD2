@@ -31,7 +31,7 @@
                            </font>
                         </Button>
                         <Button id="minimizarTela" fx:id="minimizarTela" layoutX="1245.0" layoutY="5.0" mnemonicParsing="false" styleClass="minimize" stylesheets="@EstilizacaoTelas.css" text="-" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="5.0" />
-                        <Label id="nometelaatual" fx:id="nometelaatual" layoutX="10.0" layoutY="10.0" text="Lançamento de Horas" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                        <Label id="nometelaatual" fx:id="nometelaatual" layoutX="10.0" layoutY="10.0" text="Lançamentos" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font>
@@ -80,15 +80,16 @@
                            <children>
                               <TableView id="tabelaLancamento" fx:id="tabelaLancamento" layoutX="5.0" prefHeight="300.0" prefWidth="1060.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                  <columns>
-                                    <TableColumn id="tabelaId" fx:id="tabelaId" maxWidth="350.0" minWidth="50.0" prefWidth="50.0" text="Nº" />
+                                    <TableColumn id="tabelaN" fx:id="tabelaN" maxWidth="350.0" minWidth="30.0" prefWidth="30.0" text="Nº" />
                                     <TableColumn id="tabelaTipo" fx:id="tabelaTipo" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="-1.0" text="Tipo" />
-                                    <TableColumn id="tabelaStatus" fx:id="tabelaStatus" maxWidth="1250.0" minWidth="125.0" prefWidth="125.0" text="Tipo" />
-                                    <TableColumn id="tabelaDHInicio" fx:id="tabelaDHInicio" maxWidth="1250.0" minWidth="125.0" prefWidth="125.0" text="Status" />
-                                    <TableColumn id="tabelaDHFim" fx:id="tabelaDHFim" maxWidth="1750.0" minWidth="175.0" prefWidth="175.0" text="Início" />
-                                    <TableColumn id="tabelaCR" fx:id="tabelaCR" maxWidth="1750.0" minWidth="175.0" prefWidth="175.0" text="Fim" />
-                                    <TableColumn id="tabelaCliente" fx:id="tabelaCliente" maxWidth="1250.0" minWidth="125.0" prefWidth="125.0" text="CR" />
-                                    <TableColumn id="tabelaProjeto" fx:id="tabelaProjeto" maxWidth="1500.0" minWidth="150.0" prefWidth="150.0" text="Cliente" />
-                                    <TableColumn id="tabelaProjeto" fx:id="tabelaProjeto1" maxWidth="1500.0" minWidth="150.0" prefWidth="150.0" text="Projeto" />
+                                    <TableColumn id="tabelaTipo" fx:id="tabelaTipo" maxWidth="1250.0" minWidth="100.0" prefWidth="100.0" text="Tipo" />
+                                    <TableColumn id="tabelaStatus" fx:id="tabelaStatus" maxWidth="1250.0" minWidth="100.0" prefWidth="100.0" text="Status" />
+                                    <TableColumn id="tabelaInicio" fx:id="tabelaInicio" maxWidth="1750.0" minWidth="150.0" prefWidth="150.0" text="Início" />
+                                    <TableColumn id="tabelaFim" fx:id="tabelaFim" maxWidth="1750.0" minWidth="150.0" prefWidth="150.0" text="Fim" />
+                                    <TableColumn id="tabelaCR" fx:id="tabelaCR" maxWidth="1250.0" minWidth="125.0" prefWidth="125.0" text="CR" />
+                                    <TableColumn id="tabelaCliente" fx:id="tabelaCliente" maxWidth="1500.0" minWidth="125.0" prefWidth="125.0" text="Cliente" />
+                                    <TableColumn id="tabelaProjeto" fx:id="tabelaProjeto" maxWidth="1500.0" minWidth="125.0" prefWidth="125.0" text="Projeto" />
+                                    <TableColumn id="tabelaJustificativa" fx:id="tabelaJustificativa" maxWidth="1500.0" minWidth="150.0" prefWidth="150.0" text="Justificativa" />
                                  </columns>
                               </TableView>
                            </children>
@@ -144,7 +145,7 @@
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
-                              <Label id="Acionamento" fx:id="Acionamento" layoutX="725.0" layoutY="175.0" prefHeight="22.0" prefWidth="135.0" text="Acionamento(s)" visible="false" AnchorPane.leftAnchor="725.0" AnchorPane.topAnchor="175.0">
+                              <Label id="Acionamento" fx:id="Acionamento" layoutX="725.0" layoutY="175.0" prefHeight="22.0" prefWidth="135.0" text="Acionamento(s)" visible="false" AnchorPane.leftAnchor="725.0" AnchorPane.topAnchor="250.0">
                                  <font>
                                     <Font name="Arial" size="18.0" />
                                  </font>
@@ -157,8 +158,8 @@
                               <Spinner id="minutoFim" fx:id="minutoFim" layoutX="560.0" layoutY="95.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.leftAnchor="560.0" AnchorPane.topAnchor="95.0" />
                               <ComboBox id="horaTipo" fx:id="horaTipo" layoutX="125.0" layoutY="20.0" onMouseClicked="#tipoHora" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="20.0" />
                               <ComboBox id="selecaoCliente" fx:id="selecaoCliente" layoutX="475.0" layoutY="20.0" onMouseClicked="#forneceCliente" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="475.0" AnchorPane.topAnchor="20.0" />
-                              <ComboBox id="selecaoCR" fx:id="selecaoCR" layoutX="875.0" layoutY="20.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="875.0" AnchorPane.topAnchor="20.0" />
-                              <ComboBox id="selecaoAcionamento" fx:id="selecaoAcionamento" layoutX="875.0" layoutY="170.0" prefHeight="30.0" prefWidth="155.0" visible="false" AnchorPane.leftAnchor="875.0" AnchorPane.topAnchor="170.0" />
+                              <ComboBox id="selecaoCR" fx:id="selecaoCR" layoutX="875.0" layoutY="20.0" prefHeight="30.0" prefWidth="200.0" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="20.0" />
+                              <ComboBox id="selecaoAcionamento" fx:id="selecaoAcionamento" layoutX="875.0" layoutY="170.0" prefHeight="30.0" prefWidth="200.0" visible="false" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="245.0" />
                               <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutX="350.0" layoutY="235.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="110.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="350.0">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
@@ -169,12 +170,18 @@
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
                               </Button>
-                              <TextField id="entradaProjeto" fx:id="entradaProjeto" layoutX="875.0" layoutY="95.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="875.0" AnchorPane.topAnchor="95.0" />
+                              <TextField id="entradaProjeto" fx:id="entradaProjeto" layoutX="875.0" layoutY="95.0" prefHeight="30.0" prefWidth="200.0" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="95.0" />
                               <Label layoutX="725.0" layoutY="25.0" prefHeight="22.0" prefWidth="60.0" text="CR" textAlignment="JUSTIFY" AnchorPane.leftAnchor="725.0" AnchorPane.topAnchor="25.0">
                                  <font>
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
+                              <Label layoutX="735.0" layoutY="110.0" prefHeight="22.0" text="Justificativa" AnchorPane.leftAnchor="725.0" AnchorPane.topAnchor="175.0">
+                                 <font>
+                                    <Font name="Arial" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField id="entradaJustificativa" fx:id="entradaJustificativa" layoutX="885.0" layoutY="105.0" prefHeight="30.0" prefWidth="200.0" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="170.0" />
                            </children>
                         </AnchorPane>
                      </children>
