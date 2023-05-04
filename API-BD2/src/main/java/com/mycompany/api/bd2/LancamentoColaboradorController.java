@@ -251,7 +251,7 @@ public class LancamentoColaboradorController {
                     String nome_cr = selecaoCR.getSelectionModel().getSelectedItem();
                     crDAO cr = new crDAO();
                     
-                    Hora hora = Hora.getInstance();
+                    Hora hora = new Hora();
                     hora.setProjeto(entradaProjeto.getText());
                     hora.setCod_cr(cr.getCr(nome_cr).getCodigo_cr());
                     hora.setData_hora_inicio(timestamp_inicio.toString());
@@ -285,7 +285,8 @@ public class LancamentoColaboradorController {
         horaDAO horadao = new horaDAO();
         /*essa é a config que eu usei pra exibir horas lançadas pelo user logado na tabela*/
         Usuario usuario = Usuario.getInstance();
-        String nome = usuario.getUsername().toString();
+        String nome = usuario.getUsername();
+        System.out.println(horadao.getHoras());
         lishoras.addAll(horadao.getHora(nome));
         
         /*original*/

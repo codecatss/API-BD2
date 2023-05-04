@@ -10,7 +10,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -86,11 +88,11 @@ public class horaDAO {
         }
         
     }
-    public List<Hora> getHoras(){
+    public Set<Hora> getHoras(){
 		
 		String sql = "SELECT * FROM 2rp.hora";
 		
-		List<Hora> horas = new ArrayList<Hora>();
+		Set<Hora> horas = new HashSet<Hora>();
 		
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -106,7 +108,7 @@ public class horaDAO {
 			
 			while (rset.next()) {
 				
-				Hora hora = Hora.getInstance();
+				Hora hora = new Hora();
 				
 				hora.setCod_cr(rset.getString("cod_cr"));
                                 hora.setUsername_lancador(rset.getString("username_lancador"));
@@ -148,15 +150,15 @@ public class horaDAO {
 			return horas;
 	}
     
-    public List<Hora> getHora(String username_lancador){
+    public Set<Hora> getHora(String username_lancador){
 	
                 String sql = "SELECT * FROM 2rp.hora WHERE username_lancador = ?";
-		List<Hora> horasUser = new ArrayList<Hora>();
+		Set<Hora> horasUser = new HashSet<Hora>();
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		//Classe que vai recuperar os dados do banco. ***SELECT****
 		ResultSet rset = null;
-                Hora hora = Hora.getInstance();
+                //Hora hora = Hora.getInstance();
 		
 		try {
 			conn = Conexao.createConnectionToMySQL();
@@ -164,10 +166,8 @@ public class horaDAO {
 			pstm = (PreparedStatement) conn.prepareStatement(sql);
                         pstm.setString(1, username_lancador);			
 			rset = pstm.executeQuery();
-                        
-			
-                        while (rset.next()) {
-				
+                       while (rset.next()) {
+				Hora hora = new Hora();
 				hora.setCod_cr(rset.getString("cod_cr"));
                                 hora.setUsername_lancador(rset.getString("username_lancador"));
                                 hora.setCnpj_cliente(rset.getLong("cnpj_cliente"));
@@ -179,12 +179,10 @@ public class horaDAO {
                                 hora.setUsername_aprovador(rset.getString("username_aprovador"));
                                 hora.setJustificativa_negacao(rset.getString("justificativa_negacao"));
                                 hora.setStatus_aprovacao(rset.getString("status_aprovacao"));
+
+				horasUser.add(hora);
 				
-				
-                                horasUser.add(hora);
-			} 
-                        
-                        
+			}
 		}catch (Exception e) {
 				e.printStackTrace();
 			}finally {
@@ -204,6 +202,8 @@ public class horaDAO {
 					e.printStackTrace();
 				}
 			}
+                        System.out.println(horasUser);
 			return horasUser;
 	}
+    
 }
