@@ -184,8 +184,6 @@ public class LancamentoColaboradorController {
     private String erro = "-fx-border-color:#E06469";
     @FXML
     public void botaoAdicionar() {
-        limmparFormatacao();
-
         if(dataInicio.getValue()==null||horaInicio.getValue()==null||minutoInicio.getValue()==null||dataFim.getValue()==null||horaFim.getValue()==null||minutoFim.getValue()==null){
         System.out.println("Preencha todos os campos - tela de lançamento");
         Alert alert = new Alert(AlertType.ERROR);
@@ -268,7 +266,7 @@ public class LancamentoColaboradorController {
                     System.out.println("Foi");
 
                 }catch (Exception e){
-                    System.out.println("Houve um erro");
+                    System.out.println("Houve um erro ao salvar");
                 }  
             }else{
                 if(entradaProjeto.getText().isEmpty()){
@@ -276,7 +274,8 @@ public class LancamentoColaboradorController {
                     erroproj.setText("Informe o projeto");
                 }
             }
-        }                
+        }
+        limmparFormatacao();
          
     }
     
