@@ -289,7 +289,7 @@ public class LancamentoColaboradorController {
         lishoras.addAll(horadao.getHora(nome));
         
         /*original*/
-        lishoras.addAll(horadao.getHora(nomeUsuario.getText()));
+        //lishoras.addAll(horadao.getHora(nomeUsuario.getText()));
         observablelisthoras.setAll(lishoras);
         tabelaLancamento.setItems(observablelisthoras);
 
