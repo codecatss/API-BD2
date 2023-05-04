@@ -43,7 +43,7 @@ create table
 create table
     cliente (
         cnpj BIGINT NOT NULL,
-        razao_social VARCHAR(70) NOT NULL,
+        razao_social VARCHAR(150) NOT NULL,
         status_cliente ENUM('ativo', 'inativo') NOT NULL DEFAULT 'ativo',
         PRIMARY KEY(cnpj)
     );
