@@ -286,11 +286,7 @@ public class LancamentoColaboradorController {
         /*essa é a config que eu usei pra exibir horas lançadas pelo user logado na tabela*/
         Usuario usuario = Usuario.getInstance();
         String nome = usuario.getUsername();
-        System.out.println(horadao.getHoras());
         lishoras.addAll(horadao.getHora(nome));
-        
-        /*original*/
-        //lishoras.addAll(horadao.getHora(nomeUsuario.getText()));
         observablelisthoras.setAll(lishoras);
         tabelaLancamento.setItems(observablelisthoras);
 
