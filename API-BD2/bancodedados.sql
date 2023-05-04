@@ -63,7 +63,7 @@ create table
         justificativa_negacao VARCHAR(500),
         status_aprovacao ENUM('pendente','aprovado','negado') NOT NULL DEFAULT 'pendente',
 	solicitante_lancamento VARCHAR(30) NOT NULL,
-	Foreign Key (username_lancadoir) REFERENCES usuario(username),
+	Foreign Key (username_lancador) REFERENCES usuario(username),
 	Foreign Key (cod_cr) REFERENCES centro_resultado(codigo_cr),
 	Foreign Key (cnpj_cliente) REFERENCES cliente(cnpj),
 	Foreign Key (username_aprovador) REFERENCES usuario (username),
