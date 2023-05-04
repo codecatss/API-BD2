@@ -1,5 +1,7 @@
 package com.mycompany.api.bd2;
 
+import com.mycompany.api.bd2.daos.usuarioDAO;
+import com.mycompany.api.bd2.models.Usuario;
 import testando_view_exemplo.testeLeitura;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,13 +21,13 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
         Parent root = fxmlLoader.load();
         scene = new Scene(root, 1300, 650);
         stage.setScene(scene);
         stage.show();
-    }
+        }
+    
 
     public static void main(String[] args) {
         launch();
