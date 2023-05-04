@@ -259,14 +259,24 @@ public class LancamentoColaboradorController {
                     hora.setJustificativa_lancamento("Muita demanda");
                     hora.setStatus_aprovacao("pendente");
                     hora.setTipo(horaTipo.getSelectionModel().getSelectedItem());
-                    horaDAO horaDAO = new horaDAO();
+                    horaDAO hrDAO = new horaDAO();
 
-                    horaDAO.save(hora);
+                    hrDAO.save(hora);
 
                     System.out.println("Foi");
 
                 }catch (Exception e){
+                    String nome_cliente = selecaoCliente.getSelectionModel().getSelectedItem();
+                    clienteDAO cliente = new clienteDAO();
+                    Hora hora = new Hora();
                     System.out.println("Houve um erro ao salvar");
+                    hora.setCnpj_cliente(cliente.getCliente(nome_cliente).getCnpj());
+                    System.out.println(cliente.getCliente(nome_cliente).getCnpj());
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Houve um erro ao salvar");
+                    alert.setHeaderText(null);
+                    alert.setContentText("O bloco 'try' responsavél por salvar a nova hora para o lançamento apresentou alguma falha");
+                    alert.showAndWait();
                 }  
             }else{
                 if(entradaProjeto.getText().isEmpty()){
