@@ -62,6 +62,7 @@ create table
 	username_aprovador VARCHAR(20),
         justificativa_negacao VARCHAR(500),
         status_aprovacao ENUM('pendente','aprovado','negado') NOT NULL DEFAULT 'pendente',
+	solicitante VARCHAR(30) NOT NULL,
         PRIMARY KEY(id)
     );
 
