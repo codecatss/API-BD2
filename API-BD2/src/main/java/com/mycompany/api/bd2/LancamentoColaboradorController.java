@@ -308,9 +308,11 @@ public class LancamentoColaboradorController {
     
     @FXML
     public void limmparFormatacao(){
-        dataInicio.setStyle(null);
-        dataFim.setStyle(null);
-        errodata.setText(null);
+        dataInicio.getEditor().clear();
+        dataInicio.setValue(null);
+        dataFim.getEditor().clear();
+        dataFim.setValue(null);
+
         
         errohoraI.setText(null);
         errohoraII.setText(null);
