@@ -82,14 +82,15 @@
                                  <columns>
                                     <TableColumn id="tabelaN" fx:id="tabelaN" maxWidth="350.0" minWidth="30.0" prefWidth="30.0" text="Nº" />
                                     <TableColumn id="tabelaTipo" fx:id="tabelaTipo" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="-1.0" text="Tipo" />
-                                    <TableColumn id="tabelaTipo" fx:id="tabelaTipo" maxWidth="1250.0" minWidth="100.0" prefWidth="100.0" text="Tipo" />
-                                    <TableColumn id="tabelaStatus" fx:id="tabelaStatus" maxWidth="1250.0" minWidth="100.0" prefWidth="100.0" text="Status" />
+                                    <TableColumn id="tabelaTipo" fx:id="tabelaTipo" maxWidth="1250.0" minWidth="75.0" prefWidth="75.0" text="Tipo" />
+                                    <TableColumn id="tabelaStatus" fx:id="tabelaStatus" maxWidth="1250.0" minWidth="75.0" prefWidth="75.0" text="Status" />
                                     <TableColumn id="tabelaInicio" fx:id="tabelaInicio" maxWidth="1750.0" minWidth="150.0" prefWidth="150.0" text="Início" />
                                     <TableColumn id="tabelaFim" fx:id="tabelaFim" maxWidth="1750.0" minWidth="150.0" prefWidth="150.0" text="Fim" />
-                                    <TableColumn id="tabelaCR" fx:id="tabelaCR" maxWidth="1250.0" minWidth="125.0" prefWidth="125.0" text="CR" />
-                                    <TableColumn id="tabelaCliente" fx:id="tabelaCliente" maxWidth="1500.0" minWidth="125.0" prefWidth="125.0" text="Cliente" />
+                                    <TableColumn id="tabelaCR" fx:id="tabelaCR" maxWidth="1250.0" minWidth="100.0" prefWidth="100.0" text="CR" />
+                                    <TableColumn id="tabelaCliente" fx:id="tabelaCliente" maxWidth="1500.0" minWidth="100.0" prefWidth="100.0" text="Cliente" />
                                     <TableColumn id="tabelaProjeto" fx:id="tabelaProjeto" maxWidth="1500.0" minWidth="125.0" prefWidth="125.0" text="Projeto" />
-                                    <TableColumn id="tabelaJustificativa" fx:id="tabelaJustificativa" maxWidth="1500.0" minWidth="150.0" prefWidth="150.0" text="Justificativa" />
+                                    <TableColumn id="tabelaJustificativa" fx:id="tabelaJustificativa" maxWidth="1500.0" minWidth="125.0" prefWidth="125.0" text="Justificativa" />
+                                    <TableColumn id="tabelaSolicitante" fx:id="tabelaSolicitante" maxWidth="1500.0" minWidth="125.0" prefWidth="125.0" text="Solicitante" />
                                  </columns>
                               </TableView>
                            </children>
@@ -185,7 +186,7 @@
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
                               </Button>
-                              <Button id="botaoLimpar" fx:id="botaoLimpar" layoutX="500.0" layoutY="235.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="35.0" prefWidth="110.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Limpar" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="500.0">
+                              <Button id="botaoLimpar" fx:id="botaoLimpar" layoutX="500.0" layoutY="235.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="35.0" prefWidth="110.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Limpar" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="550.0">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
@@ -202,6 +203,12 @@
                                  </font>
                               </Label>
                               <TextField id="entradaJustificativa" fx:id="entradaJustificativa" layoutX="885.0" layoutY="105.0" prefHeight="30.0" prefWidth="200.0" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="170.0" />
+                              <Label layoutX="35.0" layoutY="185.0" prefHeight="22.0" prefWidth="90.0" text="Solicitante" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="250.0">
+                                 <font>
+                                    <Font name="Arial" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField id="entradaSolicitante" fx:id="entradaSolicitante" layoutX="115.0" layoutY="246.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="245.0" />
                            </children>
                         </AnchorPane>
                      </children>
