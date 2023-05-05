@@ -40,7 +40,7 @@ public class TelaLoginController implements Initializable {
 
         try (Connection connection = Conexao.createConnectionToMySQL()) {
             Usuario usuario = new usuarioDAO().getUsuario(user, senha);
-            if (usuario!=null && usuario.getUsername().equals( user) && usuario.getSenha().equals(senha)) {
+            if (usuario!=null && usuario.getUsername().equals( user) && usuario.getSenha().equals(senha) && usuario.getCargo()=="colaborador") {
                 
                 System.out.println("Logado");
                 System.out.println(usuario.getNome());
@@ -48,13 +48,39 @@ public class TelaLoginController implements Initializable {
                 // Usuário e senha são válidos, exibir próxima tela
                 App.setRoot("LancamentoColaborador");
                 
-            } else {
+            } else{
+                if (usuario!=null && usuario.getUsername().equals( user) && usuario.getSenha().equals(senha) && usuario.getCargo() == "gestor") {
+                
+                System.out.println("Logado como gestor");
+                System.out.println(usuario.getNome());
+                LoginSenha.setText("");
+                // Usuário e senha são válidos, exibir próxima tela
+                App.setRoot("LancamentoColaborador");
+                
+            } else{
+                if (usuario!=null && usuario.getUsername().equals( user) && usuario.getSenha().equals(senha) && usuario.getCargo() == "admin") {
+                
+                System.out.println("Logado como administrador");
+                System.out.println(usuario.getNome());
+                LoginSenha.setText("");
+                // Usuário e senha são válidos, exibir próxima tela
+                App.setRoot("CadastroUsuarioADM");
+                }
+                else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Erro");
                 alert.setHeaderText("Usuário ou senha inválidos");
                 alert.setContentText("Por favor verifique suas credenciais e tente novamente.");
                 alert.showAndWait();
             }
+            }
+            }
+                
+                
+            
+                    
+            
+                
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erro");
