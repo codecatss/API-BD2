@@ -111,6 +111,8 @@ public class LancamentoColaboradorController {
     private TextField entradaProjeto;
     @FXML
     private TextField entradaJustificativa;
+    @FXML
+    private TextField entradaSolicitante;
     
     
     private List<String> obs = new ArrayList<>();
@@ -169,6 +171,7 @@ public class LancamentoColaboradorController {
         selecaoCR.getSelectionModel().clearSelection();
         entradaProjeto.clear();
         entradaJustificativa.clear();
+        entradaSolicitante.clear();
         Acionamento.setVisible(false);
         
     }
@@ -284,7 +287,7 @@ public class LancamentoColaboradorController {
                 }
             }
         }
-        limmparFormatacao();
+        limparCampos();
          
     }
     
