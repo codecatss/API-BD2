@@ -250,6 +250,7 @@ public class LancamentoColaboradorController {
                     crDAO cr = new crDAO();
                     
                     Hora hora = new Hora();
+                    Cliente cli = new Cliente();
                     hora.setProjeto(entradaProjeto.getText());
                     hora.setCod_cr(cr.getCr(nome_cr).getCodigo_cr());
                     hora.setData_hora_inicio(timestamp_inicio.toString());
@@ -298,7 +299,7 @@ public class LancamentoColaboradorController {
         lishoras.addAll(horadao.getHora(nome));
         observablelisthoras.setAll(lishoras);
         tabelaLancamento.setItems(observablelisthoras);
-
+        
         tabelaN.setCellValueFactory(new PropertyValueFactory<>("id"));
         tabelaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo")); 
         tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status")); 
@@ -307,7 +308,8 @@ public class LancamentoColaboradorController {
         tabelaFim.setCellValueFactory(new PropertyValueFactory<>("data_hora_fim")); 
         tabelaCR.setCellValueFactory(new PropertyValueFactory<>("centro_resultado")); 
         tabelaCR.setCellValueFactory(new PropertyValueFactory<>("cod_cr")); 
-        tabelaCliente.setCellValueFactory(new PropertyValueFactory<>("cliente")); 
+        tabelaCliente.setCellValueFactory(new PropertyValueFactory<>("cliente"));
+        tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
         tabelaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto"));
         
     }
