@@ -128,7 +128,7 @@ public class LancamentoColaboradorController {
     
     public void initialize() {
         
-        nomeUsuario.setText(new Usuario().getUsername());
+        nomeUsuario.setText(TelaLoginController.usuario1.getUsername());
         
         horaInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0, 1));
         minutoInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59));
