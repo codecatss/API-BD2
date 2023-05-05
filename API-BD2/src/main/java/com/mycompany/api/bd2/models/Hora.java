@@ -137,6 +137,7 @@ public class Hora {
     public String getProjeto() {
         return projeto;
     }
+    
 
     /**
      * @param projeto the projeto to set

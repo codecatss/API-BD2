@@ -28,6 +28,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 
 
 /**
@@ -99,6 +101,8 @@ public class CadastroUsuarioADMController {
     private List<String> obs = new ArrayList<>();
     private ObservableList<String> opcoes = FXCollections.observableArrayList();
     
+    String valorDoItemSelecionado;
+    
     private List<String> obs2 = new ArrayList<>();
     private ObservableList<String> opcoes2 = FXCollections.observableArrayList();
     
@@ -110,11 +114,23 @@ public class CadastroUsuarioADMController {
         nomeUsuario.setText("*nome do usuário*");
         botaoLimpar.setOnAction(event -> limparCampos());
         carregarTabelaUsuario();
+        tabelaCadastroUsuarios.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.getClickCount() == 1) { // Verifica se é um único clique
+                    Usuario item = tabelaCadastroUsuarios.getSelectionModel().getSelectedItem(); // Obtém o item selecionado
+                    valorDoItemSelecionado = item.getUsername().toString(); 
+                    System.out.println("Item selecionado: " + valorDoItemSelecionado); // Imprime no console
+                }
+            }
+    });
+            
     }
   
 
     @FXML
     private void BotaoAdicionar(ActionEvent event) {
+        System.out.println("click");
         Usuario usuario = new Usuario();
         usuarioDAO usuarioDao = new usuarioDAO();
         String nome = entradaNome.getText();
@@ -127,12 +143,24 @@ public class CadastroUsuarioADMController {
         usuario.setCargo(funcao);
         usuario.setStatus("ativo");
         //usuario.setHash(senha);
-        
-        
         usuarioDao.save(usuario);
     }
+    
     @FXML
-    public void handleTooltip(ActionEvent event){
+    private void BotaoInativar(ActionEvent event){
+        System.out.println("click");
+        usuarioDAO usuarioDao = new usuarioDAO();
+        Usuario usuario = new Usuario();
+        
+        String cargo = usuarioDao.getUsuarioByUsername(valorDoItemSelecionado).getCargo();
+        String nome = usuarioDao.getUsuarioByUsername(valorDoItemSelecionado).getNome();
+        String senha = usuarioDao.getUsuarioByUsername(valorDoItemSelecionado).getSenha();
+        usuario.setUsername(valorDoItemSelecionado);
+        usuario.setCargo(cargo);
+        usuario.setNome(nome);
+        usuario.setSenha(senha);
+        usuario.setStatus("inativo");
+        usuarioDao.update(usuario);
  
     }
     @FXML

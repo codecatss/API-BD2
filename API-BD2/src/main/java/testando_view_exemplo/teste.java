@@ -15,15 +15,18 @@ import com.mycompany.api.bd2.models.Usuario;
  */
 public class teste {
     public static void main(String[] args) {
-        usuarioDAO usuariodao = new usuarioDAO();
+        usuarioDAO usuarioDao = new usuarioDAO();
         Usuario usuario = new Usuario();
-        usuario.setUsername("marilia3");
-        usuario.setNome("Marília Mendonça");
-        //usuario.setSenha("dev123");
-        usuario.setCargo("admin");
+        //System.out.println(usuarioDao.getUsuarios());
+        String cargo = usuarioDao.getUsuarioByUsername("marilia").getCargo();
+        String nome = usuarioDao.getUsuarioByUsername("marilia").getNome();
+        String senha = usuarioDao.getUsuarioByUsername("marilia").getSenha();
+        usuario.setUsername("marilia");
+        usuario.setCargo(cargo);
+        usuario.setNome(nome);
+        usuario.setSenha(senha);
         usuario.setStatus("ativo");
-        //usuario.setHash(usuario.getSenha().toString());
-        usuariodao.save(usuario);
+        usuarioDao.update(usuario);
 }
     
     

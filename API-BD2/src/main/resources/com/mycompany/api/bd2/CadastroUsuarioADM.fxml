@@ -166,7 +166,7 @@
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
                               </Button>
-                              <Button id="botaoInativar" fx:id="botaoInativar" layoutX="175.0" layoutY="250.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="35.0" prefWidth="110.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Inativar" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="370.0">
+                              <Button id="botaoInativar" fx:id="botaoInativar" layoutX="175.0" layoutY="250.0" mnemonicParsing="false" onAction="#BotaoInativar" prefHeight="35.0" prefWidth="110.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Inativar" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="370.0">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>

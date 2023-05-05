@@ -185,6 +185,59 @@ public class usuarioDAO {
 			}
 			return usuario;
 	}
+    
+    public Usuario getUsuarioByUsername(String username){
+	
+                String sql = "SELECT * FROM usuario WHERE username = ?";
+				
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		//Classe que vai recuperar os dados do banco. ***SELECT****
+		ResultSet rset = null;
+                Usuario usuario = new Usuario();
+		
+		try {
+			conn = Conexao.createConnectionToMySQL();
+			
+			pstm = (PreparedStatement) conn.prepareStatement(sql);
+                        pstm.setString(1, username);			
+			rset = pstm.executeQuery();
+                        
+			
+                        if (rset.next()) {
+				
+				usuario.setUsername(rset.getString("username"));
+				usuario.setNome(rset.getString("nome"));
+                                usuario.setSenha(rset.getString("senha"));
+				usuario.setCargo(rset.getString("funcao"));
+				usuario.setStatus(rset.getString("status_user"));
+                                //usuario.setHash(rset.getString("hash_senha"));
+				                                
+			} else {
+                            return null;
+                        }
+                        
+		}catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(rset!=null) {
+						rset.close();
+					}
+					
+					if(pstm!=null) {
+						pstm.close();
+					}
+					
+					if(conn!=null) {
+						conn.close();
+					}
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			return usuario;
+    }
     public void update(Usuario usuario){
     String sql = "UPDATE USUARIO SET nome=?, senha=?, funcao=?, status_user=? WHERE username=?";
     Connection conn = null;
@@ -199,7 +252,7 @@ public class usuarioDAO {
         pstm.setString(3, usuario.getCargo());
         pstm.setString(4,usuario.getStatus());
         //pstm.setString(5,usuario.getHash());
-         //pstm.setInt(6,usuario.getId_user());
+         pstm.setString(5,usuario.getUsername());
          
         pstm.executeUpdate();
     }
