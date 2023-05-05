@@ -11,7 +11,7 @@ import com.mycompany.api.bd2.models.Usuario;
 public class usuarioDAO {
 
     public void save(Usuario usuario){
-        String sql = "INSERT INTO USUARIO(username, nome, senha, funcao, status_user, hash_senha) VALUES (?, ?, ?, ?, ?,?)";
+        String sql = "INSERT INTO USUARIO(username, nome, senha, funcao, status_user) VALUES (?, ?, ?, ?, ?)";
         Connection conn = null;
         PreparedStatement pstm = null; 
         
@@ -24,7 +24,7 @@ public class usuarioDAO {
             pstm.setString(3,usuario.getSenha());
             pstm.setString(4, usuario.getCargo());
             pstm.setString(5,usuario.getStatus());
-            pstm.setString(6,usuario.getHash());
+            //pstm.setString(6,usuario.getHash());
             
             pstm.execute();
         }
@@ -101,7 +101,8 @@ public class usuarioDAO {
 				
 				usuario.setUsername(rset.getString("username"));
 				usuario.setNome(rset.getString("nome"));
-                                usuario.setHash(rset.getString("senha"));
+                                //usuario.setHash(rset.getString("senha"));
+                                usuario.setSenha(rset.getString("senha"));
                                 usuario.setCargo(rset.getString("funcao"));
 				usuario.setStatus(rset.getString("status_user"));
                                 
@@ -157,7 +158,7 @@ public class usuarioDAO {
                                 usuario.setSenha(rset.getString("senha"));
 				usuario.setCargo(rset.getString("funcao"));
 				usuario.setStatus(rset.getString("status_user"));
-                                usuario.setHash(rset.getString("hash_senha"));
+                                //usuario.setHash(rset.getString("hash_senha"));
 				                                
 			} else {
                             return null;
@@ -185,7 +186,7 @@ public class usuarioDAO {
 			return usuario;
 	}
     public void update(Usuario usuario){
-    String sql = "UPDATE USUARIO SET nome=?, senha=?, funcao=?, status_user=?, hash_senha=? WHERE id_user=?";
+    String sql = "UPDATE USUARIO SET nome=?, senha=?, funcao=?, status_user=? WHERE username=?";
     Connection conn = null;
     PreparedStatement pstm = null; 
         
@@ -197,8 +198,8 @@ public class usuarioDAO {
         pstm.setString(2,usuario.getSenha());
         pstm.setString(3, usuario.getCargo());
         pstm.setString(4,usuario.getStatus());
-        pstm.setString(5,usuario.getHash());
-         pstm.setInt(6,usuario.getId_user());
+        //pstm.setString(5,usuario.getHash());
+         //pstm.setInt(6,usuario.getId_user());
          
         pstm.executeUpdate();
     }

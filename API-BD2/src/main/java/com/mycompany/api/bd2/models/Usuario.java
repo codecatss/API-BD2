@@ -14,13 +14,13 @@ import java.util.Base64;
  * @author danko
  */
 public class Usuario {
-    private int id_user;
+    //private int id_user;
     private String username = "";
     private String nome = "";
     private String senha = "";
     private Funcao cargo;
     private String status = "";
-    private String hash;
+    //private String hash;
    
     
     public String getUsername() {
@@ -80,13 +80,11 @@ public class Usuario {
     /**
      * @return the id_user
      */
-    public int getId_user() {
+    /*public int getId_user() {
         return id_user;
     }
 
-    /**
-     * @param id_user the id_user to set
-     */
+    
     public void setId_user(int id_user) {
         this.id_user = id_user;
     }
@@ -107,6 +105,6 @@ public class Usuario {
     }
         
        
-    }
+    }*/
 
 }

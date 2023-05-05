@@ -126,7 +126,7 @@ public class CadastroUsuarioADMController {
         usuario.setSenha(senha);
         usuario.setCargo(funcao);
         usuario.setStatus("ativo");
-        usuario.setHash(senha);
+        //usuario.setHash(senha);
         
         
         usuarioDao.save(usuario);
@@ -146,7 +146,7 @@ public class CadastroUsuarioADMController {
 
         colunaUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
         colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        colunaSenha.setCellValueFactory(new PropertyValueFactory<>("hash"));
+        colunaSenha.setCellValueFactory(new PropertyValueFactory<>("senha"));
         colunaFuncao.setCellValueFactory(new PropertyValueFactory<>("cargo"));
         colunaStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
          

@@ -22,7 +22,7 @@ public class teste {
         //usuario.setSenha("dev123");
         usuario.setCargo("admin");
         usuario.setStatus("ativo");
-        usuario.setHash(usuario.getSenha().toString());
+        //usuario.setHash(usuario.getSenha().toString());
         usuariodao.save(usuario);
 }
     
