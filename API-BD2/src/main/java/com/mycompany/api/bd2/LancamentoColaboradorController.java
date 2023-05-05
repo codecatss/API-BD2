@@ -102,8 +102,6 @@ public class LancamentoColaboradorController {
     @FXML
     private ComboBox<String> selecaoCR;
     @FXML
-    private ComboBox<String> selecaoAcionamento;
-    @FXML
     private Button botaoAdicionar;
     @FXML
     private Button botaoLimpar;
@@ -113,7 +111,8 @@ public class LancamentoColaboradorController {
     private TextField entradaJustificativa;
     @FXML
     private TextField entradaSolicitante;
-    
+    @FXML
+    private TextField entradaAcionamento;
     
     private List<String> obs = new ArrayList<>();
     private ObservableList<String> opcoes = FXCollections.observableArrayList();
@@ -146,11 +145,11 @@ public class LancamentoColaboradorController {
         
         horaTipo.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
         if (newVal != null && newVal.equals(TipoHora.SOBREAVISO.name().toLowerCase())) {
-            selecaoAcionamento.setVisible(true);
+            entradaAcionamento.setVisible(true);
             Acionamento.setVisible(true);
  
         } else {
-            selecaoAcionamento.setVisible(false);
+            entradaAcionamento.setVisible(false);
             Acionamento.setVisible(false);
         }
         });
@@ -167,11 +166,11 @@ public class LancamentoColaboradorController {
         minutoFim.getValueFactory().setValue(0);
         horaTipo.getSelectionModel().clearSelection();
         selecaoCliente.getSelectionModel().clearSelection();
-        selecaoAcionamento.getSelectionModel().clearSelection();
         selecaoCR.getSelectionModel().clearSelection();
         entradaProjeto.clear();
         entradaJustificativa.clear();
         entradaSolicitante.clear();
+        entradaAcionamento.clear();
         Acionamento.setVisible(false);
         
     }
@@ -314,7 +313,7 @@ public class LancamentoColaboradorController {
         tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
         tabelaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto"));
         tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
-        //tabelaSolicitante.setCellValueFactory(new PropertyValueFactory<>("solicitante"));
+        tabelaSolicitante.setCellValueFactory(new PropertyValueFactory<>("solicitante"));
 
         tabelaLancamento.refresh();
         
