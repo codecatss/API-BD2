@@ -235,7 +235,8 @@ INSERT INTO
     data_hora_fim,
     tipo,
     justificativa_lancamento,
-    projeto
+    projeto,
+    solicitante_lancamento
     )
 VALUES
     (
@@ -246,7 +247,8 @@ VALUES
         "2023-04-16 01:20:00",
         "hora-extra",
         "Populando os bancos",
-        "Projeto Integrador"
+        "Projeto Integrador",
+        "Mineda"
     ),
     (
         13652,
@@ -256,7 +258,8 @@ VALUES
         "2023-04-16 01:20:00",
         "hora-extra",
         "Populando os bancos",
-        "Projeto Integrador"
+        "Projeto Integrador",
+        "Mineda"
     ),
     (
         13652,
@@ -266,7 +269,8 @@ VALUES
         "2023-04-16 23:20:00",
         "hora-extra",
         "Conexão de banco de dados JDBC",
-        "Projeto Integrador"
+        "Projeto Integrador",
+        "Mineda"
     );
 
 -- Aprovação de hora-extra na tabela hora

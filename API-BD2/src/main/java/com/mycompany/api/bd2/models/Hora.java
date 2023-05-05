@@ -19,6 +19,7 @@ public class Hora {
     private String tipo;
     private String justificativa_lancamento;
     private String projeto;
+    private String solicitante;
     private String username_aprovador;
     private String justificativa_negacao;
     private StatusAprovacao status_aprovacao;
@@ -28,6 +29,14 @@ public class Hora {
             instancia = new Hora();
         }
         return instancia;
+    }
+
+    public String getSolicitante() {
+        return solicitante;
+    }
+
+    public void setSolicitante(String solicitante) {
+        this.solicitante = solicitante;
     }
     
     

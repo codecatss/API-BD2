@@ -76,6 +76,8 @@ public class LancamentoColaboradorController {
     @FXML
     private TableColumn<?, ?> tabelaProjeto;   
     @FXML
+    private TableColumn<?,?> tabelaSolicitante;
+    @FXML
     private TableColumn<?, ?> tabelaJustificativa;
     @FXML
     private Label errohoraI;
@@ -257,22 +259,18 @@ public class LancamentoColaboradorController {
                     hora.setData_hora_fim(timestamp_fim.toString());
                     hora.setUsername_lancador(nomeUsuario.getText());
                     hora.setCnpj_cliente(cliente.getCliente(nome_cliente).getCnpj());
-                    hora.setJustificativa_lancamento("Muita demanda");
+                    hora.setJustificativa_lancamento(entradaJustificativa.getText());
                     hora.setStatus_aprovacao("pendente");
                     hora.setTipo(horaTipo.getSelectionModel().getSelectedItem());
                     horaDAO hrDAO = new horaDAO();
 
                     hrDAO.save(hora);
 
-                    System.out.println("Foi");
+                    System.out.println("Salvo");
+                    carregarTabelaLancamento();
 
                 }catch (Exception e){
-                    String nome_cliente = selecaoCliente.getSelectionModel().getSelectedItem();
-                    clienteDAO cliente = new clienteDAO();
-                    Hora hora = new Hora();
                     System.out.println("Houve um erro ao salvar");
-                    hora.setCnpj_cliente(cliente.getCliente(nome_cliente).getCnpj());
-                    System.out.println(cliente.getCliente(nome_cliente).getCnpj());
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Houve um erro ao salvar");
                     alert.setHeaderText(null);
@@ -296,6 +294,7 @@ public class LancamentoColaboradorController {
         /*essa é a config que eu usei pra exibir horas lançadas pelo user logado na tabela*/
         Usuario usuario = Usuario.getInstance();
         String nome = usuario.getUsername();
+        lishoras.clear();
         lishoras.addAll(horadao.getHora(nome));
         observablelisthoras.setAll(lishoras);
         tabelaLancamento.setItems(observablelisthoras);
@@ -311,6 +310,10 @@ public class LancamentoColaboradorController {
         tabelaCliente.setCellValueFactory(new PropertyValueFactory<>("cliente"));
         tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
         tabelaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto"));
+        tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
+        tabelaSolicitante.setCellValueFactory(new PropertyValueFactory<>("solicitante"));
+
+        tabelaLancamento.refresh();
         
     }
     
