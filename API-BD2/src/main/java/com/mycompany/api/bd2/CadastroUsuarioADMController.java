@@ -148,6 +148,7 @@ public class CadastroUsuarioADMController {
     
     @FXML
     private void BotaoInativar(ActionEvent event){
+        lisusuarios.clear();
         System.out.println("click");
         usuarioDAO usuarioDao = new usuarioDAO();
         Usuario usuario = new Usuario();
@@ -161,6 +162,7 @@ public class CadastroUsuarioADMController {
         usuario.setSenha(senha);
         usuario.setStatus("inativo");
         usuarioDao.update(usuario);
+        carregarTabelaUsuario();
  
     }
     @FXML
