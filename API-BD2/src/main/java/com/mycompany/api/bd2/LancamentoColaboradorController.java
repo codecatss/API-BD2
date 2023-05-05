@@ -38,7 +38,7 @@ import com.mycompany.api.bd2.models.*;
 
 
 public class LancamentoColaboradorController {
-
+    
     @FXML
     private Button fecharTela;
     @FXML
@@ -127,7 +127,7 @@ public class LancamentoColaboradorController {
     
     public void initialize() {
         
-        nomeUsuario.setText(Usuario.getInstance().getUsername());
+        nomeUsuario.setText(new Usuario().getUsername());
         
         horaInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0, 1));
         minutoInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59));
@@ -292,7 +292,7 @@ public class LancamentoColaboradorController {
     public void carregarTabelaLancamento(){
         horaDAO horadao = new horaDAO();
         /*essa é a config que eu usei pra exibir horas lançadas pelo user logado na tabela*/
-        Usuario usuario = Usuario.getInstance();
+        Usuario usuario = new Usuario();
         String nome = usuario.getUsername();
         lishoras.clear();
         lishoras.addAll(horadao.getHora(nome));
@@ -311,7 +311,7 @@ public class LancamentoColaboradorController {
         tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
         tabelaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto"));
         tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
-        tabelaSolicitante.setCellValueFactory(new PropertyValueFactory<>("solicitante"));
+        //tabelaSolicitante.setCellValueFactory(new PropertyValueFactory<>("solicitante"));
 
         tabelaLancamento.refresh();
         

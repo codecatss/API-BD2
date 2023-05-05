@@ -1,6 +1,9 @@
 package com.mycompany.api.bd2.models;
 
 import com.mycompany.api.bd2.models.Funcao;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -11,22 +14,14 @@ import com.mycompany.api.bd2.models.Funcao;
  * @author danko
  */
 public class Usuario {
- 
- private static Usuario instancia = null;
+    private int id_user;
     private String username = "";
     private String nome = "";
     private String senha = "";
-    private String status = "";
     private Funcao cargo;
-
-    private Usuario() {}
-    
-    public static Usuario getInstance() {
-        if (instancia == null) {
-            instancia = new Usuario();
-        }
-        return instancia;
-    }
+    private String status = "";
+    private String hash;
+   
     
     public String getUsername() {
         return username;
@@ -80,6 +75,38 @@ public class Usuario {
         this.nome = "";
         this.senha = "";
         this.status = "";   
+    }
+
+    /**
+     * @return the id_user
+     */
+    public int getId_user() {
+        return id_user;
+    }
+
+    /**
+     * @param id_user the id_user to set
+     */
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
+    }
+
+    public String getHash() {
+        
+        return hash;
+    }
+    public void setHash(String senha){
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = md.digest(senha.getBytes());
+            String hashSenha = Base64.getEncoder().encodeToString(hashBytes);
+            this.hash = hashSenha;
+    } 
+        catch (NoSuchAlgorithmException e) {
+    // tratamento de exceção
+    }
+        
+       
     }
 
 }

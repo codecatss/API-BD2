@@ -179,7 +179,7 @@ public class horaDAO {
                                 hora.setUsername_aprovador(rset.getString("username_aprovador"));
                                 hora.setJustificativa_negacao(rset.getString("justificativa_negacao"));
                                 hora.setStatus_aprovacao(rset.getString("status_aprovacao"));
-                                hora.setSolicitante(rset.getString("solicitante_lancamento"));
+                                //hora.setSolicitante(rset.getString("solicitante_lancamento"));
 
 				horasUser.add(hora);
 				

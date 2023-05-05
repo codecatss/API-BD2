@@ -5,7 +5,9 @@
 package testando_view_exemplo;
 
 import com.mycompany.api.bd2.daos.horaDAO;
+import com.mycompany.api.bd2.daos.usuarioDAO;
 import com.mycompany.api.bd2.models.Hora;
+import com.mycompany.api.bd2.models.Usuario;
 
 /**
  *
@@ -13,10 +15,16 @@ import com.mycompany.api.bd2.models.Hora;
  */
 public class teste {
     public static void main(String[] args) {
-        horaDAO horadao = new horaDAO();
-        Hora hora = new Hora();
-        horadao.getHora("brendel");
-    }
+        usuarioDAO usuariodao = new usuarioDAO();
+        Usuario usuario = new Usuario();
+        usuario.setUsername("marilia3");
+        usuario.setNome("Marília Mendonça");
+        //usuario.setSenha("dev123");
+        usuario.setCargo("admin");
+        usuario.setStatus("ativo");
+        usuario.setHash(usuario.getSenha().toString());
+        usuariodao.save(usuario);
+}
     
     
 }
