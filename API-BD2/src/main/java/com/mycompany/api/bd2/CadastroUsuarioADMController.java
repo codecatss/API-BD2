@@ -22,6 +22,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import com.mycompany.api.bd2.models.Usuario;
+import java.io.IOException;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -29,7 +30,12 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 
 /**
@@ -130,6 +136,7 @@ public class CadastroUsuarioADMController {
 
     @FXML
     private void BotaoAdicionar(ActionEvent event) {
+        lisusuarios.clear();
         System.out.println("click");
         Usuario usuario = new Usuario();
         usuarioDAO usuarioDao = new usuarioDAO();
@@ -144,6 +151,7 @@ public class CadastroUsuarioADMController {
         usuario.setStatus("ativo");
         //usuario.setHash(senha);
         usuarioDao.save(usuario);
+        carregarTabelaUsuario();
     }
     
     @FXML
@@ -193,7 +201,6 @@ public class CadastroUsuarioADMController {
     
     public void tipoFuncao(){
         obs.clear();
-        
         obs.add("admin");
         obs.add("gestor");
         obs.add("colaborador");
@@ -203,11 +210,21 @@ public class CadastroUsuarioADMController {
     
     public void tipoStatus(){
         obs2.clear();
-        
         obs2.add("ativo");
         obs2.add("inativo");
         opcoes2.setAll(obs2);
         selecaoStatus.setItems(opcoes2);
     }
-    
+    @FXML
+    private void botaoSair(ActionEvent event) throws IOException{
+        Usuario usuario = new Usuario();
+        usuario.logout();
+        System.out.println("sair");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
+        Parent root = loader.load();
+        Scene cena = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+        stage.setScene(cena);
+        stage.show();
+    }
 }

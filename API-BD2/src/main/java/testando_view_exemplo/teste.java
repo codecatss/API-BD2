@@ -15,7 +15,7 @@ import com.mycompany.api.bd2.models.Usuario;
  */
 public class teste {
     public static void main(String[] args) {
-        usuarioDAO usuarioDao = new usuarioDAO();
+        /*usuarioDAO usuarioDao = new usuarioDAO();
         Usuario usuario = new Usuario();
         //System.out.println(usuarioDao.getUsuarios());
         String cargo = usuarioDao.getUsuarioByUsername("marilia").getCargo();
@@ -26,7 +26,13 @@ public class teste {
         usuario.setNome(nome);
         usuario.setSenha(senha);
         usuario.setStatus("ativo");
-        usuarioDao.update(usuario);
+        usuarioDao.update(usuario);/*
+        */
+        
+        horaDAO horadao = new horaDAO();
+        Hora hora = new Hora();
+        
+        horadao.getHora("caio");
 }
     
     
