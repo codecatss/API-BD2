@@ -28,6 +28,13 @@ public class TelaLoginController implements Initializable {
     @FXML
     private Button LoginBotaoFechar;
 
+    public static Usuario getUsuario1() {
+        return usuario1;
+    }
+    
+    
+    public static Usuario usuario1 = new Usuario();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -46,6 +53,8 @@ public class TelaLoginController implements Initializable {
                 System.out.println(usuario.getNome());
                 LoginSenha.setText("");
                 // Usuário e senha são válidos, exibir próxima tela
+                usuario1.setUsername(user);
+                //usuario1.setSenha(senha);
                 App.setRoot("LancamentoColaborador");
                 
             } else{
@@ -100,10 +109,7 @@ public class TelaLoginController implements Initializable {
 
     @FXML
     private void handleFecharButtonAction(ActionEvent event) {
-        // Obtém a janela atual
        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-       // Fecha a janela atual
        stage.close();
     }
 }

@@ -117,7 +117,8 @@ public class CadastroUsuarioADMController {
     private ObservableList<Usuario> observablelistusuario = FXCollections.observableArrayList();
     
     public void initialize() {
-        nomeUsuario.setText("*nome do usuário*");
+        nomeUsuario.setText(new Usuario().getUsername());
+        //nomeUsuario.setText("*nome do usuário*");
         botaoLimpar.setOnAction(event -> limparCampos());
         carregarTabelaUsuario();
         tabelaCadastroUsuarios.setOnMouseClicked(new EventHandler<MouseEvent>() {
