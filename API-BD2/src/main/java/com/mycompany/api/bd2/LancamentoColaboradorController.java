@@ -113,6 +113,8 @@ public class LancamentoColaboradorController {
     private TextField entradaSolicitante;
     
     private String usuario = TelaLoginController.usuariologado.getUsername();
+    @FXML
+    private TextField entradaAcionamento;
     
     private List<String> obs = new ArrayList<>();
     private ObservableList<String> opcoes = FXCollections.observableArrayList();
