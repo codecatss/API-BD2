@@ -178,6 +178,57 @@ public class clienteDAO {
                         System.out.println(cliente);
         return cliente;
     }
+    
+    public Cliente getClientebyCNPJ(long cnpj){
+	
+                String sql = "SELECT * FROM cliente WHERE cnpj = ?";
+				
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		//Classe que vai recuperar os dados do banco. ***SELECT****
+		ResultSet rset = null;
+                Cliente cliente = new Cliente();
+		
+		try {
+			conn = Conexao.createConnectionToMySQL();
+			
+			pstm = (PreparedStatement) conn.prepareStatement(sql);
+                        pstm.setLong(1, cnpj);			
+			rset = pstm.executeQuery();
+                        
+			
+                        if (rset.next()) {
+				
+				cliente.setCnpj(rset.getLong("cnpj"));
+				cliente.setRazao_social(rset.getString("razao_social"));
+                                cliente.setStatus_cliente(rset.getString("status_cliente"));
+				                                
+			} else {
+                            return null;
+                        }
+                        
+		}catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(rset!=null) {
+						rset.close();
+					}
+					
+					if(pstm!=null) {
+						pstm.close();
+					}
+					
+					if(conn!=null) {
+						conn.close();
+					}
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			return cliente;
+    }
+
     public void update(Cliente cliente) {
     String sql = "UPDATE cliente SET razao_social=?, status_cliente=? WHERE cnpj=?";
     Connection conn = null;
