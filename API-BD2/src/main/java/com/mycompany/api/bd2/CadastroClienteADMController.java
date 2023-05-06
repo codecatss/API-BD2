@@ -81,6 +81,8 @@ public class CadastroClienteADMController {
     private TableColumn<?, ?> colunaCNPJ;
     @FXML
     private TableColumn<?, ?> colunaRS;
+    @FXML
+    private TableColumn<?, ?> colunaStatus;
 
     private String usuario = TelaLoginController.usuariologado.getUsername();
 
@@ -123,6 +125,7 @@ public class CadastroClienteADMController {
 
         colunaCNPJ.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
         colunaRS.setCellValueFactory(new PropertyValueFactory<>("razao_social"));
+        colunaStatus.setCellValueFactory(new PropertyValueFactory<>("status_cliente"));
     }
 
     @FXML

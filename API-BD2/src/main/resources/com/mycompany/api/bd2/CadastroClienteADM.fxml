@@ -173,7 +173,7 @@
                            <children>
                               <TableView id="tabelaCadastroCliente" fx:id="tabelaCadastroCliente" prefHeight="609.0" prefWidth="708.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                 <columns>
-                                    <TableColumn id="colunaCNPJ" fx:id="colunaCNPJ1" maxWidth="3000.0" minWidth="168.0" prefWidth="260.0" text="CNPJ" />
+                                  <TableColumn id="colunaCNPJ" fx:id="colunaCNPJ" maxWidth="3000.0" minWidth="168.0" prefWidth="260.0" text="CNPJ" />
                                   <TableColumn id="colunaRS" fx:id="colunaRS" maxWidth="1000.0" minWidth="255.0" prefWidth="264.0" text="Razão Social" />
                                   <TableColumn id="colunaStatus" fx:id="colunaStatus" maxWidth="3000.0" minWidth="164.0" prefWidth="316.0" text="Status" />
                                 </columns>
