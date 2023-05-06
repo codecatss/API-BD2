@@ -180,7 +180,6 @@
                               <ComboBox id="horaTipo" fx:id="horaTipo" layoutX="125.0" layoutY="20.0" onMouseClicked="#tipoHora" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="20.0" />
                               <ComboBox id="selecaoCliente" fx:id="selecaoCliente" layoutX="475.0" layoutY="20.0" onMouseClicked="#forneceCliente" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="475.0" AnchorPane.topAnchor="20.0" />
                               <ComboBox id="selecaoCR" fx:id="selecaoCR" layoutX="875.0" layoutY="20.0" onMouseClicked="#forneceCR" prefHeight="30.0" prefWidth="200.0" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="20.0" />
-                              <ComboBox id="selecaoAcionamento" fx:id="selecaoAcionamento" layoutX="875.0" layoutY="170.0" prefHeight="30.0" prefWidth="200.0" visible="false" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="245.0" />
                               <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutX="350.0" layoutY="235.0" mnemonicParsing="false" onAction="#botaoAdicionar" prefHeight="35.0" prefWidth="110.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="350.0">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
@@ -209,6 +208,7 @@
                                  </font>
                               </Label>
                               <TextField id="entradaSolicitante" fx:id="entradaSolicitante" layoutX="115.0" layoutY="246.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="245.0" />
+                              <TextField id="entradaAcionamento" fx:id="entradaAcionamento" layoutX="905.0" layoutY="125.0" prefHeight="30.0" prefWidth="200.0" visible="false" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="245.0" />
                            </children>
                         </AnchorPane>
                      </children>
