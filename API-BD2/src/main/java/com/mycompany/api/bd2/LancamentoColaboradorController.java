@@ -292,6 +292,11 @@ public class LancamentoColaboradorController {
          
     }
     
+    public String forneceCliente(int cnpj){
+        clienteDAO cldao = new clienteDAO();
+        return cldao.getCliente(cnpj).getRazao_social();
+    }
+    
     @FXML
     public void carregarTabelaLancamento(){
         horaDAO horadao = new horaDAO();
@@ -301,7 +306,7 @@ public class LancamentoColaboradorController {
         tabelaLancamento.setItems(observablelisthoras);
         
         tabelaN.setCellValueFactory(new PropertyValueFactory<>("id"));
-        tabelaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo")); 
+        //tabelaTipo.setCellValueFactory(forneceCliente(0));
         tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status")); 
         tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao")); 
         tabelaInicio.setCellValueFactory(new PropertyValueFactory<>("data_hora_inicio")); 
