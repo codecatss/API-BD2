@@ -161,7 +161,7 @@
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
                               </Button>
-                              <Button id="botaoEditar" fx:id="botaoEditar" layoutX="25.0" layoutY="250.0" mnemonicParsing="false" onAction="#BotaoAdicionar" prefHeight="35.0" prefWidth="110.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Editar" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="370.0">
+                              <Button id="botaoEditar" fx:id="botaoEditar" layoutX="25.0" layoutY="250.0" mnemonicParsing="false" onAction="#BotaoEditar" prefHeight="35.0" prefWidth="110.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Editar" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="370.0">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
