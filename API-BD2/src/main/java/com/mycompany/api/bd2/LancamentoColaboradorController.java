@@ -292,10 +292,6 @@ public class LancamentoColaboradorController {
          
     }
     
-    public String forneceCliente(int cnpj){
-        clienteDAO cldao = new clienteDAO();
-        return cldao.getCliente(cnpj).getRazao_social();
-    }
     
     @FXML
     public void carregarTabelaLancamento(){
