@@ -62,7 +62,7 @@ public class LancamentoColaboradorController {
     @FXML
     private TableColumn<?, ?> tabelaN;
     @FXML
-    private TableColumn<?, ?> tabelaTipo;
+    private TableColumn<Hora, String> tabelaTipo;
     @FXML
     private TableColumn<?, ?> tabelaStatus;
     @FXML
@@ -302,14 +302,14 @@ public class LancamentoColaboradorController {
         tabelaLancamento.setItems(observablelisthoras);
         
         tabelaN.setCellValueFactory(new PropertyValueFactory<>("id"));
-        //tabelaTipo.setCellValueFactory(forneceCliente(0));
+        tabelaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status")); 
         tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao")); 
         tabelaInicio.setCellValueFactory(new PropertyValueFactory<>("data_hora_inicio")); 
         tabelaFim.setCellValueFactory(new PropertyValueFactory<>("data_hora_fim")); 
         tabelaCR.setCellValueFactory(new PropertyValueFactory<>("centro_resultado")); 
         tabelaCR.setCellValueFactory(new PropertyValueFactory<>("cod_cr")); 
-        tabelaCliente.setCellValueFactory(new PropertyValueFactory<>("cliente"));
+        tabelaCliente.setCellValueFactory(new PropertyValueFactory<>("nome_cliente"));
         tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
         tabelaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto"));
         tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
