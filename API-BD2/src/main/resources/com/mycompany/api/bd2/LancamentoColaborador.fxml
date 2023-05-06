@@ -82,10 +82,10 @@
                                  <columns>
                                     <TableColumn id="tabelaN" fx:id="tabelaN" maxWidth="350.0" minWidth="30.0" prefWidth="30.0" text="Nº" />
                                     <TableColumn id="tabelaTipo" fx:id="tabelaTipo" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="-1.0" text="Tipo" />
-                                    <TableColumn id="tabelaTipo" fx:id="tabelaTipo" maxWidth="1250.0" minWidth="75.0" prefWidth="75.0" text="Tipo" />
+                                    <TableColumn id="tabelaTipo" fx:id="tabelaTipo" maxWidth="1250.0" minWidth="150.0" prefWidth="150.0" text="Tipo" />
                                     <TableColumn id="tabelaStatus" fx:id="tabelaStatus" maxWidth="1250.0" minWidth="75.0" prefWidth="75.0" text="Status" />
-                                    <TableColumn id="tabelaInicio" fx:id="tabelaInicio" maxWidth="1750.0" minWidth="150.0" prefWidth="150.0" text="Início" />
-                                    <TableColumn id="tabelaFim" fx:id="tabelaFim" maxWidth="1750.0" minWidth="150.0" prefWidth="150.0" text="Fim" />
+                                    <TableColumn id="tabelaInicio" fx:id="tabelaInicio" maxWidth="1750.0" minWidth="200.0" prefWidth="200.0" text="Início" />
+                                    <TableColumn id="tabelaFim" fx:id="tabelaFim" maxWidth="1750.0" minWidth="200.0" prefWidth="200.0" text="Fim" />
                                     <TableColumn id="tabelaCR" fx:id="tabelaCR" maxWidth="1250.0" minWidth="100.0" prefWidth="100.0" text="CR" />
                                     <TableColumn id="tabelaCliente" fx:id="tabelaCliente" maxWidth="1500.0" minWidth="100.0" prefWidth="100.0" text="Cliente" />
                                     <TableColumn id="tabelaProjeto" fx:id="tabelaProjeto" maxWidth="1500.0" minWidth="125.0" prefWidth="125.0" text="Projeto" />

@@ -180,8 +180,8 @@ public class LancamentoColaboradorController {
     
     @FXML
     public void tipoHora() throws ParseException{
-    obs.add("Hora-"+ TipoHora.EXTRA.name().toLowerCase());
-    obs.add(TipoHora.SOBREAVISO.name().toLowerCase());
+    obs.add("Hora extra");
+    obs.add("Sobreaviso");
     opcoes.setAll(obs);
     horaTipo.setItems(opcoes);
     }
@@ -218,7 +218,6 @@ public class LancamentoColaboradorController {
                 if((horaFim.getValue()>horaInicio.getValue())||((horaInicio.getValue().equals(horaFim.getValue()))&&minutoFim.getValue()>minutoInicio.getValue())){
                     salvar = true;
                 }else{
-                    System.out.println("qubra aqui");
                     errohoraI.setText("Hora inválida");
                     errohoraII.setText("Hora inválida");
                     horaInicio.setStyle(erro);
@@ -265,7 +264,7 @@ public class LancamentoColaboradorController {
                     hora.setCnpj_cliente(cliente.getCliente(nome_cliente).getCnpj());
                     hora.setJustificativa_lancamento(entradaJustificativa.getText());
                     hora.setStatus_aprovacao("pendente");
-                    hora.setTipo(horaTipo.getSelectionModel().getSelectedItem());
+                    hora.setTipo(horaTipo.getSelectionModel().getSelectedItem().toUpperCase());
                     horaDAO hrDAO = new horaDAO();
 
                     hrDAO.save(hora);
