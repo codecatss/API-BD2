@@ -35,6 +35,8 @@ import javafx.scene.control.Alert.AlertType;
 
 
 import com.mycompany.api.bd2.models.*;
+import javafx.application.Platform;
+import javafx.stage.Stage;
 
 
 public class LancamentoColaboradorController {
@@ -154,6 +156,10 @@ public class LancamentoColaboradorController {
             entradaAcionamento.setVisible(false);
             Acionamento.setVisible(false);
         }
+        });
+        minimizarTela.setOnAction(e -> {
+            Stage stage = (Stage) minimizarTela.getScene().getWindow();
+            stage.setIconified(true);
         });
     }
     
@@ -347,6 +353,9 @@ public class LancamentoColaboradorController {
         }
         opCli.setAll(cli);
         selecaoCliente.setItems(opCli);
+    }
+    public void fechaTela(){
+    Platform.exit();
     }
     
     @FXML

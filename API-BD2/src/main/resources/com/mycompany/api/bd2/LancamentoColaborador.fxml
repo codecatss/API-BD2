@@ -25,7 +25,7 @@
                <children>
                   <AnchorPane layoutX="534.0" layoutY="-80.0" prefHeight="40.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button id="fecharTela" fx:id="fecharTela" layoutX="1270.0" layoutY="5.0" mnemonicParsing="false" styleClass="close" stylesheets="@EstilizacaoTelas.css" text="X" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="5.0">
+                        <Button id="fecharTela" fx:id="fecharTela" layoutX="1270.0" layoutY="5.0" mnemonicParsing="false" onAction="#fechaTela" styleClass="close" stylesheets="@EstilizacaoTelas.css" text="X" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="5.0">
                            <font>
                               <Font name="Arial Bold" size="12.0" />
                            </font>
@@ -82,7 +82,7 @@
                                  <columns>
                                     <TableColumn id="tabelaN" fx:id="tabelaN" maxWidth="350.0" minWidth="30.0" prefWidth="30.0" text="Nº" />
                                     <TableColumn id="tabelaTipo" fx:id="tabelaTipo" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="-1.0" text="Tipo" />
-                                    <TableColumn id="tabelaTipo" fx:id="tabelaTipo" maxWidth="1250.0" minWidth="75.0" prefWidth="75.0" text="Tipo" />
+                                    <TableColumn id="colunaTipo" fx:id="colunaTipo" maxWidth="1250.0" minWidth="75.0" prefWidth="75.0" text="Tipo" />
                                     <TableColumn id="tabelaStatus" fx:id="tabelaStatus" maxWidth="1250.0" minWidth="75.0" prefWidth="75.0" text="Status" />
                                     <TableColumn id="tabelaInicio" fx:id="tabelaInicio" maxWidth="1750.0" minWidth="150.0" prefWidth="150.0" text="Início" />
                                     <TableColumn id="tabelaFim" fx:id="tabelaFim" maxWidth="1750.0" minWidth="150.0" prefWidth="150.0" text="Fim" />
