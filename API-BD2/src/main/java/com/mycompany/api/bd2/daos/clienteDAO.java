@@ -178,5 +178,34 @@ public class clienteDAO {
                         System.out.println(cliente);
         return cliente;
     }
+    public void update(Cliente cliente) {
+    String sql = "UPDATE cliente SET razao_social=?, status_cliente=? WHERE cnpj=?";
+    Connection conn = null;
+    PreparedStatement pstm = null;
+
+    try {
+        conn = Conexao.createConnectionToMySQL();
+
+        pstm = (PreparedStatement) conn.prepareStatement(sql);
+        pstm.setString(1, cliente.getRazao_social());
+        pstm.setString(2, cliente.getStatus_cliente());
+        pstm.setLong(3, cliente.getCnpj());
+
+        pstm.executeUpdate();
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    }
 }
 
