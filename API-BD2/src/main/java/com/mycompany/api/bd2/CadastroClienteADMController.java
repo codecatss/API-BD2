@@ -82,15 +82,17 @@ public class CadastroClienteADMController {
     @FXML
     private TableColumn<?, ?> colunaRS;
 
+    private String usuario = TelaLoginController.usuariologado.getUsername();
+
     private List<String> obs = new ArrayList<>();
     private ObservableList<String> opcoes = FXCollections.observableArrayList();
     private List<Cliente> lisClientes = new ArrayList<>();
     private ObservableList<Cliente> observableListCliente = FXCollections.observableArrayList();
-    
+
     long valorDoItemSelecionado;
 
     public void initialize() {
-        nomeUsuario.setText("*nome do usuário*");
+        nomeUsuario.setText(usuario);
 
         botaoLimpar.setOnAction(event -> limparCampos());
         carregarTabelaCliente();
@@ -125,7 +127,6 @@ public class CadastroClienteADMController {
 
     @FXML
     private void BotaoAdicionar(ActionEvent event) {
-        System.out.println("botão adicionar");
         if (entradaCNPJ.getText().isEmpty() || entradaRS.getText().isEmpty()) {
             System.out.println("Preencha todos os campos - cadastro de cliente");
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -136,29 +137,24 @@ public class CadastroClienteADMController {
         } else {
             Cliente cliente = new Cliente();
             cliente.setCnpj(Long.parseLong(entradaCNPJ.getText()));
-            System.out.println("set cnpj ok");
             cliente.setRazao_social(entradaRS.getText());
-            System.out.println("set rs ok");
             cliente.setStatus_cliente("ativo");
-            System.out.println("set status ok");
 
             clienteDAO clienteDao = new clienteDAO();
             clienteDao.save(cliente);
-            System.out.println("save ok");
+            System.out.println("Salvo");
             carregarTabelaCliente();
         }
     }
 
     @FXML
     public void limparCampos() {
-        System.out.println("botão limpar");
         entradaCNPJ.clear();
         entradaRS.clear();
     }
 
     @FXML
     private void BotaoEditar(ActionEvent event) {
-        System.out.println("botão editar");
 
         // verifica se alguma linha foi selecionada
         if (tabelaCadastroCliente.getSelectionModel().getSelectedItem() != null) {
@@ -202,7 +198,6 @@ public class CadastroClienteADMController {
 
     @FXML
     private void BotaoInativar(ActionEvent event) {
-        System.out.println("botão inativar");
         clienteDAO clientedao = new clienteDAO();
         Cliente cliente = new Cliente();
 
@@ -216,7 +211,6 @@ public class CadastroClienteADMController {
 
     @FXML
     private void BotaoAtivar(ActionEvent event) {
-        System.out.println("botão ativar");
         clienteDAO clientedao = new clienteDAO();
         Cliente cliente = new Cliente();
 
@@ -235,15 +229,67 @@ public class CadastroClienteADMController {
     }
 
     @FXML
+    private void BotaoMinimizar(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setIconified(true);
+    }
+
+    @FXML
     private void BotaoSair(ActionEvent event) throws IOException {
         Usuario usuario = new Usuario();
         usuario.logout();
-        System.out.println("sair");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
         Parent root = loader.load();
         Scene cena = new Scene(root);
         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
         stage.setScene(cena);
         stage.show();
+    }
+
+    @FXML
+    void GestaoUsuarios(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroUsuarioADM.fxml"));
+        Parent root = loader.load();
+        Scene cena = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+        stage.setScene(cena);
+        stage.show();
+    }
+
+    @FXML
+    void GestaoCRs(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Em progresso");
+        alert.setHeaderText(null);
+        alert.setContentText("Desculpe o transtorno, estamos sempre trabalhando em melhorias");
+        alert.showAndWait();
+    }
+
+    @FXML
+    void GestaoClientes(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroClienteADM.fxml"));
+        Parent root = loader.load();
+        Scene cena = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+        stage.setScene(cena);
+        stage.show();
+    }
+
+    @FXML
+    void AprovarHoras(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Em progresso");
+        alert.setHeaderText(null);
+        alert.setContentText("Desculpe o transtorno, estamos sempre trabalhando em melhorias");
+        alert.showAndWait();
+    }
+
+    @FXML
+    void Relatorios(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Em progresso");
+        alert.setHeaderText(null);
+        alert.setContentText("Desculpe o transtorno, estamos sempre trabalhando em melhorias");
+        alert.showAndWait();
     }
 }
