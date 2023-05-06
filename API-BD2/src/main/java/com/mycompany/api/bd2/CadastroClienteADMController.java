@@ -6,6 +6,8 @@ package com.mycompany.api.bd2;
 
 import com.mycompany.api.bd2.daos.clienteDAO;
 import com.mycompany.api.bd2.models.Cliente;
+import com.mycompany.api.bd2.models.Usuario;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +16,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -24,6 +30,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -79,7 +86,7 @@ public class CadastroClienteADMController {
     private ObservableList<String> opcoes = FXCollections.observableArrayList();
     private List<Cliente> lisClientes = new ArrayList<>();
     private ObservableList<Cliente> observableListCliente = FXCollections.observableArrayList();
-
+    
     long valorDoItemSelecionado;
 
     public void initialize() {
@@ -223,6 +230,20 @@ public class CadastroClienteADMController {
 
     @FXML
     private void BotaoFechar(ActionEvent event) {
-        System.out.println("botão fechar");
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void BotaoSair(ActionEvent event) throws IOException {
+        Usuario usuario = new Usuario();
+        usuario.logout();
+        System.out.println("sair");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
+        Parent root = loader.load();
+        Scene cena = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+        stage.setScene(cena);
+        stage.show();
     }
 }
