@@ -303,7 +303,6 @@ public class LancamentoColaboradorController {
         
         tabelaN.setCellValueFactory(new PropertyValueFactory<>("id"));
         tabelaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
-        tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status")); 
         tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao")); 
         tabelaInicio.setCellValueFactory(new PropertyValueFactory<>("data_hora_inicio")); 
         tabelaFim.setCellValueFactory(new PropertyValueFactory<>("data_hora_fim")); 

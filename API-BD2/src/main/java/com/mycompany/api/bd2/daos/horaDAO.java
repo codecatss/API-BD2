@@ -179,7 +179,8 @@ public class horaDAO {
                                 hora.setUsername_aprovador(rset.getString("username_aprovador"));
                                 hora.setJustificativa_negacao(rset.getString("justificativa_negacao"));
                                 hora.setStatus_aprovacao(rset.getString("status_aprovacao"));
-                                //hora.setSolicitante(rset.getString("solicitante_lancamento"));
+                                hora.setSolicitante(rset.getString("solicitante_lancamento"));
+                                hora.setNome_cliente(getNomeClient(rset.getLong("cnpj_cliente")));
 
 				horasUser.add(hora);
 				
@@ -207,4 +208,46 @@ public class horaDAO {
 			return horasUser;
 	}
     
+    private String nome;
+    public String getNomeClient(long n_cnpj){
+        String sql = "SELECT razao_social FROM 2rp.cliente WHERE cnpj = ?";
+		
+            Set<Hora> horas = new HashSet<Hora>();
+
+            Connection conn = null;
+            PreparedStatement pstm = null;
+            //Classe que vai recuperar os dados do banco. ***SELECT****
+            ResultSet rset = null;
+
+            try {
+                conn = Conexao.createConnectionToMySQL();
+
+                pstm = (PreparedStatement) conn.prepareStatement(sql);
+                pstm.setLong(1, n_cnpj);
+
+                rset = pstm.executeQuery();
+
+                if (rset.next()) {
+                    nome = rset.getString("razao_social");
+                }
+            }catch(Exception e){
+                e.printStackTrace();}
+            finally {
+                try {
+                    if(rset!=null) {
+                            rset.close();
+                    }
+
+                    if(pstm!=null) {
+                            pstm.close();
+                    }
+
+                    if(conn!=null) {
+                            conn.close();
+                    }
+                }catch(Exception e) {
+                    e.printStackTrace();
+                }
+        }
+    return nome;}
 }
