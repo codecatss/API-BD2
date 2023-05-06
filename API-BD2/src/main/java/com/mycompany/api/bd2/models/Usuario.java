@@ -14,6 +14,7 @@ import java.util.Base64;
  * @author danko
  */
 public class Usuario {
+    
     //private int id_user;
     private String username = "";
     private String nome = "";

@@ -29,11 +29,11 @@ public class TelaLoginController implements Initializable {
     private Button LoginBotaoFechar;
 
     public static Usuario getUsuario1() {
-        return usuario1;
+        return usuariologado;
     }
     
     
-    public static Usuario usuario1 = new Usuario();
+    public static Usuario usuariologado = new Usuario();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -53,7 +53,7 @@ public class TelaLoginController implements Initializable {
                 System.out.println(usuario.getNome());
                 LoginSenha.setText("");
                 // Usuário e senha são válidos, exibir próxima tela
-                usuario1.setUsername(user);
+                usuariologado.setUsername(user);
                 //usuario1.setSenha(senha);
                 App.setRoot("LancamentoColaborador");
                 

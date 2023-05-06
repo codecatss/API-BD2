@@ -114,6 +114,7 @@ public class LancamentoColaboradorController {
     @FXML
     private TextField entradaSolicitante;
     
+    private String usuario = TelaLoginController.usuariologado.getUsername();
     
     private List<String> obs = new ArrayList<>();
     private ObservableList<String> opcoes = FXCollections.observableArrayList();
@@ -129,7 +130,7 @@ public class LancamentoColaboradorController {
     
     public void initialize() {
         
-        nomeUsuario.setText(TelaLoginController.usuario1.getUsername());
+        nomeUsuario.setText(usuario);
         
         horaInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0, 1));
         minutoInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59));
@@ -294,11 +295,8 @@ public class LancamentoColaboradorController {
     @FXML
     public void carregarTabelaLancamento(){
         horaDAO horadao = new horaDAO();
-        /*essa é a config que eu usei pra exibir horas lançadas pelo user logado na tabela*/
-        Usuario usuario = new Usuario();
-        String nome = usuario.getUsername();
         lishoras.clear();
-        lishoras.addAll(horadao.getHora(nome));
+        lishoras.addAll(horadao.getHora(usuario));
         observablelisthoras.setAll(lishoras);
         tabelaLancamento.setItems(observablelisthoras);
         
