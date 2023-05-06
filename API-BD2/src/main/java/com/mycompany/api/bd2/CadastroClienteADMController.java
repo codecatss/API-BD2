@@ -6,21 +6,17 @@ package com.mycompany.api.bd2;
 
 import com.mycompany.api.bd2.daos.clienteDAO;
 import com.mycompany.api.bd2.models.Cliente;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -32,7 +28,7 @@ import javafx.scene.input.MouseEvent;
 /**
  * FXML Controller class
  *
- * @author conta
+ * @author CodeCats
  */
 public class CadastroClienteADMController {
 
@@ -84,7 +80,7 @@ public class CadastroClienteADMController {
     private List<Cliente> lisClientes = new ArrayList<>();
     private ObservableList<Cliente> observableListCliente = FXCollections.observableArrayList();
 
-    String valorDoItemSelecionado;
+    long valorDoItemSelecionado;
 
     public void initialize() {
         nomeUsuario.setText("*nome do usuário*");
@@ -96,7 +92,7 @@ public class CadastroClienteADMController {
             public void handle(MouseEvent event) {
                 if (event.getClickCount() == 1) { // Verifica se é um único clique
                     Cliente item = (Cliente) tabelaCadastroCliente.getSelectionModel().getSelectedItem(); // Obtém o item selecionado
-                    valorDoItemSelecionado = item.getRazao_social();
+                    valorDoItemSelecionado = item.getCnpj();
                     entradaCNPJ.setText(String.valueOf(item.getCnpj()));
                     entradaRS.setText(item.getRazao_social());
                     System.out.println("Item selecionado: " + valorDoItemSelecionado); // Imprime no console
@@ -200,11 +196,29 @@ public class CadastroClienteADMController {
     @FXML
     private void BotaoInativar(ActionEvent event) {
         System.out.println("botão inativar");
+        clienteDAO clientedao = new clienteDAO();
+        Cliente cliente = new Cliente();
+
+        String razao_social = clientedao.getClientebyCNPJ(valorDoItemSelecionado).getRazao_social();
+        cliente.setCnpj(valorDoItemSelecionado);
+        cliente.setRazao_social(razao_social);
+        cliente.setStatus_cliente("inativo");
+        clientedao.update(cliente);
+        carregarTabelaCliente();
     }
 
     @FXML
     private void BotaoAtivar(ActionEvent event) {
         System.out.println("botão ativar");
+        clienteDAO clientedao = new clienteDAO();
+        Cliente cliente = new Cliente();
+
+        String razao_social = clientedao.getClientebyCNPJ(valorDoItemSelecionado).getRazao_social();
+        cliente.setCnpj(valorDoItemSelecionado);
+        cliente.setRazao_social(razao_social);
+        cliente.setStatus_cliente("ativo");
+        clientedao.update(cliente);
+        carregarTabelaCliente();
     }
 
     @FXML
