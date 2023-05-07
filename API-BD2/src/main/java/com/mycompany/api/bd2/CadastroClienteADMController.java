@@ -99,6 +99,7 @@ public class CadastroClienteADMController {
         botaoEditar.setDisable(true);
         botaoInativar.setDisable(true);
         botaoAtivar.setDisable(true);
+        menuCliente.setDisable(true);
 
         entradaCNPJ.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
@@ -183,6 +184,8 @@ public class CadastroClienteADMController {
     public void limparCampos() {
         entradaCNPJ.clear();
         entradaRS.clear();
+        botaoAdicionar.setDisable(false);
+        tabelaCadastroCliente.getSelectionModel().clearSelection();
     }
 
     @FXML
@@ -230,36 +233,39 @@ public class CadastroClienteADMController {
 
     @FXML
     private void BotaoInativar(ActionEvent event) {
-        clienteDAO clientedao = new clienteDAO();
-        Cliente cliente = new Cliente();
-
-        String razao_social = clientedao.getClientebyCNPJ(valorDoItemSelecionado).getRazao_social();
-        cliente.setCnpj(valorDoItemSelecionado);
-        cliente.setRazao_social(razao_social);
-        cliente.setStatus_cliente("inativo");
-        clientedao.update(cliente);
-        carregarTabelaCliente();
-        // exibe um alerta informando que o cliente foi ativado
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Cliente Detivado");
+         // exibe um alerta de confirmação antes de ativar o cliente
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmação");
         alert.setHeaderText(null);
-        alert.setContentText("O cliente foi Desativado com sucesso!");
-        alert.showAndWait();
-        limparCampos();
+        alert.setContentText("Tem certeza que deseja inativar o cliente?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            // o usuário clicou em "Ok", então o cliente será ativado
+            clienteDAO clientedao = new clienteDAO();
+            Cliente cliente = clientedao.getClientebyCNPJ(valorDoItemSelecionado);
+            cliente.setStatus_cliente("inativo");
+            
+            clientedao.update(cliente);
+
+            carregarTabelaCliente();
+            limparCampos();
+
+            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+            alert2.setTitle("Cliente inativado");
+            alert2.setHeaderText(null);
+            alert2.setContentText("O cliente foi inativado com sucesso!");
+            alert2.showAndWait();
+        } else {
+            // o usuário clicou em "Cancelar", então nada será feito
+            limparCampos();
+
+            carregarTabelaCliente();
+
+        }
     }
 
     @FXML
     private void BotaoAtivar(ActionEvent event) {
-        clienteDAO clientedao = new clienteDAO();
-        Cliente cliente = new Cliente();
-
-        String razao_social = clientedao.getClientebyCNPJ(valorDoItemSelecionado).getRazao_social();
-        cliente.setCnpj(valorDoItemSelecionado);
-        cliente.setRazao_social(razao_social);
-        cliente.setStatus_cliente("ativo");
-        clientedao.update(cliente);
-        carregarTabelaCliente();
-
         // exibe um alerta de confirmação antes de ativar o cliente
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmação");
@@ -268,7 +274,15 @@ public class CadastroClienteADMController {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             // o usuário clicou em "Ok", então o cliente será ativado
+            clienteDAO clientedao = new clienteDAO();
+            Cliente cliente = clientedao.getClientebyCNPJ(valorDoItemSelecionado);
+            cliente.setStatus_cliente("ativo");
+            
+            clientedao.update(cliente);
+
+            carregarTabelaCliente();
             limparCampos();
+
             Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
             alert2.setTitle("Cliente ativado");
             alert2.setHeaderText(null);
@@ -279,7 +293,6 @@ public class CadastroClienteADMController {
             limparCampos();
 
             carregarTabelaCliente();
-
         }
     }
 
@@ -315,8 +328,8 @@ public class CadastroClienteADMController {
         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
         stage.setScene(cena);
         stage.show();
-    }    
-    
+    }
+
     @FXML
     void GestaoCRs(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroCRADM.fxml"));
@@ -326,7 +339,6 @@ public class CadastroClienteADMController {
         stage.setScene(cena);
         stage.show();
     }
-
 
     @FXML
     void GestaoClientes(ActionEvent event) throws IOException {

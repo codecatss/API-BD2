@@ -51,9 +51,13 @@ public class CadastroUsuarioADMController {
     private TableView<Usuario> tabelaCadastroUsuarios;
     @FXML
     private TableColumn<?, ?> colunaNome;
+    @FXML
     private TableColumn<?, ?> colunaSenha;
+    @FXML
     private TableColumn<?, ?> colunaUsername;
+    @FXML
     private TableColumn<?, ?> colunaFuncao;
+    @FXML
     private TableColumn<?, ?> colunaStatus;
     @FXML
     private Button fecharTela;
@@ -79,9 +83,15 @@ public class CadastroUsuarioADMController {
     private Button menuRelatorio;
     @FXML
     private TextField entradaNome;
+    @FXML
     private TextField entradaUsername;
+    @FXML
     private PasswordField entradaSenha;
+    @FXML
+    private TextField entradaMatricula;
+    @FXML
     private ComboBox<String> selecaoFuncao;
+    @FXML
     private ComboBox<String> selecaoStatus;
     @FXML
     private Button botaoAdicionar;
@@ -104,6 +114,7 @@ public class CadastroUsuarioADMController {
 
     private List<Usuario> lisusuarios = new ArrayList<>();
     private ObservableList<Usuario> observablelistusuario = FXCollections.observableArrayList();
+
     public void initialize() {
         nomeUsuario.setText(new Usuario().getUsername());
         //nomeUsuario.setText("*nome do usuário*");
@@ -187,6 +198,18 @@ public class CadastroUsuarioADMController {
     }
 
     @FXML
+    private void BotaoAtivar(ActionEvent event) {
+
+        System.out.println("click");
+        usuarioDAO usuarioDao = new usuarioDAO();
+        Usuario usuario = usuarioDao.getUsuarioByUsername(valorDoItemSelecionado);
+        usuario.setStatus("ativo");
+        usuarioDao.update(usuario);
+        lisusuarios.clear();
+        carregarTabelaUsuario();
+    }
+
+    @FXML
     public void carregarTabelaUsuario() {
 
         usuarioDAO usuariodao = new usuarioDAO();
@@ -245,18 +268,17 @@ public class CadastroUsuarioADMController {
     }
 
     @FXML
-public void limparCampos() {
-    entradaNome.clear();
-    entradaUsername.clear();
-    selecaoFuncao.setValue(null);
-    selecaoStatus.setValue(null);
-    entradaSenha.clear();
-    botaoAdicionar.setDisable(true);
+    public void limparCampos() {
+        entradaNome.clear();
+        entradaUsername.clear();
+        selecaoFuncao.setValue(null);
+        selecaoStatus.setValue(null);
+        entradaSenha.clear();
+        botaoAdicionar.setDisable(true);
 
-    // Desseleciona a linha da tabela
-    tabelaCadastroUsuarios.getSelectionModel().clearSelection();
-}
-
+        // Desseleciona a linha da tabela
+        tabelaCadastroUsuarios.getSelectionModel().clearSelection();
+    }
 
     public void tipoFuncao() {
         obs.clear();
