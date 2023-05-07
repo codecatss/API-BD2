@@ -34,6 +34,7 @@ import com.mycompany.api.bd2.models.Hora;
 
 
 import com.mycompany.api.bd2.models.*;
+import javafx.stage.Stage;
 
 
 public class LancamentoGestorController {
@@ -158,6 +159,10 @@ public class LancamentoGestorController {
             entradaAcionamento.setVisible(false);
             Acionamento.setVisible(false);
         }
+        });
+        minimizarTela.setOnAction(e -> {
+            Stage stage = (Stage) minimizarTela.getScene().getWindow();
+            stage.setIconified(true);
         });
     }
     
@@ -365,5 +370,5 @@ public class LancamentoGestorController {
         }
         opCr.setAll(centro_r);
         selecaoCR.setItems(opCr);
-    }
+    } 
 }

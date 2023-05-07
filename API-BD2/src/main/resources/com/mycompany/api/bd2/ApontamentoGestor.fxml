@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.api.bd2.ApontamentoGestor">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.api.bd2.LancamentoColaboradorController">
    <children>
       <BorderPane layoutX="520.0" layoutY="225.0" prefHeight="650.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -52,12 +52,12 @@
                               <Font name="Arial" size="18.0" />
                            </font>
                         </Label>
-                        <Button id="botaoSair" fx:id="botaoSair" layoutX="10.0" layoutY="580.0" mnemonicParsing="false" styleClass="logout" stylesheets="@EstilizacaoTelas.css" text="Sair" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
+                        <Button id="botaoSair" fx:id="botaoSair" layoutX="10.0" layoutY="580.0" mnemonicParsing="false" onAction="#sair" styleClass="logout" stylesheets="@EstilizacaoTelas.css" text="Sair" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
                            <font>
                               <Font name="Arial Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button id="menuLancamento" fx:id="menuLancamento" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text=" Lançamentos" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="150.0">
+                        <Button id="menuLancamento" fx:id="menuLancamento" mnemonicParsing="false" onAction="#carregarTabelaLancamento" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text=" Lançamentos" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="150.0">
                            <graphic>
                               <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
