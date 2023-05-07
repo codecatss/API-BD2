@@ -121,6 +121,10 @@ public class CadastroCRADMController implements Initializable {
         entradaNome.setText(null);
         entradaCod.setText(null);
         entradaSigla.setText(null);
-        App.setRoot("CadastroUsuarioADM");
-    }   
+    }
+    
+    @FXML
+    private void navGestUsuario()throws IOException {
+    App.setRoot("CadastroClienteADM");
+    }
 }

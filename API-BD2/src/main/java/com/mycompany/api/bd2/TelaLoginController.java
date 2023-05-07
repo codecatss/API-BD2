@@ -80,7 +80,7 @@ public class TelaLoginController implements Initializable {
                 App.setRoot("CadastroCRADM");
                 }
             }
-
+            }
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erro");
