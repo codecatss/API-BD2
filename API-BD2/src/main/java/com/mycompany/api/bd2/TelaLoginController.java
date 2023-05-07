@@ -55,25 +55,53 @@ public class TelaLoginController implements Initializable {
                 // Usuário e senha são válidos, exibir próxima tela
                 usuariologado.setUsername(user);
                 //usuario1.setSenha(senha);
-                App.setRoot("LancamentoColaborador");
-                
-            } else{
-                if (usuario!=null && usuario.getUsername().equals( user) && usuario.getSenha().equals(senha) && usuario.getCargo() == "gestor") {
-                
-                System.out.println("Logado como gestor");
-                System.out.println(usuario.getNome());
-                LoginSenha.setText("");
-                // Usuário e senha são válidos, exibir próxima tela
-                App.setRoot("LancamentoColaborador");
-                
-            } else{
-                if (usuario!=null && usuario.getUsername().equals( user) && usuario.getSenha().equals(senha) && usuario.getCargo() == "admin") {
-                
-                System.out.println("Logado como administrador");
-                System.out.println(usuario.getNome());
-                LoginSenha.setText("");
-                // Usuário e senha são válidos, exibir próxima tela
-                App.setRoot("CadastroUsuarioADM");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("LancamentoColaborador.fxml"));
+                Parent root = loader.load();
+                Scene cena = new Scene(root);
+                Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+                stage.setScene(cena);
+                stage.centerOnScreen();
+                stage.show();
+
+
+            } else {
+                if (usuario != null && usuario.getUsername().equals(user) && usuario.getSenha().equals(senha) && usuario.getCargo() == "gestor") {
+
+                    System.out.println("Logado como gestor");
+                    System.out.println(usuario.getNome());
+                    LoginSenha.setText("");
+                    usuariologado.setUsername(user);
+                    // Usuário e senha são válidos, exibir próxima tela
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("LancamentoColaborador.fxml"));
+                    Parent root = loader.load();
+                    Scene cena = new Scene(root);
+                    Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+                    stage.setScene(cena);
+                    stage.centerOnScreen();
+                    stage.show();
+
+                } else {
+                    if (usuario != null && usuario.getUsername().equals(user) && usuario.getSenha().equals(senha) && usuario.getCargo() == "admin") {
+
+                        System.out.println("Logado como administrador");
+                        System.out.println(usuario.getNome());
+                        LoginSenha.setText("");
+                        usuariologado.setUsername(user);
+                        // Usuário e senha são válidos, exibir próxima tela
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroUsuarioADM.fxml"));
+                        Parent root = loader.load();
+                        Scene cena = new Scene(root);
+                        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+                        stage.setScene(cena);
+                        stage.centerOnScreen();
+                        stage.show();
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Erro");
+                        alert.setHeaderText("Usuário ou senha inválidos");
+                        alert.setContentText("Por favor verifique suas credenciais e tente novamente.");
+                        alert.showAndWait();
+                    }
                 }
                 else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
