@@ -4,7 +4,11 @@
  */
 package com.mycompany.api.bd2;
 
+import com.mycompany.api.bd2.daos.crDAO;
+import com.mycompany.api.bd2.models.Centro_resultado;
 import java.net.URL;
+import java.sql.Array;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,6 +54,8 @@ public class CadastroCRADMController implements Initializable {
     @FXML
     private TextField entradaNome;
     @FXML
+    private TextField entradaSigla;
+    @FXML
     private Button botaoAdicionar;
     @FXML
     private Button botaoLimpar;
@@ -59,8 +65,6 @@ public class CadastroCRADMController implements Initializable {
     private Button botaoInativar;
     @FXML
     private Button botaoAtivar;
-    @FXML
-    private TextField entradaSigla;
     @FXML
     private TableView<?> tabelaCadastroCliente;
     @FXML
@@ -75,11 +79,33 @@ public class CadastroCRADMController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }    
 
     @FXML
-    private void BotaoAdicionar(ActionEvent event) {
+    private void BotaoAdicionar() {
+        boolean ehdigito = false;
+        crDAO crdao = new crDAO();
+        Centro_resultado cr = new Centro_resultado();
+        //testa se o codigo da CR é um número
+        if(entradaCod.getText().matches("\\d+")){
+            ehdigito = true;
+        }else{
+            System.out.println("n numero");
+
+        }
+        if(ehdigito && !entradaNome.getText().isEmpty() &&  !entradaSigla.getText().isEmpty()){
+            try{
+                cr.setNome(entradaNome.getText());
+                cr.setCodigo_cr(entradaCod.getText());
+                cr.setSigla(entradaSigla.getText());
+                cr.setStatus_cr("ativo");
+                
+                crdao.save(cr);
+                System.out.println("foi");
+            }catch(Exception e){
+System.out.println("n foi");
+            }
+        }
     }
 
     @FXML
