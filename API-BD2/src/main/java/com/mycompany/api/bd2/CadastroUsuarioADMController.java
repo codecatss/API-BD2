@@ -38,13 +38,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-
 /**
  * FXML Controller class
  *
  * @author conta
  */
 public class CadastroUsuarioADMController {
+
     @FXML
     private Tooltip passaNome;
     @FXML
@@ -103,20 +103,18 @@ public class CadastroUsuarioADMController {
     private Button botaoInativar;
     @FXML
     private Button botaoAtivar;
-    
-    
+
     private List<String> obs = new ArrayList<>();
     private ObservableList<String> opcoes = FXCollections.observableArrayList();
-    
+
     String valorDoItemSelecionado;
-    
+
     private List<String> obs2 = new ArrayList<>();
     private ObservableList<String> opcoes2 = FXCollections.observableArrayList();
-    
-    
+
     private List<Usuario> lisusuarios = new ArrayList<>();
     private ObservableList<Usuario> observablelistusuario = FXCollections.observableArrayList();
-    
+
     public void initialize() {
         nomeUsuario.setText(new Usuario().getUsername());
         //nomeUsuario.setText("*nome do usuário*");
@@ -127,14 +125,17 @@ public class CadastroUsuarioADMController {
             public void handle(MouseEvent event) {
                 if (event.getClickCount() == 1) { // Verifica se é um único clique
                     Usuario item = tabelaCadastroUsuarios.getSelectionModel().getSelectedItem(); // Obtém o item selecionado
-                    valorDoItemSelecionado = item.getUsername().toString(); 
-                    System.out.println("Item selecionado: " + valorDoItemSelecionado); // Imprime no console
+                    valorDoItemSelecionado = item.getUsername();
+                    entradaNome.setText(item.getNome());
+                    entradaUsername.setText(item.getUsername());
+                    selecaoFuncao.setValue(item.getCargo());
+                    entradaSenha.setText(item.getSenha());
+                    selecaoStatus.setValue(item.getStatus());
                 }
             }
-    });
-            
+        });
+
     }
-  
 
     @FXML
     private void BotaoAdicionar(ActionEvent event) {
@@ -155,14 +156,14 @@ public class CadastroUsuarioADMController {
         usuarioDao.save(usuario);
         carregarTabelaUsuario();
     }
-    
+
     @FXML
-    private void BotaoInativar(ActionEvent event){
+    private void BotaoInativar(ActionEvent event) {
         lisusuarios.clear();
         System.out.println("click");
         usuarioDAO usuarioDao = new usuarioDAO();
         Usuario usuario = new Usuario();
-        
+
         String cargo = usuarioDao.getUsuarioByUsername(valorDoItemSelecionado).getCargo();
         String nome = usuarioDao.getUsuarioByUsername(valorDoItemSelecionado).getNome();
         String senha = usuarioDao.getUsuarioByUsername(valorDoItemSelecionado).getSenha();
@@ -173,13 +174,14 @@ public class CadastroUsuarioADMController {
         usuario.setStatus("inativo");
         usuarioDao.update(usuario);
         carregarTabelaUsuario();
- 
+
     }
+
     @FXML
-    public void carregarTabelaUsuario(){
-        
+    public void carregarTabelaUsuario() {
+
         usuarioDAO usuariodao = new usuarioDAO();
-        
+
         lisusuarios.addAll(usuariodao.getUsuarios());
         observablelistusuario.setAll(lisusuarios);
         tabelaCadastroUsuarios.setItems(observablelistusuario);
@@ -191,48 +193,62 @@ public class CadastroUsuarioADMController {
         colunaStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
     }
+
     @FXML
-    private void BotaoEditar(ActionEvent event){
-        
-        if(valorDoItemSelecionado == null){
+
+    private void BotaoEditar(ActionEvent event) {
+        if (valorDoItemSelecionado == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Usuário não selecionado!");
-            alert.setHeaderText("Você não selecionou o usuário");
-            alert.setContentText("Por favor, clique em uma linha e preencha os campos.");
+            alert.setTitle("Usuário não selecionado");
+            alert.setHeaderText(null);
+            alert.setContentText("Por favor, selecione um usuário na tabela para editar.");
             alert.showAndWait();
-        }
-        else{
-        lisusuarios.clear();
-        System.out.println("click");
-        Usuario usuario = new Usuario();
-        usuarioDAO usuarioDao = new usuarioDAO();
-        String nome = entradaNome.getText();
-        String funcao = selecaoFuncao.getSelectionModel().getSelectedItem();
-        String senha = entradaSenha.getText();
-        String status = selecaoStatus.getSelectionModel().getSelectedItem();
-        usuario.setNome(nome);
-        usuario.setUsername(valorDoItemSelecionado);
-        usuario.setSenha(senha);
-        usuario.setCargo(funcao);
-        usuario.setStatus(status);
-        //usuario.setHash(senha);
-        usuarioDao.update(usuario);
-        carregarTabelaUsuario();
+        } else {
+            String nome = entradaNome.getText().trim();
+            String funcao = selecaoFuncao.getSelectionModel().getSelectedItem();
+            String senha = entradaSenha.getText().trim();
+            String status = selecaoStatus.getSelectionModel().getSelectedItem();
+
+            if (nome.isEmpty() || senha.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Campos obrigatórios");
+                alert.setHeaderText(null);
+                alert.setContentText("Por favor, preencha todos os campos obrigatórios (*).");
+                alert.showAndWait();
+            } else {
+                lisusuarios.clear();
+
+                Usuario usuario = new Usuario();
+                usuario.setNome(nome);
+                usuario.setUsername(valorDoItemSelecionado);
+                usuario.setSenha(senha);
+                usuario.setCargo(funcao);
+                usuario.setStatus(status);
+
+                usuarioDAO usuarioDao = new usuarioDAO();
+                usuarioDao.update(usuario);
+                limparCampos();
+                System.out.println("Tabela Limpa");
+                carregarTabelaUsuario();
+
+            }
         }
     }
-    
+
     @FXML
-    public void limparCampos(){
-        selecaoFuncao.getSelectionModel().clearSelection(); 
-        selecaoStatus.getSelectionModel().clearSelection();
-        entradaNome.clear();
-        entradaUsername.clear();
-        entradaSenha.clear();
-        
-    }
-    
-    
-    public void tipoFuncao(){
+public void limparCampos() {
+    entradaNome.clear();
+    entradaUsername.clear();
+    selecaoFuncao.setValue(null);
+    selecaoStatus.setValue(null);
+    entradaSenha.clear();
+}
+
+
+
+
+
+    public void tipoFuncao() {
         obs.clear();
         obs.add("admin");
         obs.add("gestor");
@@ -240,20 +256,31 @@ public class CadastroUsuarioADMController {
         opcoes.setAll(obs);
         selecaoFuncao.setItems(opcoes);
     }
-    
-    public void tipoStatus(){
+
+    public void tipoStatus() {
         obs2.clear();
         obs2.add("ativo");
         obs2.add("inativo");
         opcoes2.setAll(obs2);
         selecaoStatus.setItems(opcoes2);
     }
+
     @FXML
-    private void botaoSair(ActionEvent event) throws IOException{
+    private void botaoSair(ActionEvent event) throws IOException {
         Usuario usuario = new Usuario();
         usuario.logout();
         System.out.println("sair");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
+        Parent root = loader.load();
+        Scene cena = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+        stage.setScene(cena);
+        stage.show();
+    }
+
+    @FXML
+    void GestaoClientes(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroClienteADM.fxml"));
         Parent root = loader.load();
         Scene cena = new Scene(root);
         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
