@@ -15,13 +15,13 @@ import java.io.IOException;
  * JavaFX App
  */
 public class App extends Application {
-    
+   
 
     private static Scene scene;
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CadastroCRADM.fxml"));
         Parent root = fxmlLoader.load();
         scene = new Scene(root, 1300, 650);
         stage.setScene(scene);
