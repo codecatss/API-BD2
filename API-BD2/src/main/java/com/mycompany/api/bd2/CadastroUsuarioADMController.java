@@ -118,8 +118,28 @@ public class CadastroUsuarioADMController {
     public void initialize() {
         nomeUsuario.setText(new Usuario().getUsername());
         //nomeUsuario.setText("*nome do usuário*");
+        // Desabilita os botões "Editar", "Inativar" e "Ativar" no início
+        botaoEditar.setDisable(true);
+        botaoInativar.setDisable(true);
+        botaoAtivar.setDisable(true);
+
         botaoLimpar.setOnAction(event -> limparCampos());
         carregarTabelaUsuario();
+
+        tabelaCadastroUsuarios.getSelectionModel().selectedItemProperty().addListener((obs, antigo, novo) -> {
+            if (novo == null) {
+                botaoAdicionar.setDisable(false);
+                botaoEditar.setDisable(true);
+                botaoInativar.setDisable(true);
+                botaoAtivar.setDisable(true);
+            } else {
+                botaoAdicionar.setDisable(true);
+                botaoEditar.setDisable(false);
+                botaoInativar.setDisable(false);
+                botaoAtivar.setDisable(false);
+            }
+        });
+
         tabelaCadastroUsuarios.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -242,10 +262,11 @@ public void limparCampos() {
     selecaoFuncao.setValue(null);
     selecaoStatus.setValue(null);
     entradaSenha.clear();
+    botaoAdicionar.setDisable(true);
+
+    // Desseleciona a linha da tabela
+    tabelaCadastroUsuarios.getSelectionModel().clearSelection();
 }
-
-
-
 
 
     public void tipoFuncao() {
