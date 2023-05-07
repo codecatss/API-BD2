@@ -11,7 +11,7 @@ import com.mycompany.api.bd2.models.Usuario;
 public class usuarioDAO {
 
     public void save(Usuario usuario){
-        String sql = "INSERT INTO usuario(username, nome, senha, funcao, status_user) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO USUARIO(username, nome, senha, funcao, status_user) VALUES (?, ?, ?, ?, ?)";
         Connection conn = null;
         PreparedStatement pstm = null; 
         
@@ -47,7 +47,7 @@ public class usuarioDAO {
      
 
     public void delete(Usuario usuario){
-        String sql = "DELETE FROM usuario "+"WHERE username=?";
+        String sql = "DELETE FROM USUARIOS "+"WHERE username=?";
         Connection conn = null;
         PreparedStatement pstm = null; 
         
@@ -239,7 +239,7 @@ public class usuarioDAO {
 			return usuario;
     }
     public void update(Usuario usuario){
-    String sql = "UPDATE usuario SET nome=?, senha=?, funcao=?, status_user=? WHERE username=?";
+    String sql = "UPDATE USUARIO SET nome=?, senha=?, funcao=?, status_user=? WHERE username=?";
     Connection conn = null;
     PreparedStatement pstm = null; 
         
