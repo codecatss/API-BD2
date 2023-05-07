@@ -122,8 +122,10 @@ public class CadastroUsuarioADMController {
         botaoEditar.setDisable(true);
         botaoInativar.setDisable(true);
         botaoAtivar.setDisable(true);
-
+        menuUsuario.setDisable(true);
+        
         botaoLimpar.setOnAction(event -> limparCampos());
+     
         carregarTabelaUsuario();
 
         tabelaCadastroUsuarios.getSelectionModel().selectedItemProperty().addListener((obs, antigo, novo) -> {
