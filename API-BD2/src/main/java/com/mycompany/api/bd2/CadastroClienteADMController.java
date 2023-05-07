@@ -100,11 +100,23 @@ public class CadastroClienteADMController {
         botaoInativar.setDisable(true);
         botaoAtivar.setDisable(true);
 
+        entradaCNPJ.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                entradaCNPJ.setText(oldValue);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Campo inválido");
+                alert.setHeaderText(null);
+                alert.setContentText("O campo CNPJ deve conter apenas números.");
+                alert.showAndWait();
+            }
+        });
+
         botaoLimpar.setOnAction(event -> limparCampos());
         carregarTabelaCliente();
 
         tabelaCadastroCliente.getSelectionModel().selectedItemProperty().addListener((obs, antigo, novo) -> {
             if (novo == null) {
+                botaoAdicionar.setDisable(false);
                 botaoEditar.setDisable(true);
                 botaoInativar.setDisable(true);
                 botaoAtivar.setDisable(true);
@@ -163,7 +175,6 @@ public class CadastroClienteADMController {
 
             clienteDAO clienteDao = new clienteDAO();
             clienteDao.save(cliente);
-            System.out.println("Salvo");
             carregarTabelaCliente();
         }
     }
@@ -249,13 +260,27 @@ public class CadastroClienteADMController {
         clientedao.update(cliente);
         carregarTabelaCliente();
 
-        // exibe um alerta informando que o cliente foi ativado
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Cliente ativado");
+        // exibe um alerta de confirmação antes de ativar o cliente
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmação");
         alert.setHeaderText(null);
-        alert.setContentText("O cliente foi ativado com sucesso!");
-        alert.showAndWait();
-        limparCampos();
+        alert.setContentText("Tem certeza que deseja ativar o cliente?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            // o usuário clicou em "Ok", então o cliente será ativado
+            limparCampos();
+            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+            alert2.setTitle("Cliente ativado");
+            alert2.setHeaderText(null);
+            alert2.setContentText("O cliente foi ativado com sucesso!");
+            alert2.showAndWait();
+        } else {
+            // o usuário clicou em "Cancelar", então nada será feito
+            limparCampos();
+
+            carregarTabelaCliente();
+
+        }
     }
 
     @FXML
