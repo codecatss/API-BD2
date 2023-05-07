@@ -37,6 +37,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * FXML Controller class
@@ -298,25 +312,48 @@ public class CadastroUsuarioADMController {
     }
 
     @FXML
+
     private void botaoSair(ActionEvent event) throws IOException {
         Usuario usuario = new Usuario();
         usuario.logout();
         System.out.println("sair");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
-        Parent root = loader.load();
-        Scene cena = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
-        stage.setScene(cena);
-        stage.show();
+
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.2), ((Node) event.getSource()).getScene().getRoot());
+        fadeOut.setFromValue(1);
+        fadeOut.setToValue(0);
+        fadeOut.setOnFinished((ActionEvent event1) -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
+                Parent root = loader.load();
+                Scene cena = new Scene(root);
+                Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+                stage.setScene(cena);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(CadastroUsuarioADMController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        fadeOut.play();
     }
 
     @FXML
     void GestaoClientes(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroClienteADM.fxml"));
-        Parent root = loader.load();
-        Scene cena = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
-        stage.setScene(cena);
-        stage.show();
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.1), ((Node) event.getSource()).getScene().getRoot());
+        fadeOut.setFromValue(1);
+        fadeOut.setToValue(0);
+        fadeOut.setOnFinished((ActionEvent event1) -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroClienteADM.fxml"));
+                Parent root = loader.load();
+                Scene cena = new Scene(root);
+                Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+                stage.setScene(cena);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(CadastroUsuarioADMController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        fadeOut.play();
     }
+
 }
