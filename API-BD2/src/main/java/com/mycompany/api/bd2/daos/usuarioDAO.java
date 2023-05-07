@@ -128,7 +128,6 @@ public class usuarioDAO {
 					e.printStackTrace();
 				}
 			}
-                        System.out.println(usuarios);
 			return usuarios;
 	}
     
