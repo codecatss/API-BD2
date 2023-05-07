@@ -51,13 +51,9 @@ public class CadastroUsuarioADMController {
     private TableView<Usuario> tabelaCadastroUsuarios;
     @FXML
     private TableColumn<?, ?> colunaNome;
-    @FXML
     private TableColumn<?, ?> colunaSenha;
-    @FXML
     private TableColumn<?, ?> colunaUsername;
-    @FXML
     private TableColumn<?, ?> colunaFuncao;
-    @FXML
     private TableColumn<?, ?> colunaStatus;
     @FXML
     private Button fecharTela;
@@ -83,15 +79,9 @@ public class CadastroUsuarioADMController {
     private Button menuRelatorio;
     @FXML
     private TextField entradaNome;
-    @FXML
     private TextField entradaUsername;
-    @FXML
     private PasswordField entradaSenha;
-    @FXML
-    private TextField entradaMatricula;
-    @FXML
     private ComboBox<String> selecaoFuncao;
-    @FXML
     private ComboBox<String> selecaoStatus;
     @FXML
     private Button botaoAdicionar;
@@ -114,7 +104,6 @@ public class CadastroUsuarioADMController {
 
     private List<Usuario> lisusuarios = new ArrayList<>();
     private ObservableList<Usuario> observablelistusuario = FXCollections.observableArrayList();
-
     public void initialize() {
         nomeUsuario.setText(new Usuario().getUsername());
         //nomeUsuario.setText("*nome do usuário*");
