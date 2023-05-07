@@ -95,9 +95,27 @@ public class CadastroClienteADMController {
 
     public void initialize() {
         nomeUsuario.setText(usuario);
+        // Desabilita os botões "Editar", "Inativar" e "Ativar" no início
+        botaoEditar.setDisable(true);
+        botaoInativar.setDisable(true);
+        botaoAtivar.setDisable(true);
 
         botaoLimpar.setOnAction(event -> limparCampos());
         carregarTabelaCliente();
+
+        tabelaCadastroCliente.getSelectionModel().selectedItemProperty().addListener((obs, antigo, novo) -> {
+            if (novo == null) {
+                botaoEditar.setDisable(true);
+                botaoInativar.setDisable(true);
+                botaoAtivar.setDisable(true);
+            } else {
+                botaoAdicionar.setDisable(true);
+                botaoEditar.setDisable(false);
+                botaoInativar.setDisable(false);
+                botaoAtivar.setDisable(false);
+            }
+        });
+
         tabelaCadastroCliente.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -110,10 +128,10 @@ public class CadastroClienteADMController {
                 }
             }
         });
-
     }
 
     @FXML
+
     public void carregarTabelaCliente() {
         lisClientes.clear();
 
@@ -210,6 +228,13 @@ public class CadastroClienteADMController {
         cliente.setStatus_cliente("inativo");
         clientedao.update(cliente);
         carregarTabelaCliente();
+        // exibe um alerta informando que o cliente foi ativado
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Cliente Detivado");
+        alert.setHeaderText(null);
+        alert.setContentText("O cliente foi Desativado com sucesso!");
+        alert.showAndWait();
+        limparCampos();
     }
 
     @FXML
@@ -223,6 +248,14 @@ public class CadastroClienteADMController {
         cliente.setStatus_cliente("ativo");
         clientedao.update(cliente);
         carregarTabelaCliente();
+
+        // exibe um alerta informando que o cliente foi ativado
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Cliente ativado");
+        alert.setHeaderText(null);
+        alert.setContentText("O cliente foi ativado com sucesso!");
+        alert.showAndWait();
+        limparCampos();
     }
 
     @FXML
