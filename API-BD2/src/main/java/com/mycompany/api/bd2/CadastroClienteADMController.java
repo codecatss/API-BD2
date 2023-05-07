@@ -184,6 +184,8 @@ public class CadastroClienteADMController {
     public void limparCampos() {
         entradaCNPJ.clear();
         entradaRS.clear();
+        botaoAdicionar.setDisable(true);
+        tabelaCadastroCliente.getSelectionModel().clearSelection();
     }
 
     @FXML
