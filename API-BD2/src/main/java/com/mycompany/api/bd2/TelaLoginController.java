@@ -62,6 +62,7 @@ public class TelaLoginController implements Initializable {
                 Scene cena = new Scene(root);
                 Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
                 stage.setScene(cena);
+                stage.centerOnScreen();
                 stage.show();
 
 
@@ -71,8 +72,15 @@ public class TelaLoginController implements Initializable {
                     System.out.println("Logado como gestor");
                     System.out.println(usuario.getNome());
                     LoginSenha.setText("");
+                    usuariologado.setUsername(user);
                     // Usuário e senha são válidos, exibir próxima tela
-                    App.setRoot("LancamentoColaborador");
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("LancamentoColaborador.fxml"));
+                    Parent root = loader.load();
+                    Scene cena = new Scene(root);
+                    Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+                    stage.setScene(cena);
+                    stage.centerOnScreen();
+                    stage.show();
 
                 } else {
                     if (usuario != null && usuario.getUsername().equals(user) && usuario.getSenha().equals(senha) && usuario.getCargo() == "admin") {
@@ -80,8 +88,15 @@ public class TelaLoginController implements Initializable {
                         System.out.println("Logado como administrador");
                         System.out.println(usuario.getNome());
                         LoginSenha.setText("");
+                        usuariologado.setUsername(user);
                         // Usuário e senha são válidos, exibir próxima tela
-                        App.setRoot("CadastroUsuarioADM");
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroUsuarioADM.fxml"));
+                        Parent root = loader.load();
+                        Scene cena = new Scene(root);
+                        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+                        stage.setScene(cena);
+                        stage.centerOnScreen();
+                        stage.show();
                     } else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Erro");
