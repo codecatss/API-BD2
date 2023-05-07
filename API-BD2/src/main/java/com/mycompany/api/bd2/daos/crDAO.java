@@ -18,7 +18,7 @@ import com.mycompany.api.bd2.models.Centro_resultado;
  */
 public class crDAO {
     public void save(Centro_resultado cr){
-        String sql = "INSERT INTO centro_resultado(nome, codigo_cr, sigla, status_cr,) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO centro_resultado(nome, codigo_cr, sigla, status_cr) VALUES (?, ?, ?, ?)";
         Connection conn = null;
         PreparedStatement pstm = null;
         

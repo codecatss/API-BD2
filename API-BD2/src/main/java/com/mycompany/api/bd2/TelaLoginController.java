@@ -90,7 +90,7 @@ public class TelaLoginController implements Initializable {
                         LoginSenha.setText("");
                         usuariologado.setUsername(user);
                         // Usuário e senha são válidos, exibir próxima tela
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroUsuarioADM.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroCRADM.fxml"));
                         Parent root = loader.load();
                         Scene cena = new Scene(root);
                         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();

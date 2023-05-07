@@ -17,7 +17,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -25,6 +30,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -82,31 +88,49 @@ public class CadastroCRADMController implements Initializable {
 
     private String usuario = TelaLoginController.usuariologado.getUsername();
     public void initialize(URL url, ResourceBundle rb) {
+        entradaCod.setStyle(null); 
+        entradaCod.setPromptText("Apenas números");
+
+        menuCR.setDisable(true);
         nomeUsuario.setText(usuario);
         forneceTabela();
     }    
 
+    private String erro = "-fx-border-color:#E06469";
     @FXML
     private void BotaoAdicionar() {
         boolean ehdigito = false;
         boolean atequatro = false;
+        String cod = "0";
         crDAO crdao = new crDAO();
         Centro_resultado cr = new Centro_resultado();
         //testa se o codigo da CR é um número
         if(entradaCod.getText().matches("\\d+")){
-            ehdigito = true;
-        }else{
-            System.out.println("n numero");
-        }
-        if(!entradaSigla.getText().isEmpty() && entradaSigla.getText().length()<=4){
-            atequatro = true;
-        }else{
+            cod = entradaCod.getText();
+            if(cod.length()<4){
+                cod = String.format("%0" + (4 - cod.length()) + "d%s", 0, cod);
+                ehdigito = true;
+            }
+            else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText(null);
+            alert.setContentText("O código da CR deve conter ATÉ 4 números.");
+            alert.showAndWait();
             System.out.println("mais de 4 caracteres");
+            }   
+        }else{
+            entradaCod.setStyle(erro);
+            entradaCod.setText(null);
+            entradaCod.setPromptText("Apenas números");
+            entradaCod.setStyle("-fx-prompt-text-fill: #E06469;");
+            System.out.println("Apenas números em como código");
         }
-        if(ehdigito && !entradaNome.getText().isEmpty() && atequatro){
+        
+        if(ehdigito && !entradaNome.getText().isEmpty()){
             try{
                 cr.setNome(entradaNome.getText());
-                cr.setCodigo_cr(entradaCod.getText());
+                cr.setCodigo_cr(cod);
                 cr.setSigla(entradaSigla.getText().toUpperCase());
                 cr.setStatus_cr("ativo");
                 
@@ -121,7 +145,12 @@ public class CadastroCRADMController implements Initializable {
             }
         }
         else{
-            System.out.println("n salvo");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText(null);
+            alert.setContentText("Preencha todos os campos.");
+            alert.showAndWait();
+            System.out.println("Preencha todos os campos");
         }
     }
 
@@ -133,8 +162,14 @@ public class CadastroCRADMController implements Initializable {
     }
     
     @FXML
-    private void navGestUsuario()throws IOException {
-    App.setRoot("CadastroClienteADM");
+    private void navGestClientes(ActionEvent event)throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroClienteADM.fxml"));
+    Parent root = loader.load();
+    Scene cena = new Scene(root);
+    Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+    stage.setScene(cena);
+    stage.centerOnScreen();
+    stage.show();
     }
     
     private List<Centro_resultado> liscr = new ArrayList<>();
