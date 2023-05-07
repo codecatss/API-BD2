@@ -3,17 +3,11 @@ package com.mycompany.api.bd2;
 import com.mycompany.api.bd2.daos.clienteDAO;
 import com.mycompany.api.bd2.daos.crDAO;
 import com.mycompany.api.bd2.daos.horaDAO;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.text.ParseException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -25,7 +19,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.collections.ObservableList;
 import java.time.LocalDate;
 import java.sql.Timestamp;
@@ -35,6 +28,12 @@ import javafx.scene.control.Alert.AlertType;
 
 
 import com.mycompany.api.bd2.models.*;
+import java.io.IOException;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 
 public class LancamentoColaboradorController {
@@ -358,4 +357,6 @@ public class LancamentoColaboradorController {
         opCr.setAll(centro_r);
         selecaoCR.setItems(opCr);
     }
+
+    
 }

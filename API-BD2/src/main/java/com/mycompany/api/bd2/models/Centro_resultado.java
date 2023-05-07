@@ -4,6 +4,8 @@
  */
 package com.mycompany.api.bd2.models;
 
+import java.util.Arrays;
+
 /**
  *
  * @author mikaela.begotti
