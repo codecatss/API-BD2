@@ -45,19 +45,12 @@ import javafx.stage.Stage;
  * @author conta
  */
 public class CadastroUsuarioADMController {
-    @FXML
-    private Tooltip passaNome;
-    @FXML
     private TableView<Usuario> tabelaCadastroUsuarios;
     @FXML
     private TableColumn<?, ?> colunaNome;
-    @FXML
     private TableColumn<?, ?> colunaSenha;
-    @FXML
     private TableColumn<?, ?> colunaUsername;
-    @FXML
     private TableColumn<?, ?> colunaFuncao;
-    @FXML
     private TableColumn<?, ?> colunaStatus;
     @FXML
     private Button fecharTela;
@@ -83,15 +76,9 @@ public class CadastroUsuarioADMController {
     private Button menuRelatorio;
     @FXML
     private TextField entradaNome;
-    @FXML
     private TextField entradaUsername;
-    @FXML
     private PasswordField entradaSenha;
-    @FXML
-    private TextField entradaMatricula;
-    @FXML
     private ComboBox<String> selecaoFuncao;
-    @FXML
     private ComboBox<String> selecaoStatus;
     @FXML
     private Button botaoAdicionar;
@@ -116,6 +103,16 @@ public class CadastroUsuarioADMController {
     
     private List<Usuario> lisusuarios = new ArrayList<>();
     private ObservableList<Usuario> observablelistusuario = FXCollections.observableArrayList();
+    @FXML
+    private TextField entradaCod;
+    @FXML
+    private TextField entradaSigla;
+    @FXML
+    private TableView<?> tabelaCadastroCliente;
+    @FXML
+    private TableColumn<?, ?> colunaCod;
+    @FXML
+    private TableColumn<?, ?> colunaSigla;
     
     public void initialize() {
         nomeUsuario.setText(new Usuario().getUsername());
@@ -156,7 +153,6 @@ public class CadastroUsuarioADMController {
         carregarTabelaUsuario();
     }
     
-    @FXML
     private void BotaoInativar(ActionEvent event){
         lisusuarios.clear();
         System.out.println("click");
@@ -175,7 +171,6 @@ public class CadastroUsuarioADMController {
         carregarTabelaUsuario();
  
     }
-    @FXML
     public void carregarTabelaUsuario(){
         
         usuarioDAO usuariodao = new usuarioDAO();
@@ -191,7 +186,6 @@ public class CadastroUsuarioADMController {
         colunaStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
     }
-    @FXML
     private void BotaoEditar(ActionEvent event){
         
         if(valorDoItemSelecionado == null){
@@ -248,7 +242,6 @@ public class CadastroUsuarioADMController {
         opcoes2.setAll(obs2);
         selecaoStatus.setItems(opcoes2);
     }
-    @FXML
     private void botaoSair(ActionEvent event) throws IOException{
         Usuario usuario = new Usuario();
         usuario.logout();
