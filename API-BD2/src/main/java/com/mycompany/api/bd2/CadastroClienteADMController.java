@@ -99,6 +99,7 @@ public class CadastroClienteADMController {
         botaoEditar.setDisable(true);
         botaoInativar.setDisable(true);
         botaoAtivar.setDisable(true);
+        menuCliente.setDisable(true);
 
         entradaCNPJ.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
@@ -315,8 +316,8 @@ public class CadastroClienteADMController {
         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
         stage.setScene(cena);
         stage.show();
-    }    
-    
+    }
+
     @FXML
     void GestaoCRs(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroCRADM.fxml"));
@@ -326,7 +327,6 @@ public class CadastroClienteADMController {
         stage.setScene(cena);
         stage.show();
     }
-
 
     @FXML
     void GestaoClientes(ActionEvent event) throws IOException {
