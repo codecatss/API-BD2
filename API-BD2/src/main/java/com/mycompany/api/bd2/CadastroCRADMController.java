@@ -6,10 +6,15 @@ package com.mycompany.api.bd2;
 
 import com.mycompany.api.bd2.daos.crDAO;
 import com.mycompany.api.bd2.models.Centro_resultado;
+import com.mycompany.api.bd2.models.Hora;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 
 /**
@@ -66,17 +72,18 @@ public class CadastroCRADMController implements Initializable {
     @FXML
     private Button botaoAtivar;
     @FXML
-    private TableView<?> tabelaCadastroCliente;
+    private TableView<Centro_resultado> tabelaCadastroCliente;
     @FXML
-    private TableColumn<?, ?> colunaCod;
+    private TableColumn<Centro_resultado, String> colunaCod;
     @FXML
-    private TableColumn<?, ?> colunaNome;
+    private TableColumn<Centro_resultado, String> colunaNome;
     @FXML
-    private TableColumn<?, ?> colunaSigla;
+    private TableColumn<Centro_resultado, String> colunaSigla;
 
     private String usuario = TelaLoginController.usuariologado.getUsername();
     public void initialize(URL url, ResourceBundle rb) {
         nomeUsuario.setText(usuario);
+        forneceTabela();
     }    
 
     @FXML
@@ -104,7 +111,9 @@ public class CadastroCRADMController implements Initializable {
                 cr.setStatus_cr("ativo");
                 
                 crdao.save(cr);
-                System.out.println("foi");
+                System.out.println("Salvo");
+                limparCampos();
+                forneceTabela();
             }
             catch(Exception e){
                 System.out.println("Ocorreu um erro ao salvar os dados.");
@@ -126,5 +135,22 @@ public class CadastroCRADMController implements Initializable {
     @FXML
     private void navGestUsuario()throws IOException {
     App.setRoot("CadastroClienteADM");
+    }
+    
+    private List<Centro_resultado> liscr = new ArrayList<>();
+    private ObservableList<Centro_resultado> observablelistliscr = FXCollections.observableArrayList();
+    @FXML
+    private void forneceTabela(){
+        crDAO crdao = new crDAO();
+        liscr.clear();
+        liscr.addAll(crdao.getCrs());
+        observablelistliscr.setAll(liscr);
+        tabelaCadastroCliente.setItems(observablelistliscr);
+        
+        colunaCod.setCellValueFactory(new PropertyValueFactory<>("codigo_cr"));
+        colunaNome.setCellValueFactory(new PropertyValueFactory<>("sigla"));
+        colunaSigla.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        
+
     }
 }
