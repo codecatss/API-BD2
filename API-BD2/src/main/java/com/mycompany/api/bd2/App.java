@@ -17,12 +17,12 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
-    Parent root = loader.load();
-    Scene cena = new Scene(root);
-    stage.setScene(cena);
-    stage.show();
-    };
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
+      Parent root = loader.load();
+      Scene cena = new Scene(root);
+      stage.setScene(cena);
+      stage.show();
+    }
 
     public static void main(String[] args) {
         launch();

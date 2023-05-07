@@ -282,7 +282,6 @@ public class CadastroClienteADMController {
             limparCampos();
 
             carregarTabelaCliente();
-
         }
     }
 
@@ -323,16 +322,6 @@ public class CadastroClienteADMController {
     @FXML
     void GestaoCRs(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroCRADM.fxml"));
-        Parent root = loader.load();
-        Scene cena = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
-        stage.setScene(cena);
-        stage.show();
-    }
-
-    @FXML
-    void GestaoClientes(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroClienteADM.fxml"));
         Parent root = loader.load();
         Scene cena = new Scene(root);
         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
