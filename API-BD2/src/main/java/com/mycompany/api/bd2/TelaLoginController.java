@@ -19,6 +19,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class TelaLoginController implements Initializable {
 
@@ -54,17 +69,27 @@ public class TelaLoginController implements Initializable {
                 System.out.println("Logado");
                 System.out.println(usuario.getNome());
                 LoginSenha.setText("");
-                // Usuário e senha são válidos, exibir próxima tela
-                usuariologado.setUsername(user);
-                //usuario1.setSenha(senha);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("LancamentoColaborador.fxml"));
-                Parent root = loader.load();
-                Scene cena = new Scene(root);
-                Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
-                stage.setScene(cena);
-                stage.centerOnScreen();
-                stage.show();
 
+                // Transição de tela
+                FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.3), ((Node) event.getSource()).getScene().getRoot());
+                fadeOut.setFromValue(1);
+                fadeOut.setToValue(0);
+                fadeOut.setOnFinished((ActionEvent event1) -> {
+                    try {
+                        // Usuário e senha são válidos, exibir próxima tela
+                        usuariologado.setUsername(user);
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("LancamentoColaborador.fxml"));
+                        Parent root = loader.load();
+                        Scene cena = new Scene(root);
+                        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+                        stage.setScene(cena);
+                        stage.centerOnScreen();
+                        stage.show();
+                    } catch (IOException ex) {
+                        Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                });
+                fadeOut.play();
 
             } else {
                 if (usuario != null && usuario.getUsername().equals(user) && usuario.getSenha().equals(senha) && usuario.getCargo() == "gestor") {
@@ -72,42 +97,64 @@ public class TelaLoginController implements Initializable {
                     System.out.println("Logado como gestor");
                     System.out.println(usuario.getNome());
                     LoginSenha.setText("");
-                    usuariologado.setUsername(user);
-                    // Usuário e senha são válidos, exibir próxima tela
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("LancamentoColaborador.fxml"));
-                    Parent root = loader.load();
-                    Scene cena = new Scene(root);
-                    Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
-                    stage.setScene(cena);
-                    stage.centerOnScreen();
-                    stage.show();
+
+                    // Transição de tela
+                    FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.5), ((Node) event.getSource()).getScene().getRoot());
+                    fadeOut.setFromValue(1);
+                    fadeOut.setToValue(0);
+                    fadeOut.setOnFinished((ActionEvent event1) -> {
+                        try {
+                            // Usuário e senha são válidos, exibir próxima tela
+                            usuariologado.setUsername(user);
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("LancamentoColaborador.fxml"));
+                            Parent root = loader.load();
+                            Scene cena = new Scene(root);
+                            Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+                            stage.setScene(cena);
+                            stage.centerOnScreen();
+                            stage.show();
+                        } catch (IOException ex) {
+                            Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    });
+                    fadeOut.play();
+
+                } else if (usuario != null && usuario.getUsername().equals(user) && usuario.getSenha().equals(senha) && usuario.getCargo() == "admin") {
+
+                    System.out.println("Logado como administrador");
+                    System.out.println(usuario.getNome());
+                    LoginSenha.setText("");
+
+                    // Transição de tela
+                    FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.5), ((Node) event.getSource()).getScene().getRoot());
+                    fadeOut.setFromValue(1);
+                    fadeOut.setToValue(0);
+                    fadeOut.setOnFinished((ActionEvent event1) -> {
+                        try {
+                            // Usuário e senha são válidos, exibir próxima tela
+                            usuariologado.setUsername(user);
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroUsuarioADM.fxml"));
+                            Parent root = loader.load();
+                            Scene cena = new Scene(root);
+                            Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+                            stage.setScene(cena);
+                            stage.centerOnScreen();
+                            stage.show();
+                        } catch (IOException ex) {
+                            Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    });
+                    fadeOut.play();
 
                 } else {
-                    if (usuario != null && usuario.getUsername().equals(user) && usuario.getSenha().equals(senha) && usuario.getCargo() == "admin") {
-
-                        System.out.println("Logado como administrador");
-                        System.out.println(usuario.getNome());
-                        LoginSenha.setText("");
-                        usuariologado.setUsername(user);
-                        // Usuário e senha são válidos, exibir próxima tela
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroUsuarioADM.fxml"));
-                        Parent root = loader.load();
-                        Scene cena = new Scene(root);
-                        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
-                        stage.setScene(cena);
-                        stage.centerOnScreen();
-                        stage.show();
-                    } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Erro");
-                        alert.setHeaderText("Usuário ou senha inválidos");
-                        alert.setContentText("Por favor verifique suas credenciais e tente novamente.");
-                        alert.showAndWait();
-                    }
-                }
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                
+            
+         
             }
+        }
 
-        } catch (SQLException e) {
+    }  catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erro");
             alert.setHeaderText("Erro de banco de dados");
@@ -124,11 +171,11 @@ public class TelaLoginController implements Initializable {
         }
     }
 
+
     @FXML
     private void handleFecharButtonAction(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
-    
-    
+
 }
