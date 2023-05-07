@@ -177,7 +177,7 @@
                                  </font>
                               </Label>
                               <TextField id="entradaUsername" styleClass="arial-font" fx:id="entradaUsername" layoutX="125.0" layoutY="70.0" prefHeight="30.0" prefWidth="170.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="120.0" />
-                              <Button id="botaoAtivar" fx:id="botaoAtivar" layoutX="75.0" layoutY="375.0" mnemonicParsing="false" onAction="#BotaoAdicionar" prefHeight="35.0" prefWidth="110.0" styleClass="atv-btn" stylesheets="@EstilizacaoTelas.css" text="Ativar" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="430.0">
+                              <Button id="botaoAtivar" fx:id="botaoAtivar" layoutX="75.0" layoutY="375.0" mnemonicParsing="false" onAction="#BotaoAtivar" prefHeight="35.0" prefWidth="110.0" styleClass="atv-btn" stylesheets="@EstilizacaoTelas.css" text="Ativar" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="430.0">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
