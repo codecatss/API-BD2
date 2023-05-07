@@ -4,6 +4,7 @@
  */
 package com.mycompany.api.bd2;
 
+ Cadastro-de-CR
 import com.mycompany.api.bd2.daos.crDAO;
 import com.mycompany.api.bd2.models.Centro_resultado;
 import com.mycompany.api.bd2.models.Hora;
@@ -60,8 +61,6 @@ public class CadastroCRADMController implements Initializable {
     @FXML
     private TextField entradaNome;
     @FXML
-    private TextField entradaSigla;
-    @FXML
     private Button botaoAdicionar;
     @FXML
     private Button botaoLimpar;
@@ -80,8 +79,12 @@ public class CadastroCRADMController implements Initializable {
     @FXML
     private TableColumn<Centro_resultado, String> colunaSigla;
 
-    private String usuario = TelaLoginController.usuariologado.getUsername();
+    /**
+     * Initializes the controller class.
+     */
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
+    
         nomeUsuario.setText(usuario);
         forneceTabela();
     }    
@@ -123,14 +126,11 @@ public class CadastroCRADMController implements Initializable {
         else{
             System.out.println("n salvo");
         }
-    }
 
     @FXML
-    private void limparCampos() throws IOException {
-        entradaNome.setText(null);
-        entradaCod.setText(null);
-        entradaSigla.setText(null);
+    private void limparCampos(ActionEvent event) {
     }
+    
     
     @FXML
     private void navGestUsuario()throws IOException {

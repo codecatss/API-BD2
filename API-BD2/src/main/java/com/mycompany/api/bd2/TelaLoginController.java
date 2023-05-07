@@ -9,11 +9,8 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -31,16 +28,17 @@ public class TelaLoginController implements Initializable {
     @FXML
     private Button LoginBotaoFechar;
 
-    public static Usuario getUsuariologado() {
+    public static Usuario getUsuario1() {
         return usuariologado;
     }
-
+    
+    
     public static Usuario usuariologado = new Usuario();
-
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }
+    }    
 
     @FXML
     private void handleLoginButtonAction(ActionEvent event) {
@@ -49,8 +47,8 @@ public class TelaLoginController implements Initializable {
 
         try (Connection connection = Conexao.createConnectionToMySQL()) {
             Usuario usuario = new usuarioDAO().getUsuario(user, senha);
-            if (usuario != null && usuario.getUsername().equals(user) && usuario.getSenha().equals(senha) && usuario.getCargo() == "colaborador") {
-
+            if (usuario!=null && usuario.getUsername().equals( user) && usuario.getSenha().equals(senha) && usuario.getCargo()=="colaborador") {
+                
                 System.out.println("Logado");
                 System.out.println(usuario.getNome());
                 LoginSenha.setText("");
@@ -66,7 +64,6 @@ public class TelaLoginController implements Initializable {
                 System.out.println(usuario.getNome());
                 LoginSenha.setText("");
                 // Usuário e senha são válidos, exibir próxima tela
-                usuariologado.setUsername(user);
                 App.setRoot("LancamentoColaborador");
                 
             } else{
@@ -76,11 +73,23 @@ public class TelaLoginController implements Initializable {
                 System.out.println(usuario.getNome());
                 LoginSenha.setText("");
                 // Usuário e senha são válidos, exibir próxima tela
-                usuariologado.setUsername(user);
-                App.setRoot("CadastroCRADM");
+                App.setRoot("CadastroUsuarioADM");
                 }
+                else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erro");
+                alert.setHeaderText("Usuário ou senha inválidos");
+                alert.setContentText("Por favor verifique suas credenciais e tente novamente.");
+                alert.showAndWait();
             }
             }
+            }
+                
+                
+            
+                    
+            
+                
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erro");
@@ -95,14 +104,12 @@ public class TelaLoginController implements Initializable {
             alert.setContentText("Ocorreu um erro desconhecido. Por favor tente novamente mais tarde.");
             alert.showAndWait();
             e.printStackTrace();
-        }
+        } 
     }
 
     @FXML
     private void handleFecharButtonAction(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+       Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+       stage.close();
     }
-    
-    
 }
