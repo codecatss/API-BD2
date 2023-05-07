@@ -34,6 +34,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -188,15 +189,46 @@ public class CadastroUsuarioADMController {
         colunaSenha.setCellValueFactory(new PropertyValueFactory<>("senha"));
         colunaFuncao.setCellValueFactory(new PropertyValueFactory<>("cargo"));
         colunaStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
-         
-         
+
+    }
+    @FXML
+    private void BotaoEditar(ActionEvent event){
         
-        
+        if(valorDoItemSelecionado == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Usuário não selecionado!");
+            alert.setHeaderText("Você não selecionou o usuário");
+            alert.setContentText("Por favor, clique em uma linha e preencha os campos.");
+            alert.showAndWait();
+        }
+        else{
+        lisusuarios.clear();
+        System.out.println("click");
+        Usuario usuario = new Usuario();
+        usuarioDAO usuarioDao = new usuarioDAO();
+        String nome = entradaNome.getText();
+        String funcao = selecaoFuncao.getSelectionModel().getSelectedItem();
+        String senha = entradaSenha.getText();
+        String status = selecaoStatus.getSelectionModel().getSelectedItem();
+        usuario.setNome(nome);
+        usuario.setUsername(valorDoItemSelecionado);
+        usuario.setSenha(senha);
+        usuario.setCargo(funcao);
+        usuario.setStatus(status);
+        //usuario.setHash(senha);
+        usuarioDao.update(usuario);
+        carregarTabelaUsuario();
+        }
     }
     
     @FXML
     public void limparCampos(){
-        selecaoFuncao.getSelectionModel().clearSelection();        
+        selecaoFuncao.getSelectionModel().clearSelection(); 
+        selecaoStatus.getSelectionModel().clearSelection();
+        entradaNome.clear();
+        entradaUsername.clear();
+        entradaSenha.clear();
+        
     }
     
     

@@ -9,11 +9,13 @@ import java.util.Date;
 import com.mycompany.api.bd2.models.TipoHora;
 
 public class Hora {
+    
     private Hora instancia = null;
     private int id;
     private String cod_cr;
     private String username_lancador;
     private long cnpj_cliente;
+    private String nome_cliente;
     private Timestamp data_hora_inicio;
     private Timestamp data_hora_fim;
     private String tipo;
@@ -31,6 +33,15 @@ public class Hora {
         return instancia;
     }
 
+    public String getNome_cliente() {
+        return nome_cliente;
+    }
+
+    public void setNome_cliente(String nome_cliente) {
+        this.nome_cliente = nome_cliente;
+    }
+
+    
     public String getSolicitante() {
         return solicitante;
     }
@@ -123,9 +134,9 @@ public class Hora {
      * @param tipo the tipo to set
      */
     public void setTipo(String tipo) {
-        if (tipo.equals("Hora-extra")) {
+        if (tipo.equals("EXTRA")) {
             this.tipo = TipoHora.EXTRA.name();
-        }else if(tipo.equals(TipoHora.SOBREAVISO.name().toLowerCase())){
+        }else if(tipo.equals("SOBREAVISO")){
             this.tipo = TipoHora.SOBREAVISO.name();            
         }
         else{

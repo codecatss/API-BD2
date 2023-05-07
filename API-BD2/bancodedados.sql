@@ -245,7 +245,7 @@ VALUES
         123456789,
         "2023-04-15 23:30:00",
         "2023-04-16 01:20:00",
-        "hora-extra",
+        "EXTRA",
         "Populando os bancos",
         "Projeto Integrador",
         "Mineda"
@@ -256,7 +256,7 @@ VALUES
         123456789,
         "2023-04-15 23:30:00",
         "2023-04-16 01:20:00",
-        "hora-extra",
+        "EXTRA",
         "Populando os bancos",
         "Projeto Integrador",
         "Mineda"
@@ -267,7 +267,7 @@ VALUES
         123456789,
         "2023-04-15 21:30:00",
         "2023-04-16 23:20:00",
-        "hora-extra",
+        "EXTRA",
         "Conexão de banco de dados JDBC",
         "Projeto Integrador",
         "Mineda"

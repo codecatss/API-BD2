@@ -64,7 +64,7 @@ public class LancamentoColaboradorController {
     @FXML
     private TableColumn<?, ?> tabelaN;
     @FXML
-    private TableColumn<?, ?> tabelaTipo;
+    private TableColumn<Hora, String> tabelaTipo;
     @FXML
     private TableColumn<?, ?> tabelaStatus;
     @FXML
@@ -186,8 +186,8 @@ public class LancamentoColaboradorController {
     
     @FXML
     public void tipoHora() throws ParseException{
-    obs.add("Hora-"+ TipoHora.EXTRA.name().toLowerCase());
-    obs.add(TipoHora.SOBREAVISO.name().toLowerCase());
+    obs.add("Hora extra");
+    obs.add("Sobreaviso");
     opcoes.setAll(obs);
     horaTipo.setItems(opcoes);
     }
@@ -224,7 +224,6 @@ public class LancamentoColaboradorController {
                 if((horaFim.getValue()>horaInicio.getValue())||((horaInicio.getValue().equals(horaFim.getValue()))&&minutoFim.getValue()>minutoInicio.getValue())){
                     salvar = true;
                 }else{
-                    System.out.println("qubra aqui");
                     errohoraI.setText("Hora inválida");
                     errohoraII.setText("Hora inválida");
                     horaInicio.setStyle(erro);
@@ -271,7 +270,7 @@ public class LancamentoColaboradorController {
                     hora.setCnpj_cliente(cliente.getCliente(nome_cliente).getCnpj());
                     hora.setJustificativa_lancamento(entradaJustificativa.getText());
                     hora.setStatus_aprovacao("pendente");
-                    hora.setTipo(horaTipo.getSelectionModel().getSelectedItem());
+                    hora.setTipo(horaTipo.getSelectionModel().getSelectedItem().toUpperCase());
                     horaDAO hrDAO = new horaDAO();
 
                     hrDAO.save(hora);
@@ -298,6 +297,7 @@ public class LancamentoColaboradorController {
          
     }
     
+    
     @FXML
     public void carregarTabelaLancamento(){
         horaDAO horadao = new horaDAO();
@@ -307,14 +307,13 @@ public class LancamentoColaboradorController {
         tabelaLancamento.setItems(observablelisthoras);
         
         tabelaN.setCellValueFactory(new PropertyValueFactory<>("id"));
-        tabelaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo")); 
-        tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status")); 
+        tabelaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao")); 
         tabelaInicio.setCellValueFactory(new PropertyValueFactory<>("data_hora_inicio")); 
         tabelaFim.setCellValueFactory(new PropertyValueFactory<>("data_hora_fim")); 
         tabelaCR.setCellValueFactory(new PropertyValueFactory<>("centro_resultado")); 
         tabelaCR.setCellValueFactory(new PropertyValueFactory<>("cod_cr")); 
-        tabelaCliente.setCellValueFactory(new PropertyValueFactory<>("cliente"));
+        tabelaCliente.setCellValueFactory(new PropertyValueFactory<>("nome_cliente"));
         tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
         tabelaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto"));
         tabelaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
