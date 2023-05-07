@@ -71,7 +71,7 @@ public class TelaLoginController implements Initializable {
                 LoginSenha.setText("");
 
                 // Transição de tela
-                FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.3), ((Node) event.getSource()).getScene().getRoot());
+                FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.2), ((Node) event.getSource()).getScene().getRoot());
                 fadeOut.setFromValue(1);
                 fadeOut.setToValue(0);
                 fadeOut.setOnFinished((ActionEvent event1) -> {
@@ -148,6 +148,11 @@ public class TelaLoginController implements Initializable {
 
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Erro");
+                        alert.setHeaderText("Usuário ou senha inválidos");
+                        alert.setContentText("Por favor verifique suas credenciais e tente novamente.");
+                        alert.showAndWait();
+
                 
             
          
