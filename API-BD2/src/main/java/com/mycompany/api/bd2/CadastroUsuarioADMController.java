@@ -198,6 +198,18 @@ public class CadastroUsuarioADMController {
     }
 
     @FXML
+    private void BotaoAtivar(ActionEvent event) {
+
+        System.out.println("click");
+        usuarioDAO usuarioDao = new usuarioDAO();
+        Usuario usuario = usuarioDao.getUsuarioByUsername(valorDoItemSelecionado);
+        usuario.setStatus("ativo");
+        usuarioDao.update(usuario);
+        lisusuarios.clear();
+        carregarTabelaUsuario();
+    }
+
+    @FXML
     public void carregarTabelaUsuario() {
 
         usuarioDAO usuariodao = new usuarioDAO();
@@ -256,18 +268,17 @@ public class CadastroUsuarioADMController {
     }
 
     @FXML
-public void limparCampos() {
-    entradaNome.clear();
-    entradaUsername.clear();
-    selecaoFuncao.setValue(null);
-    selecaoStatus.setValue(null);
-    entradaSenha.clear();
-    botaoAdicionar.setDisable(true);
+    public void limparCampos() {
+        entradaNome.clear();
+        entradaUsername.clear();
+        selecaoFuncao.setValue(null);
+        selecaoStatus.setValue(null);
+        entradaSenha.clear();
+        botaoAdicionar.setDisable(true);
 
-    // Desseleciona a linha da tabela
-    tabelaCadastroUsuarios.getSelectionModel().clearSelection();
-}
-
+        // Desseleciona a linha da tabela
+        tabelaCadastroUsuarios.getSelectionModel().clearSelection();
+    }
 
     public void tipoFuncao() {
         obs.clear();
