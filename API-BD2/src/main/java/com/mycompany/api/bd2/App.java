@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import javafx.scene.Node;
 
 /**
  * JavaFX App
@@ -21,12 +22,13 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CadastroClienteADM.fxml"));
-        Parent root = fxmlLoader.load();
-        scene = new Scene(root, 1300, 650);
-        stage.setScene(scene);
-        stage.show();
-        }
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
+    Parent root = loader.load();
+    Scene cena = new Scene(root);
+
+    stage.setScene(cena);
+    stage.show();
+    };
     
 
     public static void main(String[] args) {
