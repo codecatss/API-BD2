@@ -364,6 +364,16 @@ public class LancamentoColaboradorController {
         opCr.setAll(centro_r);
         selecaoCR.setItems(opCr);
     }
-
     
+    @FXML
+    private void BotaoSair(ActionEvent event) throws IOException {
+        Usuario usuario = new Usuario();
+        usuario.logout();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
+        Parent root = loader.load();
+        Scene cena = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+        stage.setScene(cena);
+        stage.show();
+    }
 }
