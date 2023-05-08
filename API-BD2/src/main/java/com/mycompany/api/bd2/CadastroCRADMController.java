@@ -7,6 +7,7 @@ package com.mycompany.api.bd2;
 import com.mycompany.api.bd2.daos.crDAO;
 import com.mycompany.api.bd2.models.Centro_resultado;
 import com.mycompany.api.bd2.models.Hora;
+import com.mycompany.api.bd2.models.Usuario;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -207,5 +208,27 @@ public class CadastroCRADMController implements Initializable {
         colunaNome.setCellValueFactory(new PropertyValueFactory<>("sigla"));
         colunaSigla.setCellValueFactory(new PropertyValueFactory<>("nome"));
 
+    }
+    
+    @FXML
+    private void BotaoSair(ActionEvent event) throws IOException {
+        Usuario usuario = new Usuario();
+        usuario.logout();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
+        Parent root = loader.load();
+        Scene cena = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+        stage.setScene(cena);
+        stage.show();
+    }
+    
+    @FXML
+    private void GestaoUsuarios(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroUsuarioADM.fxml"));
+        Parent root = loader.load();
+        Scene cena = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+        stage.setScene(cena);
+        stage.show();
     }
 }
