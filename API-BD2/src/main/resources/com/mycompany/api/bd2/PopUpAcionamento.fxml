@@ -2,18 +2,20 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane prefHeight="20.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <BorderPane prefHeight="300.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <AnchorPane prefHeight="30.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="30.0" prefWidth="500.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane prefHeight="30.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane prefHeight="30.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <Button id="fecharTela" fx:id="fecharTela" mnemonicParsing="false" styleClass="close" stylesheets="@EstilizacaoTelas.css" text="X" AnchorPane.bottomAnchor="2.5" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.5">
                            <font>
@@ -31,6 +33,62 @@
                </children>
             </AnchorPane>
          </top>
+         <left>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="291.0" prefWidth="126.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="22.0" prefWidth="90.0" text="Hora Início" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="15.0">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label prefWidth="5.0" text=":" AnchorPane.leftAnchor="97.5" AnchorPane.topAnchor="55.0">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="90.0" text="Hora Fim" textAlignment="CENTER" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="115.0">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label prefWidth="5.0" text=":" AnchorPane.leftAnchor="97.5" AnchorPane.topAnchor="155.0">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Spinner id="horaInicio" fx:id="horaInicio" prefHeight="30.0" prefWidth="70.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="50.0" />
+                        <Spinner id="minutoInicio" fx:id="minutoInicio" prefHeight="30.0" prefWidth="70.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="50.0" />
+                        <Spinner id="horaFim" fx:id="horaFim" layoutX="25.0" layoutY="100.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="150.0" />
+                        <Spinner id="minutoFim" fx:id="minutoFim" prefHeight="30.0" prefWidth="70.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="150.0" />
+                        <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutX="30.0" layoutY="256.0" mnemonicParsing="false" onAction="#botaoAdicionar" prefHeight="35.0" prefWidth="110.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="200.0">
+                           <font>
+                              <Font name="Arial Bold" size="18.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </left>
+         <center>
+            <AnchorPane prefHeight="370.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="245.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <TableView prefHeight="245.0" prefWidth="325.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                           <columns>
+                              <TableColumn id="colunaAcionamento" fx:id="colunaAcionamento" minWidth="100.0" prefWidth="100.0" text="Acionamento(s)" />
+                              <TableColumn id="colunaInicio" fx:id="colunaInicio" minWidth="100.0" prefWidth="100.0" text="Hora Início" />
+                              <TableColumn id="colunaFim" fx:id="colunaFim" minWidth="95.0" prefWidth="95.0" text="Hora Fim" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </center>
       </BorderPane>
    </children>
 </AnchorPane>
