@@ -87,16 +87,35 @@ public class CadastroCRADMController implements Initializable {
     private TableColumn<Centro_resultado, String> colunaSigla;
 
     private String usuario = TelaLoginController.usuariologado.getUsername();
+
     public void initialize(URL url, ResourceBundle rb) {
-        entradaCod.setStyle(null); 
+        entradaCod.setStyle(null);
         entradaCod.setPromptText("Apenas números");
+        botaoEditar.setDisable(true);
+        botaoInativar.setDisable(true);
+        botaoAtivar.setDisable(true);
 
         menuCR.setDisable(true);
         nomeUsuario.setText(usuario);
         forneceTabela();
-    }    
+
+        tabelaCadastroCliente.getSelectionModel().selectedItemProperty().addListener((obs, antigo, novo) -> {
+            if (novo == null) {
+                botaoAdicionar.setDisable(false);
+                botaoEditar.setDisable(true);
+                botaoInativar.setDisable(true);
+                botaoAtivar.setDisable(true);
+            } else {
+                botaoAdicionar.setDisable(true);
+                botaoEditar.setDisable(false);
+                botaoInativar.setDisable(false);
+                botaoAtivar.setDisable(false);
+            }
+        });
+    }
 
     private String erro = "-fx-border-color:#E06469";
+
     @FXML
     private void BotaoAdicionar() {
         boolean ehdigito = false;
@@ -105,46 +124,43 @@ public class CadastroCRADMController implements Initializable {
         crDAO crdao = new crDAO();
         Centro_resultado cr = new Centro_resultado();
         //testa se o codigo da CR é um número
-        if(entradaCod.getText().matches("\\d+")){
+        if (entradaCod.getText().matches("\\d+")) {
             cod = entradaCod.getText();
-            if(cod.length()<4){
+            if (cod.length() < 4) {
                 cod = String.format("%0" + (4 - cod.length()) + "d%s", 0, cod);
                 ehdigito = true;
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erro");
+                alert.setHeaderText(null);
+                alert.setContentText("O código da CR deve conter ATÉ 4 números.");
+                alert.showAndWait();
+                System.out.println("mais de 4 caracteres");
             }
-            else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erro");
-            alert.setHeaderText(null);
-            alert.setContentText("O código da CR deve conter ATÉ 4 números.");
-            alert.showAndWait();
-            System.out.println("mais de 4 caracteres");
-            }   
-        }else{
+        } else {
             entradaCod.setStyle(erro);
             entradaCod.setText(null);
             entradaCod.setPromptText("Apenas números");
             entradaCod.setStyle("-fx-prompt-text-fill: #E06469;");
             System.out.println("Apenas números em como código");
         }
-        
-        if(ehdigito && !entradaNome.getText().isEmpty()){
-            try{
+
+        if (ehdigito && !entradaNome.getText().isEmpty()) {
+            try {
                 cr.setNome(entradaNome.getText());
                 cr.setCodigo_cr(cod);
                 cr.setSigla(entradaSigla.getText().toUpperCase());
                 cr.setStatus_cr("ativo");
-                
+
                 crdao.save(cr);
                 System.out.println("Salvo");
                 limparCampos();
                 forneceTabela();
-            }
-            catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("Ocorreu um erro ao salvar os dados.");
                 e.printStackTrace();
             }
-        }
-        else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erro");
             alert.setHeaderText(null);
@@ -159,33 +175,37 @@ public class CadastroCRADMController implements Initializable {
         entradaNome.setText(null);
         entradaCod.setText(null);
         entradaSigla.setText(null);
+        botaoAdicionar.setDisable(true);
+
+        // Desseleciona a linha da tabela
+        tabelaCadastroCliente.getSelectionModel().clearSelection();
     }
-    
+
     @FXML
-    private void navGestClientes(ActionEvent event)throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroClienteADM.fxml"));
-    Parent root = loader.load();
-    Scene cena = new Scene(root);
-    Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
-    stage.setScene(cena);
-    stage.centerOnScreen();
-    stage.show();
+    private void navGestClientes(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroClienteADM.fxml"));
+        Parent root = loader.load();
+        Scene cena = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+        stage.setScene(cena);
+        stage.centerOnScreen();
+        stage.show();
     }
-    
+
     private List<Centro_resultado> liscr = new ArrayList<>();
     private ObservableList<Centro_resultado> observablelistliscr = FXCollections.observableArrayList();
+
     @FXML
-    private void forneceTabela(){
+    private void forneceTabela() {
         crDAO crdao = new crDAO();
         liscr.clear();
         liscr.addAll(crdao.getCrs());
         observablelistliscr.setAll(liscr);
         tabelaCadastroCliente.setItems(observablelistliscr);
-        
+
         colunaCod.setCellValueFactory(new PropertyValueFactory<>("codigo_cr"));
         colunaNome.setCellValueFactory(new PropertyValueFactory<>("sigla"));
         colunaSigla.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        
 
     }
 }
