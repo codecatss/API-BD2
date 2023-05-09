@@ -270,6 +270,7 @@ public class LancamentoColaboradorController {
                     hora.setCnpj_cliente(cliente.getCliente(nome_cliente).getCnpj());
                     hora.setJustificativa_lancamento(entradaJustificativa.getText());
                     hora.setStatus_aprovacao("pendente");
+                    hora.setSolicitante(entradaSolicitante.getText());
                     hora.setTipo(horaTipo.getSelectionModel().getSelectedItem().toUpperCase());
                     horaDAO hrDAO = new horaDAO();
 
