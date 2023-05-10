@@ -46,7 +46,7 @@ public class PopUpAcionamentoController implements Initializable {
     @FXML
     private Button botaoExcluir;
     @FXML
-    private Button botaoAdicionar1;
+    private Button botaoAdicionar;
 
     /**
      * Initializes the controller class.
