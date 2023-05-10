@@ -20,7 +20,7 @@
                <children>
                   <AnchorPane layoutX="534.0" layoutY="-80.0" prefHeight="40.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button id="fecharTela" fx:id="fecharTela" layoutX="1270.0" layoutY="5.0" mnemonicParsing="false" styleClass="close" stylesheets="@EstilizacaoTelas.css" text="X" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="5.0">
+                        <Button id="fecharTela" fx:id="fecharTela" layoutX="1270.0" layoutY="5.0" mnemonicParsing="false" onAction="#fechaTela" styleClass="close" stylesheets="@EstilizacaoTelas.css" text="X" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="5.0">
                            <font>
                               <Font name="Arial Bold" size="12.0" />
                            </font>
@@ -57,7 +57,7 @@
                               <Font name="Arial Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button id="menuLancamento" fx:id="menuLancamento" mnemonicParsing="false" onAction="#lancamentoGestor" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text=" Lançamentos" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="150.0">
+                        <Button id="menuLancamento" fx:id="menuLancamento" mnemonicParsing="false" onAction="#lancamentoColaborador" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text=" Lançamentos" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="150.0">
                            <graphic>
                               <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

@@ -36,6 +36,7 @@ import javafx.scene.control.Alert.AlertType;
 
 import com.mycompany.api.bd2.models.*;
 import java.io.IOException;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -394,9 +395,13 @@ public class LancamentoColaboradorController {
         stage.setScene(cena);
         stage.show();
     }
+    @FXML
+    public void botaoExit(){
+    Platform.exit();
+    }
     
-        @FXML
-    void navApontamentoGestor(ActionEvent event) throws IOException {
-        App.setRoot("ApontamentoGestor.fxml");
+    @FXML
+    public void navApontamentoGestor(ActionEvent event) throws IOException {
+        App.setRoot("ApontamentoGestor");
     }
 }
