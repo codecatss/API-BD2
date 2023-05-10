@@ -56,13 +56,13 @@ public class LancamentoColaboradorController {
     @FXML
     private Label nomeUsuario;
     @FXML
-    private Label Acionamento;
-    @FXML
     private Label errodata;
     @FXML
     private Label  erroproj;
     @FXML
     private Button botaoSair;
+    @FXML
+    private Button botaoAcionamento;
     @FXML
     private TableView<Hora> tabelaLancamento;
     @FXML
@@ -119,8 +119,6 @@ public class LancamentoColaboradorController {
     private TextField entradaSolicitante;
     
     private String usuario = TelaLoginController.usuariologado.getUsername();
-    @FXML
-    private TextField entradaAcionamento;
     
     private List<String> obs = new ArrayList<>();
     private ObservableList<String> opcoes = FXCollections.observableArrayList();
@@ -151,14 +149,14 @@ public class LancamentoColaboradorController {
         botaoLimpar.setOnAction(event -> limparCampos());
         carregarTabelaLancamento();
         
+        botaoAcionamento.setVisible(false);
+        
         horaTipo.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-        if (newVal != null && newVal.equals(TipoHora.SOBREAVISO.name().toLowerCase())) {
-            entradaAcionamento.setVisible(true);
-            Acionamento.setVisible(true);
+        if (newVal != null && newVal.equals("Sobreaviso")) {
+            botaoAcionamento.setVisible(true);
  
         } else {
-            entradaAcionamento.setVisible(false);
-            Acionamento.setVisible(false);
+            botaoAcionamento.setVisible(false);
         }
         });
     }
@@ -178,8 +176,7 @@ public class LancamentoColaboradorController {
         entradaProjeto.clear();
         entradaJustificativa.clear();
         entradaSolicitante.clear();
-        entradaAcionamento.clear();
-        Acionamento.setVisible(false);
+        botaoAcionamento.setVisible(false);
         
     }
     

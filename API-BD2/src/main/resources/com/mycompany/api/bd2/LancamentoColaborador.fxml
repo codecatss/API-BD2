@@ -146,11 +146,6 @@
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
-                              <Label id="Acionamento" fx:id="Acionamento" layoutX="725.0" layoutY="175.0" prefHeight="22.0" prefWidth="135.0" text="Acionamento(s)" visible="false" AnchorPane.leftAnchor="725.0" AnchorPane.topAnchor="250.0">
-                                 <font>
-                                    <Font name="Arial" size="18.0" />
-                                 </font>
-                              </Label>
                               <Label fx:id="errohoraI" layoutX="475.0" layoutY="71.0" prefHeight="22.0" prefWidth="155.0" textFill="RED">
                                  <font>
                                     <Font name="Arial" size="18.0" />
@@ -180,12 +175,12 @@
                               <ComboBox id="horaTipo" fx:id="horaTipo" layoutX="125.0" layoutY="20.0" onMouseClicked="#tipoHora" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="20.0" />
                               <ComboBox id="selecaoCliente" fx:id="selecaoCliente" layoutX="475.0" layoutY="20.0" onMouseClicked="#forneceCliente" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="475.0" AnchorPane.topAnchor="20.0" />
                               <ComboBox id="selecaoCR" fx:id="selecaoCR" layoutX="875.0" layoutY="20.0" onMouseClicked="#forneceCR" prefHeight="30.0" prefWidth="200.0" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="20.0" />
-                              <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutX="350.0" layoutY="235.0" mnemonicParsing="false" onAction="#botaoAdicionar" prefHeight="35.0" prefWidth="110.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="350.0">
+                              <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutX="350.0" layoutY="235.0" mnemonicParsing="false" onAction="#botaoAdicionar" prefHeight="35.0" prefWidth="200.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="325.0">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
                               </Button>
-                              <Button id="botaoLimpar" fx:id="botaoLimpar" layoutX="500.0" layoutY="235.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="35.0" prefWidth="110.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Limpar" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="550.0">
+                              <Button id="botaoLimpar" fx:id="botaoLimpar" layoutX="500.0" layoutY="235.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="35.0" prefWidth="200.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Limpar" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="575.0">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
@@ -208,7 +203,11 @@
                                  </font>
                               </Label>
                               <TextField id="entradaSolicitante" fx:id="entradaSolicitante" layoutX="115.0" layoutY="246.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="245.0" />
-                              <TextField id="entradaAcionamento" fx:id="entradaAcionamento" layoutX="905.0" layoutY="125.0" prefHeight="30.0" prefWidth="200.0" visible="false" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="245.0" />
+                              <Button id="botaoAcionamento" fx:id="botaoAcionamento" layoutX="749.0" layoutY="235.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="atv-btn" stylesheets="@EstilizacaoTelas.css" text="+ Acionamento" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="825.0">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                              </Button>
                            </children>
                         </AnchorPane>
                      </children>
