@@ -104,6 +104,7 @@ public class ApontamentoGestorController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         nomeUsuario.setText(usuario);
+        menuApontamento.setDisable(true);
 
         minimizarTela.setOnAction(e -> {
             Stage stage = (Stage) minimizarTela.getScene().getWindow();

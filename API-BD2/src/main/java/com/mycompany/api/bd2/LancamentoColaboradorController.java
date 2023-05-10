@@ -169,6 +169,7 @@ public class LancamentoColaboradorController {
 
         if (TelaLoginController.usuariologado.getCargo().equals("gestor")) {
             menuLancamento.setVisible(true);
+            menuLancamento.setDisable(true);
             menuApontamento.setVisible(true);
             menuRelatorio.setVisible(true);
         } else {
