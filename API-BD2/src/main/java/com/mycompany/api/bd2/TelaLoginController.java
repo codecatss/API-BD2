@@ -64,7 +64,7 @@ public class TelaLoginController implements Initializable {
                 System.out.println(usuario.getNome());
                 LoginSenha.setText("");
                 // Usuário e senha são válidos, exibir próxima tela
-                App.setRoot("LancamentoColaborador");
+                App.setRoot("ApontamentoGestor");
                 
             } else{
                 if (usuario!=null && usuario.getUsername().equals( user) && usuario.getSenha().equals(senha) && usuario.getCargo() == "admin") {
