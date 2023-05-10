@@ -20,7 +20,7 @@ import java.util.Set;
  */
 public class horaDAO {
     public void save(Hora hora){
-    String sql = "INSERT INTO hora(cod_cr, username_lancador, cnpj_cliente, data_hora_inicio, data_hora_fim, tipo, justificativa_lancamento, projeto, username_aprovador, justificativa_negacao, status_aprovacao) VALUES (?, ?, ?, ?, ?,?,?,?,?,?,?)";
+    String sql = "INSERT INTO hora(cod_cr, username_lancador, cnpj_cliente, data_hora_inicio, data_hora_fim, tipo, justificativa_lancamento, projeto, username_aprovador, justificativa_negacao, status_aprovacao, solicitante_lancamento) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
     Connection conn = null;
     PreparedStatement pstm = null; 
         
@@ -40,6 +40,7 @@ public class horaDAO {
             pstm.setString(9,hora.getUsername_aprovador());
             pstm.setString(10,hora.getJustificativa_negacao());
             pstm.setString(11,hora.getStatus_aprovacao());
+            pstm.setString(12,hora.getSolicitante());
             
             pstm.execute();
         }

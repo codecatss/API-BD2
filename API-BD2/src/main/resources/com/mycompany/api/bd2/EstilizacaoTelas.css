@@ -183,3 +183,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .login-btn:hover{
     -fx-background-color:linear-gradient(to bottom, #0A2647,#2C74B3);
 }
+
+.arial-font {
+-fx-font-family: "Arial";
+}

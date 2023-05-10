@@ -35,7 +35,11 @@ import javafx.scene.control.Alert.AlertType;
 
 
 import com.mycompany.api.bd2.models.*;
-import javafx.application.Platform;
+import java.io.IOException;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
@@ -157,10 +161,6 @@ public class LancamentoColaboradorController {
             Acionamento.setVisible(false);
         }
         });
-        minimizarTela.setOnAction(e -> {
-            Stage stage = (Stage) minimizarTela.getScene().getWindow();
-            stage.setIconified(true);
-        });
     }
     
     
@@ -270,6 +270,7 @@ public class LancamentoColaboradorController {
                     hora.setCnpj_cliente(cliente.getCliente(nome_cliente).getCnpj());
                     hora.setJustificativa_lancamento(entradaJustificativa.getText());
                     hora.setStatus_aprovacao("pendente");
+                    hora.setSolicitante(entradaSolicitante.getText());
                     hora.setTipo(horaTipo.getSelectionModel().getSelectedItem().toUpperCase());
                     horaDAO hrDAO = new horaDAO();
 
@@ -353,9 +354,6 @@ public class LancamentoColaboradorController {
         opCli.setAll(cli);
         selecaoCliente.setItems(opCli);
     }
-    public void fechaTela(){
-    Platform.exit();
-    }
     
     @FXML
     public void forneceCR(){
@@ -366,5 +364,17 @@ public class LancamentoColaboradorController {
         }
         opCr.setAll(centro_r);
         selecaoCR.setItems(opCr);
+    }
+    
+    @FXML
+    private void BotaoSair(ActionEvent event) throws IOException {
+        Usuario usuario = new Usuario();
+        usuario.logout();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
+        Parent root = loader.load();
+        Scene cena = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+        stage.setScene(cena);
+        stage.show();
     }
 }

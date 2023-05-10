@@ -134,7 +134,7 @@ public class Hora {
      * @param tipo the tipo to set
      */
     public void setTipo(String tipo) {
-        if (tipo.equals("EXTRA")) {
+        if (tipo.equals("EXTRA")||tipo.equals("HORA EXTRA")) {
             this.tipo = TipoHora.EXTRA.name();
         }else if(tipo.equals("SOBREAVISO")){
             this.tipo = TipoHora.SOBREAVISO.name();            
