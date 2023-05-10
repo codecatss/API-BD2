@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import com.mycompany.api.bd2.models.Centro_resultado;
+import com.mycompany.api.bd2.models.Cliente;
 
 /**
  *
@@ -179,5 +180,35 @@ public class crDAO {
                         System.out.println(cr.getNome());
         return cr;
     }
+        
+    public void update(Centro_resultado cr) {
+    String sql = "UPDATE centro_resultado SET nome=?, status_cr=?, sigla=? WHERE codigo_cr=?";
+    Connection conn = null;
+    PreparedStatement pstm = null;
 
+    try {
+        conn = Conexao.createConnectionToMySQL();
+
+        pstm = (PreparedStatement) conn.prepareStatement(sql);
+        pstm.setString(1, cr.getNome());
+        pstm.setString(2, cr.getStatus_cr());
+        pstm.setString(3, cr.getSigla());
+        pstm.setString(4, cr.getCodigo_cr());
+
+        pstm.executeUpdate();
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    }
 }
