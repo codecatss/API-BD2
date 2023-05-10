@@ -43,7 +43,7 @@ create table
 create table
     cliente (
         cnpj BIGINT NOT NULL,
-        razao_social VARCHAR(70) NOT NULL,
+        razao_social VARCHAR(150) NOT NULL,
         status_cliente ENUM('ativo', 'inativo') NOT NULL DEFAULT 'ativo',
         PRIMARY KEY(cnpj)
     );
@@ -51,17 +51,22 @@ create table
 create table
     hora(
         id int AUTO_INCREMENT NOT NULL,
-        cod_cr VARCHAR(30),
-        username_lancador VARCHAR(20),
-        cnpj_cliente BIGINT,
-        data_hora_inicio DATETIME,
-        data_hora_fim DATETIME,
-        tipo VARCHAR(15),
-        justificativa_lancamento VARCHAR(500),
-        projeto VARCHAR(100),
+        cod_cr VARCHAR(30) NOT NULL,
+        username_lancador VARCHAR(20) NOT NULL,
+        cnpj_cliente BIGINT NOT NULL,
+        data_hora_inicio DATETIME NOT NULL,
+        data_hora_fim DATETIME NOT NULL,
+        tipo VARCHAR(15) NOT NULL,
+        justificativa_lancamento VARCHAR(500) NOT NULL,
+        projeto VARCHAR(100) NOT NULL,
 	username_aprovador VARCHAR(20),
         justificativa_negacao VARCHAR(500),
-        status_aprovacao ENUM('pendente','aprovado','negado') DEFAULT 'pendente',
+        status_aprovacao ENUM('pendente','aprovado','negado') NOT NULL DEFAULT 'pendente',
+	solicitante_lancamento VARCHAR(30) NOT NULL,
+	Foreign Key (username_lancador) REFERENCES usuario(username),
+	Foreign Key (cod_cr) REFERENCES centro_resultado(codigo_cr),
+	Foreign Key (cnpj_cliente) REFERENCES cliente(cnpj),
+	Foreign Key (username_aprovador) REFERENCES usuario (username),
         PRIMARY KEY(id)
     );
 
@@ -230,7 +235,8 @@ INSERT INTO
     data_hora_fim,
     tipo,
     justificativa_lancamento,
-    projeto
+    projeto,
+    solicitante_lancamento
     )
 VALUES
     (
@@ -239,9 +245,10 @@ VALUES
         123456789,
         "2023-04-15 23:30:00",
         "2023-04-16 01:20:00",
-        "hora-extra",
+        "EXTRA",
         "Populando os bancos",
-        "Projeto Integrador"
+        "Projeto Integrador",
+        "Mineda"
     ),
     (
         13652,
@@ -249,9 +256,10 @@ VALUES
         123456789,
         "2023-04-15 23:30:00",
         "2023-04-16 01:20:00",
-        "hora-extra",
+        "EXTRA",
         "Populando os bancos",
-        "Projeto Integrador"
+        "Projeto Integrador",
+        "Mineda"
     ),
     (
         13652,
@@ -259,9 +267,10 @@ VALUES
         123456789,
         "2023-04-15 21:30:00",
         "2023-04-16 23:20:00",
-        "hora-extra",
+        "EXTRA",
         "Conexão de banco de dados JDBC",
-        "Projeto Integrador"
+        "Projeto Integrador",
+        "Mineda"
     );
 
 -- Aprovação de hora-extra na tabela hora

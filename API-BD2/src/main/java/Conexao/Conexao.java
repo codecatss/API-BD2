@@ -11,7 +11,6 @@ public class Conexao {
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/2rp"; //porta do seu banco
     
     public static Connection createConnectionToMySQL() throws Exception{
-        Class.forName("com.mysql.jdbc.Driver");
         Connection connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
         return connection;
     }

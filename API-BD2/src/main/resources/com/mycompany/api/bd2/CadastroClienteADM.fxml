@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.api.bd2.CadastroClienteADMController">
+   <children>
+      <BorderPane layoutX="520.0" layoutY="225.0" prefHeight="650.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="40.0" prefWidth="1300.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane layoutX="534.0" layoutY="-80.0" prefHeight="40.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.5" AnchorPane.rightAnchor="2.5" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Button id="fecharTela" fx:id="fecharTela" layoutX="1270.0" layoutY="5.0" mnemonicParsing="false" onAction="#BotaoFechar" prefHeight="22.0" styleClass="close" stylesheets="@EstilizacaoTelas.css" text="X" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="5.0">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button id="minimizarTela" fx:id="minimizarTela" layoutX="1245.0" layoutY="5.0" mnemonicParsing="false" onAction="#BotaoMinimizar" prefWidth="22.0" styleClass="minimize" stylesheets="@EstilizacaoTelas.css" text="-" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="5.0" />
+                        <Label id="nometelaatual" fx:id="nometelaatual" layoutX="10.0" layoutY="10.0" text="Gestão Clientes" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </top>
+         <left>
+            <AnchorPane prefHeight="610.0" prefWidth="225.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="610.0" prefWidth="225.0" styleClass="nav-form" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Line endX="93.88575744628906" layoutX="15.0" layoutY="85.0" startX="-100.0" stroke="WHITE" strokeWidth="2.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="85.0" />
+                        <ImageView id="imagemUser" fx:id="imagemUser" fitHeight="40.0" fitWidth="40.0" layoutX="15.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="25.0">
+                           <image>
+                              <Image url="@user-48.png" />
+                           </image>
+                        </ImageView>
+                        <Label id="nomeUsuario" fx:id="nomeUsuario" layoutX="75.0" layoutY="30.0" text="USUÁRIO" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="30.0">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                        </Label>
+                        <Button id="botaoSair" fx:id="botaoSair" layoutX="10.0" layoutY="580.0" mnemonicParsing="false" onAction="#BotaoSair" styleClass="logout" stylesheets="@EstilizacaoTelas.css" text="Sair" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button id="menuUsuario" fx:id="menuUsuario" layoutX="-1.0" layoutY="140.0" mnemonicParsing="false" onAction="#GestaoUsuarios" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Gestão Usuários" textAlignment="CENTER" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="140.0">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@adicionar-usuario.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button id="menuCR" fx:id="menuCR" mnemonicParsing="false" onAction="#GestaoCRs" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Gestão CRs" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="195.0">
+                           <graphic>
+                              <ImageView fitHeight="26.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@adicionar-produto.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button id="menuCliente" fx:id="menuCliente" mnemonicParsing="false" onAction="#GestaoClientes" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Gestão Clientes" textAlignment="CENTER" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="250.0">
+                           <graphic>
+                              <ImageView fitHeight="29.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@adicionar-ficheiro.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button id="menuAprovar" fx:id="menuAprovar" mnemonicParsing="false" onAction="#AprovarHoras" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Aprovar Horas" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="305.0">
+                           <graphic>
+                              <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@aprovacao%20(1).png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button id="menuRelatorio" fx:id="menuRelatorio" mnemonicParsing="false" onAction="#Relatorios" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Relatórios" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="360.0">
+                           <graphic>
+                              <ImageView fitHeight="28.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@relatorio.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </left>
+         <center>
+            <HBox prefHeight="610.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="610.0" prefWidth="300.0">
+                     <children>
+                        <AnchorPane prefHeight="610.0" prefWidth="350.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <TextField id="entradaCNPJ" styleClass="arial-font" fx:id="entradaCNPJ" layoutX="115.0" layoutY="10.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="20.0" />
+                              <Label layoutX="15.0" layoutY="15.0" prefHeight="22.0" prefWidth="60.0" text="CNPJ" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="25.0">
+                                 <font>
+                                    <Font name="Arial" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="15.0" layoutY="65.0" prefHeight="22.0" prefWidth="150.0" styleClass="arial-font" text="Razão Social" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="75.0">
+                                 <font>
+                                    <Font name="Arial" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField id="entradaRS" styleClass="arial-font" fx:id="entradaRS" layoutX="115.0" layoutY="60.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="70.0" />
+                              <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutY="200.0" mnemonicParsing="false" onAction="#BotaoAdicionar" prefHeight="35.0" prefWidth="110.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="150.0">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button id="botaoLimpar" fx:id="botaoLimpar" layoutX="175.0" layoutY="200.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="35.0" prefWidth="110.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Limpar" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="150.0">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button id="botaoEditar" fx:id="botaoEditar" layoutX="25.0" layoutY="250.0" mnemonicParsing="false" onAction="#BotaoEditar" prefHeight="35.0" prefWidth="110.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Editar" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="215.0">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button id="botaoInativar" fx:id="botaoInativar" layoutX="175.0" layoutY="250.0" mnemonicParsing="false" onAction="#BotaoInativar" prefHeight="35.0" prefWidth="110.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Inativar" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="215.0">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button id="botaoAtivar" fx:id="botaoAtivar" layoutX="53.0" layoutY="403.0" mnemonicParsing="false" onAction="#BotaoAtivar" prefHeight="35.0" prefWidth="110.0" styleClass="atv-btn" stylesheets="@EstilizacaoTelas.css" text="Ativar" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="290.0">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <styleClass>
+                              <String fx:value="white-bg" />
+                              <String fx:value="shadow" />
+                           </styleClass>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane>
+                     <children>
+                        <AnchorPane prefHeight="610.0" prefWidth="775.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <TableView id="tabelaCadastroCliente" fx:id="tabelaCadastroCliente" prefHeight="609.0" prefWidth="708.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                <columns>
+                                  <TableColumn id="colunaCNPJ" styleClass="arial-font" fx:id="colunaCNPJ" maxWidth="3000.0" minWidth="168.0" prefWidth="260.0" text="CNPJ" />
+                                  <TableColumn id="colunaRS" styleClass="arial-font" fx:id="colunaRS" maxWidth="1000.0" minWidth="255.0" prefWidth="264.0" text="Razão Social" />
+                                  <TableColumn id="colunaStatus" styleClass="arial-font" fx:id="colunaStatus" maxWidth="3000.0" minWidth="164.0" prefWidth="316.0" text="Status" />
+                                </columns>
+                              </TableView>
+                           </children>
+                           <styleClass>
+                              <String fx:value="white-bg" />
+                              <String fx:value="shadow" />
+                           </styleClass>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

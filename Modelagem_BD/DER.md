@@ -1,2 +1,1 @@
-
-![Modelagem_BD_Sprint2](https://user-images.githubusercontent.com/111433915/233791430-3c9c5e63-32ce-4163-a718-1de2ba441db9.png)
+![Modelagem_BD_Sprint3](https://user-images.githubusercontent.com/111433915/236079615-c59791c7-38e3-429d-887c-1e529ca4162a.png)
