@@ -321,4 +321,14 @@ public class CadastroUsuarioADMController {
         stage.setScene(cena);
         stage.show();
     }
+    
+    @FXML
+    void navApontamentoGestor(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ApontamentoGestor.fxml"));
+        Parent root = loader.load();
+        Scene cena = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+        stage.setScene(cena);
+        stage.show();
+    }
 }

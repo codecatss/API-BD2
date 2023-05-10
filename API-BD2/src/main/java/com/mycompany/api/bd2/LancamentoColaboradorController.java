@@ -46,7 +46,7 @@ import javafx.stage.Stage;
 public class LancamentoColaboradorController {
     
     @FXML
-    private Button fecharTela;
+    private Button FecharTela;
     @FXML
     private Button minimizarTela;
     @FXML
@@ -117,6 +117,12 @@ public class LancamentoColaboradorController {
     private TextField entradaJustificativa;
     @FXML
     private TextField entradaSolicitante;
+    @FXML
+    private Button menuLancamento;
+    @FXML
+    private Button menuApontamento;
+    @FXML
+    private Button menuRelatorio;
     
     private String usuario = TelaLoginController.usuariologado.getUsername();
     @FXML
@@ -161,6 +167,17 @@ public class LancamentoColaboradorController {
             Acionamento.setVisible(false);
         }
         });
+        
+        if(TelaLoginController.usuariologado.getCargo().equals("gestor")){
+            menuLancamento.setVisible(true);
+            menuApontamento.setVisible(true);
+            menuRelatorio.setVisible(true);
+        }
+        else{
+            menuLancamento.setVisible(false);
+            menuApontamento.setVisible(false);
+            menuRelatorio.setVisible(false);
+        }
     }
     
     
@@ -376,5 +393,10 @@ public class LancamentoColaboradorController {
         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
         stage.setScene(cena);
         stage.show();
+    }
+    
+        @FXML
+    void navApontamentoGestor(ActionEvent event) throws IOException {
+        App.setRoot("ApontamentoGestor.fxml");
     }
 }

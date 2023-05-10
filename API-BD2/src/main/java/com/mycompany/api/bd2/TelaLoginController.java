@@ -51,11 +51,12 @@ public class TelaLoginController implements Initializable {
             Usuario usuario = new usuarioDAO().getUsuario(user, senha);
             if (usuario != null && usuario.getUsername().equals(user) && usuario.getSenha().equals(senha) && usuario.getCargo() == "colaborador") {
 
-                System.out.println("Logado");
+                System.out.println("Logado como "+usuario.getCargo());
                 System.out.println(usuario.getNome());
                 LoginSenha.setText("");
                 // Usuário e senha são válidos, exibir próxima tela
-                usuariologado.setUsername(user);
+                usuariologado.setUsername(usuario.getUsername());
+                usuariologado.setCargo(usuario.getCargo());
                 //usuario1.setSenha(senha);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("LancamentoColaborador.fxml"));
                 Parent root = loader.load();
@@ -72,7 +73,8 @@ public class TelaLoginController implements Initializable {
                     System.out.println("Logado como gestor");
                     System.out.println(usuario.getNome());
                     LoginSenha.setText("");
-                    usuariologado.setUsername(user);
+                    usuariologado.setUsername(usuario.getUsername());
+                    usuariologado.setCargo(usuario.getCargo());
                     // Usuário e senha são válidos, exibir próxima tela
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("LancamentoColaborador.fxml"));
                     Parent root = loader.load();
@@ -88,7 +90,8 @@ public class TelaLoginController implements Initializable {
                         System.out.println("Logado como administrador");
                         System.out.println(usuario.getNome());
                         LoginSenha.setText("");
-                        usuariologado.setUsername(user);
+                        usuariologado.setUsername(usuario.getUsername());
+                        usuariologado.setCargo(usuario.getCargo());
                         // Usuário e senha são válidos, exibir próxima tela
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroCRADM.fxml"));
                         Parent root = loader.load();
