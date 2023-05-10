@@ -28,7 +28,7 @@ public class App extends Application {
         launch();
     }
 
-    public static Scene getScene(Stage stage) {
+    public static Scene getScene() {
         return scene;
     }
 

@@ -57,7 +57,7 @@
                               <Font name="Arial Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button id="menuLancamento" fx:id="menuLancamento" mnemonicParsing="false" onAction="#lancamentoColaborador" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text=" Lançamentos" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="150.0">
+                        <Button id="menuLancamento" fx:id="menuLancamento" mnemonicParsing="false" onAction="#navLancamentoColaborador" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text=" Lançamentos" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="150.0">
                            <graphic>
                               <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
