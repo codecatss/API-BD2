@@ -6,17 +6,17 @@ package com.mycompany.api.bd2;
 
 import com.mycompany.api.bd2.daos.crDAO;
 import com.mycompany.api.bd2.models.Centro_resultado;
-import com.mycompany.api.bd2.models.Hora;
 import com.mycompany.api.bd2.models.Usuario;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,12 +25,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
@@ -79,7 +81,7 @@ public class CadastroCRADMController implements Initializable {
     @FXML
     private Button botaoAtivar;
     @FXML
-    private TableView<Centro_resultado> tabelaCadastroCliente;
+    private TableView<Centro_resultado> tabelaCadastroCr;
     @FXML
     private TableColumn<Centro_resultado, String> colunaCod;
     @FXML
@@ -89,18 +91,20 @@ public class CadastroCRADMController implements Initializable {
 
     private String usuario = TelaLoginController.usuariologado.getUsername();
 
+    String valorDoItemSelecionado;
+
     public void initialize(URL url, ResourceBundle rb) {
         entradaCod.setStyle(null);
-        entradaCod.setPromptText("Apenas números");
+        entradaCod.setPromptText("Até 4 números");
         botaoEditar.setDisable(true);
         botaoInativar.setDisable(true);
         botaoAtivar.setDisable(true);
 
         menuCR.setDisable(true);
         nomeUsuario.setText(usuario);
-        forneceTabela();
+        carregarTabelaCr();
 
-        tabelaCadastroCliente.getSelectionModel().selectedItemProperty().addListener((obs, antigo, novo) -> {
+        tabelaCadastroCr.getSelectionModel().selectedItemProperty().addListener((obs, antigo, novo) -> {
             if (novo == null) {
                 botaoAdicionar.setDisable(false);
                 botaoEditar.setDisable(true);
@@ -113,23 +117,35 @@ public class CadastroCRADMController implements Initializable {
                 botaoAtivar.setDisable(false);
             }
         });
+        tabelaCadastroCr.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.getClickCount() == 1) { // Verifica se é um único clique
+                    Centro_resultado item = (Centro_resultado) tabelaCadastroCr.getSelectionModel().getSelectedItem(); // Obtém o item selecionado
+                    valorDoItemSelecionado = item.getCodigo_cr();
+                    entradaCod.setText(item.getCodigo_cr());
+                    entradaNome.setText(item.getNome());
+                    entradaSigla.setText(item.getSigla());
+                    System.out.println("Item selecionado: " + valorDoItemSelecionado); // Imprime no console
+                }
+            }
+        });
     }
 
     private String erro = "-fx-border-color:#E06469";
 
     @FXML
     private void BotaoAdicionar() {
-        boolean ehdigito = false;
-        boolean atequatro = false;
+        boolean digito = false;
         String cod = "0";
         crDAO crdao = new crDAO();
         Centro_resultado cr = new Centro_resultado();
         //testa se o codigo da CR é um número
         if (entradaCod.getText().matches("\\d+")) {
             cod = entradaCod.getText();
-            if (cod.length() < 4) {
-                cod = String.format("%0" + (4 - cod.length()) + "d%s", 0, cod);
-                ehdigito = true;
+            if (cod.length() <= 4) {
+                cod = String.format("%0" + (5 - cod.length()) + "d%s", 0, cod);
+                digito = true;
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Erro");
@@ -146,7 +162,7 @@ public class CadastroCRADMController implements Initializable {
             System.out.println("Apenas números em como código");
         }
 
-        if (ehdigito && !entradaNome.getText().isEmpty()) {
+        if (digito && !entradaNome.getText().isEmpty()) {
             try {
                 cr.setNome(entradaNome.getText());
                 cr.setCodigo_cr(cod);
@@ -156,7 +172,7 @@ public class CadastroCRADMController implements Initializable {
                 crdao.save(cr);
                 System.out.println("Salvo");
                 limparCampos();
-                forneceTabela();
+                carregarTabelaCr();
             } catch (Exception e) {
                 System.out.println("Ocorreu um erro ao salvar os dados.");
                 e.printStackTrace();
@@ -172,44 +188,92 @@ public class CadastroCRADMController implements Initializable {
     }
 
     @FXML
-    private void limparCampos() throws IOException {
+    private void limparCampos() {
         entradaNome.setText(null);
         entradaCod.setText(null);
         entradaSigla.setText(null);
         botaoAdicionar.setDisable(true);
 
         // Desseleciona a linha da tabela
-        tabelaCadastroCliente.getSelectionModel().clearSelection();
+        tabelaCadastroCr.getSelectionModel().clearSelection();
     }
 
     @FXML
-    private void navGestClientes(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroClienteADM.fxml"));
-        Parent root = loader.load();
-        Scene cena = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
-        stage.setScene(cena);
-        stage.centerOnScreen();
-        stage.show();
+
+    private void BotaoEditar(ActionEvent event) {
+        // verifica se alguma linha foi selecionada
+        if (tabelaCadastroCr.getSelectionModel().getSelectedItem() != null) {
+            // desabilita a edição da coluna de código
+            tabelaCadastroCr.getColumns().get(0).setEditable(false);
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmação");
+            alert.setHeaderText(null);
+            alert.setContentText("Tem certeza que deseja atualizar os dados do CR?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                // o usuário clicou em "OK", continue com a ação
+                Centro_resultado crSelecionado = tabelaCadastroCr.getSelectionModel().getSelectedItem();
+
+                String novoNome = entradaNome.getText();
+                String novaSigla = entradaSigla.getText();
+                if (!novoNome.isEmpty()) {
+                    // atualiza o objeto Centro_resultado com o novo nome
+                    crSelecionado.setNome(novoNome);
+                    crSelecionado.setSigla(novaSigla);
+
+                    // salva o objeto atualizado no banco de dados
+                    crDAO crdao = new crDAO();
+                    crdao.update(crSelecionado);
+
+                    // atualiza a tabela com as novas informações
+                    carregarTabelaCr();
+                    limparCampos();
+                }
+            } else {
+                limparCampos();
+                System.out.println("Cancelado");
+            }
+
+        } else {
+            System.out.println("Nenhuma linha selecionada");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Nenhuma linha selecionada");
+            alert.setHeaderText(null);
+            alert.setContentText("Por favor, selecione uma linha da tabela para editar");
+            alert.showAndWait();
+        }
     }
+
+    @FXML
+    private void BotaoInativar(ActionEvent event) {
+        
+    }
+
+    @FXML
+    private void BotaoAtivar(ActionEvent event) {
+    
+    }
+
 
     private List<Centro_resultado> liscr = new ArrayList<>();
     private ObservableList<Centro_resultado> observablelistliscr = FXCollections.observableArrayList();
 
     @FXML
-    private void forneceTabela() {
+    private void carregarTabelaCr() {
         crDAO crdao = new crDAO();
         liscr.clear();
         liscr.addAll(crdao.getCrs());
         observablelistliscr.setAll(liscr);
-        tabelaCadastroCliente.setItems(observablelistliscr);
+        tabelaCadastroCr.setItems(observablelistliscr);
 
         colunaCod.setCellValueFactory(new PropertyValueFactory<>("codigo_cr"));
         colunaNome.setCellValueFactory(new PropertyValueFactory<>("sigla"));
         colunaSigla.setCellValueFactory(new PropertyValueFactory<>("nome"));
 
     }
-    
+
     @FXML
     private void BotaoSair(ActionEvent event) throws IOException {
         Usuario usuario = new Usuario();
@@ -219,9 +283,10 @@ public class CadastroCRADMController implements Initializable {
         Scene cena = new Scene(root);
         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
         stage.setScene(cena);
+        stage.centerOnScreen();
         stage.show();
     }
-    
+
     @FXML
     private void GestaoUsuarios(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroUsuarioADM.fxml"));
@@ -229,6 +294,30 @@ public class CadastroCRADMController implements Initializable {
         Scene cena = new Scene(root);
         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
         stage.setScene(cena);
+        stage.centerOnScreen();
         stage.show();
+    }
+
+    @FXML
+    private void GestaoClientes(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroClienteADM.fxml"));
+        Parent root = loader.load();
+        Scene cena = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+        stage.setScene(cena);
+        stage.centerOnScreen();
+        stage.show();
+    }
+
+    @FXML
+    private void BotaoFechar(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void BotaoMinimizar(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setIconified(true);
     }
 }
