@@ -317,6 +317,7 @@ public class CadastroClienteADMController {
         Scene cena = new Scene(root);
         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
         stage.setScene(cena);
+        stage.centerOnScreen();
         stage.show();
     }
 
@@ -327,6 +328,7 @@ public class CadastroClienteADMController {
         Scene cena = new Scene(root);
         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
         stage.setScene(cena);
+        stage.centerOnScreen();
         stage.show();
     }
 
@@ -337,6 +339,7 @@ public class CadastroClienteADMController {
         Scene cena = new Scene(root);
         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
         stage.setScene(cena);
+        stage.centerOnScreen();
         stage.show();
     }
 
@@ -347,6 +350,7 @@ public class CadastroClienteADMController {
         Scene cena = new Scene(root);
         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
         stage.setScene(cena);
+        stage.centerOnScreen();
         stage.show();
     }
 

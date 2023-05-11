@@ -6,35 +6,30 @@
 package com.mycompany.api.bd2;
 
 import com.mycompany.api.bd2.daos.usuarioDAO;
-import java.net.URL;
+import com.mycompany.api.bd2.models.Usuario;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import com.mycompany.api.bd2.models.Usuario;
-import java.io.IOException;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.Tooltip;
-import javafx.scene.control.cell.PropertyValueFactory;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -104,6 +99,8 @@ public class CadastroUsuarioADMController {
     @FXML
     private Button botaoAtivar;
 
+    private String usuario = TelaLoginController.usuariologado.getUsername();
+
     private List<String> obs = new ArrayList<>();
     private ObservableList<String> opcoes = FXCollections.observableArrayList();
 
@@ -116,16 +113,16 @@ public class CadastroUsuarioADMController {
     private ObservableList<Usuario> observablelistusuario = FXCollections.observableArrayList();
 
     public void initialize() {
-        nomeUsuario.setText(new Usuario().getUsername());
+        nomeUsuario.setText(usuario);
         //nomeUsuario.setText("*nome do usuário*");
         // Desabilita os botões "Editar", "Inativar" e "Ativar" no início
         botaoEditar.setDisable(true);
         botaoInativar.setDisable(true);
         botaoAtivar.setDisable(true);
         menuUsuario.setDisable(true);
-        
+
         botaoLimpar.setOnAction(event -> limparCampos());
-     
+
         carregarTabelaUsuario();
 
         tabelaCadastroUsuarios.getSelectionModel().selectedItemProperty().addListener((obs, antigo, novo) -> {
@@ -300,15 +297,27 @@ public class CadastroUsuarioADMController {
     }
 
     @FXML
-    private void botaoSair(ActionEvent event) throws IOException {
+    private void BotaoFechar(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void BotaoMinimizar(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setIconified(true);
+    }
+
+    @FXML
+    private void BotaoSair(ActionEvent event) throws IOException {
         Usuario usuario = new Usuario();
         usuario.logout();
-        System.out.println("sair");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
         Parent root = loader.load();
         Scene cena = new Scene(root);
         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
         stage.setScene(cena);
+        stage.centerOnScreen();
         stage.show();
     }
 
@@ -319,16 +328,36 @@ public class CadastroUsuarioADMController {
         Scene cena = new Scene(root);
         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
         stage.setScene(cena);
+        stage.centerOnScreen();
         stage.show();
     }
-    
+
     @FXML
-    void navApontamentoGestor(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ApontamentoGestor.fxml"));
+    void GestaoCRs(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroCRADM.fxml"));
         Parent root = loader.load();
         Scene cena = new Scene(root);
         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
         stage.setScene(cena);
+        stage.centerOnScreen();
         stage.show();
+    }
+
+    @FXML
+    void AprovarHoras(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Em progresso");
+        alert.setHeaderText(null);
+        alert.setContentText("Desculpe o transtorno, estamos sempre trabalhando em melhorias");
+        alert.showAndWait();
+    }
+
+    @FXML
+    void Relatorios(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Em progresso");
+        alert.setHeaderText(null);
+        alert.setContentText("Desculpe o transtorno, estamos sempre trabalhando em melhorias");
+        alert.showAndWait();
     }
 }
