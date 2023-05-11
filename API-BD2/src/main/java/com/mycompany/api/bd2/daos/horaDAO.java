@@ -6,11 +6,13 @@ package com.mycompany.api.bd2.daos;
 
 import Conexao.Conexao;
 import com.mycompany.api.bd2.models.Hora;
+import com.mycompany.api.bd2.models.TabelaAprovaçãoGestor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -207,6 +209,64 @@ public class horaDAO {
 			}
                         System.out.println(horasUser);
 			return horasUser;
+	}
+    
+    public List<TabelaAprovaçãoGestor> getHora(LinkedList<Integer> lis_int_cr){//sobrecarga para gerar a tabela de apontamentos
+        
+        List<TabelaAprovaçãoGestor> horasUser = new LinkedList<>();
+        for(Object i : lis_int_cr){
+            String sql = "SELECT * FROM 2rp.hora WHERE cod_cr = ?";
+
+            Connection conn = null;
+            PreparedStatement pstm = null;
+            //Classe que vai recuperar os dados do banco. ***SELECT****
+            ResultSet rset = null;
+            //Hora hora = Hora.getInstance();
+
+            try {   
+                String cod = i.toString();
+
+                conn = Conexao.createConnectionToMySQL();
+
+                pstm = (PreparedStatement) conn.prepareStatement(sql);
+                pstm.setInt(1, Integer.parseInt(cod));			
+                rset = pstm.executeQuery();
+                while (rset.next()) {
+                    TabelaAprovaçãoGestor info = new TabelaAprovaçãoGestor();
+                    info.setCod_cr(rset.getString("cod_cr"));
+                    info.setUsername(rset.getString("username_lancador"));
+                    info.setInicio(rset.getString("data_hora_inicio"));
+                    info.setFim(rset.getString("data_hora_fim"));
+                    info.setTipo(rset.getString("tipo"));
+                    info.setJustificativa(rset.getString("justificativa_lancamento"));
+                    info.setProjeto(rset.getString("projeto"));
+                    //info.setNome_cliente(getNomeClient(rset.getLong("cnpj_cliente")));
+
+                    horasUser.add(info);
+
+                }
+            }catch (Exception e) {
+                e.printStackTrace();
+                }finally {
+                    try {
+                            if(rset!=null) {
+                                    rset.close();
+                            }
+
+                            if(pstm!=null) {
+                                    pstm.close();
+                            }
+
+                            if(conn!=null) {
+                                    conn.close();
+                            }
+                    }catch(Exception e) {
+                            e.printStackTrace();
+                    }
+                }
+        }
+        System.out.println(horasUser);
+        return horasUser;
 	}
     
     private String nome;

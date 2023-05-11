@@ -17,6 +17,7 @@ import com.mycompany.api.bd2.models.Integrante;
  * @author mikaela.begotti
  */
 public class integranteDAO {
+    
     public void save(Integrante integrante){
         String sql = "INSERT INTO integrante(gestor, username_integrante, cod_cr) VALUES (?, ?, ?)";
         Connection conn = null;
@@ -129,5 +130,51 @@ public class integranteDAO {
 			}
                         System.out.println(integrantes);
 			return integrantes;
+	}
+
+    public List<Integer> getListCrGestor(String nomegestor){
+		
+		String sql = "SELECT cod_cr FROM 2rp.integrante WHERE gestor = 0 AND username_lancador = ?";
+
+		
+		List<Integer> liscr = new ArrayList<>();
+		
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		//Classe que vai recuperar os dados do banco. ***SELECT****
+		ResultSet rset = null;
+		
+		try {
+                    conn = Conexao.createConnectionToMySQL();
+                    pstm = conn.prepareStatement(sql);
+                    pstm.setString(1, nomegestor);  // Define o valor de nomeProcurado no PreparedStatement
+                    rset = pstm.executeQuery();
+			
+                    while (rset.next()) {
+
+                            liscr.add(Integer.valueOf((rset.getString("cod_cr"))));
+
+                    }
+		}catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(rset!=null) {
+						rset.close();
+					}
+					
+					if(pstm!=null) {
+						pstm.close();
+					}
+					
+					if(conn!=null) {
+						conn.close();
+					}
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+                        System.out.println(liscr);
+			return liscr;
 	}
 }

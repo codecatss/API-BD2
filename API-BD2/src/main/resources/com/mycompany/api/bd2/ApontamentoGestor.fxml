@@ -102,14 +102,14 @@
                      <children>
                         <TableView id="tabelaContainer" fx:id="tabelaApontamento" layoutX="14.0" layoutY="57.0" prefHeight="665.0" prefWidth="1044.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0">
                            <columns>
-                              <TableColumn fx:id="colunaUsername" prefWidth="75.0" text="Username" />
-                              <TableColumn fx:id="colunaNome" prefWidth="232.8000030517578" text="Nome" />
-                              <TableColumn fx:id="colunaCR" prefWidth="159.99996948242188" text="CR" />
+                              <TableColumn fx:id="colunaUsername" prefWidth="180.0" text="Colaborador" />
+                              <TableColumn fx:id="colunaCR" prefWidth="180.0" text="CR" />
                               <TableColumn fx:id="colunaEmpresa" prefWidth="155.2000732421875" text="Empresa" />
                               <TableColumn fx:id="colunaProjeto" prefWidth="160.0" text="Projeto" />
-                              <TableColumn fx:id="colunaFuncao" prefWidth="98.39996337890625" text="Função" />
+                              <TableColumn fx:id="colunaFuncao" prefWidth="98.39996337890625" text="Tipo" />
                               <TableColumn fx:id="colunaInicio" prefWidth="232.8000030517578" text="Inicio" />
                               <TableColumn fx:id="colunaFim" prefWidth="232.8000030517578" text="Fim" />
+                              <TableColumn fx:id="colunaJust" prefWidth="98.39996337890625" text="Justificativa" />
                            </columns>
                         </TableView>
                         <Label layoutX="14.0" layoutY="20.0" text="Apontamento pendentes">
