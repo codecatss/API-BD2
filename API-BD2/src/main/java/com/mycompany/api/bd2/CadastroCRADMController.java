@@ -368,4 +368,21 @@ public class CadastroCRADMController implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
+    @FXML
+    void AprovarHoras(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Em progresso");
+        alert.setHeaderText(null);
+        alert.setContentText("Desculpe o transtorno, estamos sempre trabalhando em melhorias");
+        alert.showAndWait();
+    }
+
+    @FXML
+    void Relatorios(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Em progresso");
+        alert.setHeaderText(null);
+        alert.setContentText("Desculpe o transtorno, estamos sempre trabalhando em melhorias");
+        alert.showAndWait();
+    }
 }
