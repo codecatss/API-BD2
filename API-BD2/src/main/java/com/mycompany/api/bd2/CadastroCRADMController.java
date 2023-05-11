@@ -81,6 +81,8 @@ public class CadastroCRADMController implements Initializable {
     @FXML
     private Button botaoAtivar;
     @FXML
+    private Button botaoGerir;
+    @FXML
     private TableView<Centro_resultado> tabelaCadastroCr;
     @FXML
     private TableColumn<Centro_resultado, String> colunaCod;
@@ -99,6 +101,7 @@ public class CadastroCRADMController implements Initializable {
         botaoEditar.setDisable(true);
         botaoInativar.setDisable(true);
         botaoAtivar.setDisable(true);
+        botaoGerir.setDisable(true);
 
         menuCR.setDisable(true);
         nomeUsuario.setText(usuario);
@@ -110,11 +113,13 @@ public class CadastroCRADMController implements Initializable {
                 botaoEditar.setDisable(true);
                 botaoInativar.setDisable(true);
                 botaoAtivar.setDisable(true);
+                botaoGerir.setDisable(true);
             } else {
                 botaoAdicionar.setDisable(true);
                 botaoEditar.setDisable(false);
                 botaoInativar.setDisable(false);
                 botaoAtivar.setDisable(false);
+                botaoGerir.setDisable(false);
             }
         });
         tabelaCadastroCr.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -323,6 +328,11 @@ public class CadastroCRADMController implements Initializable {
     }
 
     @FXML
+    void BotaoGerir(ActionEvent event) {
+        System.out.println("Gerir");
+    }
+
+    @FXML
     private void BotaoSair(ActionEvent event) throws IOException {
         Usuario usuario = new Usuario();
         usuario.logout();
@@ -368,6 +378,7 @@ public class CadastroCRADMController implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
+
     @FXML
     void AprovarHoras(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
