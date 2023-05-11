@@ -122,7 +122,7 @@
                      <children>
                         <AnchorPane prefHeight="610.0" prefWidth="350.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <TextField id="entradaCNPJ" styleClass="arial-font" fx:id="entradaCNPJ" layoutX="115.0" layoutY="10.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="20.0" />
+                              <TextField id="entradaCNPJ" fx:id="entradaCNPJ" layoutX="115.0" layoutY="10.0" prefHeight="30.0" prefWidth="155.0" styleClass="arial-font" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="20.0" />
                               <Label layoutX="15.0" layoutY="15.0" prefHeight="22.0" prefWidth="60.0" text="CNPJ" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="25.0">
                                  <font>
                                     <Font name="Arial" size="18.0" />
@@ -133,7 +133,7 @@
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
-                              <TextField id="entradaRS" styleClass="arial-font" fx:id="entradaRS" layoutX="115.0" layoutY="60.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="70.0" />
+                              <TextField id="entradaRS" fx:id="entradaRS" layoutX="115.0" layoutY="60.0" prefHeight="30.0" prefWidth="155.0" styleClass="arial-font" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="70.0" />
                               <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutY="200.0" mnemonicParsing="false" onAction="#BotaoAdicionar" prefHeight="35.0" prefWidth="110.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="150.0">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
@@ -173,9 +173,9 @@
                            <children>
                               <TableView id="tabelaCadastroCliente" fx:id="tabelaCadastroCliente" prefHeight="609.0" prefWidth="708.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                 <columns>
-                                  <TableColumn id="colunaCNPJ" styleClass="arial-font" fx:id="colunaCNPJ" maxWidth="3000.0" minWidth="168.0" prefWidth="260.0" text="CNPJ" />
-                                  <TableColumn id="colunaRS" styleClass="arial-font" fx:id="colunaRS" maxWidth="1000.0" minWidth="255.0" prefWidth="264.0" text="Razão Social" />
-                                  <TableColumn id="colunaStatus" styleClass="arial-font" fx:id="colunaStatus" maxWidth="3000.0" minWidth="164.0" prefWidth="316.0" text="Status" />
+                                  <TableColumn id="colunaStatus" fx:id="colunaStatus" maxWidth="3000.0" minWidth="164.0" prefWidth="183.19994831085205" styleClass="arial-font" text="Status" />
+                                  <TableColumn id="colunaCNPJ" fx:id="colunaCNPJ" maxWidth="3000.0" minWidth="168.0" prefWidth="249.60008239746094" styleClass="arial-font" text="CNPJ" />
+                                  <TableColumn id="colunaRS" fx:id="colunaRS" maxWidth="1000.0" minWidth="255.0" prefWidth="344.800048828125" styleClass="arial-font" text="Razão Social" />
                                 </columns>
                               </TableView>
                            </children>
