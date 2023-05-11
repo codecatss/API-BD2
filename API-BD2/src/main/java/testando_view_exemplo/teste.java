@@ -4,8 +4,10 @@
  */
 package testando_view_exemplo;
 
+import com.mycompany.api.bd2.daos.crDAO;
 import com.mycompany.api.bd2.daos.horaDAO;
 import com.mycompany.api.bd2.daos.usuarioDAO;
+import com.mycompany.api.bd2.models.Centro_resultado;
 import com.mycompany.api.bd2.models.Hora;
 import com.mycompany.api.bd2.models.Usuario;
 
@@ -15,24 +17,16 @@ import com.mycompany.api.bd2.models.Usuario;
  */
 public class teste {
     public static void main(String[] args) {
-        /*usuarioDAO usuarioDao = new usuarioDAO();
-        Usuario usuario = new Usuario();
-        //System.out.println(usuarioDao.getUsuarios());
-        String cargo = usuarioDao.getUsuarioByUsername("marilia").getCargo();
-        String nome = usuarioDao.getUsuarioByUsername("marilia").getNome();
-        String senha = usuarioDao.getUsuarioByUsername("marilia").getSenha();
-        usuario.setUsername("marilia");
-        usuario.setCargo(cargo);
-        usuario.setNome(nome);
-        usuario.setSenha(senha);
-        usuario.setStatus("ativo");
-        usuarioDao.update(usuario);/*
-        */
+        Centro_resultado cr = new Centro_resultado();
+        crDAO crdao = new crDAO();
         
-        horaDAO horadao = new horaDAO();
-        Hora hora = new Hora();
+        cr.setCodigo_cr("13652");
+        cr.setNome("Codecats");
+        cr.setSigla("CCTS");
+        cr.setStatus_cr("inativo");
         
-        horadao.getHora("caio");
+        crdao.update(cr);
+
 }
     
     
