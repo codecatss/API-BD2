@@ -139,29 +139,22 @@
                               </Label>
                               <ComboBox id="selecaoFuncao" fx:id="selecaoFuncao" layoutX="115.0" layoutY="110.0" onMouseClicked="#tipoFuncao" prefHeight="30.0" prefWidth="170.0" styleClass="arial-font" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="120.0" />
                               
-                              <Label layoutX="15.0" layoutY="115.0" prefHeight="22.0" prefWidth="75.0" text="Status" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="175.0">
-                                 <font>
-                                    <Font name="Arial" size="18.0" />
-                                 </font>
-                              </Label>
-                              <ComboBox id="selecaoStatus" fx:id="selecaoStatus" layoutX="115.0" layoutY="150.0" onMouseClicked="#tipoStatus" prefHeight="30.0" prefWidth="170.0" styleClass="arial-font" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="170.0" />
-                              
-                              <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutX="20.0" layoutY="240.0" mnemonicParsing="false" onAction="#BotaoAdicionar" prefHeight="35.0" prefWidth="110.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="240.0">
+                              <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutX="20.0" layoutY="210.0" mnemonicParsing="false" onAction="#BotaoAdicionar" prefHeight="35.0" prefWidth="110.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="210.0">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
                               </Button>
-                              <Button id="botaoLimpar" fx:id="botaoLimpar" layoutX="160.4" layoutY="240.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="35.0" prefWidth="110.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Limpar" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="240.0">
+                              <Button id="botaoLimpar" fx:id="botaoLimpar" layoutX="160.4" layoutY="210.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="35.0" prefWidth="110.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Limpar" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="210.0">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
                               </Button>
-                              <Button id="botaoEditar" fx:id="botaoEditar" layoutX="20.0" layoutY="290.0" mnemonicParsing="false" onAction="#BotaoEditar" prefHeight="35.0" prefWidth="110.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Editar" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="290.0">
+                              <Button id="botaoEditar" fx:id="botaoEditar" layoutX="20.0" layoutY="260.0" mnemonicParsing="false" onAction="#BotaoEditar" prefHeight="35.0" prefWidth="110.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Editar" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="260.0">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
                               </Button>
-                              <Button id="botaoInativar" fx:id="botaoInativar" layoutX="160.4" layoutY="290.0" mnemonicParsing="false" onAction="#BotaoInativar" prefHeight="35.0" prefWidth="110.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Inativar" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="290.0">
+                              <Button id="botaoInativar" fx:id="botaoInativar" layoutX="160.4" layoutY="260.0" mnemonicParsing="false" onAction="#BotaoInativar" prefHeight="35.0" prefWidth="110.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Inativar" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="260.0">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
@@ -171,7 +164,7 @@
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
-                              <Button id="botaoAtivar" fx:id="botaoAtivar" layoutX="75.0" layoutY="350.0" mnemonicParsing="false" onAction="#BotaoAtivar" prefHeight="35.0" prefWidth="110.0" styleClass="atv-btn" stylesheets="@EstilizacaoTelas.css" text="Ativar" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="350.0">
+                              <Button id="botaoAtivar" fx:id="botaoAtivar" layoutX="75.0" layoutY="320.0" mnemonicParsing="false" onAction="#BotaoAtivar" prefHeight="35.0" prefWidth="110.0" styleClass="atv-btn" stylesheets="@EstilizacaoTelas.css" text="Ativar" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="320.0">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
@@ -191,8 +184,8 @@
                               <TableView id="tabelaCadastroUsuarios" fx:id="tabelaCadastroUsuarios" prefHeight="609.0" prefWidth="708.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                 <columns>
                                     <TableColumn id="colunaStatus" fx:id="colunaStatus" maxWidth="1600.0" minWidth="150.0" prefWidth="150.0" styleClass="arial-font" text="Status" />
-                                  <TableColumn id="colunaUsername" fx:id="colunaUsername" maxWidth="2000.0" minWidth="144.0000457763672" prefWidth="172.80003356933594" styleClass="arial-font" text="Username" />
                                     <TableColumn id="colunaNome" fx:id="colunaNome" maxWidth="2000.0" minWidth="200.0" prefWidth="261.60003662109375" styleClass="arial-font" text="Nome" />
+                                  <TableColumn id="colunaUsername" fx:id="colunaUsername" maxWidth="2000.0" minWidth="144.0000457763672" prefWidth="172.80003356933594" styleClass="arial-font" text="Username" />
                                     <TableColumn id="colunaFuncao" fx:id="colunaFuncao" maxWidth="1750.0" minWidth="175.0" prefWidth="177.5999755859375" styleClass="arial-font" text="Função" />
                                 </columns>
                               </TableView>
