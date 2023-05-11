@@ -4,35 +4,39 @@
  */
 package testando_view_exemplo;
 
+import com.mycompany.api.bd2.daos.crDAO;
 import com.mycompany.api.bd2.daos.horaDAO;
+import com.mycompany.api.bd2.daos.integranteDAO;
 import com.mycompany.api.bd2.daos.usuarioDAO;
+import com.mycompany.api.bd2.models.Centro_resultado;
 import com.mycompany.api.bd2.models.Hora;
+import com.mycompany.api.bd2.models.Integrante;
 import com.mycompany.api.bd2.models.Usuario;
+import java.text.ParseException;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
  * @author mikaela.begotti
  */
 public class teste {
-    public static void main(String[] args) {
-        /*usuarioDAO usuarioDao = new usuarioDAO();
-        Usuario usuario = new Usuario();
-        //System.out.println(usuarioDao.getUsuarios());
-        String cargo = usuarioDao.getUsuarioByUsername("marilia").getCargo();
-        String nome = usuarioDao.getUsuarioByUsername("marilia").getNome();
-        String senha = usuarioDao.getUsuarioByUsername("marilia").getSenha();
-        usuario.setUsername("marilia");
-        usuario.setCargo(cargo);
-        usuario.setNome(nome);
-        usuario.setSenha(senha);
-        usuario.setStatus("ativo");
-        usuarioDao.update(usuario);/*
-        */
+    public static void main(String[] args) throws ParseException {
         
-        horaDAO horadao = new horaDAO();
-        Hora hora = new Hora();
+        Integrante integrante = new Integrante();
+        integranteDAO idao = new integranteDAO();
         
-        horadao.getHora("caio");
+        integrante.setCod_cr("13652");
+        integrante.setGestor(1);
+        integrante.setUsername_integrante("brendel");
+        
+        
+        
+        
+   
+           
+        idao.update(integrante);
+
 }
     
     

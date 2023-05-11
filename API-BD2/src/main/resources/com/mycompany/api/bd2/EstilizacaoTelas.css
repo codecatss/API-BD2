@@ -62,6 +62,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-cursor:hand;
 }
 
+.atv-btn:hover{
+    -fx-background-color:#2C74B3;
+}
+
 .appointments-btn{
     -fx-background-color:transparent;
     -fx-cursor:hand;

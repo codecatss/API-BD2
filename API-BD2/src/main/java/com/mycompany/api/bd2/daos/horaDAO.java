@@ -5,6 +5,7 @@
 package com.mycompany.api.bd2.daos;
 
 import Conexao.Conexao;
+import com.mycompany.api.bd2.models.Centro_resultado;
 import com.mycompany.api.bd2.models.Hora;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -251,4 +252,46 @@ public class horaDAO {
                 }
         }
     return nome;}
+    
+    public void update(Hora hora) {
+    String sql = "UPDATE hora SET cod_cr=?, username_lancador=?, cnpj_cliente=?, data_hora_inicio=?, data_hora_fim=?, "
+            + "tipo=?, justificativa_lancamento=?, projeto=?, username_aprovador=?, justificativa_negacao=?, status_aprovacao=?, "
+            + "solicitante_lancamento=? WHERE id=?";
+    Connection conn = null;
+    PreparedStatement pstm = null;
+
+    try {
+        conn = Conexao.createConnectionToMySQL();
+
+            pstm = (PreparedStatement) conn.prepareStatement(sql);
+            pstm.setString(1,hora.getCod_cr());
+            pstm.setString(2,hora.getUsername_lancador());
+            pstm.setLong(3,hora.getCnpj_cliente());
+            pstm.setTimestamp(4,hora.getData_hora_inicio());
+            pstm.setTimestamp(5,hora.getData_hora_fim());
+            pstm.setString(6,hora.getTipo());
+            pstm.setString(7,hora.getJustificativa_lancamento());
+            pstm.setString(8,hora.getProjeto());
+            pstm.setString(9,hora.getUsername_aprovador());
+            pstm.setString(10,hora.getJustificativa_negacao());
+            pstm.setString(11,hora.getStatus_aprovacao());
+            pstm.setString(12,hora.getSolicitante());
+            pstm.setInt(13, hora.getId());
+
+        pstm.executeUpdate();
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    }
 }

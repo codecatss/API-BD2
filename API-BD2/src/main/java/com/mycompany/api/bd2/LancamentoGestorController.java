@@ -49,8 +49,6 @@ public class LancamentoGestorController {
     @FXML
     private Label nomeUsuario;
     @FXML
-    private Label Acionamento;
-    @FXML
     private Label errodata;
     @FXML
     private Label  erroproj;
@@ -103,6 +101,8 @@ public class LancamentoGestorController {
     @FXML
     private Button botaoAdicionar;
     @FXML
+    private Button botaoAcionamento;
+    @FXML
     private Button botaoLimpar;
     @FXML
     private TextField entradaProjeto;
@@ -111,8 +111,6 @@ public class LancamentoGestorController {
     @FXML
     private TextField entradaSolicitante;
     @FXML
-    private TextField entradaAcionamento;
-    @FXML
     private Button menuLancamento;
     @FXML
     private Button menuApontamento;
@@ -120,7 +118,7 @@ public class LancamentoGestorController {
     private Button menuRelatorio;
     
     
- private List<String> obs = new ArrayList<>();
+    private List<String> obs = new ArrayList<>();
     private ObservableList<String> opcoes = FXCollections.observableArrayList();
     
     private List<String> cli = new ArrayList<>();
@@ -150,13 +148,11 @@ public class LancamentoGestorController {
         carregarTabelaLancamento();
         
         horaTipo.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-        if (newVal != null && newVal.equals(TipoHora.SOBREAVISO.name().toLowerCase())) {
-            entradaAcionamento.setVisible(true);
-            Acionamento.setVisible(true);
+        if (newVal != null && newVal.equals("Sobreaviso")) {
+            botaoAcionamento.setVisible(true);
  
         } else {
-            entradaAcionamento.setVisible(false);
-            Acionamento.setVisible(false);
+            botaoAcionamento.setVisible(false);
         }
         });
     }
@@ -176,8 +172,7 @@ public class LancamentoGestorController {
         entradaProjeto.clear();
         entradaJustificativa.clear();
         entradaSolicitante.clear();
-        entradaAcionamento.clear();
-        Acionamento.setVisible(false);
+        botaoAcionamento.setVisible(false);
         
     }
     
