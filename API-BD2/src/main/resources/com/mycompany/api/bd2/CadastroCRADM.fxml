@@ -154,7 +154,7 @@
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
                               </Button>
-                              <Button id="botaoAtivar" fx:id="botaoAtivar" layoutX="53.0" layoutY="403.0" mnemonicParsing="false" onAction="#BotaoAdicionar" prefHeight="35.0" prefWidth="110.0" styleClass="atv-btn" stylesheets="@EstilizacaoTelas.css" text="Ativar" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="310.0">
+                              <Button id="botaoAtivar" fx:id="botaoAtivar" layoutX="53.0" layoutY="403.0" mnemonicParsing="false" onAction="#BotaoAdicionar" prefHeight="35.0" prefWidth="110.0" styleClass="atv-btn" stylesheets="@EstilizacaoTelas.css" text="Ativar" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="375.0">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
@@ -165,6 +165,11 @@
                                  </font>
                               </Label>
                               <TextField id="entradaSigla" fx:id="entradaSigla" layoutX="125.0" layoutY="121.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="120.0" />
+                              <Button id="botaoCR" fx:id="botaoCR" layoutX="10.0" layoutY="210.0" mnemonicParsing="false" onAction="#BotaoAdicionar" prefHeight="35.0" prefWidth="110.0" styleClass="atv-btn" stylesheets="@EstilizacaoTelas.css" text="Gerir CR" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="310.0">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                              </Button>
                            </children>
                            <styleClass>
                               <String fx:value="white-bg" />
