@@ -4,17 +4,13 @@
  */
 package com.mycompany.api.bd2.daos;
 
-import com.mycompany.api.bd2.models.Cliente;
 import Conexao.Conexao;
+import com.mycompany.api.bd2.models.Cliente;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import com.mycompany.api.bd2.models.Hora;
 /**
  *
  * @author mikaela.begotti
@@ -82,6 +78,7 @@ public class clienteDAO {
         }
         
     }
+    
     public List<Cliente> getClientes(){
 		
 		String sql = "SELECT * FROM 2rp.cliente";
@@ -132,6 +129,7 @@ public class clienteDAO {
                         System.out.println(clientes);
 			return clientes;
 	}
+    
     public Cliente getCliente(String nome_cliente){
 		String sql = "SELECT * FROM 2rp.cliente where razao_social = ?";
 				

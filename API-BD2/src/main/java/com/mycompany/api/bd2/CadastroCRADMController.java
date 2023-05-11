@@ -248,14 +248,62 @@ public class CadastroCRADMController implements Initializable {
 
     @FXML
     private void BotaoInativar(ActionEvent event) {
-        
+        // exibe um alerta de confirmação antes de inativar a CR
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmação");
+        alert.setHeaderText(null);
+        alert.setContentText("Tem certeza que deseja inativar o CR?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            // o usuário clicou em "Ok", então a CR será inativada
+            crDAO crdao = new crDAO();
+            Centro_resultado cr = crdao.getCrByCodigo(valorDoItemSelecionado);
+            cr.setStatus_cr("inativo");
+            crdao.update(cr);
+
+            carregarTabelaCr();
+            limparCampos();
+
+            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+            alert2.setTitle("CR inativado");
+            alert2.setHeaderText(null);
+            alert2.setContentText("O CR foi inativado com sucesso!");
+            alert2.showAndWait();
+        } else {
+            // o usuário clicou em "Cancelar", então nada será feito
+            limparCampos();
+            carregarTabelaCr();
+        }
     }
 
     @FXML
     private void BotaoAtivar(ActionEvent event) {
-    
-    }
+        // exibe um alerta de confirmação antes de ativar a CR
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmação");
+        alert.setHeaderText(null);
+        alert.setContentText("Tem certeza que deseja ativar a CR?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            // o usuário clicou em "Ok", então a CR será ativada
+            crDAO crdao = new crDAO();
+            Centro_resultado cr = crdao.getCrByCodigo(valorDoItemSelecionado);
+            cr.setStatus_cr("ativo");
+            crdao.update(cr);
+            carregarTabelaCr();
+            limparCampos();
 
+            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+            alert2.setTitle("CR ativado");
+            alert2.setHeaderText(null);
+            alert2.setContentText("O CR foi ativado com sucesso!");
+            alert2.showAndWait();
+        } else {
+            // o usuário clicou em "Cancelar", então nada será feito
+            limparCampos();
+            carregarTabelaCr();
+        }
+    }
 
     private List<Centro_resultado> liscr = new ArrayList<>();
     private ObservableList<Centro_resultado> observablelistliscr = FXCollections.observableArrayList();

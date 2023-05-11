@@ -149,12 +149,12 @@
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
                               </Button>
-                              <Button id="botaoInativar" fx:id="botaoInativar" layoutX="175.0" layoutY="250.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="35.0" prefWidth="110.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Inativar" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="235.0">
+                              <Button id="botaoInativar" fx:id="botaoInativar" layoutX="175.0" layoutY="250.0" mnemonicParsing="false" onAction="#BotaoInativar" prefHeight="35.0" prefWidth="110.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Inativar" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="235.0">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
                               </Button>
-                              <Button id="botaoAtivar" fx:id="botaoAtivar" layoutX="53.0" layoutY="403.0" mnemonicParsing="false" onAction="#BotaoAdicionar" prefHeight="35.0" prefWidth="110.0" styleClass="atv-btn" stylesheets="@EstilizacaoTelas.css" text="Ativar" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="375.0">
+                              <Button id="botaoAtivar" fx:id="botaoAtivar" layoutX="53.0" layoutY="403.0" mnemonicParsing="false" onAction="#BotaoAtivar" prefHeight="35.0" prefWidth="110.0" styleClass="atv-btn" stylesheets="@EstilizacaoTelas.css" text="Ativar" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="375.0">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
