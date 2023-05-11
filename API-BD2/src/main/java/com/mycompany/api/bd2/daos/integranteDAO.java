@@ -5,6 +5,7 @@
 package com.mycompany.api.bd2.daos;
 
 import Conexao.Conexao;
+import com.mycompany.api.bd2.models.Cliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -130,4 +131,35 @@ public class integranteDAO {
                         System.out.println(integrantes);
 			return integrantes;
 	}
+    
+    public void update(Integrante integrante) {
+    String sql = "UPDATE integrante SET gestor=?, cod_cr=? WHERE username_integrante=? and cod_cr=?";
+    Connection conn = null;
+    PreparedStatement pstm = null;
+
+    try {
+        conn = Conexao.createConnectionToMySQL();
+
+        pstm = (PreparedStatement) conn.prepareStatement(sql);
+        pstm.setInt(1, integrante.getGestor());
+        pstm.setString(2, integrante.getCod_cr());
+        pstm.setString(3, integrante.getUsername_integrante());
+        pstm.setString(4, integrante.getCod_cr());
+
+        pstm.executeUpdate();
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    }
 }
