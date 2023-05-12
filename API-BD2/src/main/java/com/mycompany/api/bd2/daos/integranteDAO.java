@@ -5,19 +5,20 @@
 package com.mycompany.api.bd2.daos;
 
 import Conexao.Conexao;
-import com.mycompany.api.bd2.models.Cliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import com.mycompany.api.bd2.models.Integrante;
+import java.util.LinkedList;
 
 /**
  *
  * @author mikaela.begotti
  */
 public class integranteDAO {
+    
     public void save(Integrante integrante){
         String sql = "INSERT INTO integrante(gestor, username_integrante, cod_cr) VALUES (?, ?, ?)";
         Connection conn = null;
@@ -131,35 +132,50 @@ public class integranteDAO {
                         System.out.println(integrantes);
 			return integrantes;
 	}
-    
-    public void update(Integrante integrante) {
-    String sql = "UPDATE integrante SET gestor=?, cod_cr=? WHERE username_integrante=? and cod_cr=?";
-    Connection conn = null;
-    PreparedStatement pstm = null;
 
-    try {
-        conn = Conexao.createConnectionToMySQL();
+    public LinkedList<Integer> getListCrGestor(String nomegestor){
+		
+		String sql = "SELECT cod_cr FROM 2rp.integrante WHERE gestor = 1 AND username_integrante = ?";
 
-        pstm = (PreparedStatement) conn.prepareStatement(sql);
-        pstm.setInt(1, integrante.getGestor());
-        pstm.setString(2, integrante.getCod_cr());
-        pstm.setString(3, integrante.getUsername_integrante());
-        pstm.setString(4, integrante.getCod_cr());
+		
+		LinkedList<Integer> liscr = new LinkedList<>();
+		
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		//Classe que vai recuperar os dados do banco. ***SELECT****
+		ResultSet rset = null;
+		
+		try {
+                    conn = Conexao.createConnectionToMySQL();
+                    pstm = conn.prepareStatement(sql);
+                    pstm.setString(1, nomegestor);  // Define o valor de nomeProcurado no PreparedStatement
+                    rset = pstm.executeQuery();
+			
+                    while (rset.next()) {
 
-        pstm.executeUpdate();
-    } catch (Exception e) {
-        e.printStackTrace();
-    } finally {
-        try {
-            if (pstm != null) {
-                pstm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    }
+                            liscr.add(Integer.valueOf((rset.getString("cod_cr"))));
+
+                    }
+		}catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(rset!=null) {
+						rset.close();
+					}
+					
+					if(pstm!=null) {
+						pstm.close();
+					}
+					
+					if(conn!=null) {
+						conn.close();
+					}
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+                        System.out.println("dao integrante" + liscr);
+			return liscr;
+	}
 }
