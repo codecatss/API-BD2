@@ -109,13 +109,16 @@ public class ApontamentoGestorController implements Initializable {
             Stage stage = (Stage) minimizarTela.getScene().getWindow();
             stage.setIconified(true);
         });
+        horaDAO horadao = new horaDAO();
+       System.out.println("initialize "+horadao.getHora(crgestor.getListCrGestor(usuario)));
+       carregarTabelaLancamento();
     }
 
     public void fechaTela() {
         Platform.exit();
     }
     
-    private List<Integer> lis_cr = new LinkedList<>();
+    
     private integranteDAO crgestor = new integranteDAO();
     
     @FXML
@@ -132,10 +135,18 @@ public class ApontamentoGestorController implements Initializable {
         colunaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto"));
         colunaInicio.setCellValueFactory(new PropertyValueFactory<>("inicio"));
         colunaFim.setCellValueFactory(new PropertyValueFactory<>("fim"));
-        colunaJust.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
-        colunaFunçao.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
+        //colunaJust.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
+        //colunaFunçao.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
         tabelaApontamento.refresh();
     }
+    
+    @FXML
+    public void botaoAprovar(){
+        if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
+            System.out.print("clicado");
+        }
+    }
+    
    
     @FXML
     public void navLancamentoColaborador(ActionEvent event) throws IOException {

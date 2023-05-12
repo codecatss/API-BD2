@@ -211,10 +211,10 @@ public class horaDAO {
 			return horasUser;
 	}
     
-    public List<TabelaAprovaçãoGestor> getHora(LinkedList<Integer> lis_int_cr){//sobrecarga para gerar a tabela de apontamentos
+    public LinkedList<TabelaAprovaçãoGestor> getHora(LinkedList<Integer> lis_int_cr){//sobrecarga para gerar a tabela de apontamentos
         
-        List<TabelaAprovaçãoGestor> horasUser = new LinkedList<>();
-        for(Object i : lis_int_cr){
+        LinkedList<TabelaAprovaçãoGestor> horasUser = new LinkedList<>();
+        for(Integer i : lis_int_cr){
             String sql = "SELECT * FROM 2rp.hora WHERE cod_cr = ?";
 
             Connection conn = null;
@@ -241,7 +241,9 @@ public class horaDAO {
                     info.setJustificativa(rset.getString("justificativa_lancamento"));
                     info.setProjeto(rset.getString("projeto"));
                     //info.setNome_cliente(getNomeClient(rset.getLong("cnpj_cliente")));
-
+                    
+                    
+                    
                     horasUser.add(info);
 
                 }

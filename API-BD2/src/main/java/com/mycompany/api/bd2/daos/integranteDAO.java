@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import com.mycompany.api.bd2.models.Integrante;
+import java.util.LinkedList;
 
 /**
  *
@@ -132,12 +133,12 @@ public class integranteDAO {
 			return integrantes;
 	}
 
-    public List<Integer> getListCrGestor(String nomegestor){
+    public LinkedList<Integer> getListCrGestor(String nomegestor){
 		
-		String sql = "SELECT cod_cr FROM 2rp.integrante WHERE gestor = 0 AND username_lancador = ?";
+		String sql = "SELECT cod_cr FROM 2rp.integrante WHERE gestor = 1 AND username_integrante = ?";
 
 		
-		List<Integer> liscr = new ArrayList<>();
+		LinkedList<Integer> liscr = new LinkedList<>();
 		
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -174,7 +175,7 @@ public class integranteDAO {
 					e.printStackTrace();
 				}
 			}
-                        System.out.println(liscr);
+                        System.out.println("dao integrante" + liscr);
 			return liscr;
 	}
 }

@@ -19,6 +19,7 @@ public class TabelaAprovaçãoGestor {
     private String inicio;
     private String fim;
     private String justificativa;
+    private String justificativa_lancamento;
 
     public String getUsername() {
         return username;
@@ -93,7 +94,13 @@ public class TabelaAprovaçãoGestor {
         this.justificativa = justificativa;
     }
 
-    
-    
+    public String getJustificativa_lancamento() {
+        return justificativa_lancamento;
+    }
+
+    public void setJustificativa_lancamento(String justificativa_lancamento) {
+        this.justificativa_lancamento = justificativa_lancamento;
+    }
+
     
 }
