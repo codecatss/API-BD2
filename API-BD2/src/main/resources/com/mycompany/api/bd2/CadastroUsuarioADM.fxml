@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -130,7 +129,6 @@
                                  </font>
                               </Label>
                               <TextField id="entradaNome" fx:id="entradaNome" layoutX="115.0" layoutY="10.0" prefHeight="30.0" prefWidth="170.0" styleClass="arial-font" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="20.0" />
-                              <PasswordField id="entradaSenha" fx:id="entradaSenha" layoutX="115.0" layoutY="60.0" prefHeight="30.0" prefWidth="170.0" styleClass="arial-font" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="70.0" />
                               
                               <Label layoutX="15.0" layoutY="115.0" prefHeight="22.0" prefWidth="75.0" text="Função" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="125.0">
                                  <font>
@@ -169,6 +167,7 @@
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
                               </Button>
+                              <TextField id="entradaUsername" fx:id="entradaUsername" layoutX="110.0" layoutY="71.0" prefHeight="30.0" prefWidth="170.0" styleClass="arial-font" />
                            </children>
                            <styleClass>
                               <String fx:value="white-bg" />
