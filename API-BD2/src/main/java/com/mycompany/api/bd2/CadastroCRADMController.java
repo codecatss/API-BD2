@@ -90,6 +90,8 @@ public class CadastroCRADMController implements Initializable {
     private TableColumn<Centro_resultado, String> colunaNome;
     @FXML
     private TableColumn<Centro_resultado, String> colunaSigla;
+    @FXML
+    private TableColumn<?, ?> colunaStatus;
 
     private String usuario = TelaLoginController.usuariologado.getUsername();
 
@@ -321,6 +323,7 @@ public class CadastroCRADMController implements Initializable {
         observablelistliscr.setAll(liscr);
         tabelaCadastroCr.setItems(observablelistliscr);
 
+        colunaStatus.setCellValueFactory(new PropertyValueFactory<>("status_cr"));
         colunaCod.setCellValueFactory(new PropertyValueFactory<>("codigo_cr"));
         colunaNome.setCellValueFactory(new PropertyValueFactory<>("sigla"));
         colunaSigla.setCellValueFactory(new PropertyValueFactory<>("nome"));

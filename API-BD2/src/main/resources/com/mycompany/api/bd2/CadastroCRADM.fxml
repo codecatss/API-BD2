@@ -184,7 +184,7 @@
                            <children>
                               <TableView id="tabelaCadastroCr" fx:id="tabelaCadastroCr" prefHeight="609.0" prefWidth="708.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                  <columns>
-                                    <TableColumn prefWidth="184.0" text="Status" />
+                                    <TableColumn id="colunaStatus" fx:id="colunaStatus" prefWidth="184.0" text="Status" />
                                     <TableColumn id="colunaCod" fx:id="colunaCod" maxWidth="3000.0" minWidth="125.0" prefWidth="125.0" text="Código" />
                                     <TableColumn id="colunaNome" fx:id="colunaNome" maxWidth="1000.0" minWidth="259.20005798339844" prefWidth="259.20005798339844" text="Nome" />
                                     <TableColumn id="colunaSigla" fx:id="colunaSigla" maxWidth="1000.0" minWidth="129.60003662109375" prefWidth="192.00006103515625" text="Sigla" />
