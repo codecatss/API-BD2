@@ -199,7 +199,7 @@ public class CadastroCRADMController implements Initializable {
         entradaNome.setText(null);
         entradaCod.setText(null);
         entradaSigla.setText(null);
-        botaoAdicionar.setDisable(true);
+        botaoAdicionar.setDisable(false);
 
         // Desseleciona a linha da tabela
         tabelaCadastroCr.getSelectionModel().clearSelection();
@@ -280,6 +280,7 @@ public class CadastroCRADMController implements Initializable {
             // o usuário clicou em "Cancelar", então nada será feito
             limparCampos();
             carregarTabelaCr();
+            
         }
     }
 
