@@ -21,14 +21,14 @@
 
 ## :dart: Backlog do produto
 
-| *COMO UM* |  *EU GOSTARIA*  | *PARA* | *PIORIDADE* |
+| *COMO UM* |  *EU GOSTARIA*  | *PARA* | *PRIORIDADE* |
 |-----------------------|-------------------------|-------------------------|-------------------------|
-| Colaborador | De lançar minhas horas extras e de sobreaviso | Serem aprovadas por um gerente e serem pagas |1|
+| Colaborador | De lançar minhas horas extras e sobreavisos | Serem aprovadas por um gestor e serem pagas |1|
 | Gestor | De lançar minhas horas extras e sobreavisos | Serem pagas |2|
-| Gestor |  De validar ou não as horas lançadas por um colaborador | Repassar ao RH |3|
-| Administrador | De consultar as horas extras e sobreavisos validadas pelos gestores | Serem pagas |4|
+| Gestor |  De apontar ou não as horas lançadas por um colaborador | Repassar ao RH |3|
+| Administrador | De consultar e aprovar as horas extras e sobreavisos apontadas pelos gestores | Serem pagas |4|
 | Administrador | De poder acessar as informações de parametrização | Fazer a gestão dos clientes, projetos e colaboradores |5|
-| Administrador | De adicionar novos clientes, squads, colaboradores, gestores e projetos | Que a equipe possa utilizar o sistema |6|
+| Administrador | De adicionar novos clientes, equipes, colaboradores, gestores e projetos | Que a equipe possa utilizar o sistema |6|
 | Administrador | De exportar um relatório em CSV  | Controle |7|
 | Administrador | De visualizar um dashboard das horas lançadas | Acompanhamento em tempo real |8|
 | Administrador | De filtrar meu dashboard  | Montar a equipe |9|
@@ -41,8 +41,9 @@
 |:-------------:|:-----------------------:|:-------------------------:|:-------------------------:|
 |  01  | 13/03 a 02/04 | Fluxograma da aplicação, wireframe do produto e modelagem de banco de dados | <a href="https://github.com/codecatss/API-BD2/wiki/Backlog-Sprint-1">Sprint 1</a> |
 |  02  | 03/04 a 23/04 | Sistema de lançamento de horas  | <a href="https://github.com/codecatss/API-BD2/wiki/Backlog-Sprint-2">Sprint 2</a>
-|  03  | 24/04 a 14/05 | Sistema de aprovação de horas, Sistema de cadastro e Sistema de login | <a href="https://github.com/codecatss/API-BD2/wiki/Backlog-Sprint-3">Sprint 3</a>
-
+|  03  | 24/04 a 14/05 | Sistema de apontamento de horas do gestor, sistema de cadastro e sistema de login | <a href="https://github.com/codecatss/API-BD2/wiki/Backlog-Sprint-3">Sprint 3</a>
+|  04  | 15/05 a 04/06 | Sistema de aprovação de horas do ADM, extração de relatório e melhorias do sistema | <a href="https://github.com/codecatss/API-BD2/wiki/Backlog-Sprint-4">Sprint 4</a>
+ 
 <span id="prototipo">
 
 ## :computer: Protótipo
@@ -69,7 +70,7 @@
 |    Função     | Nome    |    LinkedIn & GitHub      |
 | :-----------: | :------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 | Scrum Master | Nicole Souza           |     [![Linkedin Badge](https://img.shields.io/badge/Linkedin-blue?style=flat-square&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/nicolem-souza/) [![GitHub Badge](https://img.shields.io/badge/GitHub-111217?style=flat-square&logo=github&logoColor=white)](https://github.com/NicSouza)              |
-| Product Owner | William Danko      |     [![Linkedin Badge](https://img.shields.io/badge/Linkedin-blue?style=flat-square&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/willian-danko-leite-caboski-5410741b4) [![GitHub Badge](https://img.shields.io/badge/GitHub-111217?style=flat-square&logo=github&logoColor=white)](https://github.com/DankoCaboski)    
+| Product Owner | Willian Danko      |     [![Linkedin Badge](https://img.shields.io/badge/Linkedin-blue?style=flat-square&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/willian-danko-leite-caboski-5410741b4) [![GitHub Badge](https://img.shields.io/badge/GitHub-111217?style=flat-square&logo=github&logoColor=white)](https://github.com/DankoCaboski)    
 | Developer| Brendel Marques    |     [![Linkedin Badge](https://img.shields.io/badge/Linkedin-blue?style=flat-square&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/brendel-marques/) [![GitHub Badge](https://img.shields.io/badge/GitHub-111217?style=flat-square&logo=github&logoColor=white)](https://github.com/BrendelMarques)              |
 | Developer | Caio Sousa           |     [![Linkedin Badge](https://img.shields.io/badge/Linkedin-blue?style=flat-square&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/caio-sousa-75b631124/) [![GitHub Badge](https://img.shields.io/badge/GitHub-111217?style=flat-square&logo=github&logoColor=white)](https://github.com/Caio-sousaFatec)              |
 | Developer| Larissa Reis        |     [![Linkedin Badge](https://img.shields.io/badge/Linkedin-blue?style=flat-square&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/larissa-reis-693568250/) [![GitHub Badge](https://img.shields.io/badge/GitHub-111217?style=flat-square&logo=github&logoColor=white)](https://github.com/larissa-fernanda)              |
