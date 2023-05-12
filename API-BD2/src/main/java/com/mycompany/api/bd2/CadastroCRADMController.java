@@ -326,8 +326,8 @@ public class CadastroCRADMController implements Initializable {
 
         colunaStatus.setCellValueFactory(new PropertyValueFactory<>("status_cr"));
         colunaCod.setCellValueFactory(new PropertyValueFactory<>("codigo_cr"));
-        colunaNome.setCellValueFactory(new PropertyValueFactory<>("sigla"));
-        colunaSigla.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colunaSigla.setCellValueFactory(new PropertyValueFactory<>("sigla"));
 
     }
 
