@@ -215,7 +215,7 @@ public class horaDAO {
         
         LinkedList<TabelaAprovaçãoGestor> horasUser = new LinkedList<>();
         for(Integer i : lis_int_cr){
-            String sql = "SELECT * FROM 2rp.hora WHERE cod_cr = ?";
+            String sql = "SELECT * FROM 2rp.hora WHERE cod_cr = ? AND status_aprovacao = 'pendente'";
 
             Connection conn = null;
             PreparedStatement pstm = null;
@@ -240,7 +240,7 @@ public class horaDAO {
                     info.setTipo(rset.getString("tipo"));
                     info.setJustificativa(rset.getString("justificativa_lancamento"));
                     info.setProjeto(rset.getString("projeto"));
-                    //info.setNome_cliente(getNomeClient(rset.getLong("cnpj_cliente")));
+                    info.setId(rset.getInt("id"));
                     
                     
                     
@@ -273,7 +273,7 @@ public class horaDAO {
     
     private String nome;
     public String getNomeClient(long n_cnpj){
-        String sql = "SELECT razao_social FROM 2rp.cliente WHERE cnpj = ?";
+        String sql = "SELECT razao_social FROM 2rp.cliente WHERE cnpj = ?"; 
 		
             Set<Hora> horas = new HashSet<Hora>();
 
@@ -313,4 +313,66 @@ public class horaDAO {
                 }
         }
     return nome;}
+    
+    public void aprovarHora(int id) {
+    String sql = "UPDATE hora SET status_aprovacao = 'aprovado_gestor' WHERE id = ?";
+
+    Connection conn = null;
+    PreparedStatement pstm = null;
+
+    try {
+        conn = Conexao.createConnectionToMySQL();
+        pstm = conn.prepareStatement(sql);
+        pstm.setInt(1, id);
+
+        pstm.executeUpdate();
+        
+        System.out.println("Update realizado");
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+    public void reprovarHora(int id) {
+    String sql = "UPDATE hora SET status_aprovacao = 'negado' WHERE id = ?";
+
+    Connection conn = null;
+    PreparedStatement pstm = null;
+
+    try {
+        conn = Conexao.createConnectionToMySQL();
+        pstm = conn.prepareStatement(sql);
+        pstm.setInt(1, id);
+
+        pstm.executeUpdate();
+        
+        System.out.println("Update realizado");
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
 }

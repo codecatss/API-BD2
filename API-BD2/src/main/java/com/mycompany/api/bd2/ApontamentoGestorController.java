@@ -61,9 +61,9 @@ public class ApontamentoGestorController implements Initializable {
     @FXML
     private Button menuRelatorio;
     @FXML
-    private Button botaoAprovar;
+    private Button BotaoAprovar;
     @FXML
-    private Button botaoReprovar;
+    private Button BotaoReprovar;
 
     @FXML
     private TableView<TabelaAprovaçãoGestor> tabelaApontamento;
@@ -84,9 +84,9 @@ public class ApontamentoGestorController implements Initializable {
     private TableColumn<TabelaAprovaçãoGestor, String> colunaFim;//ok
     @FXML
     private TableColumn<TabelaAprovaçãoGestor, String> colunaInicio;//ok
-    
-    
 
+    horaDAO horadao = new horaDAO();
+    
     private List<TabelaAprovaçãoGestor> lishoras = new ArrayList<>();
     private ObservableList<TabelaAprovaçãoGestor> observablelisthoras = FXCollections.observableArrayList();
 
@@ -109,21 +109,18 @@ public class ApontamentoGestorController implements Initializable {
             Stage stage = (Stage) minimizarTela.getScene().getWindow();
             stage.setIconified(true);
         });
-        horaDAO horadao = new horaDAO();
-       System.out.println("initialize "+horadao.getHora(crgestor.getListCrGestor(usuario)));
-       carregarTabelaLancamento();
+        carregarTabelaLancamento();
+
     }
 
     public void fechaTela() {
         Platform.exit();
     }
-    
-    
+
     private integranteDAO crgestor = new integranteDAO();
-    
+
     @FXML
     public void carregarTabelaLancamento() {
-        horaDAO horadao = new horaDAO();
         lishoras.clear();
         lishoras.addAll(horadao.getHora(crgestor.getListCrGestor(usuario)));
         observablelisthoras.setAll(lishoras);
@@ -139,15 +136,23 @@ public class ApontamentoGestorController implements Initializable {
         //colunaFunçao.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
         tabelaApontamento.refresh();
     }
-    
+
     @FXML
-    public void botaoAprovar(){
+    public void botaoAprovar() {
         if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
-            System.out.print("clicado");
+            horadao.aprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId());
+            carregarTabelaLancamento();
+        }
+    }
+
+    @FXML
+    public void botaoReprovar() {
+        if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
+            horadao.reprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId());
+            carregarTabelaLancamento();
         }
     }
     
-   
     @FXML
     public void navLancamentoColaborador(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LancamentoColaborador.fxml"));

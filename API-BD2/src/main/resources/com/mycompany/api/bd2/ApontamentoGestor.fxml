@@ -117,12 +117,12 @@
                               <Font name="Arial" size="24.0" />
                            </font>
                         </Label>
-                        <Button id="buttonAprovar" fx:id="botaoAprovar" layoutX="352.0" layoutY="20.0" mnemonicParsing="false" onAction="#botaoAprovar" prefHeight="28.0" prefWidth="82.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Aprovar" textFill="WHITE">
+                        <Button id="buttonAprovar" fx:id="BotaoAprovar" layoutX="352.0" layoutY="20.0" mnemonicParsing="false" onAction="#botaoAprovar" prefHeight="28.0" prefWidth="82.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Aprovar" textFill="WHITE">
                            <font>
                               <Font name="Arial Narrow" size="12.0" />
                            </font>
                         </Button>
-                        <Button id="buttonReprovar" fx:id="botaoReprovar" layoutX="453.0" layoutY="20.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="76.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Reprovar" textFill="WHITE">
+                        <Button id="buttonReprovar" fx:id="BotaoReprovar" layoutX="453.0" layoutY="20.0" mnemonicParsing="false" onAction="#botaoReprovar" prefHeight="27.0" prefWidth="76.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Reprovar" textFill="WHITE">
                            <font>
                               <Font name="Arial Narrow" size="12.0" />
                            </font>

@@ -10,6 +10,7 @@ package com.mycompany.api.bd2.models;
  */
 public class TabelaAprovaçãoGestor {
     
+    private int id;
     private String username;
     private int cod_cr;
     private String nome_cr;
@@ -100,6 +101,14 @@ public class TabelaAprovaçãoGestor {
 
     public void setJustificativa_lancamento(String justificativa_lancamento) {
         this.justificativa_lancamento = justificativa_lancamento;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     
