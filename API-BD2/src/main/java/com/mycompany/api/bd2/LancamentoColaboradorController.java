@@ -206,7 +206,7 @@ public class LancamentoColaboradorController {
     private String erro = "-fx-border-color:#E06469";
 
     @FXML
-    public void botaoAdicionar() {
+    public void botaoAdicionar() throws ParseException {
         if (dataInicio.getValue() == null || horaInicio.getValue() == null || minutoInicio.getValue() == null || dataFim.getValue() == null || horaFim.getValue() == null || minutoFim.getValue() == null) {
             System.out.println("Preencha todos os campos - tela de lançamento");
             Alert alert = new Alert(AlertType.ERROR);
@@ -248,7 +248,7 @@ public class LancamentoColaboradorController {
             }
 
             if (salvar && (!entradaProjeto.getText().isEmpty())) {
-                try {
+                //try {
                     LocalDate data_inicio = dataInicio.getValue();
                     int hora_inicio = horaInicio.getValue();
                     int min_inicio = minutoInicio.getValue();
@@ -276,7 +276,10 @@ public class LancamentoColaboradorController {
                     hora.setUsername_lancador(nomeUsuario.getText());
                     hora.setCnpj_cliente(cliente.getCliente(nome_cliente).getCnpj());
                     hora.setJustificativa_lancamento(entradaJustificativa.getText());
-                    hora.setStatus_aprovacao("pendente");
+                    if(TelaLoginController.usuariologado.getCargo().equalsIgnoreCase("gestor")){
+                        hora.setStatus_aprovacao("aprovado_gestor");
+                    }else{
+                    hora.setStatus_aprovacao("pendente");}
                     hora.setSolicitante(entradaSolicitante.getText());
                     hora.setTipo(horaTipo.getSelectionModel().getSelectedItem().toUpperCase());
                     horaDAO hrDAO = new horaDAO();
@@ -286,14 +289,14 @@ public class LancamentoColaboradorController {
                     System.out.println("Salvo");
                     carregarTabelaLancamento();
 
-                } catch (Exception e) {
+                /*} catch (Exception e) {
                     System.out.println("Houve um erro ao salvar");
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Houve um erro ao salvar");
                     alert.setHeaderText(null);
                     alert.setContentText("O bloco 'try' responsavél por salvar a nova hora para o lançamento apresentou alguma falha");
                     alert.showAndWait();
-                }
+                }*/
             } else {
                 if (entradaProjeto.getText().isEmpty()) {
                     entradaProjeto.setStyle(erro);
