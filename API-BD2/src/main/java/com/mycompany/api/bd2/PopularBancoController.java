@@ -1,7 +1,9 @@
 package com.mycompany.api.bd2;
 
+import com.mycompany.api.bd2.daos.integranteDAO;
 import com.mycompany.api.bd2.daos.usuarioDAO;
 import com.mycompany.api.bd2.models.Centro_resultado;
+import com.mycompany.api.bd2.models.Integrante;
 import com.mycompany.api.bd2.models.Usuario;
 
 import javafx.collections.FXCollections;
@@ -16,7 +18,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class PopularBancoController {
 
-    
     @FXML
     private Label nometelaatual;
     @FXML
@@ -34,32 +35,56 @@ public class PopularBancoController {
     @FXML
     private TableView<Usuario> tabelaUsuarioDisp;
     @FXML
-    private TableColumn<Usuario, String> colunaUsarioDisp;
+    private TableColumn<Usuario, String> colunaUsuarioDisp;
     @FXML
-    private TableView<?> tabelaIntegrantes;
+    private TableView<Integrante> tabelaIntegrantes;
     @FXML
-    private TableColumn<Usuario, String> colunaIntegrantes;
-    
+    private TableColumn<Integrante, String> colunaIntegrantes;
+    @FXML
+    private TableColumn<Integrante, String> colunaFuncao;
 
     private Centro_resultado crSelecionado = CadastroCRADMController.crInfo;
 
     private ObservableList<Usuario> observableListUser = FXCollections.observableArrayList();
     private ObservableList<Usuario> observableListUsuariosSelecionados = FXCollections.observableArrayList();
 
+    private ObservableList<Integrante> observableListIntegrante = FXCollections.observableArrayList();
+    private ObservableList<Integrante> observableListIntegrantesSelecionados = FXCollections.observableArrayList();
+
     private Usuario usuarioSelecionado;
-   
+    private Integrante integranteSelecionado;
+
     @FXML
     void BotaoAdicionar(ActionEvent event) {
         if (usuarioSelecionado != null) {
-            observableListUsuariosSelecionados.add(usuarioSelecionado);
-            //.setCellValueFactory(new PropertyValueFactory<>("username"));
-            //.setItems(observableListUsuariosSelecionados);
+            Integrante integrante = new Integrante();
+            integrante.setCod_cr(crSelecionado.getCodigo_cr());
+            integrante.setUsername_integrante(usuarioSelecionado.getUsername());
+            integrante.setGestor("colaborador");
+
+            integranteDAO integranteDao = new integranteDAO();
+            integranteDao.save(integrante);
+
+            carregarTabelaUser();
+            carregarTabelaIntegrantes();
+        } else {
+            System.out.println("Necas de pitibiribas");
         }
     }
 
     @FXML
     void BotaoExcluir(ActionEvent event) {
-
+        if (integranteSelecionado != null) {
+            integranteDAO integranteDao = new integranteDAO();
+            integranteDao.removeFromCr(
+                    crSelecionado.getCodigo_cr(),
+                    integranteSelecionado.getUsername_integrante()
+            );
+            carregarTabelaUser();
+            carregarTabelaIntegrantes();
+        } else {
+            System.out.println("Nada selecionado");
+        }
     }
 
     @FXML
@@ -67,28 +92,45 @@ public class PopularBancoController {
 
     }
 
+    @FXML
     void initialize() {
-        System.out.println("ola");
         carregarTabelaUser();
-        configurarColunas();
         adicionarListenerSelecaoUsuario();
+        carregarTabelaIntegrantes();
+        adicionarListenerSelecaoIntegrante();
     }
 
     private void carregarTabelaUser() {
         usuarioDAO usuarioDao = new usuarioDAO();
         observableListUser.setAll(usuarioDao.getUsuariosSemCr(crSelecionado.getCodigo_cr()));
-        //.setItems(observableListUser);
-    }
+        tabelaUsuarioDisp.setItems(observableListUser);
 
-    private void configurarColunas() {
-        //.setCellValueFactory(new PropertyValueFactory<>("username"));
+        colunaUsuarioDisp.setCellValueFactory(new PropertyValueFactory<>("username"));
     }
 
     private void adicionarListenerSelecaoUsuario() {
-        //.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+        tabelaUsuarioDisp.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             usuarioSelecionado = newValue;
             if (usuarioSelecionado != null) {
                 System.out.println("Usuário selecionado: " + usuarioSelecionado.getUsername());
+            }
+        });
+    }
+
+    private void carregarTabelaIntegrantes() {
+        integranteDAO integranteDao = new integranteDAO();
+        observableListIntegrante.setAll(integranteDao.getIntegrantesByCr(crSelecionado.getCodigo_cr()));
+        tabelaIntegrantes.setItems(observableListIntegrante);
+
+        colunaFuncao.setCellValueFactory(new PropertyValueFactory<>("gestor"));
+        colunaIntegrantes.setCellValueFactory(new PropertyValueFactory<>("username_integrante"));
+    }
+
+    private void adicionarListenerSelecaoIntegrante() {
+        tabelaIntegrantes.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            integranteSelecionado = newValue;
+            if (integranteSelecionado != null) {
+                System.out.println("Integrante selecionado: " + integranteSelecionado.getUsername_integrante());
             }
         });
     }
