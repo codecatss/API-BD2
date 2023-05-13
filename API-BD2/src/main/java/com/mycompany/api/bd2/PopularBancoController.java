@@ -23,6 +23,15 @@ public class PopularBancoController {
     private Button botaoExcluir;
 
     @FXML
+    private TableColumn<?, ?> colunaFuncao;
+
+    @FXML
+    private TableView<Usuario> tabelaUsuarios;
+
+    @FXML
+    private TableColumn<Usuario, String> colunaUsuario;
+
+    @FXML
     private Button botaoGestor;
 
     @FXML
@@ -31,18 +40,20 @@ public class PopularBancoController {
     @FXML
     private TableColumn<Usuario, String> colunaUserDisp;
 
-    @FXML
-    private TableView<Usuario> tabelaUsuarios;
-
     private Centro_resultado crSelecionado = CadastroCRADMController.crInfo;
 
     private ObservableList<Usuario> observableListUser = FXCollections.observableArrayList();
+    private ObservableList<Usuario> observableListUsuariosSelecionados = FXCollections.observableArrayList();
+
+    private Usuario usuarioSelecionado;
 
     @FXML
     void BotaoAdicionar(ActionEvent event) {
-        System.out.println(crSelecionado.getNome());
-        System.out.println(crSelecionado.getSigla());
-        System.out.println(crSelecionado.getCodigo_cr());
+        if (usuarioSelecionado != null) {
+            observableListUsuariosSelecionados.add(usuarioSelecionado);
+            colunaUsuario.setCellValueFactory(new PropertyValueFactory<>("username"));
+            tabelaUsuarios.setItems(observableListUsuariosSelecionados);
+        }
     }
 
     @FXML
@@ -59,15 +70,26 @@ public class PopularBancoController {
     void initialize() {
         System.out.println("ola");
         carregarTabelaUser();
+        configurarColunas();
+        adicionarListenerSelecaoUsuario();
     }
 
-    @FXML
     private void carregarTabelaUser() {
         usuarioDAO usuarioDao = new usuarioDAO();
         observableListUser.setAll(usuarioDao.getUsuariosSemCr(crSelecionado.getCodigo_cr()));
-        
-        colunaUserDisp.setCellValueFactory(new PropertyValueFactory<>("username"));
         tabelaUsuarios.setItems(observableListUser);
     }
 
+    private void configurarColunas() {
+        colunaUserDisp.setCellValueFactory(new PropertyValueFactory<>("username"));
+    }
+
+    private void adicionarListenerSelecaoUsuario() {
+        tabelaUsuarios.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            usuarioSelecionado = newValue;
+            if (usuarioSelecionado != null) {
+                System.out.println("Usuário selecionado: " + usuarioSelecionado.getUsername());
+            }
+        });
+    }
 }
