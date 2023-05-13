@@ -16,29 +16,30 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class PopularBancoController {
 
+    
     @FXML
-    private Button botaoAdicionar;
-
+    private Label nometelaatual;
     @FXML
-    private Button botaoExcluir;
-
+    private Button fecharTela;
     @FXML
-    private TableColumn<?, ?> colunaFuncao;
-
-    @FXML
-    private TableView<Usuario> tabelaUsuarios;
-
-    @FXML
-    private TableColumn<Usuario, String> colunaUsuario;
-
+    private Button minimizarTela;
     @FXML
     private Button botaoGestor;
-
     @FXML
-    private Label botaoVoltar;
-
+    private Button botaoAdicionar;
     @FXML
-    private TableColumn<Usuario, String> colunaUserDisp;
+    private Button botaoExcluir;
+    @FXML
+    private Button botaoVoltar;
+    @FXML
+    private TableView<Usuario> tabelaUsuarioDisp;
+    @FXML
+    private TableColumn<Usuario, String> colunaUsarioDisp;
+    @FXML
+    private TableView<?> tabelaIntegrantes;
+    @FXML
+    private TableColumn<Usuario, String> colunaIntegrantes;
+    
 
     private Centro_resultado crSelecionado = CadastroCRADMController.crInfo;
 
@@ -46,13 +47,13 @@ public class PopularBancoController {
     private ObservableList<Usuario> observableListUsuariosSelecionados = FXCollections.observableArrayList();
 
     private Usuario usuarioSelecionado;
-
+   
     @FXML
     void BotaoAdicionar(ActionEvent event) {
         if (usuarioSelecionado != null) {
             observableListUsuariosSelecionados.add(usuarioSelecionado);
-            colunaUsuario.setCellValueFactory(new PropertyValueFactory<>("username"));
-            tabelaUsuarios.setItems(observableListUsuariosSelecionados);
+            //.setCellValueFactory(new PropertyValueFactory<>("username"));
+            //.setItems(observableListUsuariosSelecionados);
         }
     }
 
@@ -66,7 +67,6 @@ public class PopularBancoController {
 
     }
 
-    @FXML
     void initialize() {
         System.out.println("ola");
         carregarTabelaUser();
@@ -77,19 +77,23 @@ public class PopularBancoController {
     private void carregarTabelaUser() {
         usuarioDAO usuarioDao = new usuarioDAO();
         observableListUser.setAll(usuarioDao.getUsuariosSemCr(crSelecionado.getCodigo_cr()));
-        tabelaUsuarios.setItems(observableListUser);
+        //.setItems(observableListUser);
     }
 
     private void configurarColunas() {
-        colunaUserDisp.setCellValueFactory(new PropertyValueFactory<>("username"));
+        //.setCellValueFactory(new PropertyValueFactory<>("username"));
     }
 
     private void adicionarListenerSelecaoUsuario() {
-        tabelaUsuarios.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+        //.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             usuarioSelecionado = newValue;
             if (usuarioSelecionado != null) {
                 System.out.println("Usuário selecionado: " + usuarioSelecionado.getUsername());
             }
         });
+    }
+
+    @FXML
+    private void BotaoVoltar(ActionEvent event) {
     }
 }
