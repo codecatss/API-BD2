@@ -91,6 +91,10 @@ public class LancamentoColaboradorController {
     private Label errohoraII;
     @FXML
     private DatePicker dataInicio;
+    
+    public DatePicker getDataInicio() {
+    return dataInicio;
+}
     @FXML
     private DatePicker dataFim;
     @FXML
@@ -113,6 +117,10 @@ public class LancamentoColaboradorController {
     private Button botaoLimpar;
     @FXML
     private TextField entradaProjeto;
+    
+    public String getEntradaProjeto() {
+    return entradaProjeto.getText();
+}
     @FXML
     private TextField entradaJustificativa;
     @FXML
@@ -125,6 +133,7 @@ public class LancamentoColaboradorController {
     private Button menuRelatorio;
 
     private String usuario = TelaLoginController.usuariologado.getUsername();
+    
 
     private List<String> obs = new ArrayList<>();
     private ObservableList<String> opcoes = FXCollections.observableArrayList();
@@ -137,6 +146,8 @@ public class LancamentoColaboradorController {
 
     private List<String> centro_r = new ArrayList<>();
     private ObservableList<String> opCr = FXCollections.observableArrayList();
+    
+    
 
     public void initialize() {
 
@@ -334,25 +345,27 @@ public class LancamentoColaboradorController {
     }
     
     @FXML
-    public void botaoAcionamento(ActionEvent event){
-        
-       try {
-           System.out.println("clicked");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/api/bd2/PopUpAcionamento.fxml"));
-        Parent root = loader.load();
-        PopUpAcionamentoController controller = loader.getController();
+    public void botaoAcionamento(ActionEvent event) throws ParseException{
+     try{
+     System.out.println("clicked");
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/api/bd2/PopUpAcionamento.fxml"));
+    Parent root = loader.load();
+    PopUpAcionamentoController controller = new PopUpAcionamentoController(); // Passa as referências dos objetos DatePicker
+    loader.setController(controller);
+ 
+    Stage popup = new Stage();
+    popup.initModality(Modality.APPLICATION_MODAL);
+    popup.initOwner(botaoAcionamento.getScene().getWindow());
+    popup.setScene(new Scene(root));
 
-        Stage popup = new Stage();
-        popup.initModality(Modality.APPLICATION_MODAL);
-        popup.initOwner(botaoAcionamento.getScene().getWindow());
-        popup.setScene(new Scene(root));
+    popup.showAndWait();
 
-        popup.showAndWait();
-    } catch (IOException e) {
-        
-    }
-}
+    // Obtenha o objeto Hora preenchido na PopUp
+
+} catch (IOException e) {
     
+}
+    }
 
     @FXML
     public void limmparFormatacao() {

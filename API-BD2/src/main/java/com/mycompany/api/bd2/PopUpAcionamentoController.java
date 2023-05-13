@@ -11,6 +11,7 @@ import com.mycompany.api.bd2.models.Cliente;
 import com.mycompany.api.bd2.models.Hora;
 import java.net.URL;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -23,12 +24,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
@@ -74,8 +77,29 @@ public class PopUpAcionamentoController implements Initializable {
     /**
      * Initializes the controller class.
      */
-        private List<Integer> horas = new LinkedList<>();
-     private List<Integer> lishoras = new ArrayList<>();
+    private List<Integer> horas = new LinkedList<>();
+    private List<Integer> lishoras = new ArrayList<>();
+     
+    private DatePicker dataInicio;
+    private DatePicker dataFim;
+    private ComboBox<String> selecaoCliente;
+    private ComboBox<String> selecaoCR;
+    private TextField entradaProjeto;
+    private TextField entradaJustificativa;
+    private TextField entradaSolicitante;
+    private Label nomeUsuario;
+    
+
+    /*public PopUpAcionamentoController(DatePicker dataInicio, DatePicker dataFim, ComboBox<String> selecaoCliente, ComboBox<String> selecaoCR, TextField entradaProjeto, TextField entradaJustificativa, TextField entradaSolicitante, Label nomeUsuario) {
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
+        this.selecaoCliente = selecaoCliente;
+        this.selecaoCR = selecaoCR;
+        this.entradaProjeto = entradaProjeto;
+        this.entradaJustificativa = entradaJustificativa;
+        this.entradaSolicitante = entradaSolicitante;
+        this.nomeUsuario = nomeUsuario;
+    }*/
      
     private ObservableList<Integer> observablelisthoras = FXCollections.observableArrayList();
     @Override
@@ -94,8 +118,8 @@ public class PopUpAcionamentoController implements Initializable {
     }    
 
     @FXML
-    private void botaoAdicionar(ActionEvent event) {
-        if (horaInicio.getValue() == null || minutoInicio.getValue() == null || horaFim.getValue() == null || minutoFim.getValue() == null) {
+    private void botaoAdicionar(ActionEvent event) throws ParseException {
+        if (horaInicio.getValue() == 0 || minutoInicio.getValue() == 0 || horaFim.getValue() == 0 || minutoFim.getValue() == null) {
             System.out.println("Preencha todos os campos - tela de lançamento");
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Preencha todos os campos");
@@ -122,11 +146,31 @@ public class PopUpAcionamentoController implements Initializable {
           
             }
             if(salvar){
-                
+                 
+                 
             }
         }
     }
     
+    public Hora getHora() throws ParseException {
+        Hora hora = new Hora();
+        LocalDate data_inicio = dataInicio.getValue();
+        int hora_inicio = horaInicio.getValue();
+        int min_inicio = minutoInicio.getValue();
+        String data_hora_inicio = data_inicio.getYear() + "-" + data_inicio.getMonthValue() + "-" + data_inicio.getDayOfMonth() + " " + hora_inicio + ":" + min_inicio + ":00";
+        Timestamp timestamp_inicio = Timestamp.valueOf(data_hora_inicio);
+        hora.setData_hora_inicio(timestamp_inicio.toString());
+
+        LocalDate data_fim = dataFim.getValue();
+        int hora_fim = horaFim.getValue();
+        int min_fim = minutoFim.getValue();
+        String data_hora_fim = data_fim.getYear() + "-" + data_fim.getMonthValue() + "-" + data_fim.getDayOfMonth() + " " + hora_fim + ":" + min_fim + ":00";
+        Timestamp timestamp_fim = Timestamp.valueOf(data_hora_fim);
+        hora.setData_hora_fim(timestamp_fim.toString());
+
+        return hora;
+    }
+
     @FXML
     private void carregarTabelaAcionamento(){
         
