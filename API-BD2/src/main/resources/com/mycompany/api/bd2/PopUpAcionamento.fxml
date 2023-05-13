@@ -108,7 +108,7 @@
                <children>
                   <AnchorPane prefHeight="245.0" prefWidth="300.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <TableView prefHeight="245.0" prefWidth="325.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                        <TableView id="tabelaAcionamento" fx:id="tabelaAcionamento" prefHeight="245.0" prefWidth="325.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                            <columns>
                               <TableColumn id="colunaAcionamento" fx:id="colunaAcionamento" minWidth="100.0" prefWidth="100.0" text="Acionamento(s)" />
                               <TableColumn id="colunaInicio" fx:id="colunaInicio" minWidth="150.0" prefWidth="150.0" text="Hora Início" />

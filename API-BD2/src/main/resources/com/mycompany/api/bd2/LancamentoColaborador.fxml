@@ -236,7 +236,7 @@
                                  </font>
                               </Label>
                               <TextField id="entradaSolicitante" fx:id="entradaSolicitante" layoutX="115.0" layoutY="246.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="245.0" />
-                              <Button id="botaoAcionamento" fx:id="botaoAcionamento" layoutX="749.0" layoutY="235.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="atv-btn" stylesheets="@EstilizacaoTelas.css" text="+ Acionamento" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="825.0">
+                              <Button id="botaoAcionamento" onAction="#botaoAcionamento" fx:id="botaoAcionamento" layoutX="749.0" layoutY="235.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="atv-btn" stylesheets="@EstilizacaoTelas.css" text="+ Acionamento" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="825.0">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>

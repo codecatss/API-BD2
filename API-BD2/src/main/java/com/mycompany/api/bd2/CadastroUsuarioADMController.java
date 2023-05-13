@@ -47,8 +47,6 @@ public class CadastroUsuarioADMController {
     @FXML
     private TableColumn<?, ?> colunaNome;
     @FXML
-    private TableColumn<?, ?> colunaSenha;
-    @FXML
     private TableColumn<?, ?> colunaUsername;
     @FXML
     private TableColumn<?, ?> colunaFuncao;
@@ -81,13 +79,9 @@ public class CadastroUsuarioADMController {
     @FXML
     private TextField entradaUsername;
     @FXML
-    private PasswordField entradaSenha;
-    @FXML
     private TextField entradaMatricula;
     @FXML
     private ComboBox<String> selecaoFuncao;
-    @FXML
-    private ComboBox<String> selecaoStatus;
     @FXML
     private Button botaoAdicionar;
     @FXML
@@ -148,8 +142,6 @@ public class CadastroUsuarioADMController {
                     entradaNome.setText(item.getNome());
                     entradaUsername.setText(item.getUsername());
                     selecaoFuncao.setValue(item.getCargo());
-                    entradaSenha.setText(item.getSenha());
-                    selecaoStatus.setValue(item.getStatus());
                 }
             }
         });
@@ -165,12 +157,15 @@ public class CadastroUsuarioADMController {
         String nome = entradaNome.getText();
         String username = entradaUsername.getText();
         String funcao = selecaoFuncao.getSelectionModel().getSelectedItem();
-        String senha = entradaSenha.getText();
         usuario.setUsername(username);
         usuario.setNome(nome);
-        usuario.setSenha(senha);
         usuario.setCargo(funcao);
         usuario.setStatus("ativo");
+        if (funcao.equals("admin")) {
+            usuario.setSenha("admin123");
+        } else {
+            usuario.setSenha("dev123");
+        }
         //usuario.setHash(senha);
         usuarioDao.save(usuario);
         carregarTabelaUsuario();
@@ -181,15 +176,7 @@ public class CadastroUsuarioADMController {
         lisusuarios.clear();
         System.out.println("click");
         usuarioDAO usuarioDao = new usuarioDAO();
-        Usuario usuario = new Usuario();
-
-        String cargo = usuarioDao.getUsuarioByUsername(valorDoItemSelecionado).getCargo();
-        String nome = usuarioDao.getUsuarioByUsername(valorDoItemSelecionado).getNome();
-        String senha = usuarioDao.getUsuarioByUsername(valorDoItemSelecionado).getSenha();
-        usuario.setUsername(valorDoItemSelecionado);
-        usuario.setCargo(cargo);
-        usuario.setNome(nome);
-        usuario.setSenha(senha);
+        Usuario usuario = usuarioDao.getUsuarioByUsername(valorDoItemSelecionado);
         usuario.setStatus("inativo");
         usuarioDao.update(usuario);
         carregarTabelaUsuario();
@@ -217,11 +204,10 @@ public class CadastroUsuarioADMController {
         observablelistusuario.setAll(lisusuarios);
         tabelaCadastroUsuarios.setItems(observablelistusuario);
 
+        colunaStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         colunaUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
         colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        colunaSenha.setCellValueFactory(new PropertyValueFactory<>("senha"));
         colunaFuncao.setCellValueFactory(new PropertyValueFactory<>("cargo"));
-        colunaStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
     }
 
@@ -237,10 +223,8 @@ public class CadastroUsuarioADMController {
         } else {
             String nome = entradaNome.getText().trim();
             String funcao = selecaoFuncao.getSelectionModel().getSelectedItem();
-            String senha = entradaSenha.getText().trim();
-            String status = selecaoStatus.getSelectionModel().getSelectedItem();
 
-            if (nome.isEmpty() || senha.isEmpty()) {
+            if (nome.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Campos obrigatórios");
                 alert.setHeaderText(null);
@@ -249,19 +233,16 @@ public class CadastroUsuarioADMController {
             } else {
                 lisusuarios.clear();
 
-                Usuario usuario = new Usuario();
-                usuario.setNome(nome);
-                usuario.setUsername(valorDoItemSelecionado);
-                usuario.setSenha(senha);
-                usuario.setCargo(funcao);
-                usuario.setStatus(status);
-
                 usuarioDAO usuarioDao = new usuarioDAO();
+
+                Usuario usuario = usuarioDao.getUsuarioByUsername(valorDoItemSelecionado);
+                usuario.setNome(nome);
+                usuario.setCargo(funcao);
+
                 usuarioDao.update(usuario);
                 limparCampos();
                 System.out.println("Tabela Limpa");
                 carregarTabelaUsuario();
-
             }
         }
     }
@@ -271,8 +252,6 @@ public class CadastroUsuarioADMController {
         entradaNome.clear();
         entradaUsername.clear();
         selecaoFuncao.setValue(null);
-        selecaoStatus.setValue(null);
-        entradaSenha.clear();
         botaoAdicionar.setDisable(true);
 
         // Desseleciona a linha da tabela
@@ -286,14 +265,6 @@ public class CadastroUsuarioADMController {
         obs.add("colaborador");
         opcoes.setAll(obs);
         selecaoFuncao.setItems(opcoes);
-    }
-
-    public void tipoStatus() {
-        obs2.clear();
-        obs2.add("ativo");
-        obs2.add("inativo");
-        opcoes2.setAll(obs2);
-        selecaoStatus.setItems(opcoes2);
     }
 
     @FXML

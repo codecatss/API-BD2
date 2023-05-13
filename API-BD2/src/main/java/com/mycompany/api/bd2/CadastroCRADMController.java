@@ -90,6 +90,8 @@ public class CadastroCRADMController implements Initializable {
     private TableColumn<Centro_resultado, String> colunaNome;
     @FXML
     private TableColumn<Centro_resultado, String> colunaSigla;
+    @FXML
+    private TableColumn<?, ?> colunaStatus;
 
     private String usuario = TelaLoginController.usuariologado.getUsername();
 
@@ -204,7 +206,7 @@ public class CadastroCRADMController implements Initializable {
         entradaNome.setText(null);
         entradaCod.setText(null);
         entradaSigla.setText(null);
-        botaoAdicionar.setDisable(true);
+        botaoAdicionar.setDisable(false);
 
         // Desseleciona a linha da tabela
         tabelaCadastroCr.getSelectionModel().clearSelection();
@@ -285,6 +287,7 @@ public class CadastroCRADMController implements Initializable {
             // o usuário clicou em "Cancelar", então nada será feito
             limparCampos();
             carregarTabelaCr();
+            
         }
     }
 
@@ -329,9 +332,10 @@ public class CadastroCRADMController implements Initializable {
         observablelistliscr.setAll(liscr);
         tabelaCadastroCr.setItems(observablelistliscr);
 
+        colunaStatus.setCellValueFactory(new PropertyValueFactory<>("status_cr"));
         colunaCod.setCellValueFactory(new PropertyValueFactory<>("codigo_cr"));
-        colunaNome.setCellValueFactory(new PropertyValueFactory<>("sigla"));
-        colunaSigla.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colunaSigla.setCellValueFactory(new PropertyValueFactory<>("sigla"));
 
     }
 

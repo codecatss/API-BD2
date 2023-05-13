@@ -40,6 +40,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class LancamentoColaboradorController {
@@ -315,7 +316,6 @@ public class LancamentoColaboradorController {
         lishoras.addAll(horadao.getHora(usuario));
         observablelisthoras.setAll(lishoras);
         tabelaLancamento.setItems(observablelisthoras);
-
         tabelaN.setCellValueFactory(new PropertyValueFactory<>("id"));
         tabelaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao"));
@@ -332,6 +332,27 @@ public class LancamentoColaboradorController {
         tabelaLancamento.refresh();
 
     }
+    
+    @FXML
+    public void botaoAcionamento(ActionEvent event){
+        
+       try {
+           System.out.println("clicked");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/api/bd2/PopUpAcionamento.fxml"));
+        Parent root = loader.load();
+        PopUpAcionamentoController controller = loader.getController();
+
+        Stage popup = new Stage();
+        popup.initModality(Modality.APPLICATION_MODAL);
+        popup.initOwner(botaoAcionamento.getScene().getWindow());
+        popup.setScene(new Scene(root));
+
+        popup.showAndWait();
+    } catch (IOException e) {
+        
+    }
+}
+    
 
     @FXML
     public void limmparFormatacao() {
