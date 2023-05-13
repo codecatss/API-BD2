@@ -138,6 +138,7 @@ public class CadastroCRADMController implements Initializable {
                     entradaNome.setText(item.getNome());
                     entradaSigla.setText(item.getSigla());
                     System.out.println("Item selecionado: " + valorDoItemSelecionado); // Imprime no console
+                    
                 }
             }
         });
@@ -295,6 +296,7 @@ public class CadastroCRADMController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText("Tem certeza que deseja ativar a CR?");
         Optional<ButtonType> result = alert.showAndWait();
+        
         if (result.get() == ButtonType.OK) {
             // o usuário clicou em "Ok", então a CR será ativada
             crDAO crdao = new crDAO();
