@@ -25,7 +25,7 @@
                            </font>
                         </Button>
                         <Button id="minimizarTela" fx:id="minimizarTela" layoutX="1245.0" layoutY="5.0" mnemonicParsing="false" styleClass="minimize" stylesheets="@EstilizacaoTelas.css" text="-" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="5.0" />
-                        <Label id="nometelaatual" fx:id="nometelaatual" layoutX="10.0" layoutY="10.0" text="Gestão do CR" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                        <Label id="nometelaatual" fx:id="nometelaatual" layoutX="10.0" layoutY="10.0" text="Gerenciar CR" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font>
@@ -44,9 +44,9 @@
                         <String fx:value="shadow" />
                      </styleClass>
                      <children>
-                        <TableView fx:id="tabelaUsuarios" layoutX="17.0" layoutY="162.0" prefHeight="746.0" prefWidth="1080.0" styleClass="arial-font" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                        <TableView id="tabelaUsuarioDisp" fx:id="tabelaUsuarioDisp" layoutX="17.0" layoutY="162.0" prefHeight="746.0" prefWidth="1080.0" styleClass="arial-font" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                            <columns>
-                              <TableColumn fx:id="colunaUserDisp" minWidth="200.0" prefWidth="200.0" text="Usuário" />
+                              <TableColumn fx:id="colunaUsarioDisp" minWidth="200.0" prefWidth="200.0" text="Usuário" />
                            </columns>
                         </TableView>
                      </children>
@@ -92,11 +92,11 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Label fx:id="botaoVoltar" accessibleRole="BUTTON" layoutX="79.0" layoutY="318.0" text="Voltar" textAlignment="CENTER" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="79.0" AnchorPane.rightAnchor="78.0">
+                        <Button id="botaoVoltar" fx:id="botaoVoltar" mnemonicParsing="false" onAction="#BotaoVoltar" styleClass="logout" stylesheets="@EstilizacaoTelas.css" text="Voltar" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
                            <font>
-                              <Font name="Arial Bold" size="12.0" />
+                              <Font name="Arial Bold" size="14.0" />
                            </font>
-                        </Label>
+                        </Button>
                      </children>
                   </AnchorPane>
                </children>
@@ -113,7 +113,7 @@
                      <children>
                         <TableView fx:id="tabelaIntegrantes" layoutX="17.0" layoutY="162.0" prefHeight="610.0" prefWidth="225.0" styleClass="arial-font" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                           <columns>
-                            <TableColumn fx:id="colunaUsuario" minWidth="175.0" prefWidth="175.0" styleClass="arial-font" text="Usuário" />
+                            <TableColumn fx:id="colunaIntegrantes" minWidth="175.0" prefWidth="175.0" styleClass="arial-font" text="Usuário" />
                             <TableColumn fx:id="colunaFuncao" minWidth="125.0" prefWidth="125.0" text="Função" />
                           </columns>
                         </TableView>
