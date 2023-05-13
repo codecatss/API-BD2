@@ -28,6 +28,8 @@ public class PopularBancoController {
     @FXML
     private Label nometelaatual;
     @FXML
+    private Label nomeCR;
+    @FXML
     private Button fecharTela;
     @FXML
     private Button minimizarTela;
@@ -62,17 +64,24 @@ public class PopularBancoController {
     private Integrante integranteSelecionado;
 
     @FXML
+    void initialize() {
+        nomeCR.setText(crSelecionado.getNome());
+        carregarTabelaUser();
+        adicionarListenerSelecaoUsuario();
+        carregarTabelaIntegrantes();
+        adicionarListenerSelecaoIntegrante();
+    }
+
+    @FXML
     void BotaoAdicionar(ActionEvent event) {
         if (usuarioSelecionado != null) {
             integranteDAO integranteDao = new integranteDAO();
             Integrante Gestor = integranteDao.getGestorFromCr(crSelecionado.getCodigo_cr());
-            
-            
+
             Integrante integrante = new Integrante();
             integrante.setCod_cr(crSelecionado.getCodigo_cr());
             integrante.setUsername_integrante(usuarioSelecionado.getUsername());
             integrante.setGestor("colaborador");
-
 
             integranteDao.save(integrante);
 
@@ -136,14 +145,6 @@ public class PopularBancoController {
         }
     }
 
-    @FXML
-    void initialize() {
-        carregarTabelaUser();
-        adicionarListenerSelecaoUsuario();
-        carregarTabelaIntegrantes();
-        adicionarListenerSelecaoIntegrante();
-    }
-
     private void carregarTabelaUser() {
         usuarioDAO usuarioDao = new usuarioDAO();
         observableListUser.setAll(usuarioDao.getUsuariosSemCr(crSelecionado.getCodigo_cr()));
@@ -178,6 +179,7 @@ public class PopularBancoController {
             }
         });
     }
+
     @FXML
     private void BotaoFechar(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
