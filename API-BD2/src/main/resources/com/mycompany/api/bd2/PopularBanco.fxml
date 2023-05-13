@@ -25,7 +25,7 @@
                            </font>
                         </Button>
                         <Button id="minimizarTela" fx:id="minimizarTela" layoutX="1245.0" layoutY="5.0" mnemonicParsing="false" styleClass="minimize" stylesheets="@EstilizacaoTelas.css" text="-" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="5.0" />
-                        <Label id="nometelaatual" fx:id="nometelaatual" layoutX="10.0" layoutY="10.0" text="Gestão do CR" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                        <Label id="nometelaatual" fx:id="nometelaatual" layoutX="10.0" layoutY="10.0" text="Gerenciar CR" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font>
@@ -92,6 +92,14 @@
                               </ImageView>
                            </graphic>
                         </Button>
+<<<<<<< Updated upstream
+=======
+                        <Button id="botaoSair" fx:id="botaoSair" mnemonicParsing="false" onAction="#BotaoSair" styleClass="logout" stylesheets="@EstilizacaoTelas.css" text="Voltar" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                        </Button>
+>>>>>>> Stashed changes
                      </children>
                   </AnchorPane>
                </children>
