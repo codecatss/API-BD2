@@ -5,6 +5,7 @@ import com.mycompany.api.bd2.daos.usuarioDAO;
 import com.mycompany.api.bd2.models.Centro_resultado;
 import com.mycompany.api.bd2.models.Integrante;
 import com.mycompany.api.bd2.models.Usuario;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -89,7 +90,40 @@ public class PopularBancoController {
 
     @FXML
     void BotaoGestor(ActionEvent event) {
+        if (integranteSelecionado != null) {
+            integranteDAO integranteDao = new integranteDAO();
+            usuarioDAO usuarioDao = new usuarioDAO();
 
+            Integrante antigoGestor = integranteDao.getGestorFromCr(crSelecionado.getCodigo_cr());
+            Usuario novoGestor = usuarioDao.getUsuarioByUsername(integranteSelecionado.getUsername_integrante());
+
+            if (antigoGestor == null) {
+                integranteDao.updateGestor("gestor",
+                        novoGestor.getUsername(),
+                        crSelecionado.getCodigo_cr());
+            } else {
+                integranteDao.updateGestor("gestor", novoGestor.getUsername(), crSelecionado.getCodigo_cr());
+
+                integranteDao.updateGestor("colaborador", antigoGestor.getUsername_integrante(), crSelecionado.getCodigo_cr());
+
+                List<Integer> crsDoGestor = integranteDao.getListCrGestor(antigoGestor.getUsername_integrante());
+
+                if (crsDoGestor.isEmpty()) {
+                    System.out.println("não há CRs associados a este gestor");
+                    Usuario usuarioAntigoGestor = usuarioDao.getUsuarioByUsername(antigoGestor.getUsername_integrante());
+                    usuarioAntigoGestor.setCargo("colaborador");
+                    usuarioDao.update(usuarioAntigoGestor);
+                }
+
+                if (novoGestor.getCargo().equals("colaborador")) {
+                    novoGestor.setCargo("gestor");
+                    usuarioDao.update(novoGestor);
+                }
+            }
+            carregarTabelaIntegrantes();
+        } else {
+            System.out.println("Ninguem selecionado");
+        }
     }
 
     @FXML

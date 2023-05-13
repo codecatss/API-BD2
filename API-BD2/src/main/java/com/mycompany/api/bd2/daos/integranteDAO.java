@@ -244,7 +244,7 @@ public class integranteDAO {
                 e.printStackTrace();
             }
         }
-        System.out.println(integrante.getUsername_integrante());
+        System.out.println("getGestorFromCr: " + integrante.getUsername_integrante());
         return integrante;
     }
 
@@ -289,7 +289,7 @@ public class integranteDAO {
                 e.printStackTrace();
             }
         }
-        System.out.println("dao integrante" + liscr);
+        System.out.println("getListCrGestor: " + liscr);
         return liscr;
     }
 
@@ -323,7 +323,7 @@ public class integranteDAO {
     }
 
     public void updateGestor(String funcao, String username_integrante, String cod_cr) {
-        String sql = "UPDATE integrante SET gestor=? WHERE cod_cr=? AND username_integrante=?";
+        String sql = "UPDATE 2rp.integrante SET gestor=? WHERE cod_cr=? AND username_integrante=?";
         Connection conn = null;
         PreparedStatement pstm = null;
 
@@ -331,15 +331,16 @@ public class integranteDAO {
             conn = Conexao.createConnectionToMySQL();
 
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setString(2, username_integrante);
-            pstm.setString(3, cod_cr);
+            
             if (funcao.equals("gestor")) {
                 pstm.setInt(1, 1);
             }else{
                 pstm.setInt(1, 0);
             }
+            pstm.setString(2, cod_cr);
+            pstm.setString(3, username_integrante);
 
-            pstm.execute();
+            pstm.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -354,6 +355,6 @@ public class integranteDAO {
                 e.printStackTrace();
             }
         }
-
+        System.out.println("updateGestor: editado");
     }
 }

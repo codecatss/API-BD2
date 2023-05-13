@@ -295,7 +295,6 @@ public class usuarioDAO {
             pstm.setString(2, usuario.getSenha());
             pstm.setString(3, usuario.getCargo());
             pstm.setString(4, usuario.getStatus());
-            //pstm.setString(5,usuario.getHash());
             pstm.setString(5, usuario.getUsername());
 
             pstm.executeUpdate();
