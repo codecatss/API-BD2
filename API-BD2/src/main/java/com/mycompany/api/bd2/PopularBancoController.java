@@ -5,17 +5,23 @@ import com.mycompany.api.bd2.daos.usuarioDAO;
 import com.mycompany.api.bd2.models.Centro_resultado;
 import com.mycompany.api.bd2.models.Integrante;
 import com.mycompany.api.bd2.models.Usuario;
+import java.io.IOException;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class PopularBancoController {
 
@@ -58,12 +64,16 @@ public class PopularBancoController {
     @FXML
     void BotaoAdicionar(ActionEvent event) {
         if (usuarioSelecionado != null) {
+            integranteDAO integranteDao = new integranteDAO();
+            Integrante Gestor = integranteDao.getGestorFromCr(crSelecionado.getCodigo_cr());
+            
+            
             Integrante integrante = new Integrante();
             integrante.setCod_cr(crSelecionado.getCodigo_cr());
             integrante.setUsername_integrante(usuarioSelecionado.getUsername());
             integrante.setGestor("colaborador");
 
-            integranteDAO integranteDao = new integranteDAO();
+
             integranteDao.save(integrante);
 
             carregarTabelaUser();
@@ -168,8 +178,26 @@ public class PopularBancoController {
             }
         });
     }
+    @FXML
+    private void BotaoFechar(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
 
     @FXML
-    private void BotaoVoltar(ActionEvent event) {
+    private void BotaoMinimizar(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setIconified(true);
+    }
+
+    @FXML
+    private void BotaoVoltar(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroCRADM.fxml"));
+        Parent root = loader.load();
+        Scene cena = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+        stage.setScene(cena);
+        stage.centerOnScreen();
+        stage.show();
     }
 }
