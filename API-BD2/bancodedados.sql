@@ -6,7 +6,7 @@ create database 2rp;
 
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin123';
 
-GRANT SELECT, INSERT, UPDATE ON 2rp.* TO 'admin'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE ON 2rp.* TO 'admin'@'localhost';
 
 FLUSH PRIVILEGES;
 
