@@ -7,7 +7,6 @@ import com.mycompany.api.bd2.models.Integrante;
 import com.mycompany.api.bd2.models.Usuario;
 import java.io.IOException;
 import java.util.List;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -157,6 +156,10 @@ public class PopularBancoController {
         tabelaUsuarioDisp.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             usuarioSelecionado = newValue;
             if (usuarioSelecionado != null) {
+                tabelaIntegrantes.getSelectionModel().clearSelection();
+                botaoAdicionar.setDisable(false);
+                botaoExcluir.setDisable(true);
+                botaoGestor.setDisable(true);
                 System.out.println("Usuário selecionado: " + usuarioSelecionado.getUsername());
             }
         });
@@ -175,6 +178,10 @@ public class PopularBancoController {
         tabelaIntegrantes.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             integranteSelecionado = newValue;
             if (integranteSelecionado != null) {
+                tabelaUsuarioDisp.getSelectionModel().clearSelection();
+                botaoAdicionar.setDisable(true);
+                botaoExcluir.setDisable(false);
+                botaoGestor.setDisable(false);
                 System.out.println("Integrante selecionado: " + integranteSelecionado.getUsername_integrante());
             }
         });
