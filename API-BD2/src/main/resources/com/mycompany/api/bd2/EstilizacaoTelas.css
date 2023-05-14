@@ -62,6 +62,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-cursor:hand;
 }
 
+.atv-btn:hover{
+    -fx-background-color:#2C74B3;
+}
+
 .appointments-btn{
     -fx-background-color:transparent;
     -fx-cursor:hand;
@@ -103,6 +107,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 }
 .table-view .table-column{
     -fx-alignment:CENTER;
+    -fx-font-family:"Arial";
+
+
 }
 .table-view .column-header-background{
     -fx-background-color:linear-gradient(to right, #2b303c, #525968);
@@ -163,17 +170,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-border-width:.4px;
     -fx-border-radius:4px;
     -fx-font-size:13px;
-    -fx-font-family:"Arial"  
-        
+    -fx-font-family:"Arial"
+
 }
 .textfield:focused{
     -fx-background-color:#fff;
     -fx-border-color:linear-gradient(to bottom right, #0A2647,#2C74B3);
-    -fx-border-width:.8px; 
+    -fx-border-width:.8px;
 }
 
 .login-btn{
-    -fx-background-color:linear-gradient(to bottom, #0A2647,#2C74B3); 
+    -fx-background-color:linear-gradient(to bottom, #0A2647,#2C74B3);
     -fx-background-radius:5px;
     -fx-text-fill:#fff;
     -fx-font-size:14px;
@@ -185,5 +192,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 }
 
 .arial-font {
--fx-font-family: "Arial";
+    -fx-font-family: "Arial";
+}
+
+.text-input{
+    -fx-font-family:"Arial";
+
 }

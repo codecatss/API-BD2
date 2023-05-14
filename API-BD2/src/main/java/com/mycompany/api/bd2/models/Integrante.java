@@ -9,22 +9,23 @@ package com.mycompany.api.bd2.models;
  * @author mikaela.begotti
  */
 public class Integrante {
-    private int gestor; 
+
+    private Funcao gestor;
     private String username_integrante;
     private String cod_cr;
 
     /**
      * @return the gestor
      */
-    public int getGestor() {
-        return gestor;
+    public String getGestor() {
+        return gestor.name();
     }
 
     /**
      * @param gestor the gestor to set
      */
-    public void setGestor(int gestor) {
-        this.gestor = gestor;
+    public void setGestor(String gestor) {
+        this.gestor = Funcao.valueOf(gestor.toLowerCase());
     }
 
     /**

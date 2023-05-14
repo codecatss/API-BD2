@@ -6,12 +6,15 @@ package com.mycompany.api.bd2;
 
 import static com.mycompany.api.bd2.TelaLoginController.usuariologado;
 import com.mycompany.api.bd2.daos.horaDAO;
+import com.mycompany.api.bd2.daos.integranteDAO;
 import com.mycompany.api.bd2.models.Hora;
+import com.mycompany.api.bd2.models.TabelaAprovaçãoGestor;
 import com.mycompany.api.bd2.models.Usuario;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -58,38 +61,34 @@ public class ApontamentoGestorController implements Initializable {
     @FXML
     private Button menuRelatorio;
     @FXML
-    private Button botaoAprovar;
+    private Button BotaoAprovar;
     @FXML
-    private Button botaoReprovar;
+    private Button BotaoReprovar;
 
     @FXML
-    private TableView<Hora> tabelaApontamento;
+    private TableView<TabelaAprovaçãoGestor> tabelaApontamento;
 
     @FXML
-    private TableColumn<Hora, String> colunaCR;
+    private TableColumn<TabelaAprovaçãoGestor, String> colunaCR;//ok
     @FXML
-    private TableColumn<Hora, String> colunaEmpresa;
+    private TableColumn<TabelaAprovaçãoGestor, String> colunaEmpresa;//ok
     @FXML
-    private TableColumn<Hora, String> colunaFunçao;
+    private TableColumn<TabelaAprovaçãoGestor, String> colunaFunçao;//ok
     @FXML
-    private TableColumn<Hora, String> colunaGestor;
+    private TableColumn<TabelaAprovaçãoGestor, String> colunaProjeto;//ok
     @FXML
-    private TableColumn<Hora, String> colunaNome;
+    private TableColumn<TabelaAprovaçãoGestor, String> colunaJust;//ok
     @FXML
-    private TableColumn<Hora, String> colunaProjeto;
+    private TableColumn<TabelaAprovaçãoGestor, String> colunaUsername;//ok
     @FXML
-    private TableColumn<Hora, String> colunaJust;
+    private TableColumn<TabelaAprovaçãoGestor, String> colunaFim;//ok
     @FXML
-    private TableColumn<Hora, String> colunaUsername;
-    @FXML
-    private TableColumn<Hora, Timestamp> colunaFim;
-    @FXML
-    private TableColumn<Hora, Timestamp> colunaInicio;
+    private TableColumn<TabelaAprovaçãoGestor, String> colunaInicio;//ok
+
+    horaDAO horadao = new horaDAO();
     
-    
-
-    private List<Hora> lishoras = new ArrayList<>();
-    private ObservableList<Hora> observablelisthoras = FXCollections.observableArrayList();
+    private List<TabelaAprovaçãoGestor> lishoras = new ArrayList<>();
+    private ObservableList<TabelaAprovaçãoGestor> observablelisthoras = FXCollections.observableArrayList();
 
     public static Usuario getUsuario1() {
         return usuariologado;
@@ -110,31 +109,50 @@ public class ApontamentoGestorController implements Initializable {
             Stage stage = (Stage) minimizarTela.getScene().getWindow();
             stage.setIconified(true);
         });
+        carregarTabelaLancamento();
+
     }
 
     public void fechaTela() {
         Platform.exit();
     }
 
+    private integranteDAO crgestor = new integranteDAO();
+
     @FXML
     public void carregarTabelaLancamento() {
-        horaDAO horadao = new horaDAO();
         lishoras.clear();
-        lishoras.addAll(horadao.getHora(usuario));
+        lishoras.addAll(horadao.getHora(crgestor.getListCrGestor(usuario)));
         observablelisthoras.setAll(lishoras);
         tabelaApontamento.setItems(observablelisthoras);
 
-        colunaUsername.setCellValueFactory(new PropertyValueFactory<>("username_lancador"));
+        colunaUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
         colunaCR.setCellValueFactory(new PropertyValueFactory<>("cod_cr"));
-        colunaEmpresa.setCellValueFactory(new PropertyValueFactory<>("cnpj_cliente"));
+        colunaEmpresa.setCellValueFactory(new PropertyValueFactory<>("empresa"));
         colunaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto"));
-        colunaInicio.setCellValueFactory(new PropertyValueFactory<>("data_hora_fim"));
-        colunaFim.setCellValueFactory(new PropertyValueFactory<>("data_hora_fim"));
-        colunaJust.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
-
+        colunaInicio.setCellValueFactory(new PropertyValueFactory<>("inicio"));
+        colunaFim.setCellValueFactory(new PropertyValueFactory<>("fim"));
+        //colunaJust.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
+        //colunaFunçao.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
         tabelaApontamento.refresh();
     }
-   
+
+    @FXML
+    public void botaoAprovar() {
+        if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
+            horadao.aprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId());
+            carregarTabelaLancamento();
+        }
+    }
+
+    @FXML
+    public void botaoReprovar() {
+        if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
+            horadao.reprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId());
+            carregarTabelaLancamento();
+        }
+    }
+    
     @FXML
     public void navLancamentoColaborador(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LancamentoColaborador.fxml"));
@@ -143,6 +161,18 @@ public class ApontamentoGestorController implements Initializable {
         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
         stage.setScene(cena);
         stage.centerOnScreen();
+        stage.show();
+    }
+    
+        @FXML
+    private void BotaoSair(ActionEvent event) throws IOException {
+        Usuario usuario = new Usuario();
+        usuario.logout();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
+        Parent root = loader.load();
+        Scene cena = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+        stage.setScene(cena);
         stage.show();
     }
 }

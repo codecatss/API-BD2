@@ -5,11 +5,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.api.bd2.LancamentoColaboradorController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.api.bd2.PopularBancoController">
    <children>
       <BorderPane layoutX="520.0" layoutY="225.0" prefHeight="650.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -17,13 +19,18 @@
                <children>
                   <AnchorPane layoutX="534.0" layoutY="-80.0" prefHeight="35.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button id="fecharTela" fx:id="fecharTela" layoutX="1270.0" layoutY="5.0" mnemonicParsing="false" styleClass="close" stylesheets="@EstilizacaoTelas.css" text="X" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="5.0">
+                        <Button id="fecharTela" fx:id="fecharTela" layoutX="1270.0" layoutY="5.0" mnemonicParsing="false" onAction="#BotaoFechar" styleClass="close" stylesheets="@EstilizacaoTelas.css" text="X" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="5.0">
                            <font>
                               <Font name="Arial Bold" size="12.0" />
                            </font>
                         </Button>
-                        <Button id="minimizarTela" fx:id="minimizarTela" layoutX="1245.0" layoutY="5.0" mnemonicParsing="false" styleClass="minimize" stylesheets="@EstilizacaoTelas.css" text="-" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="5.0" />
-                        <Label id="nometelaatual" fx:id="nometelaatual" layoutX="10.0" layoutY="10.0" text="Gestão do CR" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                        <Button id="minimizarTela" fx:id="minimizarTela" layoutX="1245.0" layoutY="5.0" mnemonicParsing="false" onAction="#BotaoMinimizar" styleClass="minimize" stylesheets="@EstilizacaoTelas.css" text="-" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="5.0" />
+                        <Label id="nometelaatual" fx:id="nometelaatual" layoutX="10.0" layoutY="10.0" text="Gerenciar CR - " textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label id="nometelaatual" fx:id="nomeCR" layoutX="117.0" layoutY="10.0" textAlignment="CENTER">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font>
@@ -36,11 +43,18 @@
          <left>
             <AnchorPane prefHeight="610.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane prefHeight="746.0" prefWidth="1080.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane prefHeight="746.0" prefWidth="1080.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <styleClass>
                         <String fx:value="white-bg" />
                         <String fx:value="shadow" />
                      </styleClass>
+                     <children>
+                        <TableView id="tabelaUsuarioDisp" fx:id="tabelaUsuarioDisp" layoutX="17.0" layoutY="162.0" prefHeight="746.0" prefWidth="1080.0" styleClass="arial-font" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                           <columns>
+                              <TableColumn fx:id="colunaUsuarioDisp" minWidth="200.0" prefWidth="200.0" text="Usuário" />
+                           </columns>
+                        </TableView>
+                     </children>
                   </AnchorPane>
                </children>
             </AnchorPane>
@@ -48,20 +62,44 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane prefHeight="746.0" prefWidth="1080.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane prefHeight="746.0" prefWidth="1080.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="0.0">
                      <styleClass>
                         <String fx:value="white-bg" />
                         <String fx:value="shadow" />
                      </styleClass>
                      <children>
-                        <Button id="botaoExcluir" fx:id="botaoExcluir" layoutX="51.0" layoutY="218.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="20.0" prefWidth="70.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="x" textFill="WHITE">
+                        <Button id="botaoGestor" fx:id="botaoGestor" layoutX="51.0" layoutY="218.0" mnemonicParsing="false" onAction="#BotaoGestor" prefHeight="40.0" prefWidth="70.0" styleClass="atv-btn" stylesheets="@EstilizacaoTelas.css" text="Gestor" textFill="WHITE" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="75.0">
                            <font>
                               <Font name="Arial Bold" size="18.0" />
                            </font>
                         </Button>
-                        <Button id="botaoAdicionar" fx:id="botaoAdicionar1" layoutX="76.0" layoutY="383.0" mnemonicParsing="false" onAction="#botaoAdicionar" prefHeight="5.0" prefWidth="70.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="+" textFill="WHITE">
+                        <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutX="51.0" layoutY="120.0" mnemonicParsing="false" onAction="#BotaoAdicionar" prefHeight="5.0" prefWidth="70.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" textFill="WHITE" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="161.0">
                            <font>
                               <Font name="Arial Bold" size="18.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@proximo_direita.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button id="botaoExcluir" fx:id="botaoExcluir" layoutX="61.0" layoutY="296.0" mnemonicParsing="false" onAction="#BotaoExcluir" prefHeight="20.0" prefWidth="70.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" textFill="WHITE" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+                           <font>
+                              <Font name="Arial Bold" size="18.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@proximo_esq.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button id="botaoVoltar" fx:id="botaoVoltar" mnemonicParsing="false" onAction="#BotaoVoltar" styleClass="logout" stylesheets="@EstilizacaoTelas.css" text="Voltar" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
                            </font>
                         </Button>
                      </children>
@@ -72,16 +110,16 @@
          <right>
             <AnchorPane prefHeight="610.0" prefWidth="300.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane prefHeight="746.0" prefWidth="1080.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane prefHeight="746.0" prefWidth="1080.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
                      <styleClass>
                         <String fx:value="white-bg" />
                         <String fx:value="shadow" />
                      </styleClass>
                      <children>
-                        <TableView layoutX="17.0" layoutY="162.0" prefHeight="610.0" prefWidth="225.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="tabelaIntegrantes" layoutX="17.0" layoutY="162.0" prefHeight="610.0" prefWidth="225.0" styleClass="arial-font" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Usuário" />
-                            <TableColumn prefWidth="75.0" text="Função" />
+                            <TableColumn fx:id="colunaIntegrantes" minWidth="175.0" prefWidth="175.0" styleClass="arial-font" text="Usuário" />
+                            <TableColumn fx:id="colunaFuncao" minWidth="125.0" prefWidth="125.0" text="Função" />
                           </columns>
                         </TableView>
                      </children>

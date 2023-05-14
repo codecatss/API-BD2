@@ -50,7 +50,7 @@ create table
 
 create table
     hora(
-        id int AUTO_INCREMENT NOT NULL,
+		id int AUTO_INCREMENT NOT NULL,
         cod_cr VARCHAR(30) NOT NULL,
         username_lancador VARCHAR(20) NOT NULL,
         cnpj_cliente BIGINT NOT NULL,
@@ -59,15 +59,15 @@ create table
         tipo VARCHAR(15) NOT NULL,
         justificativa_lancamento VARCHAR(500) NOT NULL,
         projeto VARCHAR(100) NOT NULL,
-	username_aprovador VARCHAR(20),
+		username_aprovador VARCHAR(20),
         justificativa_negacao VARCHAR(500),
-        status_aprovacao ENUM('pendente','aprovado','negado') NOT NULL DEFAULT 'pendente',
-	solicitante_lancamento VARCHAR(30) NOT NULL,
-	Foreign Key (username_lancador) REFERENCES usuario(username),
-	Foreign Key (cod_cr) REFERENCES centro_resultado(codigo_cr),
-	Foreign Key (cnpj_cliente) REFERENCES cliente(cnpj),
-	Foreign Key (username_aprovador) REFERENCES usuario (username),
-        PRIMARY KEY(id)
+        status_aprovacao ENUM('pendente','aprovado_gestor','aprovado_rh','negado') NOT NULL DEFAULT 'pendente',
+		solicitante_lancamento VARCHAR(30) NOT NULL,
+		Foreign Key (username_lancador) REFERENCES usuario(username),
+		Foreign Key (cod_cr) REFERENCES centro_resultado(codigo_cr),
+		Foreign Key (cnpj_cliente) REFERENCES cliente(cnpj),
+		Foreign Key (username_aprovador) REFERENCES usuario (username),
+        PRIMARY KEY (id)
     );
 
 create table

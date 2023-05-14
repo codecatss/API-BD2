@@ -40,6 +40,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class LancamentoColaboradorController {
@@ -55,13 +56,13 @@ public class LancamentoColaboradorController {
     @FXML
     private Label nomeUsuario;
     @FXML
-    private Label Acionamento;
-    @FXML
     private Label errodata;
     @FXML
     private Label erroproj;
     @FXML
     private Button botaoSair;
+    @FXML
+    private Button botaoAcionamento;
     @FXML
     private TableView<Hora> tabelaLancamento;
     @FXML
@@ -124,8 +125,6 @@ public class LancamentoColaboradorController {
     private Button menuRelatorio;
 
     private String usuario = TelaLoginController.usuariologado.getUsername();
-    @FXML
-    private TextField entradaAcionamento;
 
     private List<String> obs = new ArrayList<>();
     private ObservableList<String> opcoes = FXCollections.observableArrayList();
@@ -155,16 +154,17 @@ public class LancamentoColaboradorController {
 
         botaoLimpar.setOnAction(event -> limparCampos());
         carregarTabelaLancamento();
-
+        
+        botaoAcionamento.setVisible(false);
+        
         horaTipo.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal != null && newVal.equals(TipoHora.SOBREAVISO.name().toLowerCase())) {
-                entradaAcionamento.setVisible(true);
-                Acionamento.setVisible(true);
+        if (newVal != null && newVal.equals("Sobreaviso")) {
+            botaoAcionamento.setVisible(true);
+ 
+        } else {
+            botaoAcionamento.setVisible(false);
+        }
 
-            } else {
-                entradaAcionamento.setVisible(false);
-                Acionamento.setVisible(false);
-            }
         });
 
         if (TelaLoginController.usuariologado.getCargo().equals("gestor")) {
@@ -193,9 +193,7 @@ public class LancamentoColaboradorController {
         entradaProjeto.clear();
         entradaJustificativa.clear();
         entradaSolicitante.clear();
-        entradaAcionamento.clear();
-        Acionamento.setVisible(false);
-
+        botaoAcionamento.setVisible(false);
     }
 
     @FXML
@@ -209,7 +207,7 @@ public class LancamentoColaboradorController {
     private String erro = "-fx-border-color:#E06469";
 
     @FXML
-    public void botaoAdicionar() {
+    public void botaoAdicionar() throws ParseException {
         if (dataInicio.getValue() == null || horaInicio.getValue() == null || minutoInicio.getValue() == null || dataFim.getValue() == null || horaFim.getValue() == null || minutoFim.getValue() == null) {
             System.out.println("Preencha todos os campos - tela de lançamento");
             Alert alert = new Alert(AlertType.ERROR);
@@ -251,7 +249,7 @@ public class LancamentoColaboradorController {
             }
 
             if (salvar && (!entradaProjeto.getText().isEmpty())) {
-                try {
+                //try {
                     LocalDate data_inicio = dataInicio.getValue();
                     int hora_inicio = horaInicio.getValue();
                     int min_inicio = minutoInicio.getValue();
@@ -279,7 +277,10 @@ public class LancamentoColaboradorController {
                     hora.setUsername_lancador(nomeUsuario.getText());
                     hora.setCnpj_cliente(cliente.getCliente(nome_cliente).getCnpj());
                     hora.setJustificativa_lancamento(entradaJustificativa.getText());
-                    hora.setStatus_aprovacao("pendente");
+                    if(TelaLoginController.usuariologado.getCargo().equalsIgnoreCase("gestor")){
+                        hora.setStatus_aprovacao("aprovado_gestor");
+                    }else{
+                    hora.setStatus_aprovacao("pendente");}
                     hora.setSolicitante(entradaSolicitante.getText());
                     hora.setTipo(horaTipo.getSelectionModel().getSelectedItem().toUpperCase());
                     horaDAO hrDAO = new horaDAO();
@@ -289,14 +290,14 @@ public class LancamentoColaboradorController {
                     System.out.println("Salvo");
                     carregarTabelaLancamento();
 
-                } catch (Exception e) {
+                /*} catch (Exception e) {
                     System.out.println("Houve um erro ao salvar");
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Houve um erro ao salvar");
                     alert.setHeaderText(null);
                     alert.setContentText("O bloco 'try' responsavél por salvar a nova hora para o lançamento apresentou alguma falha");
                     alert.showAndWait();
-                }
+                }*/
             } else {
                 if (entradaProjeto.getText().isEmpty()) {
                     entradaProjeto.setStyle(erro);
@@ -315,7 +316,6 @@ public class LancamentoColaboradorController {
         lishoras.addAll(horadao.getHora(usuario));
         observablelisthoras.setAll(lishoras);
         tabelaLancamento.setItems(observablelisthoras);
-
         tabelaN.setCellValueFactory(new PropertyValueFactory<>("id"));
         tabelaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao"));
@@ -332,6 +332,27 @@ public class LancamentoColaboradorController {
         tabelaLancamento.refresh();
 
     }
+    
+    @FXML
+    public void botaoAcionamento(ActionEvent event){
+        
+       try {
+           System.out.println("clicked");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/api/bd2/PopUpAcionamento.fxml"));
+        Parent root = loader.load();
+        PopUpAcionamentoController controller = loader.getController();
+
+        Stage popup = new Stage();
+        popup.initModality(Modality.APPLICATION_MODAL);
+        popup.initOwner(botaoAcionamento.getScene().getWindow());
+        popup.setScene(new Scene(root));
+
+        popup.showAndWait();
+    } catch (IOException e) {
+        
+    }
+}
+    
 
     @FXML
     public void limmparFormatacao() {

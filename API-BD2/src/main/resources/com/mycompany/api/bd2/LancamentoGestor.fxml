@@ -25,7 +25,7 @@
                <children>
                   <AnchorPane layoutX="534.0" layoutY="-80.0" prefHeight="40.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button id="fecharTela" fx:id="FecharTela" layoutX="1270.0" layoutY="5.0" mnemonicParsing="false" styleClass="close" stylesheets="@EstilizacaoTelas.css" text="X" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="5.0">
+                        <Button id="fecharTela" fx:id="fecharTela" layoutX="1270.0" layoutY="5.0" mnemonicParsing="false" styleClass="close" stylesheets="@EstilizacaoTelas.css" text="X" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="5.0">
                            <font>
                               <Font name="Arial Bold" size="12.0" />
                            </font>
@@ -57,14 +57,14 @@
                               <Font name="Arial" size="18.0" />
                            </font>
                         </Label>
-                        <Button id="botaoSair" fx:id="botaoSair" layoutX="10.0" layoutY="580.0" mnemonicParsing="false" onAction="#BotaoSair" styleClass="logout" stylesheets="@EstilizacaoTelas.css" text="Sair" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
+                        <Button id="botaoSair" fx:id="botaoSair" layoutX="10.0" layoutY="580.0" mnemonicParsing="false" styleClass="logout" stylesheets="@EstilizacaoTelas.css" text="Sair" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
                            <font>
                               <Font name="Arial Bold" size="14.0" />
                            </font>
                         </Button>
                      </children>
                   </AnchorPane>
-                  <Button id="menuLancamento" fx:id="menuLancamento" layoutX="19.0" layoutY="136.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text=" Lançamentos">
+                  <Button id="menuLancamento" fx:id="menuLancamento" layoutX="25.0" layoutY="150.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text=" Lançamentos" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="150.0">
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -73,7 +73,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button id="menuApontamento" fx:id="menuApontamento" layoutX="12.0" layoutY="211.0" mnemonicParsing="false" onAction="#navApontamentoGestor" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Apontamentos" textFill="WHITE">
+                  <Button id="menuApontamento" fx:id="menuApontamento" layoutX="15.0" layoutY="225.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Apontamentos" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="225.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -85,7 +85,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button id="menuRelatorio" fx:id="menuRelatorio" layoutX="20.0" layoutY="291.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text=" Relatórios" textFill="WHITE">
+                  <Button id="menuRelatorio" fx:id="menuRelatorio" layoutX="25.0" layoutY="305.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text=" Relatórios" textFill="WHITE" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="300.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -115,10 +115,10 @@
                                  <columns>
                                     <TableColumn id="tabelaN" fx:id="tabelaN" maxWidth="350.0" minWidth="30.0" prefWidth="30.0" text="Nº" />
                                     <TableColumn id="tabelaTipo" fx:id="tabelaTipo" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="-1.0" text="Tipo" />
-                                    <TableColumn id="tabelaTipo" fx:id="tabelaTipo" maxWidth="1250.0" minWidth="150.0" prefWidth="150.0" text="Tipo" />
+                                    <TableColumn id="tabelaTipo" fx:id="tabelaTipo" maxWidth="1250.0" minWidth="75.0" prefWidth="75.0" text="Tipo" />
                                     <TableColumn id="tabelaStatus" fx:id="tabelaStatus" maxWidth="1250.0" minWidth="75.0" prefWidth="75.0" text="Status" />
-                                    <TableColumn id="tabelaInicio" fx:id="tabelaInicio" maxWidth="1750.0" minWidth="200.0" prefWidth="200.0" text="Início" />
-                                    <TableColumn id="tabelaFim" fx:id="tabelaFim" maxWidth="1750.0" minWidth="200.0" prefWidth="200.0" text="Fim" />
+                                    <TableColumn id="tabelaInicio" fx:id="tabelaInicio" maxWidth="1750.0" minWidth="150.0" prefWidth="150.0" text="Início" />
+                                    <TableColumn id="tabelaFim" fx:id="tabelaFim" maxWidth="1750.0" minWidth="150.0" prefWidth="150.0" text="Fim" />
                                     <TableColumn id="tabelaCR" fx:id="tabelaCR" maxWidth="1250.0" minWidth="100.0" prefWidth="100.0" text="CR" />
                                     <TableColumn id="tabelaCliente" fx:id="tabelaCliente" maxWidth="1500.0" minWidth="100.0" prefWidth="100.0" text="Cliente" />
                                     <TableColumn id="tabelaProjeto" fx:id="tabelaProjeto" maxWidth="1500.0" minWidth="125.0" prefWidth="125.0" text="Projeto" />
@@ -236,7 +236,7 @@
                                  </font>
                               </Label>
                               <TextField id="entradaSolicitante" fx:id="entradaSolicitante" layoutX="115.0" layoutY="246.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="245.0" />
-                              <Button id="botaoAcionamento" onAction="#botaoAcionamento" fx:id="botaoAcionamento" layoutX="749.0" layoutY="235.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="atv-btn" stylesheets="@EstilizacaoTelas.css" text="+ Acionamento" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="825.0">
+                              <Button id="botaoAcionamento" fx:id="botaoAcionamento" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="atv-btn" stylesheets="@EstilizacaoTelas.css" text="+ Acionamento" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="825.0">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>

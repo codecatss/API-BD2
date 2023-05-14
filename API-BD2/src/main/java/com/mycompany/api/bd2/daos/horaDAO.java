@@ -6,11 +6,13 @@ package com.mycompany.api.bd2.daos;
 
 import Conexao.Conexao;
 import com.mycompany.api.bd2.models.Hora;
+import com.mycompany.api.bd2.models.TabelaAprovaçãoGestor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -209,9 +211,69 @@ public class horaDAO {
 			return horasUser;
 	}
     
+    public LinkedList<TabelaAprovaçãoGestor> getHora(LinkedList<Integer> lis_int_cr){//sobrecarga para gerar a tabela de apontamentos
+        
+        LinkedList<TabelaAprovaçãoGestor> horasUser = new LinkedList<>();
+        for(Integer i : lis_int_cr){
+            String sql = "SELECT * FROM 2rp.hora WHERE cod_cr = ? AND status_aprovacao = 'pendente'";
+
+            Connection conn = null;
+            PreparedStatement pstm = null;
+            //Classe que vai recuperar os dados do banco. ***SELECT****
+            ResultSet rset = null;
+            //Hora hora = Hora.getInstance();
+
+            try {   
+                String cod = i.toString();
+
+                conn = Conexao.createConnectionToMySQL();
+
+                pstm = (PreparedStatement) conn.prepareStatement(sql);
+                pstm.setInt(1, Integer.parseInt(cod));			
+                rset = pstm.executeQuery();
+                while (rset.next()) {
+                    TabelaAprovaçãoGestor info = new TabelaAprovaçãoGestor();
+                    info.setCod_cr(rset.getString("cod_cr"));
+                    info.setUsername(rset.getString("username_lancador"));
+                    info.setInicio(rset.getString("data_hora_inicio"));
+                    info.setFim(rset.getString("data_hora_fim"));
+                    info.setTipo(rset.getString("tipo"));
+                    info.setJustificativa(rset.getString("justificativa_lancamento"));
+                    info.setProjeto(rset.getString("projeto"));
+                    info.setId(rset.getInt("id"));
+                    
+                    
+                    
+                    horasUser.add(info);
+
+                }
+            }catch (Exception e) {
+                e.printStackTrace();
+                }finally {
+                    try {
+                            if(rset!=null) {
+                                    rset.close();
+                            }
+
+                            if(pstm!=null) {
+                                    pstm.close();
+                            }
+
+                            if(conn!=null) {
+                                    conn.close();
+                            }
+                    }catch(Exception e) {
+                            e.printStackTrace();
+                    }
+                }
+        }
+        System.out.println(horasUser);
+        return horasUser;
+	}
+    
     private String nome;
     public String getNomeClient(long n_cnpj){
-        String sql = "SELECT razao_social FROM 2rp.cliente WHERE cnpj = ?";
+        String sql = "SELECT razao_social FROM 2rp.cliente WHERE cnpj = ?"; 
 		
             Set<Hora> horas = new HashSet<Hora>();
 
@@ -251,4 +313,66 @@ public class horaDAO {
                 }
         }
     return nome;}
+    
+    public void aprovarHora(int id) {
+    String sql = "UPDATE hora SET status_aprovacao = 'aprovado_gestor' WHERE id = ?";
+
+    Connection conn = null;
+    PreparedStatement pstm = null;
+
+    try {
+        conn = Conexao.createConnectionToMySQL();
+        pstm = conn.prepareStatement(sql);
+        pstm.setInt(1, id);
+
+        pstm.executeUpdate();
+        
+        System.out.println("Update realizado");
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+    public void reprovarHora(int id) {
+    String sql = "UPDATE hora SET status_aprovacao = 'negado' WHERE id = ?";
+
+    Connection conn = null;
+    PreparedStatement pstm = null;
+
+    try {
+        conn = Conexao.createConnectionToMySQL();
+        pstm = conn.prepareStatement(sql);
+        pstm.setInt(1, id);
+
+        pstm.executeUpdate();
+        
+        System.out.println("Update realizado");
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
 }
