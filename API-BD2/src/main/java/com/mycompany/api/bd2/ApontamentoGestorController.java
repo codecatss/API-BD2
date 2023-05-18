@@ -90,10 +90,6 @@ public class ApontamentoGestorController implements Initializable {
     private List<TabelaAprovaçãoGestor> lishoras = new ArrayList<>();
     private ObservableList<TabelaAprovaçãoGestor> observablelisthoras = FXCollections.observableArrayList();
 
-    public static Usuario getUsuario1() {
-        return usuariologado;
-    }
-    public static Usuario usuariologado = new Usuario();
     private String usuario = TelaLoginController.usuariologado.getUsername();
 
     /**
@@ -140,7 +136,7 @@ public class ApontamentoGestorController implements Initializable {
     @FXML
     public void botaoAprovar() {
         if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
-            horadao.aprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId());
+            horadao.aprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId(),TelaLoginController.usuariologado.getCargo());
             carregarTabelaLancamento();
         }
     }

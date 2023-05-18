@@ -5,6 +5,7 @@
 package com.mycompany.api.bd2.daos;
 
 import Conexao.Conexao;
+import com.mycompany.api.bd2.models.Cargo;
 import com.mycompany.api.bd2.models.Hora;
 import com.mycompany.api.bd2.models.TabelaAprovaçãoGestor;
 import java.sql.Connection;
@@ -314,9 +315,18 @@ public class horaDAO {
         }
     return nome;}
     
-    public void aprovarHora(int id) {
-    String sql = "UPDATE hora SET status_aprovacao = 'aprovado_gestor' WHERE id = ?";
-
+    public void aprovarHora(int id, String cargo) {
+        if(cargo.equals(Cargo.colaborador.name())){
+            System.out.println("Usuário não autorizado");
+        }
+        else{
+            if (cargo.equals(Cargo.gestor.name())){
+                String sql = "UPDATE hora SET status_aprovacao = 'aprovado_"+cargo+"' WHERE id = ?";
+            }
+            if (cargo.equals(Cargo.administrador.name())){
+                String sql = "UPDATE hora SET status_aprovacao = 'aprovado_rh' WHERE id = ?";
+            }
+        }
     Connection conn = null;
     PreparedStatement pstm = null;
 
