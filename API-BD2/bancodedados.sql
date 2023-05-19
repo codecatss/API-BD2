@@ -61,7 +61,7 @@ create table
         projeto VARCHAR(100) NOT NULL,
 		username_aprovador VARCHAR(20),
         justificativa_negacao VARCHAR(500),
-        status_aprovacao ENUM('pendente','aprovado_gestor','aprovado_rh','negado') NOT NULL DEFAULT 'pendente',
+        status_aprovacao ENUM('pendente','aprovado_gestor','aprovado_administrador','negado') NOT NULL DEFAULT 'pendente',
 		solicitante_lancamento VARCHAR(30) NOT NULL,
 		Foreign Key (username_lancador) REFERENCES usuario(username),
 		Foreign Key (cod_cr) REFERENCES centro_resultado(codigo_cr),

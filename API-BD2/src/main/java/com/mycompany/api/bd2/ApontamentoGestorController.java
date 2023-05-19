@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,6 +29,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -136,7 +139,15 @@ public class ApontamentoGestorController implements Initializable {
     @FXML
     public void botaoAprovar() {
         if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
-            horadao.aprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId(),TelaLoginController.usuariologado.getCargo());
+            try {
+                horadao.aprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId(),TelaLoginController.usuariologado.getCargo());
+            } catch (InterruptedException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText(null);
+            alert.setContentText("Usuário não altorizado");
+            alert.showAndWait();
+            }
             carregarTabelaLancamento();
         }
     }

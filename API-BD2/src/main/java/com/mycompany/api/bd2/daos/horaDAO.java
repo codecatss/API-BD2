@@ -315,18 +315,12 @@ public class horaDAO {
         }
     return nome;}
     
-    public void aprovarHora(int id, String cargo) {
+    public void aprovarHora(int id, String cargo) throws InterruptedException  {
+        String sql = "UPDATE hora SET status_aprovacao = 'aprovado_"+cargo+"' WHERE id = ?";
         if(cargo.equals(Cargo.colaborador.name())){
-            System.out.println("Usuário não autorizado");
+            throw new InterruptedException("Usuário não autorizado");
         }
-        else{
-            if (cargo.equals(Cargo.gestor.name())){
-                String sql = "UPDATE hora SET status_aprovacao = 'aprovado_"+cargo+"' WHERE id = ?";
-            }
-            if (cargo.equals(Cargo.administrador.name())){
-                String sql = "UPDATE hora SET status_aprovacao = 'aprovado_rh' WHERE id = ?";
-            }
-        }
+        
     Connection conn = null;
     PreparedStatement pstm = null;
 
