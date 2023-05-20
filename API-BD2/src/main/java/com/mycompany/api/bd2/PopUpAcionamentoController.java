@@ -9,6 +9,8 @@ import com.mycompany.api.bd2.daos.crDAO;
 import com.mycompany.api.bd2.daos.horaDAO;
 import com.mycompany.api.bd2.models.Cliente;
 import com.mycompany.api.bd2.models.Hora;
+import com.mycompany.api.bd2.models.TimeData;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -21,7 +23,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -33,6 +37,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+
 
 /**
  * FXML Controller class
@@ -80,28 +86,22 @@ public class PopUpAcionamentoController implements Initializable {
     private List<Integer> horas = new LinkedList<>();
     private List<Integer> lishoras = new ArrayList<>();
      
+    
+   
+     
+    private ObservableList<Integer> observablelisthoras =  FXCollections.observableArrayList();
+    
+    private LancamentoColaboradorController lancamentoController;
     private DatePicker dataInicio;
     private DatePicker dataFim;
+    private ComboBox<String> horaTipo;
     private ComboBox<String> selecaoCliente;
     private ComboBox<String> selecaoCR;
     private TextField entradaProjeto;
-    private TextField entradaJustificativa;
     private TextField entradaSolicitante;
     private Label nomeUsuario;
-    
 
-    /*public PopUpAcionamentoController(DatePicker dataInicio, DatePicker dataFim, ComboBox<String> selecaoCliente, ComboBox<String> selecaoCR, TextField entradaProjeto, TextField entradaJustificativa, TextField entradaSolicitante, Label nomeUsuario) {
-        this.dataInicio = dataInicio;
-        this.dataFim = dataFim;
-        this.selecaoCliente = selecaoCliente;
-        this.selecaoCR = selecaoCR;
-        this.entradaProjeto = entradaProjeto;
-        this.entradaJustificativa = entradaJustificativa;
-        this.entradaSolicitante = entradaSolicitante;
-        this.nomeUsuario = nomeUsuario;
-    }*/
-     
-    private ObservableList<Integer> observablelisthoras = FXCollections.observableArrayList();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         horaInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0, 1));
@@ -113,66 +113,29 @@ public class PopUpAcionamentoController implements Initializable {
         minutoFim.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59));
         horaFim.getValueFactory().setWrapAround(true);
         minutoFim.getValueFactory().setWrapAround(true);
-
+        
+        //carregarTabelaAcionamento();
+        
         //botaoLimpar.setOnAction(event -> limparCampos());
     }    
 
     @FXML
     private void botaoAdicionar(ActionEvent event) throws ParseException {
-        if (horaInicio.getValue() == 0 || minutoInicio.getValue() == 0 || horaFim.getValue() == 0 || minutoFim.getValue() == null) {
-            System.out.println("Preencha todos os campos - tela de lançamento");
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Preencha todos os campos");
-            alert.setHeaderText(null);
-            alert.setContentText("Alguns dos campos não foi preenchido");
-            alert.showAndWait();
-        } else {
-            boolean testedata = false;
-            boolean salvar = true;
-            boolean testeseq = false;
-            
-            if (testedata) {
-                if ((horaFim.getValue() > horaInicio.getValue()) || ((horaInicio.getValue().equals(horaFim.getValue())) && minutoFim.getValue() > minutoInicio.getValue())) {
-                    salvar = true;
-                } else {
-                    errohoraI.setText("Hora inválida");
-                    errohoraII.setText("Hora inválida");
+        Hora hora = LancamentoColaboradorController.getHora();
 
-                }
-            } else {
-                if (testeseq) {
-                    salvar = true;
-                }
-          
-            }
-            if(salvar){
-                 
-                 
-            }
-        }
-    }
-    
-    public Hora getHora() throws ParseException {
-        Hora hora = new Hora();
-        LocalDate data_inicio = dataInicio.getValue();
-        int hora_inicio = horaInicio.getValue();
-        int min_inicio = minutoInicio.getValue();
-        String data_hora_inicio = data_inicio.getYear() + "-" + data_inicio.getMonthValue() + "-" + data_inicio.getDayOfMonth() + " " + hora_inicio + ":" + min_inicio + ":00";
-        Timestamp timestamp_inicio = Timestamp.valueOf(data_hora_inicio);
-        hora.setData_hora_inicio(timestamp_inicio.toString());
+        horaDAO hrDAO = new horaDAO();
 
-        LocalDate data_fim = dataFim.getValue();
-        int hora_fim = horaFim.getValue();
-        int min_fim = minutoFim.getValue();
-        String data_hora_fim = data_fim.getYear() + "-" + data_fim.getMonthValue() + "-" + data_fim.getDayOfMonth() + " " + hora_fim + ":" + min_fim + ":00";
-        Timestamp timestamp_fim = Timestamp.valueOf(data_hora_fim);
-        hora.setData_hora_fim(timestamp_fim.toString());
-
-        return hora;
-    }
+        hrDAO.save(hora);
+    } 
 
     @FXML
     private void carregarTabelaAcionamento(){
+        
+        
+        observablelisthoras.add(TimeData.getInstance().getHoraInicio());
+        tabelaAcionamento.setItems(observablelisthoras);
+        colunaInicio.setCellValueFactory(new PropertyValueFactory<>("inicio"));
+        colunaFim.setCellValueFactory(new PropertyValueFactory<>("fim"));
         
     }
 
@@ -186,3 +149,4 @@ public class PopUpAcionamentoController implements Initializable {
     }
     
 }
+

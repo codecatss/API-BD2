@@ -33,7 +33,7 @@ public class horaDAO {
             pstm = (PreparedStatement) conn.prepareStatement(sql);
             pstm.setString(1,hora.getCod_cr());
             pstm.setString(2,hora.getUsername_lancador());
-            pstm.setLong(3,hora.getCnpj_cliente());
+            pstm.setInt(3,hora.getCnpj_cliente());
             pstm.setTimestamp(4,hora.getData_hora_inicio());
             pstm.setTimestamp(5,hora.getData_hora_fim());
             pstm.setString(6,hora.getTipo());
@@ -115,7 +115,7 @@ public class horaDAO {
 				
 				hora.setCod_cr(rset.getString("cod_cr"));
                                 hora.setUsername_lancador(rset.getString("username_lancador"));
-                                hora.setCnpj_cliente(rset.getLong("cnpj_cliente"));
+                                hora.setCnpj_cliente(rset.getInt("cnpj_cliente"));
                                 hora.setData_hora_inicio(rset.getString("data_hora_inicio"));
                                 hora.setData_hora_fim(rset.getString("data_hora_fim"));
                                 hora.setTipo(rset.getString("tipo"));
@@ -173,7 +173,7 @@ public class horaDAO {
 				Hora hora = new Hora();
 				hora.setCod_cr(rset.getString("cod_cr"));
                                 hora.setUsername_lancador(rset.getString("username_lancador"));
-                                hora.setCnpj_cliente(rset.getLong("cnpj_cliente"));
+                                hora.setCnpj_cliente(rset.getInt("cnpj_cliente"));
                                 hora.setData_hora_inicio(rset.getString("data_hora_inicio"));
                                 hora.setData_hora_fim(rset.getString("data_hora_fim"));
                                 hora.setTipo(rset.getString("tipo"));
