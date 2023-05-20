@@ -97,6 +97,12 @@ public class CadastroCRADMController implements Initializable {
 
     String valorDoItemSelecionado;
 
+    public static Centro_resultado getCrInfo() {
+        return crInfo;
+    }
+
+    public static Centro_resultado crInfo = new Centro_resultado();
+
     public void initialize(URL url, ResourceBundle rb) {
         entradaCod.setStyle(null);
         entradaCod.setPromptText("Até 4 números");
@@ -134,6 +140,7 @@ public class CadastroCRADMController implements Initializable {
                     entradaNome.setText(item.getNome());
                     entradaSigla.setText(item.getSigla());
                     System.out.println("Item selecionado: " + valorDoItemSelecionado); // Imprime no console
+
                 }
             }
         });
@@ -280,7 +287,7 @@ public class CadastroCRADMController implements Initializable {
             // o usuário clicou em "Cancelar", então nada será feito
             limparCampos();
             carregarTabelaCr();
-            
+
         }
     }
 
@@ -292,6 +299,7 @@ public class CadastroCRADMController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText("Tem certeza que deseja ativar a CR?");
         Optional<ButtonType> result = alert.showAndWait();
+
         if (result.get() == ButtonType.OK) {
             // o usuário clicou em "Ok", então a CR será ativada
             crDAO crdao = new crDAO();
@@ -332,8 +340,30 @@ public class CadastroCRADMController implements Initializable {
     }
 
     @FXML
-    void BotaoGerir(ActionEvent event) {
+    void BotaoGerir(ActionEvent event) throws IOException {
         System.out.println("Gerir");
+        Centro_resultado crSelecionado = tabelaCadastroCr.getSelectionModel().getSelectedItem();
+        if (crSelecionado.getStatus_cr().equals("ativo")) {
+            crInfo.setCodigo_cr(crSelecionado.getCodigo_cr());
+            crInfo.setNome(crSelecionado.getNome());
+            crInfo.setSigla(crSelecionado.getSigla());
+            crInfo.setStatus_cr(crSelecionado.getStatus_cr());
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PopularBanco.fxml"));
+            Parent root = loader.load();
+            Scene cena = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+            stage.setScene(cena);
+            stage.centerOnScreen();
+            stage.show();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("CR inativo");
+            alert.setHeaderText(null);
+            alert.setContentText("Não é possível gerenciar um CR inativo");
+            alert.showAndWait();
+            tabelaCadastroCr.getSelectionModel().clearSelection();
+        }
     }
 
     @FXML
