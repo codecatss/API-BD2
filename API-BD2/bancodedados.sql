@@ -100,14 +100,15 @@ create table
         cod_verba INT NOT NULL,
         nome_verba VARCHAR(50),
         fator_multiplicacao DOUBLE NOT NULL,
-        hora_inicio DATETIME,
-        hora_fim DATETIME,
+        hora_inicio TIME,
+        hora_fim TIME,
         PRIMARY KEY (cod_verba)
     );
-    
-    
-    -- Inserção de dados nas tabelas
-    -- Adição de Usuários
+
+-- Inserção de dados nas tabelas
+
+-- Adição de Usuários
+
 INSERT INTO
     usuario (username, nome, senha, funcao)
 VALUES (
