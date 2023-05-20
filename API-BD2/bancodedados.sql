@@ -68,6 +68,7 @@ create table
             'negado'
         ) NOT NULL DEFAULT 'pendente',
         solicitante_lancamento VARCHAR(30) NOT NULL,
+        feriado BOOLEAN DEFAULT FALSE,
         Foreign Key (username_lancador) REFERENCES usuario(username),
         Foreign Key (cod_cr) REFERENCES centro_resultado(codigo_cr),
         Foreign Key (cnpj_cliente) REFERENCES cliente(cnpj),
@@ -95,6 +96,8 @@ create table
         PRIMARY KEY (username_integrante, cod_cr)
     );
 
+drop table verba;
+
 create table
     verba(
         cod_verba INT NOT NULL,
@@ -103,6 +106,52 @@ create table
         hora_inicio TIME,
         hora_fim TIME,
         PRIMARY KEY (cod_verba)
+    );
+
+INSERT INTO
+    verba (
+        cod_verba,
+        nome_verba,
+        fator_multiplicacao,
+        hora_inicio,
+        hora_fim
+    )
+VALUES (
+        1602,
+        'HE_100',
+        1.0,
+        '06:00:00',
+        '22:00:00'
+    ), (
+        1601,
+        'HE_75',
+        1.0,
+        '06:00:00',
+        '22:00:00'
+    ), (
+        3000,
+        'HEN_75',
+        1.1429,
+        '22:00:00',
+        '06:00:00'
+    ), (
+        3001,
+        'HEN_100',
+        1.1429,
+        '22:00:00',
+        '06:00:00'
+    ), (
+        1809,
+        'AD_NOTURNO_30',
+        1.1429,
+        '22:00:00',
+        '06:00:00'
+    ), (
+        3016,
+        'SOBREAVISO',
+        1.0,
+        NULL,
+        NULL
     );
 
 -- Inserção de dados nas tabelas
