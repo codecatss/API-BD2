@@ -27,12 +27,12 @@ public class Hora {
     private String justificativa_negacao;
     private StatusAprovacao status_aprovacao;
     
-    private static Hora instance = null;
-    public static Hora getInstance() {
-        if (instance == null) {
-            instance = new Hora();
-        }
-        return instance;
+    //private static Hora instance = null;
+    public  Hora () {
+        //if (instance == null) {
+          //  instance = new Hora();
+        //}
+        //return instance;
     }
     public String getNome_cliente() {
         return nome_cliente;

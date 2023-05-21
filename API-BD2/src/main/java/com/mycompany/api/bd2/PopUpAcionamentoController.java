@@ -92,6 +92,11 @@ public class PopUpAcionamentoController implements Initializable {
     private TextField entradaProjeto;
     private TextField entradaSolicitante;
     private Label nomeUsuario;
+    private Hora horaCapturada; // Atributo para armazenar a instância de Hora capturada
+
+    public void setHoraCapturada(Hora hora) {
+        this.horaCapturada = hora;
+    }
 
     
     @Override
@@ -120,25 +125,36 @@ public class PopUpAcionamentoController implements Initializable {
     private static int contagem = 1;
     @FXML
     private void botaoAdicionar() throws ParseException{
+        Hora horaExtra = new Hora();
         Hora hora = LancamentoColaboradorController.getHora();
         
         Timestamp timestampini = hora.getData_hora_inicio();
         int hora_inicio = horaInicio.getValue();
         int min_inicio = minutoInicio.getValue();
         String data_hora_inicio = timestampini.getYear() + "-" + timestampini.getMonth() + "-" + timestampini.getDay()+ " " + hora_inicio + ":" + min_inicio + ":00";
-        hora.setData_hora_inicio(data_hora_inicio);
-        
+        horaExtra.setData_hora_inicio(data_hora_inicio);
+        horaExtra.setCnpj_cliente(hora.getCnpj_cliente());
+        horaExtra.setCod_cr(hora.getCod_cr());
+        horaExtra.setJustificativa_lancamento(hora.getJustificativa_lancamento());
+        horaExtra.setNome_cliente(hora.getNome_cliente());
+        horaExtra.setProjeto(hora.getProjeto());
+        horaExtra.setUsername_aprovador(hora.getUsername_aprovador());
+        horaExtra.setUsername_lancador(hora.getUsername_lancador());
+        horaExtra.setTipo(hora.getTipo());
+
         Timestamp timestampfim = hora.getData_hora_fim();
         int hora_fim = horaFim.getValue();
         int min_fim = minutoFim.getValue();
         String data_hora_fim = timestampfim.getYear() + "-" + timestampfim.getMonth() + "-" + timestampfim.getDay()+ " " + hora_fim + ":" + min_fim + ":00";
-        hora.setData_hora_fim(data_hora_fim);
+        horaExtra.setData_hora_fim(data_hora_fim);
         
-        hora.setTipo(TipoHora.EXTRA.name());
-        hora.setId(contagem);
+        horaExtra.setTipo(TipoHora.EXTRA.name());
+        horaExtra.setId(contagem);
         contagem++;
-        
-        lantemp.add(hora);
+        lantemp.add(horaExtra); 
+    
+        System.out.println(hora);
+       
         carregarTabelaAcionamento();
     } 
 
