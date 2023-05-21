@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
  * @author larissa
  */
 public class Verba {
+
     private int cod_verba;
     private String nome_verba;
     private double fator_multiplicacao;
@@ -62,5 +63,5 @@ public class Verba {
         DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
         Time hora = new Time(formatter.parse(hora_fim).getTime());
         this.hora_fim = hora;
-    }          
+    }
 }
