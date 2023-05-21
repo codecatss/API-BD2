@@ -35,6 +35,7 @@ import javafx.scene.control.Alert.AlertType;
 
 import com.mycompany.api.bd2.models.*;
 import java.io.IOException;
+import java.util.Set;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -91,6 +92,7 @@ public class LancamentoColaboradorController {
     private Label errohoraII;
     @FXML
     private DatePicker dataInicio;
+    
     @FXML
     private DatePicker dataFim;
     @FXML
@@ -113,6 +115,7 @@ public class LancamentoColaboradorController {
     private Button botaoLimpar;
     @FXML
     private TextField entradaProjeto;
+    
     @FXML
     private TextField entradaJustificativa;
     @FXML
@@ -125,6 +128,7 @@ public class LancamentoColaboradorController {
     private Button menuRelatorio;
 
     private String usuario = TelaLoginController.usuariologado.getUsername();
+    
 
     private List<String> obs = new ArrayList<>();
     private ObservableList<String> opcoes = FXCollections.observableArrayList();
@@ -137,27 +141,28 @@ public class LancamentoColaboradorController {
 
     private List<String> centro_r = new ArrayList<>();
     private ObservableList<String> opCr = FXCollections.observableArrayList();
+    private boolean opened;
 
     public void initialize() {
 
-        nomeUsuario.setText(usuario);
+        getNomeUsuario().setText(usuario);
 
-        horaInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0, 1));
-        minutoInicio.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59));
-        horaInicio.getValueFactory().setWrapAround(true);
-        minutoInicio.getValueFactory().setWrapAround(true);
+        getHoraInicio().setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0, 1));
+        getMinutoInicio().setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59));
+        getHoraInicio().getValueFactory().setWrapAround(true);
+        getMinutoInicio().getValueFactory().setWrapAround(true);
 
-        horaFim.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0, 1));
-        minutoFim.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59));
-        horaFim.getValueFactory().setWrapAround(true);
-        minutoFim.getValueFactory().setWrapAround(true);
+        getHoraFim().setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0, 1));
+        getMinutoFim().setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59));
+        getHoraFim().getValueFactory().setWrapAround(true);
+        getMinutoFim().getValueFactory().setWrapAround(true);
 
         botaoLimpar.setOnAction(event -> limparCampos());
         carregarTabelaLancamento();
         
         botaoAcionamento.setVisible(false);
         
-        horaTipo.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+        getHoraTipo().getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
         if (newVal != null && newVal.equals("Sobreaviso")) {
             botaoAcionamento.setVisible(true);
  
@@ -183,16 +188,16 @@ public class LancamentoColaboradorController {
     public void limparCampos() {
         limmparFormatacao();
 
-        horaInicio.getValueFactory().setValue(0);
-        minutoInicio.getValueFactory().setValue(0);
-        horaFim.getValueFactory().setValue(0);
-        minutoFim.getValueFactory().setValue(0);
-        horaTipo.getSelectionModel().clearSelection();
-        selecaoCliente.getSelectionModel().clearSelection();
-        selecaoCR.getSelectionModel().clearSelection();
+        getHoraInicio().getValueFactory().setValue(0);
+        getMinutoInicio().getValueFactory().setValue(0);
+        getHoraFim().getValueFactory().setValue(0);
+        getMinutoFim().getValueFactory().setValue(0);
+        getHoraTipo().getSelectionModel().clearSelection();
+        getSelecaoCliente().getSelectionModel().clearSelection();
+        getSelecaoCR().getSelectionModel().clearSelection();
         entradaProjeto.clear();
-        entradaJustificativa.clear();
-        entradaSolicitante.clear();
+        getEntradaJustificativa().clear();
+        getEntradaSolicitante().clear();
         botaoAcionamento.setVisible(false);
     }
 
@@ -201,14 +206,14 @@ public class LancamentoColaboradorController {
         obs.add("Hora extra");
         obs.add("Sobreaviso");
         opcoes.setAll(obs);
-        horaTipo.setItems(opcoes);
+        getHoraTipo().setItems(opcoes);
     }
 
     private String erro = "-fx-border-color:#E06469";
 
     @FXML
     public void botaoAdicionar() throws ParseException {
-        if (dataInicio.getValue() == null || horaInicio.getValue() == null || minutoInicio.getValue() == null || dataFim.getValue() == null || horaFim.getValue() == null || minutoFim.getValue() == null) {
+        if (getDataInicio().getValue() == null || getHoraInicio().getValue() == null || getMinutoInicio().getValue() == null || getDataFim().getValue() == null || getHoraFim().getValue() == null || getMinutoFim().getValue() == null) {
             System.out.println("Preencha todos os campos - tela de lançamento");
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Preencha todos os campos");
@@ -219,27 +224,27 @@ public class LancamentoColaboradorController {
             boolean testedata = false;
             boolean salvar = true;
             boolean testeseq = false;
-            if (dataInicio.getValue().isEqual(dataFim.getValue())) {
+            if (getDataInicio().getValue().isEqual(getDataFim().getValue())) {
                 testedata = true;
             } else {
-                if (dataFim.getValue().isBefore(dataInicio.getValue())) {
-                    dataInicio.setStyle(erro);
-                    dataFim.setStyle(erro);
+                if (getDataFim().getValue().isBefore(getDataInicio().getValue())) {
+                    getDataInicio().setStyle(erro);
+                    getDataFim().setStyle(erro);
                     errodata.setText("Data inválida");
                 } else {
                     testeseq = true;
                 }
             }
             if (testedata) {
-                if ((horaFim.getValue() > horaInicio.getValue()) || ((horaInicio.getValue().equals(horaFim.getValue())) && minutoFim.getValue() > minutoInicio.getValue())) {
+                if ((getHoraFim().getValue() > getHoraInicio().getValue()) || ((getHoraInicio().getValue().equals(getHoraFim().getValue())) && getMinutoFim().getValue() > getMinutoInicio().getValue())) {
                     salvar = true;
                 } else {
                     errohoraI.setText("Hora inválida");
                     errohoraII.setText("Hora inválida");
-                    horaInicio.setStyle(erro);
-                    minutoInicio.setStyle(erro);
-                    horaFim.setStyle(erro);
-                    minutoFim.setStyle(erro);
+                    getHoraInicio().setStyle(erro);
+                    getMinutoInicio().setStyle(erro);
+                    getHoraFim().setStyle(erro);
+                    getMinutoFim().setStyle(erro);
 
                 }
             } else {
@@ -249,55 +254,7 @@ public class LancamentoColaboradorController {
             }
 
             if (salvar && (!entradaProjeto.getText().isEmpty())) {
-                //try {
-                    LocalDate data_inicio = dataInicio.getValue();
-                    int hora_inicio = horaInicio.getValue();
-                    int min_inicio = minutoInicio.getValue();
-                    String data_hora_inicio = data_inicio.getYear() + "-" + data_inicio.getMonthValue() + "-" + data_inicio.getDayOfMonth() + " " + hora_inicio + ":" + min_inicio + ":00";
-                    Timestamp timestamp_inicio = Timestamp.valueOf(data_hora_inicio);
-
-                    LocalDate data_fim = dataFim.getValue();
-                    int hora_fim = horaFim.getValue();
-                    int min_fim = minutoFim.getValue();
-                    String data_hora_fim = data_fim.getYear() + "-" + data_fim.getMonthValue() + "-" + data_fim.getDayOfMonth() + " " + hora_fim + ":" + min_fim + ":00";
-                    Timestamp timestamp_fim = Timestamp.valueOf(data_hora_fim);
-
-                    String nome_cliente = selecaoCliente.getSelectionModel().getSelectedItem();
-                    clienteDAO cliente = new clienteDAO();
-
-                    String nome_cr = selecaoCR.getSelectionModel().getSelectedItem();
-                    crDAO cr = new crDAO();
-
-                    Hora hora = new Hora();
-                    Cliente cli = new Cliente();
-                    hora.setProjeto(entradaProjeto.getText());
-                    hora.setCod_cr(cr.getCr(nome_cr).getCodigo_cr());
-                    hora.setData_hora_inicio(timestamp_inicio.toString());
-                    hora.setData_hora_fim(timestamp_fim.toString());
-                    hora.setUsername_lancador(nomeUsuario.getText());
-                    hora.setCnpj_cliente(cliente.getCliente(nome_cliente).getCnpj());
-                    hora.setJustificativa_lancamento(entradaJustificativa.getText());
-                    if(TelaLoginController.usuariologado.getCargo().equalsIgnoreCase("gestor")){
-                        hora.setStatus_aprovacao("aprovado_gestor");
-                    }else{
-                    hora.setStatus_aprovacao("pendente");}
-                    hora.setSolicitante(entradaSolicitante.getText());
-                    hora.setTipo(horaTipo.getSelectionModel().getSelectedItem().toUpperCase());
-                    horaDAO hrDAO = new horaDAO();
-
-                    hrDAO.save(hora);
-
-                    System.out.println("Salvo");
-                    carregarTabelaLancamento();
-
-                /*} catch (Exception e) {
-                    System.out.println("Houve um erro ao salvar");
-                    Alert alert = new Alert(AlertType.ERROR);
-                    alert.setTitle("Houve um erro ao salvar");
-                    alert.setHeaderText(null);
-                    alert.setContentText("O bloco 'try' responsavél por salvar a nova hora para o lançamento apresentou alguma falha");
-                    alert.showAndWait();
-                }*/
+                capturaHora();
             } else {
                 if (entradaProjeto.getText().isEmpty()) {
                     entradaProjeto.setStyle(erro);
@@ -305,10 +262,105 @@ public class LancamentoColaboradorController {
                 }
             }
         }
+        
+        opened = false;
         limparCampos();
 
     }
+    
+    private static Hora hora = new Hora();
+    public static Hora getHora(){
+        return hora;
+    }
+    
+    public Hora capturaHora(){
+        hora.beNull();
+        try {
+            LocalDate data_inicio = getDataInicio().getValue();
+                int hora_inicio = TimeData.getInstance().getHoraInicio();
+                int min_inicio = TimeData.getInstance().getMinutoInicio();
+                String data_hora_inicio = data_inicio.getYear() + "-" + data_inicio.getMonthValue() + "-" + data_inicio.getDayOfMonth() + " " + hora_inicio + ":" + min_inicio + ":00";
+                Timestamp timestamp_inicio = Timestamp.valueOf(data_hora_inicio);
 
+                LocalDate data_fim = getDataFim().getValue();
+                int hora_fim = TimeData.getInstance().getHoraFim();
+                int min_fim = TimeData.getInstance().getMinutoFim();
+                String data_hora_fim = data_fim.getYear() + "-" + data_fim.getMonthValue() + "-" + data_fim.getDayOfMonth() + " " + hora_fim + ":" + min_fim + ":00";
+                Timestamp timestamp_fim = Timestamp.valueOf(data_hora_fim);
+                hora.setData_hora_inicio(timestamp_inicio.toString());
+                hora.setData_hora_fim(timestamp_fim.toString());
+
+                hora.setData_hora_inicio(timestamp_inicio.toString());
+                hora.setData_hora_fim(timestamp_fim.toString());
+
+                String nome_cliente = getSelecaoCliente().getSelectionModel().getSelectedItem();
+                clienteDAO cliente = new clienteDAO();
+
+                String nome_cr = getSelecaoCR().getSelectionModel().getSelectedItem();
+                crDAO cr = new crDAO();
+
+
+                Cliente cli = new Cliente();
+                hora.setProjeto(entradaProjeto.getText());
+                hora.setCod_cr(cr.getCr(nome_cr).getCodigo_cr());
+
+                hora.setUsername_lancador(getNomeUsuario().getText());
+                hora.setCnpj_cliente((int) cliente.getCliente(nome_cliente).getCnpj());
+                hora.setJustificativa_lancamento(getEntradaJustificativa().getText());
+                if(TelaLoginController.usuariologado.getCargo().equalsIgnoreCase("gestor")){
+                    hora.setStatus_aprovacao("aprovado_gestor");
+                }else{
+                hora.setStatus_aprovacao("pendente");}
+                hora.setSolicitante(getEntradaSolicitante().getText());
+                hora.setTipo(getHoraTipo().getSelectionModel().getSelectedItem().toUpperCase());
+
+
+
+                horaDAO hrDAO = new horaDAO();
+
+                hrDAO.save(hora);
+              
+
+                System.out.println("Salvo");
+                carregarTabelaLancamento();
+
+            } catch (Exception e) {
+                System.out.println("Houve um erro ao salvar");
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Houve um erro ao salvar");
+                alert.setHeaderText(null);
+                alert.setContentText("O bloco 'try' responsavél por salvar a nova hora para o lançamento apresentou alguma falha");
+                alert.showAndWait();
+            }
+        return hora;
+    }
+        
+    @FXML
+    public void botaoAcionamento(ActionEvent event) throws ParseException{
+        capturaHora();
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PopUpAcionamento.fxml"));
+            //PopUpAcionamentoController controller = new PopUpAcionamentoController( this, dataInicio, dataFim, horaTipo, selecaoCliente, selecaoCR, entradaProjeto, entradaSolicitante, nomeUsuario); // Passa as referências dos objetos DatePicker
+            Parent root = loader.load();
+            PopUpAcionamentoController controller = new PopUpAcionamentoController(); // Passa as referências dos objetos DatePicker
+
+            loader.setController(controller);
+            Stage popup = new Stage();
+            popup.initModality(Modality.APPLICATION_MODAL);
+            popup.initOwner(botaoAcionamento.getScene().getWindow());
+            popup.setScene(new Scene(root));
+
+            popup.showAndWait();
+            
+
+       // Obtenha o objeto Hora preenchido na PopUp
+
+        } catch (IOException e) {
+
+        }
+
+    }
+    
     @FXML
     public void carregarTabelaLancamento() {
         horaDAO horadao = new horaDAO();
@@ -333,33 +385,19 @@ public class LancamentoColaboradorController {
 
     }
     
-    @FXML
-    public void botaoAcionamento(ActionEvent event){
-        
-       try {
-           System.out.println("clicked");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/api/bd2/PopUpAcionamento.fxml"));
-        Parent root = loader.load();
-        PopUpAcionamentoController controller = loader.getController();
 
-        Stage popup = new Stage();
-        popup.initModality(Modality.APPLICATION_MODAL);
-        popup.initOwner(botaoAcionamento.getScene().getWindow());
-        popup.setScene(new Scene(root));
-
-        popup.showAndWait();
-    } catch (IOException e) {
-        
-    }
-}
     
+     public void atualizarInformacoes() {
+         System.out.println(TimeData.getInstance().getHoraInicio());
+        // ...
+    }
 
     @FXML
     public void limmparFormatacao() {
-        dataInicio.getEditor().clear();
-        dataInicio.setValue(null);
-        dataFim.getEditor().clear();
-        dataFim.setValue(null);
+        getDataInicio().getEditor().clear();
+        getDataInicio().setValue(null);
+        getDataFim().getEditor().clear();
+        getDataFim().setValue(null);
 
         errohoraI.setText(null);
         errohoraII.setText(null);
@@ -367,10 +405,10 @@ public class LancamentoColaboradorController {
         erroproj.setText(null);
         entradaProjeto.setStyle(null);
 
-        horaInicio.setStyle(null);
-        minutoInicio.setStyle(null);
-        horaFim.setStyle(null);
-        minutoFim.setStyle(null);
+        getHoraInicio().setStyle(null);
+        getMinutoInicio().setStyle(null);
+        getHoraFim().setStyle(null);
+        getMinutoFim().setStyle(null);
     }
 
     @FXML
@@ -381,7 +419,7 @@ public class LancamentoColaboradorController {
             cli.add(cliente.getRazao_social());
         }
         opCli.setAll(cli);
-        selecaoCliente.setItems(opCli);
+        getSelecaoCliente().setItems(opCli);
     }
 
     @FXML
@@ -392,7 +430,7 @@ public class LancamentoColaboradorController {
             centro_r.add(cr.getNome());
         }
         opCr.setAll(centro_r);
-        selecaoCR.setItems(opCr);
+        getSelecaoCR().setItems(opCr);
     }
 
     @FXML
@@ -421,5 +459,89 @@ public class LancamentoColaboradorController {
         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
         stage.setScene(cena);
         stage.show();
+    }
+
+    /**
+     * @return the nomeUsuario
+     */
+    public Label getNomeUsuario() {
+        return nomeUsuario;
+    }
+
+    /**
+     * @return the dataInicio
+     */
+    public DatePicker getDataInicio() {
+        return dataInicio;
+    }
+
+    /**
+     * @return the dataFim
+     */
+    public DatePicker getDataFim() {
+        return dataFim;
+    }
+
+    /**
+     * @return the horaInicio
+     */
+    public Spinner<Integer> getHoraInicio() {
+        return horaInicio;
+    }
+
+    /**
+     * @return the minutoInicio
+     */
+    public Spinner<Integer> getMinutoInicio() {
+        return minutoInicio;
+    }
+
+    /**
+     * @return the horaFim
+     */
+    public Spinner<Integer> getHoraFim() {
+        return horaFim;
+    }
+
+    /**
+     * @return the minutoFim
+     */
+    public Spinner<Integer> getMinutoFim() {
+        return minutoFim;
+    }
+
+    /**
+     * @return the horaTipo
+     */
+    public ComboBox<String> getHoraTipo() {
+        return horaTipo;
+    }
+
+    /**
+     * @return the selecaoCliente
+     */
+    public ComboBox<String> getSelecaoCliente() {
+        return selecaoCliente;
+    }
+
+    /**
+     * @return the selecaoCR
+     */
+    public ComboBox<String> getSelecaoCR() {
+        return selecaoCR;
+    }
+
+    /**
+     * @return the entradaJustificativa
+     */
+    public TextField getEntradaJustificativa() {
+        return entradaJustificativa;
+    }
+
+    /**
+     * @return the entradaSolicitante
+     */
+    public TextField getEntradaSolicitante() {
+        return entradaSolicitante;
     }
 }

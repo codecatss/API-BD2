@@ -11,10 +11,10 @@ import com.mycompany.api.bd2.models.TipoHora;
 public class Hora {
     
     private Hora instancia = null;
-    private int id;
+    private Integer id;
     private String cod_cr;
     private String username_lancador;
-    private long cnpj_cliente;
+    private int cnpj_cliente;
     private String nome_cliente;
     private Timestamp data_hora_inicio;
     private Timestamp data_hora_fim;
@@ -27,11 +27,12 @@ public class Hora {
     private StatusAprovacao status_aprovacao;
     private boolean feriado;
     
-    public Hora getInstance() {
-        if (instancia == null) {
-            instancia = new Hora();
+    private static Hora instance = null;
+    public static Hora getInstance() {
+        if (instance == null) {
+            instance = new Hora();
         }
-        return instancia;
+        return instance;
     }
 
     public String getNome_cliente() {
@@ -179,14 +180,14 @@ public class Hora {
     /**
      * @return the cnpj_cliente
      */
-    public long getCnpj_cliente() {
+    public int getCnpj_cliente() {
         return cnpj_cliente;
     }
 
     /**
      * @param cnpj_cliente the cnpj_cliente to set
      */
-    public void setCnpj_cliente(long cnpj_cliente) {
+    public void setCnpj_cliente(int cnpj_cliente) {
         this.cnpj_cliente = cnpj_cliente;
     }
 
@@ -231,7 +232,7 @@ public class Hora {
     public void setJustificativa_negacao(String justificativa_negacao) {
         this.justificativa_negacao = justificativa_negacao;
     }
-    
+
     /**
      * @return the feriado
      */
@@ -244,5 +245,24 @@ public class Hora {
      */
     public void setFeriado(boolean feriado) {
         this.feriado = feriado;
+    }
+
+    public void beNull(){
+        this.cnpj_cliente= 000;
+        this.cod_cr=null;
+        this.data_hora_fim=null;
+        this.data_hora_inicio=null;
+        this.id=null;
+        this.justificativa_lancamento=null;
+        this.justificativa_negacao=null;
+        this.nome_cliente=null;
+        this.projeto=null;
+        this.solicitante=null;
+        this.status_aprovacao=null;
+        this.tipo=null;
+        this.username_aprovador=null;
+        this.username_lancador=null;
+        this.feriado=false;
+                
     }
 }
