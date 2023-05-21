@@ -25,6 +25,7 @@ public class Hora {
     private String username_aprovador;
     private String justificativa_negacao;
     private StatusAprovacao status_aprovacao;
+    private boolean feriado;
     
     public Hora getInstance() {
         if (instancia == null) {
@@ -231,5 +232,17 @@ public class Hora {
         this.justificativa_negacao = justificativa_negacao;
     }
     
-
+    /**
+     * @return the feriado
+     */
+    public boolean getFeriado() {
+        return feriado;
+    }
+    
+    /**
+     * @param feriado the feriado to set
+     */
+    public void setFeriado(boolean feriado) {
+        this.feriado = feriado;
+    }
 }
