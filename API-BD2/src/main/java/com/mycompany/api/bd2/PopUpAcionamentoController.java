@@ -141,6 +141,8 @@ public class PopUpAcionamentoController implements Initializable {
         horaExtra.setUsername_aprovador(hora.getUsername_aprovador());
         horaExtra.setUsername_lancador(hora.getUsername_lancador());
         horaExtra.setTipo(hora.getTipo());
+        horaExtra.setStatus_aprovacao(hora.getStatus_aprovacao());
+        horaExtra.setSolicitante(hora.getSolicitante());
 
         Timestamp timestampfim = hora.getData_hora_fim();
         int hora_fim = horaFim.getValue();
