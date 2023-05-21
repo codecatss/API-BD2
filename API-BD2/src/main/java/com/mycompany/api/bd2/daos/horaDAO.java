@@ -45,6 +45,7 @@ public class horaDAO {
             pstm.setString(12,hora.getSolicitante());
             
             pstm.execute();
+            System.out.println("Salvo");
         }
         catch (Exception e){
             e.printStackTrace();
