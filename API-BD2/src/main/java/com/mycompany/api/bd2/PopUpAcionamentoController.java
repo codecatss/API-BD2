@@ -178,7 +178,7 @@ public class PopUpAcionamentoController implements Initializable {
         horaExtra.setData_hora_fim(data_hora_fim);
         
         horaExtra.setTipo(TipoHora.EXTRA.name());
-        horaExtra.setId(contagem);
+        horaExtra.setId(lantemp.size()+1);
         contagem++;
         lantemp.add(horaExtra); 
     
@@ -200,7 +200,9 @@ public class PopUpAcionamentoController implements Initializable {
     private ObservableList<Hora> observablelisthoras =  FXCollections.observableArrayList();
     @FXML
     private void carregarTabelaAcionamento(){
-        
+        for (Hora hora : lantemp){
+            hora.setId(lantemp.indexOf(hora)+1);
+        }
         observablelisthoras.clear();
         observablelisthoras.setAll(lantemp);
         tabelaAcionamento.setItems(observablelisthoras);
@@ -217,15 +219,11 @@ public class PopUpAcionamentoController implements Initializable {
         horaFim.getValueFactory().setValue(0);
         minutoFim.getValueFactory().setValue(0);
         
-            
-            
             if (!valorDoItemSelecionado.isEmpty()) {
             lantemp.removeAll(valorDoItemSelecionado);
             tabelaAcionamento.getItems().removeAll(valorDoItemSelecionado); // Remove os itens selecionados da lista da tabela
         }
-            
-            
-             
+        carregarTabelaAcionamento();
     }
 
     public static List<Hora> getAcionamentos() {
