@@ -90,7 +90,7 @@ public class horaDAO {
                 Hora hora = new Hora();
                 hora.setCod_cr(rset.getString("cod_cr"));
                 hora.setUsername_lancador(rset.getString("username_lancador"));
-                hora.setCnpj_cliente(rset.getLong("cnpj_cliente"));
+                hora.setCnpj_cliente(rset.getInt("cnpj_cliente"));
                 hora.setData_hora_inicio(rset.getString("data_hora_inicio"));
                 hora.setData_hora_fim(rset.getString("data_hora_fim"));
                 hora.setTipo(rset.getString("tipo"));
@@ -142,7 +142,7 @@ public class horaDAO {
                 Hora hora = new Hora();
                 hora.setCod_cr(rset.getString("cod_cr"));
                 hora.setUsername_lancador(rset.getString("username_lancador"));
-                hora.setCnpj_cliente(rset.getLong("cnpj_cliente"));
+                hora.setCnpj_cliente(rset.getInt("cnpj_cliente"));
                 hora.setData_hora_inicio(rset.getString("data_hora_inicio"));
                 hora.setData_hora_fim(rset.getString("data_hora_fim"));
                 hora.setTipo(rset.getString("tipo"));

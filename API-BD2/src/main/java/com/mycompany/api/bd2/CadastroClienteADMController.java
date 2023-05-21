@@ -170,7 +170,7 @@ public class CadastroClienteADMController {
             alert.showAndWait();
         } else {
             Cliente cliente = new Cliente();
-            cliente.setCnpj(Long.parseLong(entradaCNPJ.getText()));
+            cliente.setCnpj(Integer.parseInt(entradaCNPJ.getText()));
             cliente.setRazao_social(entradaRS.getText());
             cliente.setStatus_cliente("ativo");
 
