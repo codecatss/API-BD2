@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 import com.mycompany.api.bd2.models.TipoHora;
+import java.time.LocalDate;
 
 public class Hora {
     
@@ -33,7 +34,6 @@ public class Hora {
         }
         return instance;
     }
-
     public String getNome_cliente() {
         return nome_cliente;
     }
@@ -67,7 +67,7 @@ public class Hora {
     /**
      * @return the id
      */
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -231,8 +231,11 @@ public class Hora {
         this.justificativa_negacao = justificativa_negacao;
     }
     
+    /**
+     * @Seta todos os parametros do hora como null menos cnpj cliente que passa a ser 0
+     */
     public void beNull(){
-        this.cnpj_cliente= 000;
+        this.cnpj_cliente=0;
         this.cod_cr=null;
         this.data_hora_fim=null;
         this.data_hora_inicio=null;
@@ -248,6 +251,5 @@ public class Hora {
         this.username_lancador=null;
                 
     }
-    
 
 }

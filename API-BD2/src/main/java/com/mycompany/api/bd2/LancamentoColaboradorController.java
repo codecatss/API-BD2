@@ -35,6 +35,7 @@ import javafx.scene.control.Alert.AlertType;
 
 import com.mycompany.api.bd2.models.*;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.Set;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -254,7 +255,15 @@ public class LancamentoColaboradorController {
             }
 
             if (salvar && (!entradaProjeto.getText().isEmpty())) {
-                capturaHora();
+                List<Hora> lancar = new LinkedList<>();
+                lancar.add(capturaHora());
+                
+                lancar.addAll(PopUpAcionamentoController.getAcionamentos());
+                
+                for (Hora hora : lancar){
+                    horaDAO hrDAO = new horaDAO();
+                    hrDAO.save(hora);
+                }
             } else {
                 if (entradaProjeto.getText().isEmpty()) {
                     entradaProjeto.setStyle(erro);
@@ -277,61 +286,53 @@ public class LancamentoColaboradorController {
         hora.beNull();
         try {
             LocalDate data_inicio = getDataInicio().getValue();
-                int hora_inicio = TimeData.getInstance().getHoraInicio();
-                int min_inicio = TimeData.getInstance().getMinutoInicio();
-                String data_hora_inicio = data_inicio.getYear() + "-" + data_inicio.getMonthValue() + "-" + data_inicio.getDayOfMonth() + " " + hora_inicio + ":" + min_inicio + ":00";
-                Timestamp timestamp_inicio = Timestamp.valueOf(data_hora_inicio);
+            int hora_inicio = TimeData.getInstance().getHoraInicio();
+            int min_inicio = TimeData.getInstance().getMinutoInicio();
+            String data_hora_inicio = data_inicio.getYear() + "-" + data_inicio.getMonthValue() + "-" + data_inicio.getDayOfMonth() + " " + hora_inicio + ":" + min_inicio + ":00";
+            Timestamp timestamp_inicio = Timestamp.valueOf(data_hora_inicio);
 
-                LocalDate data_fim = getDataFim().getValue();
-                int hora_fim = TimeData.getInstance().getHoraFim();
-                int min_fim = TimeData.getInstance().getMinutoFim();
-                String data_hora_fim = data_fim.getYear() + "-" + data_fim.getMonthValue() + "-" + data_fim.getDayOfMonth() + " " + hora_fim + ":" + min_fim + ":00";
-                Timestamp timestamp_fim = Timestamp.valueOf(data_hora_fim);
-                hora.setData_hora_inicio(timestamp_inicio.toString());
-                hora.setData_hora_fim(timestamp_fim.toString());
+            LocalDate data_fim = getDataFim().getValue();
+            int hora_fim = TimeData.getInstance().getHoraFim();
+            int min_fim = TimeData.getInstance().getMinutoFim();
+            String data_hora_fim = data_fim.getYear() + "-" + data_fim.getMonthValue() + "-" + data_fim.getDayOfMonth() + " " + hora_fim + ":" + min_fim + ":00";
+            Timestamp timestamp_fim = Timestamp.valueOf(data_hora_fim);
+            hora.setData_hora_inicio(timestamp_inicio.toString());
+            hora.setData_hora_fim(timestamp_fim.toString());
 
-                hora.setData_hora_inicio(timestamp_inicio.toString());
-                hora.setData_hora_fim(timestamp_fim.toString());
+            hora.setData_hora_inicio(timestamp_inicio.toString());
+            hora.setData_hora_fim(timestamp_fim.toString());
 
-                String nome_cliente = getSelecaoCliente().getSelectionModel().getSelectedItem();
-                clienteDAO cliente = new clienteDAO();
+            String nome_cliente = getSelecaoCliente().getSelectionModel().getSelectedItem();
+            clienteDAO cliente = new clienteDAO();
 
-                String nome_cr = getSelecaoCR().getSelectionModel().getSelectedItem();
-                crDAO cr = new crDAO();
-
-
-                Cliente cli = new Cliente();
-                hora.setProjeto(entradaProjeto.getText());
-                hora.setCod_cr(cr.getCr(nome_cr).getCodigo_cr());
-
-                hora.setUsername_lancador(getNomeUsuario().getText());
-                hora.setCnpj_cliente((int) cliente.getCliente(nome_cliente).getCnpj());
-                hora.setJustificativa_lancamento(getEntradaJustificativa().getText());
-                if(TelaLoginController.usuariologado.getCargo().equalsIgnoreCase("gestor")){
-                    hora.setStatus_aprovacao("aprovado_gestor");
-                }else{
-                hora.setStatus_aprovacao("pendente");}
-                hora.setSolicitante(getEntradaSolicitante().getText());
-                hora.setTipo(getHoraTipo().getSelectionModel().getSelectedItem().toUpperCase());
+            String nome_cr = getSelecaoCR().getSelectionModel().getSelectedItem();
+            crDAO cr = new crDAO();
 
 
+            Cliente cli = new Cliente();
+            hora.setProjeto(entradaProjeto.getText());
+            hora.setCod_cr(cr.getCr(nome_cr).getCodigo_cr());
 
-                horaDAO hrDAO = new horaDAO();
+            hora.setUsername_lancador(getNomeUsuario().getText());
+            hora.setCnpj_cliente((int) cliente.getCliente(nome_cliente).getCnpj());
+            hora.setJustificativa_lancamento(getEntradaJustificativa().getText());
+            if(TelaLoginController.usuariologado.getCargo().equalsIgnoreCase("gestor")){
+                hora.setStatus_aprovacao("aprovado_gestor");
+            }else{
+            hora.setStatus_aprovacao("pendente");}
+            hora.setSolicitante(getEntradaSolicitante().getText());
+            hora.setTipo(getHoraTipo().getSelectionModel().getSelectedItem().toUpperCase());
+            
+            carregarTabelaLancamento();
 
-                hrDAO.save(hora);
-              
-
-                System.out.println("Salvo");
-                carregarTabelaLancamento();
-
-            } catch (Exception e) {
-                System.out.println("Houve um erro ao salvar");
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Houve um erro ao salvar");
-                alert.setHeaderText(null);
-                alert.setContentText("O bloco 'try' responsavél por salvar a nova hora para o lançamento apresentou alguma falha");
-                alert.showAndWait();
-            }
+        } catch (Exception e) {
+            System.out.println("Houve um erro ao salvar");
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Houve um erro ao salvar");
+            alert.setHeaderText(null);
+            alert.setContentText("O bloco 'try' responsavél por salvar a nova hora para o lançamento apresentou alguma falha");
+            alert.showAndWait();
+        }
         return hora;
     }
         

@@ -10,6 +10,7 @@ import com.mycompany.api.bd2.daos.horaDAO;
 import com.mycompany.api.bd2.models.Cliente;
 import com.mycompany.api.bd2.models.Hora;
 import com.mycompany.api.bd2.models.TimeData;
+import com.mycompany.api.bd2.models.TipoHora;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
@@ -62,7 +63,7 @@ public class PopUpAcionamentoController implements Initializable {
     @FXML
     private Spinner<Integer> minutoFim;
     @FXML
-    private TableView<Integer> tabelaAcionamento;
+    private TableView<Hora> tabelaAcionamento;
     @FXML
     private TableColumn<?, ?> colunaAcionamento;
     @FXML
@@ -79,18 +80,9 @@ public class PopUpAcionamentoController implements Initializable {
     private Label errohoraI;
     @FXML
     private Label errohoraII;
-
-    /**
-     * Initializes the controller class.
-     */
-    private List<Integer> horas = new LinkedList<>();
-    private List<Integer> lishoras = new ArrayList<>();
-     
     
    
-     
-    private ObservableList<Integer> observablelisthoras =  FXCollections.observableArrayList();
-    
+      
     private LancamentoColaboradorController lancamentoController;
     private DatePicker dataInicio;
     private DatePicker dataFim;
@@ -114,28 +106,60 @@ public class PopUpAcionamentoController implements Initializable {
         horaFim.getValueFactory().setWrapAround(true);
         minutoFim.getValueFactory().setWrapAround(true);
         
-        //carregarTabelaAcionamento();
+        acionamentos.clear();
+        contagem = 1;
+                
+        carregarTabelaAcionamento();
         
         //botaoLimpar.setOnAction(event -> limparCampos());
     }    
-
+    private static List<Hora> acionamentos = new LinkedList<Hora>();
+    private static int contagem = 1;
     @FXML
-    private void botaoAdicionar(ActionEvent event) throws ParseException {
+    private void botaoAdicionar() throws ParseException{
         Hora hora = LancamentoColaboradorController.getHora();
-
-        horaDAO hrDAO = new horaDAO();
-
-        hrDAO.save(hora);
+        
+        Timestamp timestampini = hora.getData_hora_inicio();
+        int hora_inicio = horaInicio.getValue();
+        int min_inicio = minutoInicio.getValue();
+        String data_hora_inicio = timestampini.getYear() + "-" + timestampini.getMonth() + "-" + timestampini.getDay()+ " " + hora_inicio + ":" + min_inicio + ":00";
+        hora.setData_hora_inicio(data_hora_inicio);
+        
+        Timestamp timestampfim = hora.getData_hora_fim();
+        int hora_fim = horaFim.getValue();
+        int min_fim = minutoFim.getValue();
+        String data_hora_fim = timestampfim.getYear() + "-" + timestampfim.getMonth() + "-" + timestampfim.getDay()+ " " + hora_fim + ":" + min_fim + ":00";
+        hora.setData_hora_fim(data_hora_fim);
+        
+        hora.setTipo(TipoHora.EXTRA.name());
+        hora.setId(contagem);
+        contagem++;
+        
+        acionamentos.add(hora);
+        carregarTabelaAcionamento();
     } 
 
     @FXML
+    private void botaoSalvar() throws ParseException{
+        for (Hora hora : acionamentos){
+            
+            System.out.println("Adicionado "+hora.getData_hora_inicio()+" até "+hora.getData_hora_fim());
+            //horaDAO hrDAO = new horaDAO();
+
+            //hrDAO.save(hora);
+        }
+    } 
+    
+    private ObservableList<Hora> observablelisthoras =  FXCollections.observableArrayList();
+    @FXML
     private void carregarTabelaAcionamento(){
         
-        
-        observablelisthoras.add(TimeData.getInstance().getHoraInicio());
+        observablelisthoras.clear();
+        observablelisthoras.setAll(acionamentos);
         tabelaAcionamento.setItems(observablelisthoras);
-        colunaInicio.setCellValueFactory(new PropertyValueFactory<>("inicio"));
-        colunaFim.setCellValueFactory(new PropertyValueFactory<>("fim"));
+        colunaAcionamento.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colunaInicio.setCellValueFactory(new PropertyValueFactory<>("data_hora_inicio"));
+        colunaFim.setCellValueFactory(new PropertyValueFactory<>("data_hora_fim"));
         
     }
 
@@ -146,6 +170,10 @@ public class PopUpAcionamentoController implements Initializable {
         horaFim.getValueFactory().setValue(0);
         minutoFim.getValueFactory().setValue(0);
         
+    }
+
+    public static List<Hora> getAcionamentos() {
+        return acionamentos;
     }
     
 }
