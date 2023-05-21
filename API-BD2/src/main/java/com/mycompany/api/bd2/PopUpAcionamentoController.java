@@ -11,6 +11,7 @@ import com.mycompany.api.bd2.models.Cliente;
 import com.mycompany.api.bd2.models.Hora;
 import com.mycompany.api.bd2.models.TimeData;
 import com.mycompany.api.bd2.models.TipoHora;
+import com.mycompany.api.bd2.models.Usuario;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
@@ -24,6 +25,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -39,6 +41,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 
@@ -92,7 +95,12 @@ public class PopUpAcionamentoController implements Initializable {
     private TextField entradaSolicitante;
     private Label nomeUsuario;
     private Hora horaCapturada; // Atributo para armazenar a instância de Hora capturada
-
+    ObservableList<Hora>  valorDoItemSelecionado;
+    int index;
+    private List<Hora> lantemp = new LinkedList<Hora>();  
+    private static List<Hora> acionamentos = new LinkedList<Hora>();
+    
+    
     public void setHoraCapturada(Hora hora) {
         this.horaCapturada = hora;
     }
@@ -113,13 +121,25 @@ public class PopUpAcionamentoController implements Initializable {
         acionamentos.clear();
         lantemp.clear();
         contagem = 1;
+        
+          tabelaAcionamento.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.getClickCount() == 1) { // Verifica se é um único clique
+                   valorDoItemSelecionado = tabelaAcionamento.getSelectionModel().getSelectedItems(); // Obtém os itens selecionados
+
+                    index = tabelaAcionamento.getItems().indexOf(valorDoItemSelecionado);
+                    
+                    System.out.println(valorDoItemSelecionado);
+                }
+            }
+        });
                 
         carregarTabelaAcionamento();
         
         //botaoLimpar.setOnAction(event -> limparCampos());
     }    
-    private List<Hora> lantemp = new LinkedList<Hora>();  
-    private static List<Hora> acionamentos = new LinkedList<Hora>();
+    
 
     private static int contagem = 1;
     @FXML
@@ -191,12 +211,21 @@ public class PopUpAcionamentoController implements Initializable {
     }
 
     @FXML
-    private void limparCampos(ActionEvent event) {
+    private void limparCampos(ActionEvent event) throws ParseException {
         horaInicio.getValueFactory().setValue(0);
         minutoInicio.getValueFactory().setValue(0);
         horaFim.getValueFactory().setValue(0);
         minutoFim.getValueFactory().setValue(0);
         
+            
+            
+            if (!valorDoItemSelecionado.isEmpty()) {
+            lantemp.removeAll(valorDoItemSelecionado);
+            tabelaAcionamento.getItems().removeAll(valorDoItemSelecionado); // Remove os itens selecionados da lista da tabela
+        }
+            
+            
+             
     }
 
     public static List<Hora> getAcionamentos() {
