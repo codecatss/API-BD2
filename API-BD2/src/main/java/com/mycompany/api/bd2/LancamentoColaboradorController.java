@@ -334,6 +334,14 @@ public class LancamentoColaboradorController {
         
     @FXML
     public void botaoAcionamento(ActionEvent event) throws ParseException{
+        if (getDataInicio().getValue() == null || getHoraInicio().getValue() == null || getMinutoInicio().getValue() == null || getDataFim().getValue() == null || getHoraFim().getValue() == null || getMinutoFim().getValue() == null || entradaProjeto.getText().isEmpty() || selecaoCliente.getValue() == null || selecaoCR.getValue() == null || entradaJustificativa.getText().isEmpty() || horaTipo.getValue() == null) {
+            System.out.println("Preencha todos os campos - tela de lançamento");
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Preencha todos os campos");
+            alert.setHeaderText(null);
+            alert.setContentText("Alguns dos campos não foi preenchido");
+            alert.showAndWait();
+        } else{
         capturaHora();
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PopUpAcionamento.fxml"));
@@ -350,6 +358,7 @@ public class LancamentoColaboradorController {
 
         } catch (IOException e) {
 
+        }
         }
 
     }

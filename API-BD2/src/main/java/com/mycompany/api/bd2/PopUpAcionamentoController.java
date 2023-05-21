@@ -216,8 +216,7 @@ public class PopUpAcionamentoController implements Initializable {
         minutoInicio.getValueFactory().setValue(0);
         horaFim.getValueFactory().setValue(0);
         minutoFim.getValueFactory().setValue(0);
-        
-            
+
             
             if (!valorDoItemSelecionado.isEmpty()) {
             lantemp.removeAll(valorDoItemSelecionado);
