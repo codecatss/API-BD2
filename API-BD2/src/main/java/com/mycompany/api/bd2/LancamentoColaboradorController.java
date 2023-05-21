@@ -264,6 +264,7 @@ public class LancamentoColaboradorController {
                     horaDAO hrDAO = new horaDAO();
                     hrDAO.save(hora);
                 }
+                carregarTabelaLancamento();
             } else {
                 if (entradaProjeto.getText().isEmpty()) {
                     entradaProjeto.setStyle(erro);
@@ -322,8 +323,6 @@ public class LancamentoColaboradorController {
             hora.setStatus_aprovacao("pendente");}
             hora.setSolicitante(getEntradaSolicitante().getText());
             hora.setTipo(getHoraTipo().getSelectionModel().getSelectedItem().toUpperCase());
-            
-            carregarTabelaLancamento();
 
         } catch (Exception e) {
             System.out.println("Houve um erro ao salvar");

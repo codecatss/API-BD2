@@ -107,13 +107,16 @@ public class PopUpAcionamentoController implements Initializable {
         minutoFim.getValueFactory().setWrapAround(true);
         
         acionamentos.clear();
+        lantemp.clear();
         contagem = 1;
                 
         carregarTabelaAcionamento();
         
         //botaoLimpar.setOnAction(event -> limparCampos());
     }    
+    private List<Hora> lantemp = new LinkedList<Hora>();  
     private static List<Hora> acionamentos = new LinkedList<Hora>();
+
     private static int contagem = 1;
     @FXML
     private void botaoAdicionar() throws ParseException{
@@ -135,19 +138,18 @@ public class PopUpAcionamentoController implements Initializable {
         hora.setId(contagem);
         contagem++;
         
-        acionamentos.add(hora);
+        lantemp.add(hora);
         carregarTabelaAcionamento();
     } 
 
     @FXML
     private void botaoSalvar() throws ParseException{
+        acionamentos.addAll(lantemp);
         for (Hora hora : acionamentos){
-            
             System.out.println("Adicionado "+hora.getData_hora_inicio()+" até "+hora.getData_hora_fim());
-            //horaDAO hrDAO = new horaDAO();
-
-            //hrDAO.save(hora);
         }
+        Stage stage = (Stage) botaoSalvar.getScene().getWindow();
+        stage.close();
     } 
     
     private ObservableList<Hora> observablelisthoras =  FXCollections.observableArrayList();
@@ -155,7 +157,7 @@ public class PopUpAcionamentoController implements Initializable {
     private void carregarTabelaAcionamento(){
         
         observablelisthoras.clear();
-        observablelisthoras.setAll(acionamentos);
+        observablelisthoras.setAll(lantemp);
         tabelaAcionamento.setItems(observablelisthoras);
         colunaAcionamento.setCellValueFactory(new PropertyValueFactory<>("id"));
         colunaInicio.setCellValueFactory(new PropertyValueFactory<>("data_hora_inicio"));
