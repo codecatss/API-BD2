@@ -16,6 +16,7 @@ import java.net.URL;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -129,9 +130,13 @@ public class PopUpAcionamentoController implements Initializable {
         Hora hora = LancamentoColaboradorController.getHora();
         
         Timestamp timestampini = hora.getData_hora_inicio();
+        String timestampini2 = hora.getData_hora_inicio().toString();
+        timestampini2 = Timestamp.valueOf(timestampini2).toString();
+        System.out.println(timestampini2);
+        String dataIni = timestampini2.substring(0,10);
         int hora_inicio = horaInicio.getValue();
         int min_inicio = minutoInicio.getValue();
-        String data_hora_inicio = timestampini.getYear() + "-" + timestampini.getMonth() + "-" + timestampini.getDay()+ " " + hora_inicio + ":" + min_inicio + ":00";
+        String data_hora_inicio = dataIni + " " + hora_inicio + ":" + min_inicio + ":00";
         horaExtra.setData_hora_inicio(data_hora_inicio);
         horaExtra.setCnpj_cliente(hora.getCnpj_cliente());
         horaExtra.setCod_cr(hora.getCod_cr());
@@ -145,9 +150,13 @@ public class PopUpAcionamentoController implements Initializable {
         horaExtra.setSolicitante(hora.getSolicitante());
 
         Timestamp timestampfim = hora.getData_hora_fim();
+        String timestampfim2 = hora.getData_hora_fim().toString();
+        timestampfim2 = Timestamp.valueOf(timestampfim2).toString();
+        System.out.println(timestampfim);
+        String dataFim = timestampfim2.substring(0,10);
         int hora_fim = horaFim.getValue();
         int min_fim = minutoFim.getValue();
-        String data_hora_fim = timestampfim.getYear() + "-" + timestampfim.getMonth() + "-" + timestampfim.getDay()+ " " + hora_fim + ":" + min_fim + ":00";
+        String data_hora_fim = dataFim + " " + hora_fim + ":" + min_fim + ":00";
         horaExtra.setData_hora_fim(data_hora_fim);
         
         horaExtra.setTipo(TipoHora.EXTRA.name());
