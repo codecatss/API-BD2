@@ -82,8 +82,6 @@ public class PopUpAcionamentoController implements Initializable {
     @FXML
     private Label errohoraII;
     
-   
-      
     private LancamentoColaboradorController lancamentoController;
     private DatePicker dataInicio;
     private DatePicker dataFim;

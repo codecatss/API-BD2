@@ -130,7 +130,6 @@ public class LancamentoColaboradorController {
 
     private String usuario = TelaLoginController.usuariologado.getUsername();
     
-
     private List<String> obs = new ArrayList<>();
     private ObservableList<String> opcoes = FXCollections.observableArrayList();
 
@@ -142,7 +141,6 @@ public class LancamentoColaboradorController {
 
     private List<String> centro_r = new ArrayList<>();
     private ObservableList<String> opCr = FXCollections.observableArrayList();
-    private boolean opened;
 
     public void initialize() {
 
@@ -273,7 +271,6 @@ public class LancamentoColaboradorController {
             }
         }
         
-        opened = false;
         limparCampos();
 
     }
@@ -287,14 +284,14 @@ public class LancamentoColaboradorController {
         hora.beNull();
         try {
             LocalDate data_inicio = getDataInicio().getValue();
-            int hora_inicio = TimeData.getInstance().getHoraInicio();
-            int min_inicio = TimeData.getInstance().getMinutoInicio();
+            int hora_inicio = horaInicio.getValue();
+            int min_inicio = minutoInicio.getValue();
             String data_hora_inicio = data_inicio.getYear() + "-" + data_inicio.getMonthValue() + "-" + data_inicio.getDayOfMonth() + " " + hora_inicio + ":" + min_inicio + ":00";
             Timestamp timestamp_inicio = Timestamp.valueOf(data_hora_inicio);
 
             LocalDate data_fim = getDataFim().getValue();
-            int hora_fim = TimeData.getInstance().getHoraFim();
-            int min_fim = TimeData.getInstance().getMinutoFim();
+            int hora_fim = horaFim.getValue();
+            int min_fim = minutoFim.getValue();
             String data_hora_fim = data_fim.getYear() + "-" + data_fim.getMonthValue() + "-" + data_fim.getDayOfMonth() + " " + hora_fim + ":" + min_fim + ":00";
             Timestamp timestamp_fim = Timestamp.valueOf(data_hora_fim);
             hora.setData_hora_inicio(timestamp_inicio.toString());
@@ -340,9 +337,8 @@ public class LancamentoColaboradorController {
         capturaHora();
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PopUpAcionamento.fxml"));
-            //PopUpAcionamentoController controller = new PopUpAcionamentoController( this, dataInicio, dataFim, horaTipo, selecaoCliente, selecaoCR, entradaProjeto, entradaSolicitante, nomeUsuario); // Passa as referências dos objetos DatePicker
             Parent root = loader.load();
-            PopUpAcionamentoController controller = new PopUpAcionamentoController(); // Passa as referências dos objetos DatePicker
+            PopUpAcionamentoController controller = new PopUpAcionamentoController(); 
 
             loader.setController(controller);
             Stage popup = new Stage();
@@ -351,9 +347,6 @@ public class LancamentoColaboradorController {
             popup.setScene(new Scene(root));
 
             popup.showAndWait();
-            
-
-       // Obtenha o objeto Hora preenchido na PopUp
 
         } catch (IOException e) {
 
@@ -386,7 +379,6 @@ public class LancamentoColaboradorController {
     }
     
 
-    
      public void atualizarInformacoes() {
          System.out.println(TimeData.getInstance().getHoraInicio());
         // ...
