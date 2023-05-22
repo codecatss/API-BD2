@@ -202,6 +202,7 @@ public class LancamentoColaboradorController {
 
     @FXML
     public void tipoHora() throws ParseException {
+        obs.clear();
         obs.add("Hora extra");
         obs.add("Sobreaviso");
         opcoes.setAll(obs);
