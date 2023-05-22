@@ -370,7 +370,6 @@ public class LancamentoColaboradorController {
         lishoras.addAll(horadao.getHora(usuario));
         observablelisthoras.setAll(lishoras);
         tabelaLancamento.setItems(observablelisthoras);
-        tabelaN.setCellValueFactory(new PropertyValueFactory<>("id"));
         tabelaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao"));
         tabelaInicio.setCellValueFactory(new PropertyValueFactory<>("data_hora_inicio"));
