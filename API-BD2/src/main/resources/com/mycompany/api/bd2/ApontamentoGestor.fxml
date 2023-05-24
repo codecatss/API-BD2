@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -98,40 +99,53 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane prefHeight="746.0" prefWidth="1080.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane layoutX="316.0" prefHeight="603.0" prefWidth="754.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="316.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <TableView id="tabelaContainer" fx:id="tabelaApontamento" layoutX="14.0" layoutY="57.0" prefHeight="665.0" prefWidth="1044.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0">
+                        <TableView id="tabelaContainer" fx:id="tabelaApontamento" layoutX="-59.0" layoutY="57.0" prefHeight="534.0" prefWidth="744.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="7.0">
                            <columns>
-                              <TableColumn fx:id="colunaUsername" prefWidth="180.0" text="Colaborador" />
-                              <TableColumn fx:id="colunaCR" prefWidth="180.0" text="CR" />
-                              <TableColumn fx:id="colunaEmpresa" prefWidth="155.2000732421875" text="Empresa" />
-                              <TableColumn fx:id="colunaProjeto" prefWidth="160.0" text="Projeto" />
-                              <TableColumn fx:id="colunaFuncao" prefWidth="98.39996337890625" text="Tipo" />
-                              <TableColumn fx:id="colunaInicio" prefWidth="232.8000030517578" text="Inicio" />
-                              <TableColumn fx:id="colunaFim" prefWidth="232.8000030517578" text="Fim" />
-                              <TableColumn fx:id="colunaJust" prefWidth="98.39996337890625" text="Justificativa" />
+                              <TableColumn fx:id="colunaUsername" prefWidth="98.39996337890625" text="Colaborador" />
+                              <TableColumn fx:id="colunaCR" prefWidth="68.0" text="CR" />
+                              <TableColumn fx:id="colunaEmpresa" prefWidth="96.80001831054688" text="Empresa" />
+                              <TableColumn fx:id="colunaProjeto" prefWidth="123.20001220703125" text="Projeto" />
+                              <TableColumn fx:id="colunaFuncao" prefWidth="111.99993896484375" text="Tipo" />
+                              <TableColumn fx:id="colunaInicio" prefWidth="68.0" text="Inicio" />
+                              <TableColumn fx:id="colunaFim" prefWidth="73.5999755859375" text="Fim" />
+                              <TableColumn fx:id="colunaJust" prefWidth="102.80002441406259" text="Justificativa" />
                            </columns>
                         </TableView>
-                        <Label layoutX="14.0" layoutY="20.0" text="Apontamento pendentes">
-                           <font>
-                              <Font name="Arial" size="24.0" />
-                           </font>
-                        </Label>
-                        <Button id="buttonAprovar" fx:id="BotaoAprovar" layoutX="352.0" layoutY="20.0" mnemonicParsing="false" onAction="#botaoAprovar" prefHeight="28.0" prefWidth="82.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Aprovar" textFill="WHITE">
-                           <font>
-                              <Font name="Arial Narrow" size="12.0" />
-                           </font>
-                        </Button>
-                        <Button id="buttonReprovar" fx:id="BotaoReprovar" layoutX="453.0" layoutY="20.0" mnemonicParsing="false" onAction="#botaoReprovar" prefHeight="27.0" prefWidth="76.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Reprovar" textFill="WHITE">
-                           <font>
-                              <Font name="Arial Narrow" size="12.0" />
-                           </font>
-                        </Button>
                      </children>
                      <styleClass>
                         <String fx:value="white-bg" />
                         <String fx:value="shadow" />
                      </styleClass>
+                  </AnchorPane>
+                  <AnchorPane layoutX="7.0" prefHeight="603.0" prefWidth="300.0" stylesheets="@EstilizacaoTelas.css">
+                     <styleClass>
+                        <String fx:value="white-bg" />
+                        <String fx:value="shadow" />
+                     </styleClass>
+                     <children>
+                        <Button id="buttonAprovar" fx:id="BotaoAprovar" layoutX="41.0" layoutY="95.0" mnemonicParsing="false" onAction="#botaoAprovar" prefHeight="34.0" prefWidth="93.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Aprovar" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Narrow" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button id="buttonReprovar" fx:id="BotaoReprovar" layoutX="174.0" layoutY="95.0" mnemonicParsing="false" onAction="#botaoReprovar" prefHeight="34.0" prefWidth="93.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Reprovar" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Narrow" size="14.0" />
+                           </font>
+                        </Button>
+                        <TextArea fx:id="textoJustificativa" layoutX="41.0" layoutY="173.0" prefHeight="142.0" prefWidth="230.0" promptText="Preencha sua justificativa" styleClass="shadow" stylesheets="@EstilizacaoTelas.css">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                        </TextArea>
+                        <Label layoutX="25.0" layoutY="34.0" text="Apontamento pendentes">
+                           <font>
+                              <Font name="Arial" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
                   </AnchorPane>
                </children>
             </AnchorPane>
