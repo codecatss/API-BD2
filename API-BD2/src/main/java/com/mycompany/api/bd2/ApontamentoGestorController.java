@@ -16,6 +16,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -35,7 +36,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextInputDialog;
 
 /**
  * FXML Controller class
@@ -66,6 +71,10 @@ public class ApontamentoGestorController implements Initializable {
     private Button BotaoAprovar;
     @FXML
     private Button BotaoReprovar;
+    
+     @FXML
+    private TextArea textoJustificativa;
+    
 
     @FXML
     private TableView<TabelaAprovaçãoGestor> tabelaApontamento;
@@ -148,16 +157,13 @@ public class ApontamentoGestorController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Tem certeza de que deseja aprovar a hora?");
 
-            // Define os botões "Sim" e "Não"
             ButtonType buttonNao = new ButtonType("Não");
             ButtonType buttonSim = new ButtonType("Sim");
 
             alert.getButtonTypes().setAll(buttonNao, buttonSim);
 
-            // Aguarda a resposta do usuário
             alert.showAndWait().ifPresent(buttonType -> {
                 if (buttonType == buttonSim) {
-                    // Se o usuário clicou em "Sim", aprova a hora
                     horadao.aprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId());
                     carregarTabelaLancamento();
                 }
@@ -165,13 +171,31 @@ public class ApontamentoGestorController implements Initializable {
         }
     }
 
-    @FXML
-    public void botaoReprovar() {
-        if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
-            horadao.reprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId());
+@FXML
+public void botaoReprovar() {
+    if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
+        String justificativa = textoJustificativa.getText();
+        if (!justificativa.isEmpty()) {
+            int id = tabelaApontamento.getSelectionModel().getSelectedItem().getId();
+            horadao.reprovarHora(id, justificativa);
             carregarTabelaLancamento();
+            textoJustificativa.clear(); // Limpa o campo de justificativa
+        } else {
+            // Exibe um popup informando que a justificativa é obrigatória e cancela a reprovação
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setTitle("Justificativa Necessária");
+            dialog.setHeaderText(null);
+            dialog.setContentText("Por favor, digite uma justificativa para a negação.");
+
+            ButtonType cancelButton = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+            dialog.getDialogPane().getButtonTypes().addAll(cancelButton);
+
+            dialog.showAndWait();
         }
     }
+}
+
+
 
     @FXML
     public void navLancamentoColaborador(ActionEvent event) throws IOException {
