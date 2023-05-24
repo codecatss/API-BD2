@@ -313,67 +313,71 @@ public class horaDAO {
         return nome;
     }
 
-    public void aprovarHora(int id) {
-        String sql = "UPDATE hora SET status_aprovacao = 'aprovado' WHERE id = ?";
+    public void aprovarHora(int id, String usernameAprovador) {
+    String sql = "UPDATE hora SET status_aprovacao = 'aprovado', username_aprovador = ? WHERE id = ?";
 
-        Connection conn = null;
-        PreparedStatement pstm = null;
+    Connection conn = null;
+    PreparedStatement pstm = null;
 
+    try {
+        conn = Conexao.createConnectionToMySQL();
+        pstm = conn.prepareStatement(sql);
+        pstm.setString(1, usernameAprovador);
+        pstm.setInt(2, id);
+
+        pstm.executeUpdate();
+
+        System.out.println("Update realizado");
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
         try {
-            conn = Conexao.createConnectionToMySQL();
-            pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, id);
-
-            pstm.executeUpdate();
-
-            System.out.println("Update realizado");
-
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (pstm != null) {
-                    pstm.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
+}
 
-    public void reprovarHora(int id, String justificativaNegacao) {
-        String sql = "UPDATE hora SET status_aprovacao = 'negado', justificativa_negacao = ? WHERE id = ?";
 
-        Connection conn = null;
-        PreparedStatement pstm = null;
+    public void reprovarHora(int id, String justificativaNegacao, String usernameReprovador) {
+    String sql = "UPDATE hora SET status_aprovacao = 'negado', justificativa_negacao = ?, username_aprovador = ? WHERE id = ?";
 
+    Connection conn = null;
+    PreparedStatement pstm = null;
+
+    try {
+        conn = Conexao.createConnectionToMySQL();
+        pstm = conn.prepareStatement(sql);
+        pstm.setString(1, justificativaNegacao);
+        pstm.setString(2, usernameReprovador);
+        pstm.setInt(3, id);
+
+        pstm.executeUpdate();
+
+        System.out.println("Update realizado");
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
         try {
-            conn = Conexao.createConnectionToMySQL();
-            pstm = conn.prepareStatement(sql);
-            pstm.setString(1, justificativaNegacao);
-            pstm.setInt(2, id);
-
-            pstm.executeUpdate();
-
-            System.out.println("Update realizado");
-
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (pstm != null) {
-                    pstm.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
+}
+
 
 }
