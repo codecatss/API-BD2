@@ -344,8 +344,8 @@ public class horaDAO {
         }
     }
 
-    public void reprovarHora(int id) {
-        String sql = "UPDATE hora SET status_aprovacao = 'negado' WHERE id = ?";
+    public void reprovarHora(int id, String justificativaNegacao) {
+        String sql = "UPDATE hora SET status_aprovacao = 'negado', justificativa_negacao = ? WHERE id = ?";
 
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -353,7 +353,8 @@ public class horaDAO {
         try {
             conn = Conexao.createConnectionToMySQL();
             pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, id);
+            pstm.setString(1, justificativaNegacao);
+            pstm.setInt(2, id);
 
             pstm.executeUpdate();
 
@@ -374,4 +375,5 @@ public class horaDAO {
             }
         }
     }
+
 }
