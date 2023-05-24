@@ -150,26 +150,27 @@ public class ApontamentoGestorController implements Initializable {
 
     @FXML
     public void botaoAprovar() {
-        if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
-            // Exibe um popup de confirmação
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmação");
-            alert.setHeaderText(null);
-            alert.setContentText("Tem certeza de que deseja aprovar a hora?");
+    if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
+        // Exibe um popup de confirmação
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmação");
+        alert.setHeaderText(null);
+        alert.setContentText("Tem certeza de que deseja aprovar a hora?");
 
-            ButtonType buttonNao = new ButtonType("Não");
-            ButtonType buttonSim = new ButtonType("Sim");
+        ButtonType buttonNao = new ButtonType("Não");
+        ButtonType buttonSim = new ButtonType("Sim");
 
-            alert.getButtonTypes().setAll(buttonNao, buttonSim);
+        alert.getButtonTypes().setAll(buttonNao, buttonSim);
 
-            alert.showAndWait().ifPresent(buttonType -> {
-                if (buttonType == buttonSim) {
-                    horadao.aprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId());
-                    carregarTabelaLancamento();
-                }
-            });
-        }
+        alert.showAndWait().ifPresent(buttonType -> {
+            if (buttonType == buttonSim) {
+                String usernameAprovador = usuario; // Obtenha o nome do usuário aprovador
+                horadao.aprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId(), usernameAprovador);
+                carregarTabelaLancamento();
+            }
+        });
     }
+}
 
 @FXML
 public void botaoReprovar() {
@@ -177,7 +178,8 @@ public void botaoReprovar() {
         String justificativa = textoJustificativa.getText();
         if (!justificativa.isEmpty()) {
             int id = tabelaApontamento.getSelectionModel().getSelectedItem().getId();
-            horadao.reprovarHora(id, justificativa);
+            String usernameReprovador = usuario; // Obtenha o nome do usuário reprovador
+            horadao.reprovarHora(id, justificativa, usernameReprovador);
             carregarTabelaLancamento();
             textoJustificativa.clear(); // Limpa o campo de justificativa
         } else {
@@ -194,6 +196,7 @@ public void botaoReprovar() {
         }
     }
 }
+
 
 
 
