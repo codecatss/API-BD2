@@ -34,6 +34,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 /**
  * FXML Controller class
@@ -86,7 +88,7 @@ public class ApontamentoGestorController implements Initializable {
     private TableColumn<TabelaAprovaçãoGestor, String> colunaInicio;//ok
 
     horaDAO horadao = new horaDAO();
-    
+
     private List<TabelaAprovaçãoGestor> lishoras = new ArrayList<>();
     private ObservableList<TabelaAprovaçãoGestor> observablelisthoras = FXCollections.observableArrayList();
 
@@ -140,8 +142,26 @@ public class ApontamentoGestorController implements Initializable {
     @FXML
     public void botaoAprovar() {
         if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
-            horadao.aprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId());
-            carregarTabelaLancamento();
+            // Exibe um popup de confirmação
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmação");
+            alert.setHeaderText(null);
+            alert.setContentText("Tem certeza de que deseja aprovar a hora?");
+
+            // Define os botões "Sim" e "Não"
+            ButtonType buttonNao = new ButtonType("Não");
+            ButtonType buttonSim = new ButtonType("Sim");
+
+            alert.getButtonTypes().setAll(buttonNao, buttonSim);
+
+            // Aguarda a resposta do usuário
+            alert.showAndWait().ifPresent(buttonType -> {
+                if (buttonType == buttonSim) {
+                    // Se o usuário clicou em "Sim", aprova a hora
+                    horadao.aprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId());
+                    carregarTabelaLancamento();
+                }
+            });
         }
     }
 
@@ -152,7 +172,7 @@ public class ApontamentoGestorController implements Initializable {
             carregarTabelaLancamento();
         }
     }
-    
+
     @FXML
     public void navLancamentoColaborador(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LancamentoColaborador.fxml"));
@@ -163,8 +183,8 @@ public class ApontamentoGestorController implements Initializable {
         stage.centerOnScreen();
         stage.show();
     }
-    
-        @FXML
+
+    @FXML
     private void BotaoSair(ActionEvent event) throws IOException {
         Usuario usuario = new Usuario();
         usuario.logout();
