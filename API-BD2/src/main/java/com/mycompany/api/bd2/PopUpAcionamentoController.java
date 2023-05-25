@@ -220,7 +220,7 @@ public class PopUpAcionamentoController implements Initializable {
         String data_hora_fim = dataFim + " " + hora_fim + ":" + min_fim + ":00";
         horaExtra.setData_hora_fim(data_hora_fim);
         
-        if(horaIPop.isAfter(horaIni) && horaIPop.isBefore(horaFi) && horaFPop.isAfter(horaIni) && horaFPop.isBefore(horaFi)){   
+       /* if(horaIPop.isAfter(horaIni) && horaIPop.isBefore(horaFi) && horaFPop.isAfter(horaIni) && horaFPop.isBefore(horaFi)){   
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Hora-extra dentro do intervalo");
             alert.setHeaderText(null);
@@ -233,10 +233,10 @@ public class PopUpAcionamentoController implements Initializable {
             lantemp.add(horaExtra);
             System.out.println(hora);
             carregarTabelaAcionamento();
-        }
-        
+        }*/
+        boolean se = true;
         if ((horaIPop.isAfter(horaIni) || horaIPop.equals(horaIni)) 
-            && (horaIPop.isBefore(horaFi) || horaIPop.equals(horaFi))
+            && (horaIPop.isBefore(horaFi))
             && (horaFPop.isAfter(horaIni) || horaFPop.equals(horaIni))
             && (horaFPop.isBefore(horaFi) || horaFPop.equals(horaFi))) {   
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -244,6 +244,7 @@ public class PopUpAcionamentoController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("A hora-extra informada precisa estar fora do intervalo de sobreaviso.");
             alert.showAndWait();
+            se = false;
         } else if (horaFPop.isAfter(horaFi)) {
             Duration duracao = Duration.between(horaFi, horaFPop);
             long duracaoEmSegundos = duracao.getSeconds();
@@ -252,14 +253,15 @@ public class PopUpAcionamentoController implements Initializable {
             int segundos = (int) (duracaoEmSegundos % 60);
             LocalTime duracaoLocal = LocalTime.of(horas, minutos, segundos);
             System.out.println(duracaoLocal);
-        } else {
+            } 
+        if(se == true){
             horaExtra.setTipo(TipoHora.EXTRA.name());
-            horaExtra.setId(lantemp.size()+1);
-            contagem++;
-            lantemp.add(horaExtra);
-            System.out.println(hora);
-            carregarTabelaAcionamento();
-    }
+                horaExtra.setId(lantemp.size()+1);
+                contagem++;
+                lantemp.add(horaExtra);
+                System.out.println(hora);
+                carregarTabelaAcionamento();
+        }
     } 
 
     @FXML
