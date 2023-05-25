@@ -143,22 +143,17 @@ public class LancamentoColaboradorController {
     private ObservableList<String> opCr = FXCollections.observableArrayList();
 
     public void initialize() {
-
         getNomeUsuario().setText(usuario);
-
         getHoraInicio().setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0, 1));
         getMinutoInicio().setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59));
         getHoraInicio().getValueFactory().setWrapAround(true);
         getMinutoInicio().getValueFactory().setWrapAround(true);
-
         getHoraFim().setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0, 1));
         getMinutoFim().setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59));
         getHoraFim().getValueFactory().setWrapAround(true);
         getMinutoFim().getValueFactory().setWrapAround(true);
-
         botaoLimpar.setOnAction(event -> limparCampos());
         carregarTabelaLancamento();
-        
         botaoAcionamento.setVisible(false);
         
         getHoraTipo().getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
@@ -186,7 +181,6 @@ public class LancamentoColaboradorController {
     @FXML
     public void limparCampos() {
         limmparFormatacao();
-
         getHoraInicio().getValueFactory().setValue(0);
         getMinutoInicio().getValueFactory().setValue(0);
         getHoraFim().getValueFactory().setValue(0);

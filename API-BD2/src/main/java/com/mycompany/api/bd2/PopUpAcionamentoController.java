@@ -16,8 +16,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.text.ParseException;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -146,14 +150,32 @@ public class PopUpAcionamentoController implements Initializable {
     private void botaoAdicionar() throws ParseException{
         Hora horaExtra = new Hora();
         Hora hora = LancamentoColaboradorController.getHora();
-        
         Timestamp timestampini = hora.getData_hora_inicio();
         String timestampini2 = hora.getData_hora_inicio().toString();
         timestampini2 = Timestamp.valueOf(timestampini2).toString();
+     
+        String horaRange1 = timestampini2.substring(11, 21);
+        System.out.println(horaRange1);
+        LocalTime horaIni = LocalTime.parse(horaRange1); 
+        System.out.println(horaIni);
+        
         System.out.println(timestampini2);
         String dataIni = timestampini2.substring(0,10);
         int hora_inicio = horaInicio.getValue();
         int min_inicio = minutoInicio.getValue();
+        
+        String hora_inicioS = Integer.toString(hora_inicio);
+        String min_inicioS = Integer.toString(min_inicio);
+        if(min_inicioS.length() < 2 || hora_inicioS.length() < 2){
+            min_inicioS = "0"+min_inicioS;
+            hora_inicioS = "0"+hora_inicioS;
+            hora_inicioS = hora_inicioS+":"+min_inicioS+":00";
+        }else{
+            hora_inicioS = hora_inicioS+":"+min_inicioS+":00";
+        }
+        
+        LocalTime horaIPop = LocalTime.parse(hora_inicioS);
+        
         String data_hora_inicio = dataIni + " " + hora_inicio + ":" + min_inicio + ":00";
         horaExtra.setData_hora_inicio(data_hora_inicio);
         horaExtra.setCnpj_cliente(hora.getCnpj_cliente());
@@ -170,21 +192,74 @@ public class PopUpAcionamentoController implements Initializable {
         Timestamp timestampfim = hora.getData_hora_fim();
         String timestampfim2 = hora.getData_hora_fim().toString();
         timestampfim2 = Timestamp.valueOf(timestampfim2).toString();
+        
+        String horaRange2 = timestampfim2.substring(11, 21);
+        System.out.println(horaRange2);
+        LocalTime horaFi = LocalTime.parse(horaRange2); 
+        System.out.println(horaFi);
+        
         System.out.println(timestampfim);
         String dataFim = timestampfim2.substring(0,10);
         int hora_fim = horaFim.getValue();
         int min_fim = minutoFim.getValue();
+        
+        String hora_fimS = Integer.toString(hora_fim);
+        String min_fimS = Integer.toString(min_fim);
+        if(min_fimS.length() < 2){
+            min_fimS = "0"+min_fimS;
+            
+        }
+        if(hora_fimS.length() < 2){
+             hora_fimS = "0"+hora_fimS;
+            
+        }     
+        hora_fimS = hora_fimS+":"+min_fimS+":00";
+        
+        LocalTime horaFPop = LocalTime.parse(hora_fimS);
+        
         String data_hora_fim = dataFim + " " + hora_fim + ":" + min_fim + ":00";
         horaExtra.setData_hora_fim(data_hora_fim);
         
-        horaExtra.setTipo(TipoHora.EXTRA.name());
-        horaExtra.setId(lantemp.size()+1);
-        contagem++;
-        lantemp.add(horaExtra); 
-    
-        System.out.println(hora);
-       
-        carregarTabelaAcionamento();
+        if(horaIPop.isAfter(horaIni) && horaIPop.isBefore(horaFi) && horaFPop.isAfter(horaIni) && horaFPop.isBefore(horaFi)){   
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Hora-extra dentro do intervalo");
+            alert.setHeaderText(null);
+            alert.setContentText("A hora-extra informada precisa estar fora do intervalo de sobreaviso.");
+            alert.showAndWait();
+        }else{
+            horaExtra.setTipo(TipoHora.EXTRA.name());
+            horaExtra.setId(lantemp.size()+1);
+            contagem++;
+            lantemp.add(horaExtra);
+            System.out.println(hora);
+            carregarTabelaAcionamento();
+        }
+        
+        if ((horaIPop.isAfter(horaIni) || horaIPop.equals(horaIni)) 
+            && (horaIPop.isBefore(horaFi) || horaIPop.equals(horaFi))
+            && (horaFPop.isAfter(horaIni) || horaFPop.equals(horaIni))
+            && (horaFPop.isBefore(horaFi) || horaFPop.equals(horaFi))) {   
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Hora-extra dentro do intervalo");
+            alert.setHeaderText(null);
+            alert.setContentText("A hora-extra informada precisa estar fora do intervalo de sobreaviso.");
+            alert.showAndWait();
+        } else if (horaFPop.isAfter(horaFi)) {
+            Duration duracao = Duration.between(horaFi, horaFPop);
+            long duracaoEmSegundos = duracao.getSeconds();
+            int horas = (int) (duracaoEmSegundos / 3600);
+            int minutos = (int) ((duracaoEmSegundos % 3600) / 60);
+            int segundos = (int) (duracaoEmSegundos % 60);
+            LocalTime duracaoLocal = LocalTime.of(horas, minutos, segundos);
+            System.out.println(duracaoLocal);
+        } else {
+            horaExtra.setTipo(TipoHora.EXTRA.name());
+            horaExtra.setId(lantemp.size()+1);
+            contagem++;
+            lantemp.add(horaExtra);
+            System.out.println(hora);
+            carregarTabelaAcionamento();
+    }
     } 
 
     @FXML
