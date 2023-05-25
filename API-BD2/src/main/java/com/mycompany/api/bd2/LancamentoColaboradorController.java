@@ -1,8 +1,5 @@
 package com.mycompany.api.bd2;
 
-import com.mycompany.api.bd2.daos.clienteDAO;
-import com.mycompany.api.bd2.daos.crDAO;
-import com.mycompany.api.bd2.daos.horaDAO;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.text.ParseException;
@@ -29,11 +26,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.collections.ObservableList;
 import java.time.LocalDate;
 import java.sql.Timestamp;
-import com.mycompany.api.bd2.models.Hora;
 import javafx.scene.control.Alert.AlertType;
-//import daos.horaDAO;
 
+import com.mycompany.api.bd2.models.Hora;
 import com.mycompany.api.bd2.models.*;
+import com.mycompany.api.bd2.daos.clienteDAO;
+import com.mycompany.api.bd2.daos.crDAO;
+import com.mycompany.api.bd2.daos.horaDAO;
+
 import java.io.IOException;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -104,41 +104,7 @@ public class LancamentoColaboradorController {
     private ObservableList<String> opCr = FXCollections.observableArrayList();
     @FXML
     private Button fecharTela;
-    @FXML
-    private AnchorPane menuADM;
-    @FXML
-    private Button menuUsuario;
-    @FXML
-    private Button menuCR;
-    @FXML
-    private Button menuCliente;
-    @FXML
-    private Button menuAprovar;
-    @FXML
-    private TableView<?> tabelaAprovacao;
-    @FXML
-    private TableColumn<?, ?> colunaColaboradorADM;
-    @FXML
-    private TableColumn<?, ?> colunaCRADM;
-    @FXML
-    private TableColumn<?, ?> colundaGestorADM;
-    @FXML
-    private TableColumn<?, ?> colunaEmpresaADM;
-    @FXML
-    private TableColumn<?, ?> colunaProjetoADM;
-    @FXML
-    private TableColumn<?, ?> colunaFuncaoADM;
-    @FXML
-    private TableColumn<?, ?> colunaInicioADM;
-    @FXML
-    private TableColumn<?, ?> colunaFimADM;
-    @FXML
-    private TableColumn<?, ?> colunaJustificativaADM;
-    @FXML
-    private Button botaoReprovar;
-    @FXML
-    private Button botaoAprovar;
-
+    
     public void initialize() {
 
         nomeUsuario.setText(usuario);
