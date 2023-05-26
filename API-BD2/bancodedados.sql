@@ -63,12 +63,15 @@ create table
         justificativa_negacao VARCHAR(500),
         status_aprovacao ENUM(
             'pendente',
-            'aprovado_gestor',
-            'aprovado_rh',
+            'aprovado',
             'negado'
         ) NOT NULL DEFAULT 'pendente',
         solicitante_lancamento VARCHAR(30) NOT NULL,
         feriado BOOLEAN DEFAULT FALSE,
+        username_aprovadorADM VARCHAR(20),
+        justificativa_negacaoADM VARCHAR(500),
+        status_aprovacaoADM ENUM('pendente','aprovado','negado') NOT NULL DEFAULT 'pendente',
+		Foreign Key (username_lancadorADM) REFERENCES usuario(username),
         Foreign Key (username_lancador) REFERENCES usuario(username),
         Foreign Key (cod_cr) REFERENCES centro_resultado(codigo_cr),
         Foreign Key (cnpj_cliente) REFERENCES cliente(cnpj),
