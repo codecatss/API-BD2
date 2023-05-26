@@ -6,7 +6,7 @@ create database 2rp;
 
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin123';
 
-GRANT SELECT, INSERT, UPDATE ON 2rp.* TO 'admin'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON 2rp.* TO 'admin'@'localhost';
 
 FLUSH PRIVILEGES;
 
@@ -71,7 +71,7 @@ create table
         username_aprovadorADM VARCHAR(20),
         justificativa_negacaoADM VARCHAR(500),
         status_aprovacaoADM ENUM('pendente','aprovado','negado') NOT NULL DEFAULT 'pendente',
-		Foreign Key (username_lancadorADM) REFERENCES usuario(username),
+		Foreign Key (username_aprovadorADM) REFERENCES usuario(username),
         Foreign Key (username_lancador) REFERENCES usuario(username),
         Foreign Key (cod_cr) REFERENCES centro_resultado(codigo_cr),
         Foreign Key (cnpj_cliente) REFERENCES cliente(cnpj),
