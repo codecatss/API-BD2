@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,6 +24,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -34,6 +36,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -168,11 +171,11 @@ public class PopUpAcionamentoController implements Initializable {
         String min_inicioS = Integer.toString(min_inicio);
         if(min_inicioS.length() < 2 || hora_inicioS.length() < 2){
             min_inicioS = "0"+min_inicioS;
-            hora_inicioS = "0"+hora_inicioS;
-            hora_inicioS = hora_inicioS+":"+min_inicioS+":00";
-        }else{
-            hora_inicioS = hora_inicioS+":"+min_inicioS+":00";
-        }
+        if(hora_inicioS.length() < 2){
+             hora_inicioS = "0"+hora_inicioS;
+            
+        }     
+        hora_inicioS = hora_inicioS+":"+min_inicioS+":00";
         
         LocalTime horaIPop = LocalTime.parse(hora_inicioS);
         
@@ -219,34 +222,34 @@ public class PopUpAcionamentoController implements Initializable {
         
         String data_hora_fim = dataFim + " " + hora_fim + ":" + min_fim + ":00";
         horaExtra.setData_hora_fim(data_hora_fim);
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        Date data = formato.parse(dataFim);
+        
+        
+        Date data2 = formato.parse(dataIni);
  
-        boolean se = true;
         if ((horaIPop.isAfter(horaIni) || horaIPop.equals(horaIni)) 
             && (horaIPop.isBefore(horaFi))
             && (horaFPop.isAfter(horaIni) || horaFPop.equals(horaIni))
             && (horaFPop.isBefore(horaFi) || horaFPop.equals(horaFi))) {   
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Hora-extra dentro do intervalo");
-            alert.setHeaderText(null);
-            alert.setContentText("A hora-extra informada precisa estar fora do intervalo de sobreaviso.");
-            alert.showAndWait();
-            se = false;
-        } else if ((horaFPop.isAfter(horaFi) && horaIPop.isBefore(horaFi)) || horaIPop.equals(horaIni)) {
             
-            data_hora_inicio = dataIni + " " + horaFi + ":00";
-            horaExtra.setData_hora_inicio(data_hora_inicio);
-            
-            } 
-        if(se == true){
             horaExtra.setTipo(TipoHora.EXTRA.name());
-                horaExtra.setId(lantemp.size()+1);
-                contagem++;
-                lantemp.add(horaExtra);
-                System.out.println(hora);
-                carregarTabelaAcionamento();
+            horaExtra.setId(lantemp.size()+1);
+            contagem++;
+            lantemp.add(horaExtra);
+            System.out.println(hora);
+            carregarTabelaAcionamento();
+        
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Hora-extra fora do intervalo");
+            alert.setHeaderText(null);
+            alert.setContentText("A hora-extra informada precisa estar dentro do intervalo de sobreaviso.");
+            alert.showAndWait();
         }
-    } 
-
+        }
+        
+    }
     @FXML
     private void botaoSalvar() throws ParseException{
         acionamentos.addAll(lantemp);
