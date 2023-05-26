@@ -150,106 +150,128 @@ public class PopUpAcionamentoController implements Initializable {
 
     private static int contagem = 1;
     @FXML
-    private void botaoAdicionar() throws ParseException{
-        Hora horaExtra = new Hora();
-        Hora hora = LancamentoColaboradorController.getHora();
-        Timestamp timestampini = hora.getData_hora_inicio();
-        String timestampini2 = hora.getData_hora_inicio().toString();
-        timestampini2 = Timestamp.valueOf(timestampini2).toString();
-     
-        String horaRange1 = timestampini2.substring(11, 21);
-        System.out.println(horaRange1);
-        LocalTime horaIni = LocalTime.parse(horaRange1); 
-        System.out.println(horaIni);
-        
-        System.out.println(timestampini2);
-        String dataIni = timestampini2.substring(0,10);
-        int hora_inicio = horaInicio.getValue();
-        int min_inicio = minutoInicio.getValue();
-        
-        String hora_inicioS = Integer.toString(hora_inicio);
-        String min_inicioS = Integer.toString(min_inicio);
-        if(min_inicioS.length() < 2 || hora_inicioS.length() < 2){
-            min_inicioS = "0"+min_inicioS;
-        if(hora_inicioS.length() < 2){
-             hora_inicioS = "0"+hora_inicioS;
-            
-        }     
-        hora_inicioS = hora_inicioS+":"+min_inicioS+":00";
-        
-        LocalTime horaIPop = LocalTime.parse(hora_inicioS);
-        
-        String data_hora_inicio = dataIni + " " + hora_inicio + ":" + min_inicio + ":00";
-        horaExtra.setData_hora_inicio(data_hora_inicio);
-        horaExtra.setCnpj_cliente(hora.getCnpj_cliente());
-        horaExtra.setCod_cr(hora.getCod_cr());
-        horaExtra.setJustificativa_lancamento(hora.getJustificativa_lancamento());
-        horaExtra.setNome_cliente(hora.getNome_cliente());
-        horaExtra.setProjeto(hora.getProjeto());
-        horaExtra.setUsername_aprovador(hora.getUsername_aprovador());
-        horaExtra.setUsername_lancador(hora.getUsername_lancador());
-        horaExtra.setTipo(hora.getTipo());
-        horaExtra.setStatus_aprovacao(hora.getStatus_aprovacao());
-        horaExtra.setSolicitante(hora.getSolicitante());
+    private void botaoAdicionar() throws ParseException {
+    Hora horaExtra = new Hora();
+    Hora hora = LancamentoColaboradorController.getHora();
+    Timestamp timestampini = hora.getData_hora_inicio();
+    String timestampini2 = hora.getData_hora_inicio().toString();
+    timestampini2 = Timestamp.valueOf(timestampini2).toString();
 
-        Timestamp timestampfim = hora.getData_hora_fim();
-        String timestampfim2 = hora.getData_hora_fim().toString();
-        timestampfim2 = Timestamp.valueOf(timestampfim2).toString();
-        
-        String horaRange2 = timestampfim2.substring(11, 21);
-        System.out.println(horaRange2);
-        LocalTime horaFi = LocalTime.parse(horaRange2); 
-        System.out.println(horaFi);
-        
-        System.out.println(timestampfim);
-        String dataFim = timestampfim2.substring(0,10);
-        int hora_fim = horaFim.getValue();
-        int min_fim = minutoFim.getValue();
-        
-        String hora_fimS = Integer.toString(hora_fim);
-        String min_fimS = Integer.toString(min_fim);
-        if(min_fimS.length() < 2){
-            min_fimS = "0"+min_fimS;
-            
+    String horaRange1 = timestampini2.substring(11, 21);
+    System.out.println(horaRange1);
+    LocalTime horaIni = LocalTime.parse(horaRange1);
+    System.out.println(horaIni);
+
+    System.out.println(timestampini2);
+    String dataIni = timestampini2.substring(0, 10);
+    int hora_inicio = horaInicio.getValue();
+    int min_inicio = minutoInicio.getValue();
+
+    String hora_inicioS = Integer.toString(hora_inicio);
+    String min_inicioS = Integer.toString(min_inicio);
+    if (min_inicioS.length() < 2 || hora_inicioS.length() < 2) {
+        min_inicioS = "0" + min_inicioS;
+        if (hora_inicioS.length() < 2) {
+            hora_inicioS = "0" + hora_inicioS;
         }
-        if(hora_fimS.length() < 2){
-             hora_fimS = "0"+hora_fimS;
-            
-        }     
-        hora_fimS = hora_fimS+":"+min_fimS+":00";
-        
-        LocalTime horaFPop = LocalTime.parse(hora_fimS);
-        
-        String data_hora_fim = dataFim + " " + hora_fim + ":" + min_fim + ":00";
-        horaExtra.setData_hora_fim(data_hora_fim);
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-        Date data = formato.parse(dataFim);
-        
-        
-        Date data2 = formato.parse(dataIni);
- 
-        if ((horaIPop.isAfter(horaIni) || horaIPop.equals(horaIni)) 
+    }
+    hora_inicioS = hora_inicioS + ":" + min_inicioS + ":00";
+
+    LocalTime horaIPop = LocalTime.parse(hora_inicioS);
+
+    String data_hora_inicio = dataIni + " " + hora_inicio + ":" + min_inicio + ":00";
+    horaExtra.setData_hora_inicio(data_hora_inicio);
+    horaExtra.setCnpj_cliente(hora.getCnpj_cliente());
+    horaExtra.setCod_cr(hora.getCod_cr());
+    horaExtra.setJustificativa_lancamento(hora.getJustificativa_lancamento());
+    horaExtra.setNome_cliente(hora.getNome_cliente());
+    horaExtra.setProjeto(hora.getProjeto());
+    horaExtra.setUsername_aprovador(hora.getUsername_aprovador());
+    horaExtra.setUsername_lancador(hora.getUsername_lancador());
+    horaExtra.setTipo(hora.getTipo());
+    horaExtra.setStatus_aprovacao(hora.getStatus_aprovacao());
+    horaExtra.setSolicitante(hora.getSolicitante());
+
+    Timestamp timestampfim = hora.getData_hora_fim();
+    String timestampfim2 = hora.getData_hora_fim().toString();
+    timestampfim2 = Timestamp.valueOf(timestampfim2).toString();
+
+    String horaRange2 = timestampfim2.substring(11, 21);
+    System.out.println(horaRange2);
+    LocalTime horaFi = LocalTime.parse(horaRange2);
+    System.out.println(horaFi);
+
+    System.out.println(timestampfim);
+    String dataFim = timestampfim2.substring(0, 10);
+    int hora_fim = horaFim.getValue();
+    int min_fim = minutoFim.getValue();
+
+    String hora_fimS = Integer.toString(hora_fim);
+    String min_fimS = Integer.toString(min_fim);
+    if (min_fimS.length() < 2) {
+        min_fimS = "0" + min_fimS;
+    }
+    if (hora_fimS.length() < 2) {
+        hora_fimS = "0" + hora_fimS;
+    }
+    hora_fimS = hora_fimS + ":" + min_fimS + ":00";
+
+    LocalTime horaFPop = LocalTime.parse(hora_fimS);
+
+    String data_hora_fim = dataFim + " " + hora_fim + ":" + min_fim + ":00";
+    horaExtra.setData_hora_fim(data_hora_fim);
+    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+    Date data = formato.parse(dataFim);
+
+    Date data2 = formato.parse(dataIni);
+
+    if ((horaIPop.isAfter(horaIni) || horaIPop.equals(horaIni))
             && (horaIPop.isBefore(horaFi))
             && (horaFPop.isAfter(horaIni) || horaFPop.equals(horaIni))
-            && (horaFPop.isBefore(horaFi) || horaFPop.equals(horaFi))) {   
-            
+            && (horaFPop.isBefore(horaFi) || horaFPop.equals(horaFi))) {
+
+        boolean conflito = false;
+        for (Hora horaExistente : lantemp) {
+            String inicioStr = horaExistente.getData_hora_inicio().toString();
+            String fimStr = horaExistente.getData_hora_fim().toString();
+
+            LocalTime hInicio = LocalTime.parse(inicioStr.substring(11, 19));
+            LocalTime hFim = LocalTime.parse(fimStr.substring(11, 19));
+
+            if ((horaIPop.isAfter(hInicio) && horaIPop.isBefore(hFim))
+                    || (horaFPop.isAfter(hInicio) && horaFPop.isBefore(hFim))
+                    || horaIPop.equals(hInicio) || horaFPop.equals(hFim)) {
+                conflito = true;
+                break;
+            } else if (horaIPop.isBefore(hInicio) && horaFPop.isAfter(hFim)) {
+                conflito = true;
+                break;
+            }
+        }
+
+        if (!conflito) {
             horaExtra.setTipo(TipoHora.EXTRA.name());
-            horaExtra.setId(lantemp.size()+1);
+            horaExtra.setId(lantemp.size() + 1);
             contagem++;
             lantemp.add(horaExtra);
             System.out.println(hora);
             carregarTabelaAcionamento();
-        
-        }else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Hora-extra fora do intervalo");
+            alert.setTitle("Conflito de horas");
             alert.setHeaderText(null);
-            alert.setContentText("A hora-extra informada precisa estar dentro do intervalo de sobreaviso.");
+            alert.setContentText("A hora informada está em conflito com uma hora já adicionada.");
             alert.showAndWait();
         }
-        }
-        
+    } else {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Hora-extra fora do intervalo");
+        alert.setHeaderText(null);
+        alert.setContentText("A hora-extra informada precisa estar dentro do intervalo de sobreaviso.");
+        alert.showAndWait();
     }
+}
+
     @FXML
     private void botaoSalvar() throws ParseException{
         acionamentos.addAll(lantemp);
