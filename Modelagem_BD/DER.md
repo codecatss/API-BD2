@@ -1,1 +1,1 @@
-![Modelagem_BD_Sprint3](https://user-images.githubusercontent.com/111433915/236079615-c59791c7-38e3-429d-887c-1e529ca4162a.png)
+![DER](https://github.com/codecatss/API-BD2/assets/111433915/5647b6b4-052d-48dc-af13-00beb7d39875)
