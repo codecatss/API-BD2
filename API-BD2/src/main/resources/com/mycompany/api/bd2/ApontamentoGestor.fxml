@@ -78,7 +78,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button id="menuRelatorio" fx:id="menuRelatorio" layoutX="15.0" layoutY="286.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text=" Relatórios" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="286.0">
+                        <Button id="menuRelatorio" fx:id="menuRelatorio" layoutX="15.0" layoutY="286.0" mnemonicParsing="false" onAction="#RelatorioCSV" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text=" Relatórios" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="286.0">
                            <font>
                               <Font size="14.0" />
                            </font>

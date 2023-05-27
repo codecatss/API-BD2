@@ -27,14 +27,17 @@ public class Conexao {
     }
     
 
-    public static void gerarRelatorioCSV(String nomeArquivo, String query) throws IOException, Exception {
+    public static void gerarRelatorioCSV(String dataExtrato, String query) throws IOException, Exception {
         Connection connection = createConnectionToMySQL();
         Statement stmt = connection.createStatement();
+        
+        String caminhoDiretorio = System.getProperty("user.home") + "/Downloads/";
+        String caminhoCompleto = caminhoDiretorio + "extrato_"+dataExtrato;
         
         try (ResultSet rs = stmt.executeQuery(query)) {
 
             // Cria o escritor do arquivo CSV
-            CSVWriter writer = new CSVWriter(new FileWriter(nomeArquivo));
+            CSVWriter writer = new CSVWriter(new FileWriter(caminhoCompleto));
 
             // Obtem o metadado do resultado da consulta
             ResultSetMetaData rsmd = rs.getMetaData();
@@ -64,7 +67,8 @@ public class Conexao {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Relatório "+nomeArquivo+" gerado");
+        String caminho = System.getProperty("user.home") + "/Downloads/";
+        System.out.println("Relatório 'extrato_"+dataExtrato+"' foi armazenado na pasta Downloads");
     }
         
     public static void main(String[] args) throws Exception{
