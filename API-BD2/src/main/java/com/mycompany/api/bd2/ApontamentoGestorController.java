@@ -4,17 +4,16 @@
  */
 package com.mycompany.api.bd2;
 
-import static com.mycompany.api.bd2.TelaLoginController.usuariologado;
+import Conexao.Conexao;
 import com.mycompany.api.bd2.daos.horaDAO;
 import com.mycompany.api.bd2.daos.integranteDAO;
-import com.mycompany.api.bd2.models.Hora;
 import com.mycompany.api.bd2.models.TabelaAprovaçãoGestor;
 import com.mycompany.api.bd2.models.Usuario;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -174,5 +173,19 @@ public class ApontamentoGestorController implements Initializable {
         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
         stage.setScene(cena);
         stage.show();
+    }
+    
+    @FXML
+    public void RelatorioCSV() throws Exception {
+        TesteGerarRelatorio.gerarRelatorio();
+        /*
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ExtracaoRelatorio.fxml"));
+        Parent root = loader.load();
+        Scene cena = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+        stage.setScene(cena);
+        stage.centerOnScreen();
+        stage.show();
+        */
     }
 }

@@ -1,19 +1,15 @@
 package com.mycompany.api.bd2;
 
+import Conexao.Conexao;
 import com.mycompany.api.bd2.daos.clienteDAO;
 import com.mycompany.api.bd2.daos.crDAO;
 import com.mycompany.api.bd2.daos.horaDAO;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.text.ParseException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -25,18 +21,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.collections.ObservableList;
 import java.time.LocalDate;
 import java.sql.Timestamp;
 import com.mycompany.api.bd2.models.Hora;
 import javafx.scene.control.Alert.AlertType;
-//import daos.horaDAO;
-
 import com.mycompany.api.bd2.models.*;
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.Set;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -461,6 +453,20 @@ public class LancamentoColaboradorController {
         stage.show();
     }
 
+    @FXML
+    public void RelatorioCSV() throws Exception {
+        TesteGerarRelatorio.gerarRelatorio();
+    /*
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("ExtracaoRelatorio.fxml"));
+    Parent root = loader.load();
+    Scene cena = new Scene(root);
+    Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+    stage.setScene(cena);
+    stage.centerOnScreen();
+    stage.show();
+    */
+    }
+    
     /**
      * @return the nomeUsuario
      */
