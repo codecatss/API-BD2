@@ -1,5 +1,6 @@
 package com.mycompany.api.bd2;
 
+import Conexao.Conexao;
 import com.mycompany.api.bd2.daos.clienteDAO;
 import com.mycompany.api.bd2.daos.crDAO;
 import com.mycompany.api.bd2.daos.horaDAO;
@@ -461,6 +462,11 @@ public class LancamentoColaboradorController {
         stage.show();
     }
 
+    @FXML
+    public void RelatorioCSV() throws Exception {
+    Conexao conexao = new Conexao();
+    conexao.gerarRelatorioCSV("testeHora","SELECT * FROM 2rp.hora");
+    }
     /**
      * @return the nomeUsuario
      */
