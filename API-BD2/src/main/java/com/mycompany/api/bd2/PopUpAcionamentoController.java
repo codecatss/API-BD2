@@ -179,7 +179,7 @@ public class PopUpAcionamentoController implements Initializable {
 
     LocalTime horaIPop = LocalTime.parse(hora_inicioS);
 
-    String data_hora_inicio = dataIni + " " + hora_inicio + ":" + min_inicio + ":00";
+    String data_hora_inicio = dataIni + " " + hora_inicioS;
     horaExtra.setData_hora_inicio(data_hora_inicio);
     horaExtra.setCnpj_cliente(hora.getCnpj_cliente());
     horaExtra.setCod_cr(hora.getCod_cr());
@@ -218,7 +218,7 @@ public class PopUpAcionamentoController implements Initializable {
 
     LocalTime horaFPop = LocalTime.parse(hora_fimS);
 
-    String data_hora_fim = dataFim + " " + hora_fim + ":" + min_fim + ":00";
+    String data_hora_fim = dataFim + " " + hora_fimS;
     horaExtra.setData_hora_fim(data_hora_fim);
     SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
     Date data = formato.parse(dataFim);
@@ -272,6 +272,7 @@ public class PopUpAcionamentoController implements Initializable {
     }
 }
 
+
     @FXML
     private void botaoSalvar() throws ParseException{
         acionamentos.addAll(lantemp);
@@ -316,4 +317,3 @@ public class PopUpAcionamentoController implements Initializable {
     }
     
 }
-
