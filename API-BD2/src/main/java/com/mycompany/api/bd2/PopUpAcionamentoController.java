@@ -4,15 +4,13 @@
  */
 package com.mycompany.api.bd2;
 
+import com.mycompany.api.bd2.daos.horaDAO;
 import com.mycompany.api.bd2.models.Hora;
 import com.mycompany.api.bd2.models.TipoHora;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -24,7 +22,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -32,7 +29,6 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -283,10 +279,17 @@ public class PopUpAcionamentoController implements Initializable {
 
     @FXML
     private void botaoSalvar() throws ParseException {
+        horaDAO hrDAO = new horaDAO();
+        
+        hrDAO.save(sobreaviso);
+        System.out.println("Adicionado" + sobreaviso.getData_hora_inicio() + " até " + sobreaviso.getData_hora_fim());
+        
         acionamentos.addAll(lantemp);
         for (Hora hora : acionamentos) {
+            hrDAO.save(hora);
             System.out.println("Adicionado " + hora.getData_hora_inicio() + " até " + hora.getData_hora_fim());
         }
+
         Stage stage = (Stage) botaoSalvar.getScene().getWindow();
         stage.close();
     }

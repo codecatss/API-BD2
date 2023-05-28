@@ -3,46 +3,27 @@ package com.mycompany.api.bd2;
 import com.mycompany.api.bd2.daos.clienteDAO;
 import com.mycompany.api.bd2.daos.crDAO;
 import com.mycompany.api.bd2.daos.horaDAO;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.text.ParseException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.collections.ObservableList;
-import java.time.LocalDate;
-import java.sql.Timestamp;
-import com.mycompany.api.bd2.models.Hora;
-import javafx.scene.control.Alert.AlertType;
-//import daos.horaDAO;
-
 import com.mycompany.api.bd2.models.*;
 import java.io.IOException;
-import java.time.LocalTime;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Set;
+import java.util.List;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -243,7 +224,6 @@ public class LancamentoColaboradorController {
                     // Tudo certo, só salvar
                     List<Hora> lancar = new LinkedList<>();
                     lancar.add(hora);
-                    lancar.addAll(PopUpAcionamentoController.getAcionamentos());
 
                     // Percorre a lista para salvar cada objeto na base de dados usando a classe HoraDAO
                     horaDAO hrDAO = new horaDAO();
@@ -419,6 +399,8 @@ public class LancamentoColaboradorController {
                         popup.setScene(new Scene(root));
 
                         popup.showAndWait();
+                        carregarTabelaLancamento();
+                        limparCampos();
 
                     } catch (IOException e) {
 
