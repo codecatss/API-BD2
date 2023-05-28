@@ -111,7 +111,7 @@ public class Hora {
     /**
      * @return the data_hora_fim
      */
-    public Timestamp getData_hora_fim() throws ParseException {
+    public Timestamp getData_hora_fim(){
         return data_hora_fim;
     }
 
