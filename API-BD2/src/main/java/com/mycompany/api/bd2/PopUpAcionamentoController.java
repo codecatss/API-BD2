@@ -25,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
@@ -76,15 +77,13 @@ public class PopUpAcionamentoController implements Initializable {
     @FXML
     private DatePicker dataInicioAc;
 
-    private LancamentoColaboradorController lancamentoController;
+    private Hora sobreaviso = LancamentoColaboradorController.getHora();
+    private LocalDate dtInicioSA = sobreaviso.getData_hora_inicio().toLocalDateTime().toLocalDate();
+    private LocalDate dtFimSA = sobreaviso.getData_hora_fim().toLocalDateTime().toLocalDate();
+
     private LocalDate inicioAcionamento;
     private LocalDate fimAcionamento;
-    private ComboBox<String> horaTipo;
-    private ComboBox<String> selecaoCliente;
-    private ComboBox<String> selecaoCR;
-    private TextField entradaProjeto;
-    private TextField entradaSolicitante;
-    private Label nomeUsuario;
+
     private Hora horaCapturada; // Atributo para armazenar a instância de Hora capturada
     ObservableList<Hora> valorDoItemSelecionado;
     int index;
@@ -110,6 +109,21 @@ public class PopUpAcionamentoController implements Initializable {
         acionamentos.clear();
         lantemp.clear();
         contagem = 1;
+        
+        
+        dataInicioAc.setDayCellFactory(picker -> new DateCell() {
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                setDisable(empty || date.compareTo(dtInicioSA) < 0 || date.compareTo(dtFimSA) > 0);
+            }
+        });
+
+        dataFimAc.setDayCellFactory(picker -> new DateCell() {
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                setDisable(empty || date.compareTo(dtInicioSA) < 0 || date.compareTo(dtFimSA) > 0);
+            }
+        });
 
         tabelaAcionamento.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -136,8 +150,8 @@ public class PopUpAcionamentoController implements Initializable {
         // Obtém os valores de data de inicio e de fim (campos de entrada)
         inicioAcionamento = dataInicioAc.getValue();
         fimAcionamento = dataFimAc.getValue();
-        
-        // Verifica se as datas foram preenchidas
+
+        // Verifica se as datas (NÂO) foram preenchidas
         if (inicioAcionamento == null || fimAcionamento == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Preencha todos os campos");
@@ -147,19 +161,17 @@ public class PopUpAcionamentoController implements Initializable {
         } else {
             Hora horaExtra = new Hora();
 
-            Hora hora = LancamentoColaboradorController.getHora();
-
             // Preenche os dados que vêm do lançamento do sobreaviso
-            horaExtra.setCnpj_cliente(hora.getCnpj_cliente());
-            horaExtra.setCod_cr(hora.getCod_cr());
-            horaExtra.setJustificativa_lancamento(hora.getJustificativa_lancamento());
-            horaExtra.setNome_cliente(hora.getNome_cliente());
-            horaExtra.setProjeto(hora.getProjeto());
-            horaExtra.setUsername_aprovador(hora.getUsername_aprovador());
-            horaExtra.setUsername_lancador(hora.getUsername_lancador());
-            horaExtra.setTipo(hora.getTipo());
-            horaExtra.setStatus_aprovacao(hora.getStatus_aprovacao());
-            horaExtra.setSolicitante(hora.getSolicitante());
+            horaExtra.setCnpj_cliente(sobreaviso.getCnpj_cliente());
+            horaExtra.setCod_cr(sobreaviso.getCod_cr());
+            horaExtra.setJustificativa_lancamento(sobreaviso.getJustificativa_lancamento());
+            horaExtra.setNome_cliente(sobreaviso.getNome_cliente());
+            horaExtra.setProjeto(sobreaviso.getProjeto());
+            horaExtra.setUsername_aprovador(sobreaviso.getUsername_aprovador());
+            horaExtra.setUsername_lancador(sobreaviso.getUsername_lancador());
+            horaExtra.setTipo(sobreaviso.getTipo());
+            horaExtra.setStatus_aprovacao(sobreaviso.getStatus_aprovacao());
+            horaExtra.setSolicitante(sobreaviso.getSolicitante());
 
             // Formata as strings de inicioAcionamento e fimAcionamento
             String dtInicioAc = inicioAcionamento.toString();
@@ -212,8 +224,8 @@ public class PopUpAcionamentoController implements Initializable {
             // Preenche a data e a hora de fim no objeto horaExtra
             horaExtra.setData_hora_fim(data_hora_fim);
 
-            int resultInicio = horaExtra.getData_hora_inicio().compareTo(hora.getData_hora_inicio());
-            int resultFim = horaExtra.getData_hora_fim().compareTo(hora.getData_hora_fim());
+            int resultInicio = horaExtra.getData_hora_inicio().compareTo(sobreaviso.getData_hora_inicio());
+            int resultFim = horaExtra.getData_hora_fim().compareTo(sobreaviso.getData_hora_fim());
             int resultHoraExtra = horaExtra.getData_hora_inicio().compareTo(horaExtra.getData_hora_fim());
 
             // Verifica se a hora-extra informada está dentro do intervalo de sobreaviso
@@ -244,7 +256,6 @@ public class PopUpAcionamentoController implements Initializable {
                         horaExtra.setId(lantemp.size() + 1);
                         contagem++;
                         lantemp.add(horaExtra);
-                        System.out.println("hora: " + hora);
                         carregarTabelaAcionamento();
                     } else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
