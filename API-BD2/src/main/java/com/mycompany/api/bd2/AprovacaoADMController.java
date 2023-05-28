@@ -26,14 +26,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-
-
-import com.mycompany.api.bd2.models.Hora;
-import com.mycompany.api.bd2.models.*;
-import com.mycompany.api.bd2.daos.clienteDAO;
-import com.mycompany.api.bd2.daos.crDAO;
-import com.mycompany.api.bd2.daos.horaDAO;
-
 /**
  * FXML Controller class
  *
@@ -72,7 +64,7 @@ public class AprovacaoADMController implements Initializable {
     @FXML
     private TableColumn<Hora, ?> colunaCRADM;
     @FXML
-    private TableColumn<Hora, ?> colunaGestorADM;
+    private TableColumn<Hora, ?> colundaGestorADM;
     @FXML
     private TableColumn<Hora, ?> colunaEmpresaADM;
     @FXML
