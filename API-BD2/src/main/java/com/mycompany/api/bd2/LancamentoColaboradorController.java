@@ -1,5 +1,6 @@
 package com.mycompany.api.bd2;
 
+import Conexao.Conexao;
 import com.mycompany.api.bd2.daos.clienteDAO;
 import com.mycompany.api.bd2.daos.crDAO;
 import com.mycompany.api.bd2.daos.horaDAO;
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,6 +18,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.collections.ObservableList;
+import java.time.LocalDate;
+import java.sql.Timestamp;
+import com.mycompany.api.bd2.models.Hora;
+import java.io.IOException;
+import java.util.LinkedList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -429,7 +446,6 @@ public class LancamentoColaboradorController {
         lishoras.addAll(horadao.getHora(usuario));
         observablelisthoras.setAll(lishoras);
         tabelaLancamento.setItems(observablelisthoras);
-        tabelaN.setCellValueFactory(new PropertyValueFactory<>("id"));
         tabelaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         tabelaStatus.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao"));
         tabelaInicio.setCellValueFactory(new PropertyValueFactory<>("data_hora_inicio"));
@@ -522,6 +538,20 @@ public class LancamentoColaboradorController {
         stage.show();
     }
 
+    @FXML
+    public void RelatorioCSV() throws Exception {
+        TesteGerarRelatorio.gerarRelatorio();
+    /*
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("ExtracaoRelatorio.fxml"));
+    Parent root = loader.load();
+    Scene cena = new Scene(root);
+    Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+    stage.setScene(cena);
+    stage.centerOnScreen();
+    stage.show();
+    */
+    }
+    
     /**
      * @return the nomeUsuario
      */
