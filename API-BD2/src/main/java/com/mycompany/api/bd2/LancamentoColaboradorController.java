@@ -212,7 +212,7 @@ public class LancamentoColaboradorController {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Preencha todos os campos");
             alert.setHeaderText(null);
-            alert.setContentText("Alguns dos campos não foi preenchido");
+            alert.setContentText("Alguns dos campos não foram preenchidos");
             alert.showAndWait();
         } else {
             boolean testedata = false;
@@ -329,12 +329,22 @@ public class LancamentoColaboradorController {
         
     @FXML
     public void botaoAcionamento(ActionEvent event) throws ParseException{
-        if (getDataInicio().getValue() == null || getHoraInicio().getValue() == null || getMinutoInicio().getValue() == null || getDataFim().getValue() == null || getHoraFim().getValue() == null || getMinutoFim().getValue() == null || entradaProjeto.getText().isEmpty() || selecaoCliente.getValue() == null || selecaoCR.getValue() == null || entradaJustificativa.getText().isEmpty() || horaTipo.getValue() == null) {
+        if (getDataInicio().getValue() == null 
+                || getHoraInicio().getValue() == null 
+                || getMinutoInicio().getValue() == null 
+                || getDataFim().getValue() == null 
+                || getHoraFim().getValue() == null 
+                || getMinutoFim().getValue() == null 
+                || entradaProjeto.getText().isEmpty() 
+                || selecaoCliente.getValue() == null 
+                || selecaoCR.getValue() == null 
+                || entradaJustificativa.getText().isEmpty() 
+                || horaTipo.getValue() == null) {
             System.out.println("Preencha todos os campos - tela de lançamento");
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Preencha todos os campos");
             alert.setHeaderText(null);
-            alert.setContentText("Alguns dos campos não foi preenchido");
+            alert.setContentText("Alguns dos campos não foram preenchidos");
             alert.showAndWait();
         } else{
         capturaHora();
