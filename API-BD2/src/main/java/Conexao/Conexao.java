@@ -17,23 +17,23 @@ import java.io.File;
 import javafx.stage.FileChooser;
 
 public class Conexao {
+
     private static final String USERNAME = "admin"; //usuário do seu banco
     private static final String PASSWORD = "admin123"; //senha do seu banco
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/2rp"; //porta do seu banco
-    
-    public static Connection createConnectionToMySQL() throws Exception{
+
+    public static Connection createConnectionToMySQL() throws Exception {
         Connection connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
         return connection;
     }
-    
 
     public static void gerarRelatorioCSV(String dataExtrato, String query) throws IOException, Exception {
         Connection connection = createConnectionToMySQL();
         Statement stmt = connection.createStatement();
-        
+
         String caminhoDiretorio = System.getProperty("user.home") + "/Downloads/";
-        String caminhoCompleto = caminhoDiretorio + "extrato_"+dataExtrato;
-        
+        String caminhoCompleto = caminhoDiretorio + "extrato_" + dataExtrato + ".csv";
+
         try (ResultSet rs = stmt.executeQuery(query)) {
 
             // Cria o escritor do arquivo CSV
@@ -68,16 +68,15 @@ public class Conexao {
             throw new RuntimeException(e);
         }
         String caminho = System.getProperty("user.home") + "/Downloads/";
-        System.out.println("Relatório 'extrato_"+dataExtrato+"' foi armazenado na pasta Downloads");
+        System.out.println("Relatório 'extrato_" + dataExtrato + "' foi armazenado na pasta Downloads");
     }
-        
-    public static void main(String[] args) throws Exception{
+
+    public static void main(String[] args) throws Exception {
         Connection con = createConnectionToMySQL();
-        if(con!=null){
+        if (con != null) {
             System.out.println("Conexão obtida com sucesso!");
             con.close();
-        }
-        else{
+        } else {
             System.out.println("Erro ao conectar.");
         }
     }
