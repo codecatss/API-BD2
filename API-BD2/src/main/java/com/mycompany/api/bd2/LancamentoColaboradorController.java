@@ -47,8 +47,6 @@ import javafx.stage.Stage;
 public class LancamentoColaboradorController {
 
     @FXML
-    private Button FecharTela;
-    @FXML
     private Button minimizarTela;
     @FXML
     private Label nometelaatual;
@@ -56,73 +54,41 @@ public class LancamentoColaboradorController {
     private ImageView imagemUser;
     @FXML
     private Label nomeUsuario;
-    @FXML
     private Label errodata;
-    @FXML
     private Label erroproj;
     @FXML
     private Button botaoSair;
-    @FXML
     private Button botaoAcionamento;
-    @FXML
     private TableView<Hora> tabelaLancamento;
-    @FXML
     private TableColumn<Hora, ?> tabelaN;
-    @FXML
     private TableColumn<Hora, String> tabelaTipo;
-    @FXML
     private TableColumn<Hora, ?> tabelaStatus;
-    @FXML
     private TableColumn<Hora, ?> tabelaInicio;
-    @FXML
     private TableColumn<Hora, ?> tabelaFim;
-    @FXML
     private TableColumn<Hora, ?> tabelaCR;
-    @FXML
     private TableColumn<Hora, ?> tabelaCliente;
-    @FXML
     private TableColumn<Hora, ?> tabelaProjeto;
-    @FXML
     private TableColumn<Hora, ?> tabelaSolicitante;
-    @FXML
     private TableColumn<Hora, ?> tabelaJustificativa;
-    @FXML
     private Label errohoraI;
-    @FXML
     private Label errohoraII;
-    @FXML
     private DatePicker dataInicio;
 
     @FXML
     private DatePicker dataFim;
-    @FXML
     private Spinner<Integer> horaInicio;
-    @FXML
     private Spinner<Integer> minutoInicio;
-    @FXML
     private Spinner<Integer> horaFim;
-    @FXML
     private Spinner<Integer> minutoFim;
-    @FXML
     private ComboBox<String> horaTipo;
-    @FXML
     private ComboBox<String> selecaoCliente;
-    @FXML
     private ComboBox<String> selecaoCR;
-    @FXML
-    private Button botaoAdicionar;
-    @FXML
     private Button botaoLimpar;
-    @FXML
     private TextField entradaProjeto;
-
     @FXML
     private TextField entradaJustificativa;
-    @FXML
     private TextField entradaSolicitante;
-    @FXML
     private Button menuLancamento;
-    @FXML
     private Button menuApontamento;
     @FXML
     private Button menuRelatorio;
@@ -140,6 +106,42 @@ public class LancamentoColaboradorController {
 
     private List<String> centro_r = new ArrayList<>();
     private ObservableList<String> opCr = FXCollections.observableArrayList();
+    @FXML
+    private Button fecharTela;
+    @FXML
+    private AnchorPane menuADM;
+    @FXML
+    private Button menuUsuario;
+    @FXML
+    private Button menuCR;
+    @FXML
+    private Button menuCliente;
+    @FXML
+    private Button menuAprovar;
+    @FXML
+    private TableView<?> tabelaAprovacao;
+    @FXML
+    private TableColumn<?, ?> colunaColaboradorADM;
+    @FXML
+    private TableColumn<?, ?> colunaCRADM;
+    @FXML
+    private TableColumn<?, ?> colundaGestorADM;
+    @FXML
+    private TableColumn<?, ?> colunaEmpresaADM;
+    @FXML
+    private TableColumn<?, ?> colunaProjetoADM;
+    @FXML
+    private TableColumn<?, ?> colunaFuncaoADM;
+    @FXML
+    private TableColumn<?, ?> colunaInicioADM;
+    @FXML
+    private TableColumn<?, ?> colunaFimADM;
+    @FXML
+    private TableColumn<?, ?> colunaJustificativaADM;
+    @FXML
+    private Button botaoReprovar;
+    @FXML
+    private Button botaoAprovar;
 
     public void initialize() {
         getNomeUsuario().setText(usuario);
@@ -177,7 +179,6 @@ public class LancamentoColaboradorController {
         }
     }
 
-    @FXML
     public void limparCampos() {
         limmparFormatacao();
         getHoraInicio().getValueFactory().setValue(0);
@@ -193,7 +194,6 @@ public class LancamentoColaboradorController {
         botaoAcionamento.setVisible(false);
     }
 
-    @FXML
     public void tipoHora() throws ParseException {
         obs.clear();
         obs.add("Hora extra");
@@ -204,7 +204,6 @@ public class LancamentoColaboradorController {
 
     private String erro = "-fx-border-color:#E06469";
 
-    @FXML
     public void botaoAdicionar() throws ParseException {
 
         // Verifica se todos os campos foram preenchidos
@@ -439,7 +438,6 @@ public class LancamentoColaboradorController {
         }
     }
 
-    @FXML
     public void carregarTabelaLancamento() {
         horaDAO horadao = new horaDAO();
         lishoras.clear();
@@ -461,13 +459,10 @@ public class LancamentoColaboradorController {
         tabelaLancamento.refresh();
 
     }
-
     public void atualizarInformacoes() {
         System.out.println(TimeData.getInstance().getHoraInicio());
         // ...
     }
-
-    @FXML
     public void limmparFormatacao() {
         getDataInicio().getEditor().clear();
         getDataInicio().setValue(null);
@@ -488,7 +483,6 @@ public class LancamentoColaboradorController {
         getMinutoFim().setStyle(null);
     }
 
-    @FXML
     public void forneceCliente() {
         clienteDAO clienteDAO = new clienteDAO();
         cli.clear();
@@ -499,7 +493,6 @@ public class LancamentoColaboradorController {
         getSelecaoCliente().setItems(opCli);
     }
 
-    @FXML
     public void forneceCR() {
         crDAO crDAO = new crDAO();
         centro_r.clear();
@@ -510,7 +503,6 @@ public class LancamentoColaboradorController {
         getSelecaoCR().setItems(opCr);
     }
 
-    @FXML
     private void BotaoSair(ActionEvent event) throws IOException {
         Usuario usuario = new Usuario();
         usuario.logout();
@@ -522,12 +514,10 @@ public class LancamentoColaboradorController {
         stage.show();
     }
 
-    @FXML
     public void botaoExit() {
         Platform.exit();
     }
 
-    @FXML
     public void navApontamentoGestor(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ApontamentoGestor.fxml"));
