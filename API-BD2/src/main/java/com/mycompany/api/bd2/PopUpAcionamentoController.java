@@ -72,10 +72,6 @@ public class PopUpAcionamentoController implements Initializable {
     @FXML
     private Button botaoAdicionar;
     @FXML
-    private Label errohoraI;
-    @FXML
-    private Label errohoraII;
-    @FXML
     private DatePicker dataFimAc;
     @FXML
     private DatePicker dataInicioAc;
@@ -137,83 +133,92 @@ public class PopUpAcionamentoController implements Initializable {
 
     @FXML
     private void botaoAdicionar() throws ParseException {
-        Hora horaExtra = new Hora();
-        Hora hora = LancamentoColaboradorController.getHora();
-
-        // Preenche os dados que vêm do lançamento do sobreaviso
-        horaExtra.setCnpj_cliente(hora.getCnpj_cliente());
-        horaExtra.setCod_cr(hora.getCod_cr());
-        horaExtra.setJustificativa_lancamento(hora.getJustificativa_lancamento());
-        horaExtra.setNome_cliente(hora.getNome_cliente());
-        horaExtra.setProjeto(hora.getProjeto());
-        horaExtra.setUsername_aprovador(hora.getUsername_aprovador());
-        horaExtra.setUsername_lancador(hora.getUsername_lancador());
-        horaExtra.setTipo(hora.getTipo());
-        horaExtra.setStatus_aprovacao(hora.getStatus_aprovacao());
-        horaExtra.setSolicitante(hora.getSolicitante());
-
         // Obtém os valores de data de inicio e de fim (campos de entrada)
         inicioAcionamento = dataInicioAc.getValue();
         fimAcionamento = dataFimAc.getValue();
+        
+        // Verifica se as datas foram preenchidas
+        if (inicioAcionamento == null || fimAcionamento == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Preencha todos os campos");
+            alert.setHeaderText(null);
+            alert.setContentText("Alguns dos campos não foram preenchidos");
+            alert.showAndWait();
+        } else {
+            Hora horaExtra = new Hora();
 
-        // Formata as strings de inicioAcionamento e fimAcionamento
-        String dtInicioAc = inicioAcionamento.toString();
-        String dtFimAc = fimAcionamento.toString();
+            Hora hora = LancamentoColaboradorController.getHora();
 
-        // Obtém os valores de hora e minuto de inicio (campos de entrada)
-        int hora_inicio = horaInicio.getValue();
-        int min_inicio = minutoInicio.getValue();
+            // Preenche os dados que vêm do lançamento do sobreaviso
+            horaExtra.setCnpj_cliente(hora.getCnpj_cliente());
+            horaExtra.setCod_cr(hora.getCod_cr());
+            horaExtra.setJustificativa_lancamento(hora.getJustificativa_lancamento());
+            horaExtra.setNome_cliente(hora.getNome_cliente());
+            horaExtra.setProjeto(hora.getProjeto());
+            horaExtra.setUsername_aprovador(hora.getUsername_aprovador());
+            horaExtra.setUsername_lancador(hora.getUsername_lancador());
+            horaExtra.setTipo(hora.getTipo());
+            horaExtra.setStatus_aprovacao(hora.getStatus_aprovacao());
+            horaExtra.setSolicitante(hora.getSolicitante());
 
-        // Formata as strings de hora_inicio e min_inicio
-        String hora_inicioS = Integer.toString(hora_inicio);
-        String min_inicioS = Integer.toString(min_inicio);
+            // Formata as strings de inicioAcionamento e fimAcionamento
+            String dtInicioAc = inicioAcionamento.toString();
+            String dtFimAc = fimAcionamento.toString();
 
-        if (min_inicioS.length() < 2) {
-            min_inicioS = "0" + min_inicioS;
-        }
-        if (hora_inicioS.length() < 2) {
-            hora_inicioS = "0" + hora_inicioS;
-        }
+            // Obtém os valores de hora e minuto de inicio (campos de entrada)
+            int hora_inicio = horaInicio.getValue();
+            int min_inicio = minutoInicio.getValue();
 
-        // Concatena as strings de hora e minuto iniciais
-        hora_inicioS = hora_inicioS + ":" + min_inicioS + ":00";
+            // Formata as strings de hora_inicio e min_inicio
+            String hora_inicioS = Integer.toString(hora_inicio);
+            String min_inicioS = Integer.toString(min_inicio);
 
-        // Concatena as strings de data de inicio e hora de inicio
-        String data_hora_inicio = dtInicioAc + " " + hora_inicioS;
+            if (min_inicioS.length() < 2) {
+                min_inicioS = "0" + min_inicioS;
+            }
+            if (hora_inicioS.length() < 2) {
+                hora_inicioS = "0" + hora_inicioS;
+            }
 
-        // Preenche a data e a hora de inicio no objeto horaExtra
-        horaExtra.setData_hora_inicio(data_hora_inicio);
+            // Concatena as strings de hora e minuto iniciais
+            hora_inicioS = hora_inicioS + ":" + min_inicioS + ":00";
 
-        // Obtém os valores de hora e minuto de fim (campos de entrada)
-        int hora_fim = horaFim.getValue();
-        int min_fim = minutoFim.getValue();
+            // Concatena as strings de data de inicio e hora de inicio
+            String data_hora_inicio = dtInicioAc + " " + hora_inicioS;
 
-        // Formata as strings de hora_fim e min_fim
-        String hora_fimS = Integer.toString(hora_fim);
-        String min_fimS = Integer.toString(min_fim);
-        if (min_fimS.length() < 2) {
-            min_fimS = "0" + min_fimS;
-        }
-        if (hora_fimS.length() < 2) {
-            hora_fimS = "0" + hora_fimS;
-        }
+            // Preenche a data e a hora de inicio no objeto horaExtra
+            horaExtra.setData_hora_inicio(data_hora_inicio);
 
-        // Concatena as strings de hora e minuto finais
-        hora_fimS = hora_fimS + ":" + min_fimS + ":00";
+            // Obtém os valores de hora e minuto de fim (campos de entrada)
+            int hora_fim = horaFim.getValue();
+            int min_fim = minutoFim.getValue();
 
-        // Concatena as strings de data de inicio e hora finais
-        String data_hora_fim = dtFimAc + " " + hora_fimS;
+            // Formata as strings de hora_fim e min_fim
+            String hora_fimS = Integer.toString(hora_fim);
+            String min_fimS = Integer.toString(min_fim);
+            if (min_fimS.length() < 2) {
+                min_fimS = "0" + min_fimS;
+            }
+            if (hora_fimS.length() < 2) {
+                hora_fimS = "0" + hora_fimS;
+            }
 
-        // Preenche a data e a hora de fim no objeto horaExtra
-        horaExtra.setData_hora_fim(data_hora_fim);
+            // Concatena as strings de hora e minuto finais
+            hora_fimS = hora_fimS + ":" + min_fimS + ":00";
 
-        int resultInicio = horaExtra.getData_hora_inicio().compareTo(hora.getData_hora_inicio());
-        int resultFim = horaExtra.getData_hora_fim().compareTo(hora.getData_hora_fim());
-        int resultHoraExtra = horaExtra.getData_hora_inicio().compareTo(horaExtra.getData_hora_fim());
+            // Concatena as strings de data de inicio e hora finais
+            String data_hora_fim = dtFimAc + " " + hora_fimS;
 
-        // Verifica se a hora-extra informada está dentro do intervalo de sobreaviso
-        if (resultInicio >= 0 && resultFim <= 0) {
-            if (resultHoraExtra < 0) {
+            // Preenche a data e a hora de fim no objeto horaExtra
+            horaExtra.setData_hora_fim(data_hora_fim);
+
+            int resultInicio = horaExtra.getData_hora_inicio().compareTo(hora.getData_hora_inicio());
+            int resultFim = horaExtra.getData_hora_fim().compareTo(hora.getData_hora_fim());
+            int resultHoraExtra = horaExtra.getData_hora_inicio().compareTo(horaExtra.getData_hora_fim());
+
+            // Verifica se a hora-extra informada está dentro do intervalo de sobreaviso
+            if (resultInicio >= 0 && resultFim <= 0) {
+                if (resultHoraExtra < 0) {
 
                     boolean conflito = false;
                     for (Hora horaExistente : lantemp) {
@@ -248,19 +253,20 @@ public class PopUpAcionamentoController implements Initializable {
                         alert.setContentText("A hora informada está em conflito com uma hora já adicionada.");
                         alert.showAndWait();
                     }
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Hora-extra incompatível");
+                    alert.setHeaderText(null);
+                    alert.setContentText("O início da hora-extra deve ser antes do fim");
+                    alert.showAndWait();
+                }
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Hora-extra incompatível");
+                alert.setTitle("Hora-extra fora do intervalo");
                 alert.setHeaderText(null);
-                alert.setContentText("O início da hora-extra deve ser antes do fim");
+                alert.setContentText("A hora-extra informada precisa estar dentro do intervalo de data do sobreaviso.");
                 alert.showAndWait();
             }
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Hora-extra fora do intervalo");
-            alert.setHeaderText(null);
-            alert.setContentText("A hora-extra informada precisa estar dentro do intervalo de data do sobreaviso.");
-            alert.showAndWait();
         }
     }
 
