@@ -135,7 +135,7 @@ public class ApontamentoGestorController implements Initializable {
         //colunaFunçao.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
         tabelaApontamento.refresh();
     }
-
+/**
     @FXML
     public void botaoAprovar() {
         if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
@@ -159,7 +159,7 @@ public class ApontamentoGestorController implements Initializable {
             carregarTabelaLancamento();
         }
     }
-    
+ **/   
     @FXML
     public void navLancamentoColaborador(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LancamentoColaborador.fxml"));
