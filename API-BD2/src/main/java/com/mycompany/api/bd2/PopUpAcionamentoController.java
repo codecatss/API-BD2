@@ -151,7 +151,7 @@ public class PopUpAcionamentoController implements Initializable {
         inicioAcionamento = dataInicioAc.getValue();
         fimAcionamento = dataFimAc.getValue();
 
-        // Verifica se as datas (NÂO) foram preenchidas
+        // Verifica se as datas (NÃO) foram preenchidas
         if (inicioAcionamento == null || fimAcionamento == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Preencha todos os campos");
