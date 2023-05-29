@@ -7,14 +7,15 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 import com.mycompany.api.bd2.models.TipoHora;
+import java.time.LocalDate;
 
 public class Hora {
     
     private Hora instancia = null;
-    private int id;
+    private Integer id;
     private String cod_cr;
     private String username_lancador;
-    private long cnpj_cliente;
+    private int cnpj_cliente;
     private String nome_cliente;
     private Timestamp data_hora_inicio;
     private Timestamp data_hora_fim;
@@ -26,13 +27,13 @@ public class Hora {
     private String justificativa_negacao;
     private StatusAprovacao status_aprovacao;
     
-    public Hora getInstance() {
-        if (instancia == null) {
-            instancia = new Hora();
-        }
-        return instancia;
+    //private static Hora instance = null;
+    public  Hora () {
+        //if (instance == null) {
+          //  instance = new Hora();
+        //}
+        //return instance;
     }
-
     public String getNome_cliente() {
         return nome_cliente;
     }
@@ -66,7 +67,7 @@ public class Hora {
     /**
      * @return the id
      */
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -110,7 +111,7 @@ public class Hora {
     /**
      * @return the data_hora_fim
      */
-    public Timestamp getData_hora_fim() throws ParseException {
+    public Timestamp getData_hora_fim(){
         return data_hora_fim;
     }
 
@@ -177,14 +178,14 @@ public class Hora {
     /**
      * @return the cnpj_cliente
      */
-    public long getCnpj_cliente() {
+    public int getCnpj_cliente() {
         return cnpj_cliente;
     }
 
     /**
      * @param cnpj_cliente the cnpj_cliente to set
      */
-    public void setCnpj_cliente(long cnpj_cliente) {
+    public void setCnpj_cliente(int cnpj_cliente) {
         this.cnpj_cliente = cnpj_cliente;
     }
 
@@ -230,5 +231,25 @@ public class Hora {
         this.justificativa_negacao = justificativa_negacao;
     }
     
+    /**
+     * @Seta todos os parametros do hora como null menos cnpj cliente que passa a ser 0
+     */
+    public void beNull(){
+        this.cnpj_cliente=0;
+        this.cod_cr=null;
+        this.data_hora_fim=null;
+        this.data_hora_inicio=null;
+        this.id=null;
+        this.justificativa_lancamento=null;
+        this.justificativa_negacao=null;
+        this.nome_cliente=null;
+        this.projeto=null;
+        this.solicitante=null;
+        this.status_aprovacao=null;
+        this.tipo=null;
+        this.username_aprovador=null;
+        this.username_lancador=null;
+                
+    }
 
 }

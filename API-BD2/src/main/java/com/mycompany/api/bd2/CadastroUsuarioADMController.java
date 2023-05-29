@@ -324,13 +324,18 @@ public class CadastroUsuarioADMController {
         stage.centerOnScreen();
         stage.show();
     }
-
+    
     @FXML
-    void Relatorios(ActionEvent event) throws IOException {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Em progresso");
-        alert.setHeaderText(null);
-        alert.setContentText("Desculpe o transtorno, estamos sempre trabalhando em melhorias");
-        alert.showAndWait();
+    public void RelatorioCSV() throws Exception {
+        TesteGerarRelatorio.gerarRelatorio();
+        /*
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ExtracaoRelatorio.fxml"));
+        Parent root = loader.load();
+        Scene cena = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+        stage.setScene(cena);
+        stage.centerOnScreen();
+        stage.show();
+        */
     }
 }

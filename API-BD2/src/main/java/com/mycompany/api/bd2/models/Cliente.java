@@ -10,7 +10,7 @@ package com.mycompany.api.bd2.models;
  * @author mikaela.begotti
  */
 public class Cliente {
-    private long cnpj;
+    private Integer cnpj;
     private String razao_social;
     private Status_cliente status_cliente;
 
@@ -35,7 +35,7 @@ public class Cliente {
         return cnpj;
     }
 
-    public void setCnpj(long cnpj) {
+    public void setCnpj(int cnpj) {
         this.cnpj = cnpj;
     }
 

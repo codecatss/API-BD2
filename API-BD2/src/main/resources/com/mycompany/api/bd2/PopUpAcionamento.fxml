@@ -2,6 +2,7 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TableColumn?>
@@ -12,7 +13,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.api.bd2.PopUpAcionamentoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.api.bd2.PopUpAcionamentoController">
    <children>
       <BorderPane prefHeight="300.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -41,36 +42,37 @@
                <children>
                   <AnchorPane prefHeight="291.0" prefWidth="126.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="22.0" prefWidth="90.0" text="Hora Início" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="15.0">
+                        <DatePicker id="dataInicio" fx:id="dataInicioAc" layoutX="43.0" layoutY="70.0" prefHeight="30.0" prefWidth="155.0" />
+                        <Label alignment="CENTER" layoutX="47.0" layoutY="36.0" prefHeight="22.0" prefWidth="90.0" text="Início" AnchorPane.leftAnchor="47.0" AnchorPane.rightAnchor="53.0" AnchorPane.topAnchor="36.0">
                            <font>
                               <Font name="Arial" size="18.0" />
                            </font>
                         </Label>
-                        <Label layoutX="83.0" layoutY="172.0" prefWidth="5.0" text=":" AnchorPane.leftAnchor="118.0" AnchorPane.topAnchor="160.0">
+                        <Label layoutX="115.0" layoutY="252.0" prefWidth="5.0" text=":" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="252.0">
                            <font>
                               <Font name="Arial Bold" size="15.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="45.0" layoutY="207.0" prefHeight="22.0" prefWidth="90.0" text="Hora Fim" textAlignment="CENTER" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="115.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="54.0" layoutY="175.0" prefHeight="22.0" prefWidth="90.0" text="Fim" textAlignment="CENTER" AnchorPane.leftAnchor="54.0" AnchorPane.rightAnchor="56.0" AnchorPane.topAnchor="175.0">
                            <font>
                               <Font name="Arial" size="18.0" />
                            </font>
                         </Label>
-                        <Label layoutX="118.0" layoutY="82.0" prefHeight="17.0" prefWidth="0.0" text=":" AnchorPane.leftAnchor="118.0" AnchorPane.topAnchor="60.0">
+                        <Label layoutX="116.0" layoutY="116.0" prefHeight="17.0" prefWidth="0.0" text=":" AnchorPane.leftAnchor="116.0" AnchorPane.topAnchor="116.0">
                            <font>
                               <Font name="Arial Bold" size="15.0" />
                            </font>
                         </Label>
-                        <Spinner id="horaInicio" fx:id="horaInicio" layoutX="10.0" layoutY="167.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="55.0" />
-                        <Spinner id="minutoInicio" fx:id="minutoInicio" layoutX="140.0" layoutY="167.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="55.0" />
-                        <Spinner id="horaFim" fx:id="horaFim" layoutX="10.0" layoutY="237.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="155.0" />
-                        <Spinner id="minutoFim" fx:id="minutoFim" layoutX="140.0" layoutY="237.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="155.0" />
-                        <Button id="botaoSalvar" fx:id="botaoSalvar" layoutX="30.0" layoutY="256.0" mnemonicParsing="false" onAction="#botaoAdicionar" prefHeight="15.0" prefWidth="80.0" styleClass="atv-btn" stylesheets="@EstilizacaoTelas.css" text="SALVAR" textFill="WHITE" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="315.0">
+                        <Spinner id="horaInicio" fx:id="horaInicio" layoutX="42.0" layoutY="110.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="110.0" />
+                        <Spinner id="minutoInicio" fx:id="minutoInicio" layoutX="128.0" layoutY="110.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="110.0" />
+                        <Spinner id="horaFim" fx:id="horaFim" layoutX="43.0" layoutY="246.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.leftAnchor="43.0" AnchorPane.topAnchor="246.0" />
+                        <Spinner id="minutoFim" fx:id="minutoFim" layoutX="128.0" layoutY="246.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="246.0" />
+                        <Button id="botaoSalvar" fx:id="botaoSalvar" layoutX="65.0" layoutY="447.0" mnemonicParsing="false" onAction="#botaoSalvar" prefHeight="15.0" prefWidth="80.0" styleClass="atv-btn" stylesheets="@EstilizacaoTelas.css" text="SALVAR" textFill="WHITE" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="447.0">
                            <font>
                               <Font name="Arial Bold" size="18.0" />
                            </font>
                         </Button>
-                        <Button id="botaoExcluir" fx:id="botaoExcluir" layoutX="125.0" layoutY="306.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="20.0" prefWidth="70.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" textFill="WHITE" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="265.0">
+                        <Button id="botaoExcluir" fx:id="botaoExcluir" layoutX="65.0" layoutY="397.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="20.0" prefWidth="70.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" textFill="WHITE" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="397.0">
                            <font>
                               <Font name="Arial Bold" size="18.0" />
                            </font>
@@ -82,7 +84,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutX="45.0" layoutY="306.0" mnemonicParsing="false" onAction="#botaoAdicionar" prefHeight="5.0" prefWidth="70.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" textFill="WHITE" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="215.0">
+                        <Button id="botaoAdicionar" fx:id="botaoAdicionar" layoutX="65.0" layoutY="347.0" mnemonicParsing="false" onAction="#botaoAdicionar" prefHeight="5.0" prefWidth="70.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" textFill="WHITE" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="347.0">
                            <font>
                               <Font name="Arial Bold" size="18.0" />
                            </font>
@@ -94,6 +96,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
+                        <DatePicker id="dataFim" fx:id="dataFimAc" layoutX="43.0" layoutY="206.0" prefHeight="30.0" prefWidth="155.0" />
                      </children>
                      <styleClass>
                         <String fx:value="white-bg" />
@@ -108,11 +111,11 @@
                <children>
                   <AnchorPane prefHeight="245.0" prefWidth="300.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <TableView prefHeight="245.0" prefWidth="325.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                        <TableView id="tabelaAcionamento" fx:id="tabelaAcionamento" prefHeight="245.0" prefWidth="325.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                            <columns>
-                              <TableColumn id="colunaAcionamento" fx:id="colunaAcionamento" minWidth="100.0" prefWidth="100.0" text="Acionamento(s)" />
-                              <TableColumn id="colunaInicio" fx:id="colunaInicio" minWidth="150.0" prefWidth="150.0" text="Hora Início" />
-                              <TableColumn id="colunaFim" fx:id="colunaFim" minWidth="150.0" prefWidth="150.0" text="Hora Fim" />
+                              <TableColumn id="colunaAcionamento" fx:id="colunaAcionamento" minWidth="100.0" prefWidth="130.0" text="Acionamento(s)" />
+                              <TableColumn id="colunaInicio" fx:id="colunaInicio" minWidth="150.0" prefWidth="203.0" text="Hora Início" />
+                              <TableColumn id="colunaFim" fx:id="colunaFim" minWidth="150.0" prefWidth="206.0" text="Hora Fim" />
                            </columns>
                         </TableView>
                      </children>
