@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.api.bd2.ExtracaoRelatorioController">
+   <children>
+      <BorderPane layoutX="520.0" layoutY="225.0" prefHeight="650.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="40.0" prefWidth="1300.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane layoutX="534.0" layoutY="-80.0" prefHeight="40.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Button id="fecharTela" fx:id="fecharTela" layoutX="1270.0" layoutY="5.0" mnemonicParsing="false" onAction="#fechaTela" styleClass="close" stylesheets="@EstilizacaoTelas.css" text="X" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="5.0">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button id="minimizarTela" fx:id="minimizarTela" layoutX="1245.0" layoutY="5.0" mnemonicParsing="false" styleClass="minimize" stylesheets="@EstilizacaoTelas.css" text="-" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="5.0" />
+                        <Label id="nometelaatual" fx:id="nometelaatual" layoutX="10.0" layoutY="10.0" text="Apontamentos" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </top>
+         <left>
+            <AnchorPane prefHeight="610.0" prefWidth="225.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="610.0" prefWidth="225.0" styleClass="nav-form" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Line endX="100.0" layoutX="15.0" layoutY="85.0" startX="-100.0" stroke="WHITE" strokeWidth="2.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="85.0" />
+                        <ImageView id="imagemUser" fx:id="imagemUser" fitHeight="40.0" fitWidth="40.0" layoutX="15.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="25.0">
+                           <image>
+                              <Image url="@user-48.png" />
+                           </image>
+                        </ImageView>
+                        <Label id="nomeUsuario" fx:id="nomeUsuario" layoutX="75.0" layoutY="30.0" text="USUÁRIO" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="30.0">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                        </Label>
+                        <Button id="botaoSair" fx:id="botaoSair" layoutX="10.0" layoutY="580.0" mnemonicParsing="false" onAction="#BotaoSair" styleClass="logout" stylesheets="@EstilizacaoTelas.css" text="Sair" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button id="menuLancamento" fx:id="menuLancamento" layoutX="15.0" layoutY="136.0" mnemonicParsing="false" onAction="#navLancamentoColaborador" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text=" Lançamentos" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="136.0">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icon-lancamento.png" /> 
+                                </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button id="menuApontamento" fx:id="menuApontamento" layoutX="10.0" layoutY="211.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Apontamentos" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="211.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icon-apontamento.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button id="menuRelatorio" fx:id="menuRelatorio" layoutX="15.0" layoutY="286.0" mnemonicParsing="false" onAction="#RelatorioCSV" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text=" Relatórios" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="286.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icon-relatorio.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </left>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="746.0" prefWidth="1080.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <TableView id="tabelaContainer" fx:id="tabelaApontamento" layoutX="14.0" layoutY="57.0" prefHeight="665.0" prefWidth="1044.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0">
+                           <columns>
+                              <TableColumn fx:id="colunaUsername" prefWidth="180.0" text="Colaborador" />
+                              <TableColumn fx:id="colunaCR" prefWidth="148.0" text="CR" />
+                              <TableColumn fx:id="colunaEmpresa" prefWidth="167.20001220703125" text="Cliente" />
+                              <TableColumn fx:id="colunaProjeto" prefWidth="181.59994506835938" text="Projeto" />
+                              <TableColumn fx:id="colunaFuncao" prefWidth="98.39996337890625" text="Tipo" />
+                              <TableColumn fx:id="colunaInicio" prefWidth="81.59991455078125" text="Inicio" />
+                              <TableColumn fx:id="colunaFim" text="Fim" />
+                              <TableColumn fx:id="colunaFim1" text="Status" />
+                              <TableColumn fx:id="colunaJust" prefWidth="119.199951171875" text="Justificativa" />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="14.0" layoutY="20.0" text="Relatórios">
+                           <font>
+                              <Font name="Arial" size="24.0" />
+                           </font>
+                        </Label>
+                        <Button id="buttonAprovar" fx:id="BotaoAprovar" layoutX="943.0" layoutY="16.0" mnemonicParsing="false" onAction="#botaoAprovar" prefHeight="30.0" prefWidth="102.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Extrair" textFill="WHITE" AnchorPane.rightAnchor="21.000000000000085" AnchorPane.topAnchor="16.0">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Button>
+                        <ComboBox layoutX="149.0" layoutY="17.0" prefHeight="30.0" prefWidth="150.0" promptText="Status" />
+                        <DatePicker layoutX="317.0" layoutY="16.0" prefHeight="30.0" prefWidth="157.0" promptText="Início" />
+                        <DatePicker layoutX="488.0" layoutY="16.0" prefHeight="30.0" prefWidth="157.0" promptText="Fim" />
+                     </children>
+                     <styleClass>
+                        <String fx:value="white-bg" />
+                        <String fx:value="shadow" />
+                     </styleClass>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
