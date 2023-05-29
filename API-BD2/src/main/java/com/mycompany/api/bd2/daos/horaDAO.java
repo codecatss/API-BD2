@@ -375,4 +375,56 @@ public class horaDAO {
             }
         }
     }
+    
+    public Set<Hora> getHorasAprovadas() {
+    String sql = "SELECT * FROM 2rp.hora WHERE status_aprovacao = 'aprovado_gestor'";
+    Set<Hora> horasAprovadas = new HashSet<>();
+
+    Connection conn = null;
+    PreparedStatement pstm = null;
+    ResultSet rset = null;
+
+    try {
+        conn = Conexao.createConnectionToMySQL();
+        pstm = conn.prepareStatement(sql);
+        rset = pstm.executeQuery();
+
+        while (rset.next()) {
+            Hora hora = new Hora();
+            hora.setCod_cr(rset.getString("cod_cr"));
+            hora.setUsername_lancador(rset.getString("username_lancador"));
+            hora.setCnpj_cliente(rset.getInt("cnpj_cliente"));
+            hora.setData_hora_inicio(rset.getString("data_hora_inicio"));
+            hora.setData_hora_fim(rset.getString("data_hora_fim"));
+            hora.setTipo(rset.getString("tipo"));
+            hora.setJustificativa_lancamento(rset.getString("justificativa_lancamento"));
+            hora.setProjeto(rset.getString("projeto"));
+            hora.setUsername_aprovador(rset.getString("username_aprovador"));
+            hora.setJustificativa_negacao(rset.getString("justificativa_negacao"));
+            hora.setStatus_aprovacao(rset.getString("status_aprovacao"));
+
+            horasAprovadas.add(hora);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (rset != null) {
+                rset.close();
+            }
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    System.out.println(horasAprovadas);
+    return horasAprovadas;
+}
+
 }
