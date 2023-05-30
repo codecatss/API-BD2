@@ -88,7 +88,7 @@ public class ApontamentoGestorController implements Initializable {
     private TableColumn<TabelaAprovaçãoGestor, String> colunaInicio;//ok
 
     horaDAO horadao = new horaDAO();
-    
+
     private List<TabelaAprovaçãoGestor> lishoras = new ArrayList<>();
     private ObservableList<TabelaAprovaçãoGestor> observablelisthoras = FXCollections.observableArrayList();
 
@@ -134,19 +134,11 @@ public class ApontamentoGestorController implements Initializable {
         //colunaFunçao.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
         tabelaApontamento.refresh();
     }
-/**
+
     @FXML
     public void botaoAprovar() {
         if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
-            try {
-                horadao.aprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId(),TelaLoginController.usuariologado.getCargo());
-            } catch (InterruptedException ex) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erro");
-            alert.setHeaderText(null);
-            alert.setContentText("Usuário não altorizado");
-            alert.showAndWait();
-            }
+            horadao.aprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId());
             carregarTabelaLancamento();
         }
     }
@@ -158,7 +150,7 @@ public class ApontamentoGestorController implements Initializable {
             carregarTabelaLancamento();
         }
     }
- **/   
+
     @FXML
     public void navLancamentoColaborador(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LancamentoColaborador.fxml"));
@@ -169,8 +161,8 @@ public class ApontamentoGestorController implements Initializable {
         stage.centerOnScreen();
         stage.show();
     }
-    
-        @FXML
+
+    @FXML
     private void BotaoSair(ActionEvent event) throws IOException {
         Usuario usuario = new Usuario();
         usuario.logout();
@@ -181,18 +173,6 @@ public class ApontamentoGestorController implements Initializable {
         stage.setScene(cena);
         stage.show();
     }
+
     
-    @FXML
-    public void RelatorioCSV() throws Exception {
-        TesteGerarRelatorio.gerarRelatorio();
-        /*
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ExtracaoRelatorio.fxml"));
-        Parent root = loader.load();
-        Scene cena = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
-        stage.setScene(cena);
-        stage.centerOnScreen();
-        stage.show();
-        */
-    }
 }

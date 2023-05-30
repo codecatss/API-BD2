@@ -4,6 +4,9 @@ import com.mycompany.api.bd2.daos.crDAO;
 import com.mycompany.api.bd2.daos.horaDAO;
 import com.mycompany.api.bd2.models.Hora;
 import com.mycompany.api.bd2.models.Usuario;
+import com.mycompany.api.bd2.*;
+import com.mycompany.api.bd2.daos.*;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -80,6 +83,7 @@ public class AprovacaoADMController implements Initializable {
 
     private ObservableList<Hora> observablelisthoras = FXCollections.observableArrayList();
     private horaDAO horadao = new horaDAO();
+    private Hora hora = new Hora();
     private crDAO crgestor = new crDAO();
     private Usuario usuario = new Usuario();
 
@@ -89,7 +93,10 @@ public class AprovacaoADMController implements Initializable {
             Stage stage = (Stage) minimizarTela.getScene().getWindow();
             stage.setIconified(true);
         });
+
         menuAprovar.setDisable(true);
+        botaoAprovar.setOnAction(this::aprovarHora);
+
         carregarTabelaLancamento();
     }
 
@@ -150,7 +157,7 @@ public class AprovacaoADMController implements Initializable {
         alert.setContentText("Desculpe o transtorno, estamos sempre trabalhando em melhorias");
         alert.showAndWait();
     }
-    
+
     private void carregarTabelaLancamento() {
         colunaColaboradorADM.setCellValueFactory(new PropertyValueFactory<>("username_lancador"));
         colunaCRADM.setCellValueFactory(new PropertyValueFactory<>("cod_cr"));
@@ -163,6 +170,24 @@ public class AprovacaoADMController implements Initializable {
         observablelisthoras.setAll(horadao.getHorasAprovadas());
         tabelaAprovacao.setItems(observablelisthoras);
         tabelaAprovacao.refresh();
+
+    }
+
+    @FXML
+    private void aprovarHora(ActionEvent event) {
+        Hora horaSelecionada = tabelaAprovacao.getSelectionModel().getSelectedItem();
+        horaDAO dao = new horaDAO();
+
+        if (horaSelecionada != null) {
+            String codCr = horaSelecionada.getCod_cr();
+            String statusAprovacaoADM = "aprovado_rh";
+
+            dao.atualizarStatusAprovacao(codCr, statusAprovacaoADM);
+
+            horaSelecionada.setStatus_aprovacao(statusAprovacaoADM);
+            tabelaAprovacao.refresh();
+            carregarTabelaLancamento();
+        }
     }
 
 }

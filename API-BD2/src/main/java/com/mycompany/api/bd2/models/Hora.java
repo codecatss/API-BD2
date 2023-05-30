@@ -10,7 +10,7 @@ import com.mycompany.api.bd2.models.TipoHora;
 import java.time.LocalDate;
 
 public class Hora {
-    
+
     private Hora instancia = null;
     private Integer id;
     private String cod_cr;
@@ -26,14 +26,15 @@ public class Hora {
     private String username_aprovador;
     private String justificativa_negacao;
     private StatusAprovacao status_aprovacao;
-    
+
     //private static Hora instance = null;
-    public  Hora () {
+    public Hora() {
         //if (instance == null) {
-          //  instance = new Hora();
+        //  instance = new Hora();
         //}
         //return instance;
     }
+
     public String getNome_cliente() {
         return nome_cliente;
     }
@@ -42,7 +43,6 @@ public class Hora {
         this.nome_cliente = nome_cliente;
     }
 
-    
     public String getSolicitante() {
         return solicitante;
     }
@@ -50,18 +50,17 @@ public class Hora {
     public void setSolicitante(String solicitante) {
         this.solicitante = solicitante;
     }
-    
-    
+
     public StatusAprovacao getStatus_aprovacaoObj() {
         return status_aprovacao;
     }
-    
+
     public String getStatus_aprovacao() {
         return status_aprovacao.name();
     }
-    
-    public void setStatus_aprovacao(String status_aprovacao){
-        this.status_aprovacao = StatusAprovacao.valueOf(status_aprovacao);
+
+    public void setStatus_aprovacao(String status_aprovacaoADM) {
+        this.status_aprovacao = StatusAprovacao.valueOf(status_aprovacaoADM);
     }
 
     /**
@@ -95,14 +94,14 @@ public class Hora {
     /**
      * @return the data_hora_inicio
      */
-    public Timestamp getData_hora_inicio(){
+    public Timestamp getData_hora_inicio() {
         return data_hora_inicio;
     }
 
     /**
      * @param data_hora_inicio the data_hora_inicio to set
      */
-    public void setData_hora_inicio(String time) throws ParseException{
+    public void setData_hora_inicio(String time) throws ParseException {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         java.util.Date date = formatter.parse(time);
         this.data_hora_inicio = new Timestamp(date.getTime());
@@ -111,14 +110,14 @@ public class Hora {
     /**
      * @return the data_hora_fim
      */
-    public Timestamp getData_hora_fim(){
+    public Timestamp getData_hora_fim() {
         return data_hora_fim;
     }
 
     /**
      * @param data_hora_fim the data_hora_fim to set
      */
-    public void setData_hora_fim(String time) throws ParseException{
+    public void setData_hora_fim(String time) throws ParseException {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         java.util.Date date = formatter.parse(time);
         this.data_hora_fim = new Timestamp(date.getTime());
@@ -135,21 +134,19 @@ public class Hora {
      * @param tipo the tipo to set
      */
     public void setTipo(String tipo) {
-        if (tipo.equals("EXTRA")||tipo.equals("HORA EXTRA")) {
+        if (tipo.equals("EXTRA") || tipo.equals("HORA EXTRA")) {
             this.tipo = TipoHora.EXTRA.name();
-        }else if(tipo.equals("SOBREAVISO")){
-            this.tipo = TipoHora.SOBREAVISO.name();            
-        }
-        else{
+        } else if (tipo.equals("SOBREAVISO")) {
+            this.tipo = TipoHora.SOBREAVISO.name();
+        } else {
             System.out.println(tipo);
         }
-        
+
     }
 
     public String getProjeto() {
         return projeto;
     }
-    
 
     /**
      * @param projeto the projeto to set
@@ -158,11 +155,9 @@ public class Hora {
         this.projeto = projeto;
     }
 
-
     /**
      * @return the cod_cr
      */
-
     public String getCod_cr() {
         return cod_cr;
     }
@@ -170,7 +165,6 @@ public class Hora {
     /**
      * @param cod_cr the cod_cr to set
      */
-
     public void setCod_cr(String cod_cr) {
         this.cod_cr = cod_cr;
     }
@@ -230,26 +224,27 @@ public class Hora {
     public void setJustificativa_negacao(String justificativa_negacao) {
         this.justificativa_negacao = justificativa_negacao;
     }
-    
+
     /**
-     * @Seta todos os parametros do hora como null menos cnpj cliente que passa a ser 0
+     * @Seta todos os parametros do hora como null menos cnpj cliente que passa
+     * a ser 0
      */
-    public void beNull(){
-        this.cnpj_cliente=0;
-        this.cod_cr=null;
-        this.data_hora_fim=null;
-        this.data_hora_inicio=null;
-        this.id=null;
-        this.justificativa_lancamento=null;
-        this.justificativa_negacao=null;
-        this.nome_cliente=null;
-        this.projeto=null;
-        this.solicitante=null;
-        this.status_aprovacao=null;
-        this.tipo=null;
-        this.username_aprovador=null;
-        this.username_lancador=null;
-                
+    public void beNull() {
+        this.cnpj_cliente = 0;
+        this.cod_cr = null;
+        this.data_hora_fim = null;
+        this.data_hora_inicio = null;
+        this.id = null;
+        this.justificativa_lancamento = null;
+        this.justificativa_negacao = null;
+        this.nome_cliente = null;
+        this.projeto = null;
+        this.solicitante = null;
+        this.status_aprovacao = null;
+        this.tipo = null;
+        this.username_aprovador = null;
+        this.username_lancador = null;
+
     }
 
 }

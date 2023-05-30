@@ -63,7 +63,7 @@ create table
         justificativa_negacao VARCHAR(500),
         status_aprovacao ENUM(
             'pendente',
-            'aprovado',
+            'aprovado_gestor',
             'negado'
         ) NOT NULL DEFAULT 'pendente',
         solicitante_lancamento VARCHAR(30) NOT NULL,
