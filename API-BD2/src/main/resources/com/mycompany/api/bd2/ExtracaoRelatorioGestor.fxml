@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.api.bd2.ExtracaoRelatorioController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.api.bd2.ExtracaoRelatorioGestorController">
    <children>
       <BorderPane layoutX="520.0" layoutY="225.0" prefHeight="650.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -102,17 +102,17 @@
                <children>
                   <AnchorPane prefHeight="746.0" prefWidth="1080.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <TableView id="tabelaContainer" fx:id="tabelaApontamento" layoutX="14.0" layoutY="57.0" prefHeight="665.0" prefWidth="1044.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0">
+                        <TableView id="tabelaContainer" fx:id="tabelaRelatorio" layoutX="14.0" layoutY="57.0" prefHeight="665.0" prefWidth="1044.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0">
                            <columns>
-                              <TableColumn fx:id="colunaUsername" prefWidth="180.0" text="Colaborador" />
+                              <TableColumn fx:id="colunaColaborador" prefWidth="180.0" text="Colaborador" />
                               <TableColumn fx:id="colunaCR" prefWidth="148.0" text="CR" />
-                              <TableColumn fx:id="colunaEmpresa" prefWidth="167.20001220703125" text="Cliente" />
-                              <TableColumn fx:id="colunaProjeto" prefWidth="181.59994506835938" text="Projeto" />
-                              <TableColumn fx:id="colunaFuncao" prefWidth="98.39996337890625" text="Tipo" />
-                              <TableColumn fx:id="colunaInicio" prefWidth="81.59991455078125" text="Inicio" />
-                              <TableColumn fx:id="colunaFim" text="Fim" />
-                              <TableColumn fx:id="colunaFim1" text="Status" />
-                              <TableColumn fx:id="colunaJust" prefWidth="119.199951171875" text="Justificativa" />
+                              <TableColumn fx:id="colunaEmpresa" prefWidth="129.5999755859375" text="Cliente" />
+                              <TableColumn fx:id="colunaProjeto" prefWidth="160.80001831054688" text="Projeto" />
+                              <TableColumn fx:id="colunaTipo" prefWidth="104.79998779296875" text="Tipo" />
+                              <TableColumn fx:id="colunaInicio" prefWidth="87.199951171875" text="Inicio" />
+                              <TableColumn fx:id="colunaFim" prefWidth="75.2000732421875" text="Fim" />
+                              <TableColumn fx:id="colunaStatus" minWidth="1.5999755859375" prefWidth="67.2000732421875" text="Status" />
+                              <TableColumn fx:id="colunaJustificativa" maxWidth="100.0" prefWidth="184.7999267578125" text="Justificativa" />
                            </columns>
                         </TableView>
                         <Label layoutX="14.0" layoutY="20.0" text="Relatórios">
@@ -120,14 +120,14 @@
                               <Font name="Arial" size="24.0" />
                            </font>
                         </Label>
-                        <Button id="buttonAprovar" fx:id="BotaoAprovar" layoutX="943.0" layoutY="16.0" mnemonicParsing="false" onAction="#botaoAprovar" prefHeight="30.0" prefWidth="102.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Extrair" textFill="WHITE" AnchorPane.rightAnchor="21.000000000000085" AnchorPane.topAnchor="16.0">
+                        <Button id="buttonAprovar" fx:id="botaoExtrair" layoutX="943.0" layoutY="16.0" mnemonicParsing="false" onAction="#botaoExtrair" prefHeight="30.0" prefWidth="102.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Extrair" textFill="WHITE" AnchorPane.rightAnchor="21.000000000000085" AnchorPane.topAnchor="16.0">
                            <font>
                               <Font name="Arial" size="15.0" />
                            </font>
                         </Button>
-                        <ComboBox layoutX="149.0" layoutY="17.0" prefHeight="30.0" prefWidth="150.0" promptText="Status" />
-                        <DatePicker layoutX="317.0" layoutY="16.0" prefHeight="30.0" prefWidth="157.0" promptText="Início" />
-                        <DatePicker layoutX="488.0" layoutY="16.0" prefHeight="30.0" prefWidth="157.0" promptText="Fim" />
+                        <ComboBox fx:id="comboboxStatus" layoutX="149.0" layoutY="17.0" prefHeight="30.0" prefWidth="150.0" promptText="Status" />
+                        <DatePicker fx:id="dataInicioRelatorio" layoutX="322.0" layoutY="16.0" prefHeight="30.0" prefWidth="157.0" promptText="Início" />
+                        <DatePicker fx:id="dataFimRelatorio" layoutX="499.0" layoutY="16.0" prefHeight="30.0" prefWidth="157.0" promptText="Fim" />
                      </children>
                      <styleClass>
                         <String fx:value="white-bg" />
