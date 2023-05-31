@@ -324,9 +324,7 @@ public class CadastroUsuarioADMController {
     }
     
     @FXML
-    public void RelatorioCSV() throws Exception {
-        TesteGerarRelatorio.gerarRelatorio();
-        /*
+        public void RelatorioCSV(ActionEvent event) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ExtracaoRelatorio.fxml"));
         Parent root = loader.load();
         Scene cena = new Scene(root);
@@ -334,6 +332,5 @@ public class CadastroUsuarioADMController {
         stage.setScene(cena);
         stage.centerOnScreen();
         stage.show();
-        */
     }
 }

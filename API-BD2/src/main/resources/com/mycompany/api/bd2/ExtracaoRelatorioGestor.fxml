@@ -120,7 +120,7 @@
                               <Font name="Arial" size="24.0" />
                            </font>
                         </Label>
-                        <Button id="buttonAprovar" fx:id="botaoExtrair" layoutX="943.0" layoutY="16.0" mnemonicParsing="false" onAction="#botaoExtrair" prefHeight="30.0" prefWidth="102.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Extrair" textFill="WHITE" AnchorPane.rightAnchor="21.000000000000085" AnchorPane.topAnchor="16.0">
+                        <Button id="BotaoExtrair" fx:id="botaoExtrair" layoutX="943.0" layoutY="16.0" mnemonicParsing="false" onAction="#botaoExtrair" prefHeight="30.0" prefWidth="102.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Extrair" textFill="WHITE" AnchorPane.rightAnchor="21.000000000000085" AnchorPane.topAnchor="16.0">
                            <font>
                               <Font name="Arial" size="15.0" />
                            </font>
