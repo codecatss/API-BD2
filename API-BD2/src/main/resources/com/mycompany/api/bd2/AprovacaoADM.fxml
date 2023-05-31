@@ -141,7 +141,7 @@
                                         <Font name="Arial Narrow" size="12.0" />
                                     </font>
                                 </Button>
-                                <Button id="buttonAprovar" fx:id="botaoAprovar" layoutX="352.0" layoutY="20.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="82.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Aprovar" textFill="WHITE">
+                                <Button id="buttonAprovar" fx:id="botaoAprovar"  layoutX="352.0" layoutY="20.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="82.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Aprovar" textFill="WHITE">
                                     <font>
                                         <Font name="Arial Narrow" size="12.0" />
                                     </font>

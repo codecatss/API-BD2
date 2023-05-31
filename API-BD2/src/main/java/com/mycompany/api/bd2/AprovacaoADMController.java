@@ -96,7 +96,7 @@ public class AprovacaoADMController implements Initializable {
 
         menuAprovar.setDisable(true);
         botaoAprovar.setOnAction(this::aprovarHora);
-
+        botaoReprovar.setOnAction(this::reprovarHora);
         carregarTabelaLancamento();
     }
 
@@ -185,6 +185,24 @@ public class AprovacaoADMController implements Initializable {
             dao.atualizarStatusAprovacao(codCr, statusAprovacaoADM);
 
             horaSelecionada.setStatus_aprovacao(statusAprovacaoADM);
+            tabelaAprovacao.refresh();
+            carregarTabelaLancamento();
+        }
+    }
+
+    public void reprovarHora(ActionEvent event) {
+        horaDAO horaDAO = new horaDAO();
+
+        Hora horaSelecionada = tabelaAprovacao.getSelectionModel().getSelectedItem();
+
+        if (horaSelecionada != null) {
+            horaSelecionada.setStatus_aprovacao("negado");
+            horaSelecionada.setJustificativa_negacao("Negada por RH");
+
+            horaDAO.atualizarStatusAprovacao(horaSelecionada.getCod_cr(), horaSelecionada.getStatus_aprovacao());
+            horaDAO.save(horaSelecionada);
+
+            System.out.println("Hora reprovada com sucesso");
             tabelaAprovacao.refresh();
             carregarTabelaLancamento();
         }

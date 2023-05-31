@@ -26,13 +26,14 @@ public class Hora {
     private String username_aprovador;
     private String justificativa_negacao;
     private StatusAprovacao status_aprovacao;
-
+    
     //private static Hora instance = null;
     public Hora() {
         //if (instance == null) {
         //  instance = new Hora();
         //}
         //return instance;
+        this.status_aprovacao = StatusAprovacao.pendente;
     }
 
     public String getNome_cliente() {
@@ -56,7 +57,12 @@ public class Hora {
     }
 
     public String getStatus_aprovacao() {
-        return status_aprovacao.name();
+
+        if (status_aprovacao != null) {
+            return status_aprovacao.name();
+        } else {
+            return null; // Ou qualquer outro valor que faça sentido para o seu caso
+        }
     }
 
     public void setStatus_aprovacao(String status_aprovacaoADM) {

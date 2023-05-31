@@ -10,11 +10,14 @@ import com.mycompany.api.bd2.models.TabelaAprovaçãoGestor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -93,9 +96,7 @@ public class horaDAO {
         }
     }
 
-
-
-public void delete(Hora hora) {
+    public void delete(Hora hora) {
         String sql = "DELETE FROM hora " + "WHERE id=?";
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -456,6 +457,40 @@ public void delete(Hora hora) {
 
         System.out.println(horasAprovadas);
         return horasAprovadas;
+    }
+
+    public void reprovarHora(Hora hora, String justificativa) {
+        String sql = "UPDATE hora SET status_aprovacao = ?, justificativa_negacao = ? WHERE id = ?";
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            try {
+                conn = Conexao.createConnectionToMySQL();
+            } catch (Exception ex) {
+                Logger.getLogger(horaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, "negado");
+            pstmt.setString(2, "negado por rh");
+            pstmt.setInt(3, hora.getId());
+            pstmt.executeUpdate();
+
+            System.out.println("Hora reprovada com sucesso");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }
