@@ -1,15 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package com.mycompany.api.bd2;
 
+import com.mycompany.api.bd2.daos.crDAO;
+import com.mycompany.api.bd2.daos.horaDAO;
 import com.mycompany.api.bd2.models.Hora;
 import com.mycompany.api.bd2.models.Usuario;
+import com.mycompany.api.bd2.*;
+import com.mycompany.api.bd2.daos.*;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,15 +25,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author cmsso
- */
 public class AprovacaoADMController implements Initializable {
 
     @FXML
@@ -58,41 +57,47 @@ public class AprovacaoADMController implements Initializable {
     @FXML
     private Button menuRelatorio;
     @FXML
-    private TableView<?> tabelaAprovacao;
+    private TableView<Hora> tabelaAprovacao;
     @FXML
-    private TableColumn<Hora, ?> colunaColaboradorADM;
+    private TableColumn<Hora, String> colunaColaboradorADM;
     @FXML
-    private TableColumn<Hora, ?> colunaCRADM;
+    private TableColumn<Hora, String> colunaCRADM;
     @FXML
-    private TableColumn<Hora, ?> colundaGestorADM;
+    private TableColumn<Hora, String> colundaGestorADM;
     @FXML
-    private TableColumn<Hora, ?> colunaEmpresaADM;
+    private TableColumn<Hora, String> colunaEmpresaADM;
     @FXML
-    private TableColumn<Hora, ?> colunaProjetoADM;
+    private TableColumn<Hora, String> colunaProjetoADM;
     @FXML
-    private TableColumn<Hora, ?> colunaFuncaoADM;
+    private TableColumn<Hora, String> colunaFuncaoADM;
     @FXML
-    private TableColumn<Hora, ?> colunaInicioADM;
+    private TableColumn<Hora, String> colunaInicioADM;
     @FXML
-    private TableColumn<Hora, ?> colunaFimADM;
+    private TableColumn<Hora, String> colunaFimADM;
     @FXML
-    private TableColumn<Hora, ?> colunaJustificativaADM;
+    private TableColumn<Hora, String> colunaJustificativaADM;
     @FXML
     private Button botaoReprovar;
     @FXML
     private Button botaoAprovar;
 
-    /**
-     * Initializes the controller class.
-     */
+    private ObservableList<Hora> observablelisthoras = FXCollections.observableArrayList();
+    private horaDAO horadao = new horaDAO();
+    private Hora hora = new Hora();
+    private crDAO crgestor = new crDAO();
+    private Usuario usuario = new Usuario();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         minimizarTela.setOnAction(e -> {
             Stage stage = (Stage) minimizarTela.getScene().getWindow();
             stage.setIconified(true);
         });
+
         menuAprovar.setDisable(true);
+        botaoAprovar.setOnAction(this::aprovarHora);
+
+        carregarTabelaLancamento();
     }
 
     public void fechaTela() {
@@ -134,7 +139,6 @@ public class AprovacaoADMController implements Initializable {
 
     @FXML
     private void botaoSair(ActionEvent event) throws IOException {
-        Usuario usuario = new Usuario();
         usuario.logout();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
         Parent root = loader.load();
@@ -144,6 +148,7 @@ public class AprovacaoADMController implements Initializable {
         stage.centerOnScreen();
         stage.show();
     }
+
     @FXML
     void relatorios(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -152,6 +157,37 @@ public class AprovacaoADMController implements Initializable {
         alert.setContentText("Desculpe o transtorno, estamos sempre trabalhando em melhorias");
         alert.showAndWait();
     }
-    
+
+    private void carregarTabelaLancamento() {
+        colunaColaboradorADM.setCellValueFactory(new PropertyValueFactory<>("username_lancador"));
+        colunaCRADM.setCellValueFactory(new PropertyValueFactory<>("cod_cr"));
+        colunaEmpresaADM.setCellValueFactory(new PropertyValueFactory<>("cnpj_cliente"));
+        colunaProjetoADM.setCellValueFactory(new PropertyValueFactory<>("projeto"));
+        colunaInicioADM.setCellValueFactory(new PropertyValueFactory<>("data_hora_inicio"));
+        colunaFimADM.setCellValueFactory(new PropertyValueFactory<>("data_hora_fim"));
+        colunaJustificativaADM.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
+
+        observablelisthoras.setAll(horadao.getHorasAprovadas());
+        tabelaAprovacao.setItems(observablelisthoras);
+        tabelaAprovacao.refresh();
+
+    }
+
+    @FXML
+    private void aprovarHora(ActionEvent event) {
+        Hora horaSelecionada = tabelaAprovacao.getSelectionModel().getSelectedItem();
+        horaDAO dao = new horaDAO();
+
+        if (horaSelecionada != null) {
+            String codCr = horaSelecionada.getCod_cr();
+            String statusAprovacaoADM = "aprovado_rh";
+
+            dao.atualizarStatusAprovacao(codCr, statusAprovacaoADM);
+
+            horaSelecionada.setStatus_aprovacao(statusAprovacaoADM);
+            tabelaAprovacao.refresh();
+            carregarTabelaLancamento();
+        }
+    }
 
 }

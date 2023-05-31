@@ -23,7 +23,7 @@ import java.util.Set;
 public class horaDAO {
 
     public void save(Hora hora) {
-        String sql = "INSERT INTO hora(cod_cr, username_lancador, cnpj_cliente, data_hora_inicio, data_hora_fim, tipo, justificativa_lancamento, projeto, username_aprovador, justificativa_negacao, status_aprovacao, solicitante_lancamento) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO hora(cod_cr, username_lancador, cnpj_cliente, data_hora_inicio, data_hora_fim, tipo, justificativa_lancamento, projeto, username_aprovador, justificativa_negacao, status_aprovacaoADM, solicitante_lancamento) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         Connection conn = null;
         PreparedStatement pstm = null;
 
@@ -65,7 +65,38 @@ public class horaDAO {
 
     }
 
-    public void delete(Hora hora) {
+    public void atualizarStatusAprovacao(String codCr, String statusAprovacao) {
+        String sql = "UPDATE hora SET status_aprovacaoADM = ? WHERE cod_cr = ? ";
+        Connection conn = null;
+        PreparedStatement pstm = null;
+
+        try {
+            conn = Conexao.createConnectionToMySQL();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, statusAprovacao);
+            pstm.setString(2, codCr);
+            pstm.executeUpdate();
+
+            System.out.println("Status de aprovação atualizado");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstm != null) {
+                    pstm.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
+public void delete(Hora hora) {
         String sql = "DELETE FROM hora " + "WHERE id=?";
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -118,7 +149,7 @@ public class horaDAO {
 
                 hora.setCod_cr(rset.getString("cod_cr"));
                 hora.setUsername_lancador(rset.getString("username_lancador"));
-                hora.setCnpj_cliente(rset.getLong("cnpj_cliente"));
+                hora.setCnpj_cliente(rset.getInt("cnpj_cliente"));
                 hora.setData_hora_inicio(rset.getString("data_hora_inicio"));
                 hora.setData_hora_fim(rset.getString("data_hora_fim"));
                 hora.setTipo(rset.getString("tipo"));
@@ -174,7 +205,7 @@ public class horaDAO {
                 Hora hora = new Hora();
                 hora.setCod_cr(rset.getString("cod_cr"));
                 hora.setUsername_lancador(rset.getString("username_lancador"));
-                hora.setCnpj_cliente(rset.getLong("cnpj_cliente"));
+                hora.setCnpj_cliente(rset.getInt("cnpj_cliente"));
                 hora.setData_hora_inicio(rset.getString("data_hora_inicio"));
                 hora.setData_hora_fim(rset.getString("data_hora_fim"));
                 hora.setTipo(rset.getString("tipo"));
@@ -433,71 +464,117 @@ public class horaDAO {
         return nome;
     }
 
-    public void aprovarHora(int id, String usernameAprovador) {
-    String sql = "UPDATE hora SET status_aprovacao = 'aprovado', username_aprovador = ? WHERE id = ?";
+    public void aprovarHora(int id) {
+        String sql = "UPDATE hora SET status_aprovacao = 'aprovado_gestor' WHERE id = ?";
 
-    Connection conn = null;
-    PreparedStatement pstm = null;
+        Connection conn = null;
+        PreparedStatement pstm = null;
 
-    try {
-        conn = Conexao.createConnectionToMySQL();
-        pstm = conn.prepareStatement(sql);
-        pstm.setString(1, usernameAprovador);
-        pstm.setInt(2, id);
-
-        pstm.executeUpdate();
-
-        System.out.println("Update realizado");
-
-    } catch (Exception e) {
-        e.printStackTrace();
-    } finally {
         try {
-            if (pstm != null) {
-                pstm.close();
+            conn = Conexao.createConnectionToMySQL();
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, id);
+
+            pstm.executeUpdate();
+
+            System.out.println("Update realizado");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstm != null) {
+                    pstm.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            if (conn != null) {
-                conn.close();
+        }
+    }
+
+    public void reprovarHora(int id) {
+        String sql = "UPDATE hora SET status_aprovacao = 'negado' WHERE id = ?";
+
+        Connection conn = null;
+        PreparedStatement pstm = null;
+
+        try {
+            conn = Conexao.createConnectionToMySQL();
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, id);
+
+            pstm.executeUpdate();
+
+            System.out.println("Update realizado");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstm != null) {
+                    pstm.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public Set<Hora> getHorasAprovadas() {
+        String sql = "SELECT * FROM 2rp.hora WHERE status_aprovacaoADM = 'pendente' and status_aprovacao = 'aprovado_gestor'";
+        Set<Hora> horasAprovadas = new HashSet<>();
+
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rset = null;
+
+        try {
+            conn = Conexao.createConnectionToMySQL();
+            pstm = conn.prepareStatement(sql);
+            rset = pstm.executeQuery();
+
+            while (rset.next()) {
+                Hora hora = new Hora();
+                hora.setCod_cr(rset.getString("cod_cr"));
+                hora.setUsername_lancador(rset.getString("username_lancador"));
+                hora.setCnpj_cliente(rset.getInt("cnpj_cliente"));
+                hora.setData_hora_inicio(rset.getString("data_hora_inicio"));
+                hora.setData_hora_fim(rset.getString("data_hora_fim"));
+                hora.setTipo(rset.getString("tipo"));
+                hora.setJustificativa_lancamento(rset.getString("justificativa_lancamento"));
+                hora.setProjeto(rset.getString("projeto"));
+                hora.setUsername_aprovador(rset.getString("username_aprovador"));
+                hora.setJustificativa_negacao(rset.getString("justificativa_negacao"));
+                hora.setStatus_aprovacao(rset.getString("status_aprovacaoADM"));
+
+                horasAprovadas.add(hora);
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-}
-
-
-    public void reprovarHora(int id, String justificativaNegacao, String usernameReprovador) {
-    String sql = "UPDATE hora SET status_aprovacao = 'negado', justificativa_negacao = ?, username_aprovador = ? WHERE id = ?";
-
-    Connection conn = null;
-    PreparedStatement pstm = null;
-
-    try {
-        conn = Conexao.createConnectionToMySQL();
-        pstm = conn.prepareStatement(sql);
-        pstm.setString(1, justificativaNegacao);
-        pstm.setString(2, usernameReprovador);
-        pstm.setInt(3, id);
-
-        pstm.executeUpdate();
-
-        System.out.println("Update realizado");
-
-    } catch (Exception e) {
-        e.printStackTrace();
-    } finally {
-        try {
-            if (pstm != null) {
-                pstm.close();
+        } finally {
+            try {
+                if (rset != null) {
+                    rset.close();
+                }
+                if (pstm != null) {
+                    pstm.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            if (conn != null) {
-                conn.close();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-    }
-}
 
+        System.out.println(horasAprovadas);
+        return horasAprovadas;
+    }
 
 }

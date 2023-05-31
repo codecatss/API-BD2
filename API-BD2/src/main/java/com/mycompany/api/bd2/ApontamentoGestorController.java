@@ -88,7 +88,7 @@ public class ApontamentoGestorController implements Initializable {
     private TableColumn<TabelaAprovaçãoGestor, String> colunaInicio;//ok
 
     horaDAO horadao = new horaDAO();
-    
+
     private List<TabelaAprovaçãoGestor> lishoras = new ArrayList<>();
     private ObservableList<TabelaAprovaçãoGestor> observablelisthoras = FXCollections.observableArrayList();
 
@@ -138,15 +138,7 @@ public class ApontamentoGestorController implements Initializable {
     @FXML
     public void botaoAprovar() {
         if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
-            try {
-                horadao.aprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId(),TelaLoginController.usuariologado.getCargo());
-            } catch (InterruptedException ex) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erro");
-            alert.setHeaderText(null);
-            alert.setContentText("Usuário não altorizado");
-            alert.showAndWait();
-            }
+            horadao.aprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId());
             carregarTabelaLancamento();
         }
     }
@@ -158,7 +150,7 @@ public class ApontamentoGestorController implements Initializable {
             carregarTabelaLancamento();
         }
     }
-    
+
     @FXML
     public void navLancamentoColaborador(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LancamentoColaborador.fxml"));
@@ -169,8 +161,8 @@ public class ApontamentoGestorController implements Initializable {
         stage.centerOnScreen();
         stage.show();
     }
-    
-        @FXML
+
+    @FXML
     private void BotaoSair(ActionEvent event) throws IOException {
         Usuario usuario = new Usuario();
         usuario.logout();
