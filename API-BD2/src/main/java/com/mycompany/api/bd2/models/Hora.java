@@ -107,6 +107,7 @@ public class Hora {
         this.data_hora_inicio = new Timestamp(date.getTime());
     }
 
+
     /**
      * @return the data_hora_fim
      */

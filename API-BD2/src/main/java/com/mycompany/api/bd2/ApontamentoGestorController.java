@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,6 +37,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextInputDialog;
 
 /**
  * FXML Controller class
@@ -66,6 +73,10 @@ public class ApontamentoGestorController implements Initializable {
     private Button BotaoAprovar;
     @FXML
     private Button BotaoReprovar;
+    
+     @FXML
+    private TextArea textoJustificativa;
+    
 
     @FXML
     private TableView<TabelaAprovaçãoGestor> tabelaApontamento;
@@ -137,19 +148,55 @@ public class ApontamentoGestorController implements Initializable {
 
     @FXML
     public void botaoAprovar() {
-        if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
-            horadao.aprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId());
-            carregarTabelaLancamento();
-        }
-    }
+    if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
+        // Exibe um popup de confirmação
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmação");
+        alert.setHeaderText(null);
+        alert.setContentText("Tem certeza de que deseja aprovar a hora?");
 
-    @FXML
-    public void botaoReprovar() {
-        if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
-            horadao.reprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId());
+        ButtonType buttonNao = new ButtonType("Não");
+        ButtonType buttonSim = new ButtonType("Sim");
+
+        alert.getButtonTypes().setAll(buttonNao, buttonSim);
+
+        alert.showAndWait().ifPresent(buttonType -> {
+            if (buttonType == buttonSim) {
+                String usernameAprovador = usuario; // Obtenha o nome do usuário aprovador
+                horadao.aprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId(), usernameAprovador);
+                carregarTabelaLancamento();
+            }
+        });
+    }
+}
+
+@FXML
+public void botaoReprovar() {
+    if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
+        String justificativa = textoJustificativa.getText();
+        if (!justificativa.isEmpty()) {
+            int id = tabelaApontamento.getSelectionModel().getSelectedItem().getId();
+            String usernameReprovador = usuario; // Obtenha o nome do usuário reprovador
+            horadao.reprovarHora(id, justificativa, usernameReprovador);
             carregarTabelaLancamento();
+            textoJustificativa.clear(); // Limpa o campo de justificativa
+        } else {
+            // Exibe um popup informando que a justificativa é obrigatória e cancela a reprovação
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setTitle("Justificativa Necessária");
+            dialog.setHeaderText(null);
+            dialog.setContentText("Por favor, digite uma justificativa para a negação.");
+
+            ButtonType cancelButton = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+            dialog.getDialogPane().getButtonTypes().addAll(cancelButton);
+
+            dialog.showAndWait();
         }
     }
+}
+
+
+
 
     @FXML
     public void navLancamentoColaborador(ActionEvent event) throws IOException {

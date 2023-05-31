@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.api.bd2.PopUpAcionamentoController">
+   <children>
+      <BorderPane prefHeight="300.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="30.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="30.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Button id="fecharTela" fx:id="fecharTela" mnemonicParsing="false" styleClass="close" stylesheets="@EstilizacaoTelas.css" text="X" AnchorPane.bottomAnchor="2.5" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.5">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button id="minimizarTela" fx:id="minimizarTela" mnemonicParsing="false" styleClass="minimize" stylesheets="@EstilizacaoTelas.css" text="-" AnchorPane.bottomAnchor="2.5" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="2.5" />
+                        <Label id="nometelaatual" fx:id="nometelaatual" text="Justificativa" textAlignment="CENTER" AnchorPane.bottomAnchor="2.5" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="2.5">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </top>
+         <left>
+            <AnchorPane prefHeight="200.0" prefWidth="250.0" BorderPane.alignment="CENTER" />
+         </left>
+         <center>
+            <AnchorPane prefHeight="370.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane layoutX="-250.0" prefHeight="370.0" prefWidth="650.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane layoutX="5.0" layoutY="2.0" prefHeight="362.0" prefWidth="639.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="2.0">
+                           <styleClass>
+                              <String fx:value="white-bg" />
+                              <String fx:value="shadow" />
+                           </styleClass>
+                           <children>
+                              <TextArea fx:id="txtJustificativa" layoutX="63.0" layoutY="83.0" prefHeight="130.0" prefWidth="513.0" stylesheets="@EstilizacaoTelas.css">
+                                 <styleClass>
+                                    <String fx:value="text-just" />
+                                    <String fx:value="shadow" />
+                                 </styleClass>
+                              </TextArea>
+                              <Button fx:id="botaoAddJustificativa" layoutX="173.0" layoutY="261.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="98.0" styleClass="add" stylesheets="@EstilizacaoTelas.css" text="Adicionar" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial" size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="botaoCancelarJustificativa" layoutX="367.0" layoutY="260.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="98.0" styleClass="cancel" stylesheets="@EstilizacaoTelas.css" text="Cancelar" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial" size="14.0" />
+                                 </font>
+                              </Button>
+                              <Label layoutX="63.0" layoutY="30.0" text="Escreva sua justificativa:">
+                                 <font>
+                                    <Font name="Arial" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

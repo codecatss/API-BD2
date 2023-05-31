@@ -64,7 +64,7 @@
                         </Button>
                      </children>
                   </AnchorPane>
-                  <Button id="menuLancamento" fx:id="menuLancamento" layoutX="19.0" layoutY="136.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text=" Lançamento">
+                  <Button id="menuLancamento" fx:id="menuLancamento" layoutX="19.0" layoutY="136.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text=" Lançamentos">
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>

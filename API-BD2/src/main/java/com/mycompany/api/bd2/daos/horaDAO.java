@@ -23,7 +23,7 @@ import java.util.Set;
 public class horaDAO {
 
     public void save(Hora hora) {
-        String sql = "INSERT INTO hora(cod_cr, username_lancador, cnpj_cliente, data_hora_inicio, data_hora_fim, tipo, justificativa_lancamento, projeto, username_aprovador, justificativa_negacao, status_aprovacaoADM, solicitante_lancamento) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO hora(cod_cr, username_lancador, cnpj_cliente, data_hora_inicio, data_hora_fim, tipo, justificativa_lancamento, projeto, username_aprovador, justificativa_negacao, status_aprovacao, solicitante_lancamento) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         Connection conn = null;
         PreparedStatement pstm = null;
 
@@ -32,19 +32,19 @@ public class horaDAO {
             conn = Conexao.createConnectionToMySQL();
 
             pstm = (PreparedStatement) conn.prepareStatement(sql);
-            pstm.setString(1,hora.getCod_cr());
-            pstm.setString(2,hora.getUsername_lancador());
-            pstm.setInt(3,hora.getCnpj_cliente());
-            pstm.setTimestamp(4,hora.getData_hora_inicio());
-            pstm.setTimestamp(5,hora.getData_hora_fim());
-            pstm.setString(6,hora.getTipo());
-            pstm.setString(7,hora.getJustificativa_lancamento());
-            pstm.setString(8,hora.getProjeto());
-            pstm.setString(9,hora.getUsername_aprovador());
-            pstm.setString(10,hora.getJustificativa_negacao());
-            pstm.setString(11,hora.getStatus_aprovacao());
-            pstm.setString(12,hora.getSolicitante());
-            
+            pstm.setString(1, hora.getCod_cr());
+            pstm.setString(2, hora.getUsername_lancador());
+            pstm.setLong(3, hora.getCnpj_cliente());
+            pstm.setTimestamp(4, hora.getData_hora_inicio());
+            pstm.setTimestamp(5, hora.getData_hora_fim());
+            pstm.setString(6, hora.getTipo());
+            pstm.setString(7, hora.getJustificativa_lancamento());
+            pstm.setString(8, hora.getProjeto());
+            pstm.setString(9, hora.getUsername_aprovador());
+            pstm.setString(10, hora.getJustificativa_negacao());
+            pstm.setString(11, hora.getStatus_aprovacao());
+            pstm.setString(12, hora.getSolicitante());
+
             pstm.execute();
             System.out.println("Salvo");
         }
@@ -336,33 +336,34 @@ public void delete(Hora hora) {
                                 hora.setSolicitante(rset.getString("solicitante_lancamento"));
                                 hora.setNome_cliente(getNomeClient(rset.getLong("cnpj_cliente")));
 
-				horasUser.add(hora);
-				
-			}
-		}catch (Exception e) {
-				e.printStackTrace();
-			}finally {
-				try {
-					if(rset!=null) {
-						rset.close();
-					}
-					
-					if(pstm!=null) {
-						pstm.close();
-					}
-					
-					if(conn!=null) {
-						conn.close();
-					}
-				}catch(Exception e) {
-					e.printStackTrace();
-				}
-			}
-                        System.out.println(horasUser);
-			return horasUser;
-	}
-    
-    public LinkedList<TabelaAprovaçãoGestor> getHora(LinkedList<Integer> lis_int_cr){//sobrecarga para gerar a tabela de apontamentos
+                horasUser.add(hora);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rset != null) {
+                    rset.close();
+                }
+
+                if (pstm != null) {
+                    pstm.close();
+                }
+
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println(horasUser);
+        return horasUser;
+    }
+
+    public LinkedList<TabelaAprovaçãoGestor> getHora(LinkedList<Integer> lis_int_cr) {//sobrecarga para gerar a tabela de apontamentos
+
         LinkedList<TabelaAprovaçãoGestor> horasUser = new LinkedList<>();
         for (Integer i : lis_int_cr) {
             String sql = "SELECT * FROM 2rp.hora WHERE cod_cr = ? AND status_aprovacao = 'pendente'";
@@ -464,16 +465,17 @@ public void delete(Hora hora) {
         return nome;
     }
 
-    public void aprovarHora(int id) {
-        String sql = "UPDATE hora SET status_aprovacao = 'aprovado_gestor' WHERE id = ?";
+    public void aprovarHora(int id, String usernameAprovador) {
+        String sql = "UPDATE hora SET status_aprovacao = 'aprovado_gestor', username_aprovador = ? WHERE id = ?";
 
         Connection conn = null;
         PreparedStatement pstm = null;
 
-        try {
-            conn = Conexao.createConnectionToMySQL();
-            pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, id);
+    try {
+        conn = Conexao.createConnectionToMySQL();
+        pstm = conn.prepareStatement(sql);
+        pstm.setString(1, usernameAprovador);
+        pstm.setInt(2, id);
 
             pstm.executeUpdate();
 
@@ -495,16 +497,19 @@ public void delete(Hora hora) {
         }
     }
 
-    public void reprovarHora(int id) {
-        String sql = "UPDATE hora SET status_aprovacao = 'negado' WHERE id = ?";
+
+    public void reprovarHora(int id, String justificativaNegacao, String usernameReprovador) {
+    String sql = "UPDATE hora SET status_aprovacao = 'negado', justificativa_negacao = ?, username_aprovador = ? WHERE id = ?";
 
         Connection conn = null;
         PreparedStatement pstm = null;
 
-        try {
-            conn = Conexao.createConnectionToMySQL();
-            pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, id);
+    try {
+        conn = Conexao.createConnectionToMySQL();
+        pstm = conn.prepareStatement(sql);
+        pstm.setString(1, justificativaNegacao);
+        pstm.setString(2, usernameReprovador);
+        pstm.setInt(3, id);
 
             pstm.executeUpdate();
 
