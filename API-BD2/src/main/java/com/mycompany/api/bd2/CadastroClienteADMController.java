@@ -233,7 +233,7 @@ public class CadastroClienteADMController {
 
     @FXML
     private void BotaoInativar(ActionEvent event) {
-         // exibe um alerta de confirmação antes de ativar o cliente
+        // exibe um alerta de confirmação antes de ativar o cliente
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmação");
         alert.setHeaderText(null);
@@ -244,7 +244,7 @@ public class CadastroClienteADMController {
             clienteDAO clientedao = new clienteDAO();
             Cliente cliente = clientedao.getClientebyCNPJ(valorDoItemSelecionado);
             cliente.setStatus_cliente("inativo");
-            
+
             clientedao.update(cliente);
 
             carregarTabelaCliente();
@@ -277,7 +277,7 @@ public class CadastroClienteADMController {
             clienteDAO clientedao = new clienteDAO();
             Cliente cliente = clientedao.getClientebyCNPJ(valorDoItemSelecionado);
             cliente.setStatus_cliente("ativo");
-            
+
             clientedao.update(cliente);
 
             carregarTabelaCliente();
@@ -355,12 +355,14 @@ public class CadastroClienteADMController {
     }
 
     @FXML
-    void AprovarHoras(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Em progresso");
-        alert.setHeaderText(null);
-        alert.setContentText("Desculpe o transtorno, estamos sempre trabalhando em melhorias");
-        alert.showAndWait();
+    public void AprovarHoras(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AprovacaoADM.fxml"));
+        Parent root = loader.load();
+        Scene cena = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+        stage.setScene(cena);
+        stage.centerOnScreen();
+        stage.show();
     }
 
     @FXML

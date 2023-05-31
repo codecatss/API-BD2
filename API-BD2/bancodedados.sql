@@ -59,23 +59,23 @@ create table
         tipo VARCHAR(15) NOT NULL,
         justificativa_lancamento VARCHAR(500) NOT NULL,
         projeto VARCHAR(100) NOT NULL,
-        username_aprovador VARCHAR(20),
+        aprovador_gestor VARCHAR(20),
         justificativa_negacao VARCHAR(500),
-        status_aprovacao ENUM(
+        status ENUM(
             'pendente',
-            'aprovado',
-            'negado'
+            'aprovado_gestor',
+            'aprovado_adm',
+            'negado_gestor',
+            'negado_adm'
         ) NOT NULL DEFAULT 'pendente',
         solicitante_lancamento VARCHAR(30) NOT NULL,
         feriado BOOLEAN DEFAULT FALSE,
-        username_aprovadorADM VARCHAR(20),
-        justificativa_negacaoADM VARCHAR(500),
-        status_aprovacaoADM ENUM('pendente','aprovado','negado') NOT NULL DEFAULT 'pendente',
-		Foreign Key (username_aprovadorADM) REFERENCES usuario(username),
+        aprovador_ADM VARCHAR(20),
+		Foreign Key (aprovador_ADM) REFERENCES usuario(username),
         Foreign Key (username_lancador) REFERENCES usuario(username),
         Foreign Key (cod_cr) REFERENCES centro_resultado(codigo_cr),
         Foreign Key (cnpj_cliente) REFERENCES cliente(cnpj),
-        Foreign Key (username_aprovador) REFERENCES usuario (username),
+        Foreign Key (aprovador_gestor) REFERENCES usuario (username),
         PRIMARY KEY (id)
     );
 

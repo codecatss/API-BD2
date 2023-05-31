@@ -25,7 +25,7 @@
                <children>
                   <AnchorPane layoutX="534.0" layoutY="-80.0" prefHeight="40.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button id="fecharTela" fx:id="FecharTela" layoutX="1270.0" layoutY="5.0" mnemonicParsing="false" styleClass="close" stylesheets="@EstilizacaoTelas.css" text="X" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="5.0">
+                        <Button id="fecharTela" fx:id="FecharTela" layoutX="1270.0" layoutY="5.0" mnemonicParsing="false" onAction="#botaoExit" styleClass="close" stylesheets="@EstilizacaoTelas.css" text="X" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="5.0">
                            <font>
                               <Font name="Arial Bold" size="12.0" />
                            </font>
@@ -201,9 +201,9 @@
                               </Label>
                               <DatePicker id="dataFim" fx:id="dataFim" layoutX="125.0" layoutY="170.0" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="170.0" />
                               <Spinner id="horaInicio" fx:id="horaInicio" layoutX="475.0" layoutY="95.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.leftAnchor="475.0" AnchorPane.topAnchor="95.0" />
-                              <Spinner id="minutoInicio" fx:id="minutoInicio" layoutX="560.0" layoutY="170.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.leftAnchor="560.0" AnchorPane.topAnchor="170.0" />
+                              <Spinner id="minutoInicio" fx:id="minutoFim" layoutX="560.0" layoutY="170.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.leftAnchor="560.0" AnchorPane.topAnchor="170.0" />
                               <Spinner id="horaFim" fx:id="horaFim" layoutX="475.0" layoutY="170.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.leftAnchor="475.0" AnchorPane.topAnchor="170.0" />
-                              <Spinner id="minutoFim" fx:id="minutoFim" layoutX="560.0" layoutY="95.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.leftAnchor="560.0" AnchorPane.topAnchor="95.0" />
+                              <Spinner id="minutoFim" fx:id="minutoInicio" layoutX="560.0" layoutY="95.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.leftAnchor="560.0" AnchorPane.topAnchor="95.0" />
                               <ComboBox id="horaTipo" fx:id="horaTipo" layoutX="125.0" layoutY="20.0" onMouseClicked="#tipoHora" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="20.0" />
                               <ComboBox id="selecaoCliente" fx:id="selecaoCliente" layoutX="475.0" layoutY="20.0" onMouseClicked="#forneceCliente" prefHeight="30.0" prefWidth="155.0" AnchorPane.leftAnchor="475.0" AnchorPane.topAnchor="20.0" />
                               <ComboBox id="selecaoCR" fx:id="selecaoCR" layoutX="875.0" layoutY="20.0" onMouseClicked="#forneceCR" prefHeight="30.0" prefWidth="200.0" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="20.0" />
