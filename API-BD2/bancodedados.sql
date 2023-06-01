@@ -61,7 +61,7 @@ create table
         projeto VARCHAR(100) NOT NULL,
         aprovador_gestor VARCHAR(20),
         justificativa_negacao VARCHAR(500),
-        status ENUM(
+        status_aprovacao ENUM(
             'pendente',
             'aprovado_gestor',
             'aprovado_adm',
@@ -71,7 +71,7 @@ create table
         solicitante_lancamento VARCHAR(30) NOT NULL,
         feriado BOOLEAN DEFAULT FALSE,
         aprovador_ADM VARCHAR(20),
-		Foreign Key (aprovador_ADM) REFERENCES usuario(username),
+        Foreign Key (aprovador_ADM) REFERENCES usuario(username),
         Foreign Key (username_lancador) REFERENCES usuario(username),
         Foreign Key (cod_cr) REFERENCES centro_resultado(codigo_cr),
         Foreign Key (cnpj_cliente) REFERENCES cliente(cnpj),
