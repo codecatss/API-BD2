@@ -157,7 +157,7 @@ public class ExtracaoRelatorioGestorController {
             }
             else{
             DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            conexao.gerarRelatorioCSV(formData,tipo,"SELECT * FROM 2rp.hora WHERE status_aprovacao = '"+tipo.toLowerCase()+"' "
+            conexao.gerarRelatorioCSV(formData,tipo,"SELECT * FROM 2rp.hora WHERE status = '"+tipo.toLowerCase()+"' "
             + "AND data_hora_inicio BETWEEN '"+DataInicio.getValue().format(formato)+"' AND '"+DataFim.getValue().format(formato)+
             "'AND data_hora_fim BETWEEN '"+DataInicio.getValue().format(formato)+"' AND '"+DataFim.getValue().format(formato)+"'");           
                 }
