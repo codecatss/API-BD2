@@ -230,6 +230,58 @@ public class crDAO {
         return cr;
     }
 
+    public List<Centro_resultado> getCrByUser(String integrante) {
+        String sql = "SELECT integrante.username_integrante, centro_resultado.*\n"
+                + "FROM integrante\n"
+                + "LEFT JOIN centro_resultado ON integrante.cod_cr = centro_resultado.codigo_cr\n"
+                + "WHERE integrante.username_integrante = ?";
+
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rset = null;
+        List<Centro_resultado> crs = new ArrayList<Centro_resultado>();
+
+        try {
+            conn = Conexao.createConnectionToMySQL();
+
+            pstm = (PreparedStatement) conn.prepareStatement(sql);
+            pstm.setString(1, integrante);
+            rset = pstm.executeQuery();
+
+            while (rset.next()) {
+                Centro_resultado cr = new Centro_resultado();
+
+                cr.setCodigo_cr(rset.getString("codigo_cr"));
+                cr.setNome(rset.getString("nome"));
+                cr.setSigla(rset.getString("sigla"));
+                cr.setStatus_cr(rset.getString("status_cr"));
+                
+                crs.add(cr);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rset != null) {
+                    rset.close();
+                }
+
+                if (pstm != null) {
+                    pstm.close();
+                }
+
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return crs;
+    }
+
     public void update(Centro_resultado cr) {
         String sql = "UPDATE centro_resultado SET nome=?, status_cr=?, sigla=? WHERE codigo_cr=?";
         Connection conn = null;

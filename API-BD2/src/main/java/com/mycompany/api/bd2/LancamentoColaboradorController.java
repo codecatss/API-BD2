@@ -501,7 +501,7 @@ public class LancamentoColaboradorController {
     public void forneceCR() {
         crDAO crDAO = new crDAO();
         centro_r.clear();
-        for (Centro_resultado cr : crDAO.getCrs()) {
+        for (Centro_resultado cr : crDAO.getCrByUser(usuario)) {
             centro_r.add(cr.getNome());
         }
         opCr.setAll(centro_r);
