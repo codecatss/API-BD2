@@ -59,7 +59,7 @@
                               <Font name="Arial Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button id="menuLancamento" fx:id="menuLancamento" layoutX="15.0" layoutY="136.0" mnemonicParsing="false" onAction="#navLancamentoColaborador" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text=" Lançamentos" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="136.0">
+                        <Button id="menuLancamento" fx:id="menuLancamento" layoutX="15.0" layoutY="136.0" mnemonicParsing="false" onAction="#lancamento" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text=" Lançamentos" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="136.0">
                            <graphic>
                               <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -68,7 +68,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button id="menuApontamento" fx:id="menuApontamento" layoutX="10.0" layoutY="211.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Apontamentos" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="211.0">
+                        <Button id="menuApontamento" fx:id="menuApontamento" layoutX="10.0" layoutY="211.0" mnemonicParsing="false" onAction="#apontamentos" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Apontamentos" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="211.0">
                            <font>
                               <Font size="14.0" />
                            </font>

@@ -157,7 +157,7 @@ public class ExtracaoRelatorioGestorController {
             }
             else{
             DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            conexao.gerarRelatorioCSV(formData,tipo,"SELECT * FROM 2rp.hora WHERE status_aprovacao = '"+tipo.toLowerCase()+"' "
+            conexao.gerarRelatorioCSV(formData,tipo,"SELECT * FROM 2rp.hora WHERE status = '"+tipo.toLowerCase()+"' "
             + "AND data_hora_inicio BETWEEN '"+DataInicio.getValue().format(formato)+"' AND '"+DataFim.getValue().format(formato)+
             "'AND data_hora_fim BETWEEN '"+DataInicio.getValue().format(formato)+"' AND '"+DataFim.getValue().format(formato)+"'");           
                 }
@@ -196,8 +196,8 @@ public class ExtracaoRelatorioGestorController {
     }
     
     @FXML
-    private void GestaoUsuarios(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroUsuarioADM.fxml"));
+    private void apontamentos(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ApontamentoGestor.fxml"));
         Parent root = loader.load();
         Scene cena = new Scene(root);
         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
@@ -206,33 +206,12 @@ public class ExtracaoRelatorioGestorController {
     }   
     
     @FXML
-    private void GestaoCRs(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroCRADM.fxml"));
+    private void lancamento(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("LancamentoColaborador.fxml"));
         Parent root = loader.load();
         Scene cena = new Scene(root);
         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
         stage.setScene(cena);
         stage.show();
     }  
-    
-    @FXML
-    private void GestaoClientes(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("CadastroClienteADM.fxml"));
-        Parent root = loader.load();
-        Scene cena = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
-        stage.setScene(cena);
-        stage.show();
-    }    
-    
-    @FXML
-    private void AprovarHoras(ActionEvent event) throws IOException {
-        /*
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
-        Parent root = loader.load();
-        Scene cena = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
-        stage.setScene(cena);
-        stage.show();*/
-    }
 }
