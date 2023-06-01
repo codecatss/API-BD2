@@ -23,7 +23,7 @@ import java.util.Set;
 public class horaDAO {
 
     public void save(Hora hora) {
-        String sql = "INSERT INTO hora(cod_cr, username_lancador, cnpj_cliente, data_hora_inicio, data_hora_fim, tipo, justificativa_lancamento, projeto, username_aprovador, justificativa_negacao, status_aprovacao, solicitante_lancamento) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO hora(cod_cr, username_lancador, cnpj_cliente, data_hora_inicio, data_hora_fim, tipo, justificativa_lancamento, projeto, aprovador_gestor, justificativa_negacao, status_aprovacao, solicitante_lancamento) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         Connection conn = null;
         PreparedStatement pstm = null;
 
@@ -155,7 +155,7 @@ public void delete(Hora hora) {
                 hora.setTipo(rset.getString("tipo"));
                 hora.setJustificativa_lancamento(rset.getString("justificativa_lancamento"));
                 hora.setProjeto(rset.getString("projeto"));
-                hora.setUsername_aprovador(rset.getString("username_aprovador"));
+                hora.setUsername_aprovador(rset.getString("aprovador_gestor"));
                 hora.setJustificativa_negacao(rset.getString("justificativa_negacao"));
                 hora.setStatus_aprovacao(rset.getString("status_aprovacao"));
 
@@ -211,7 +211,7 @@ public void delete(Hora hora) {
                 hora.setTipo(rset.getString("tipo"));
                 hora.setJustificativa_lancamento(rset.getString("justificativa_lancamento"));
                 hora.setProjeto(rset.getString("projeto"));
-                hora.setUsername_aprovador(rset.getString("username_aprovador"));
+                hora.setUsername_aprovador(rset.getString("aprovador_gestor"));
                 hora.setJustificativa_negacao(rset.getString("justificativa_negacao"));
                 hora.setStatus_aprovacao(rset.getString("status_aprovacao"));
                 hora.setSolicitante(rset.getString("solicitante_lancamento"));
@@ -347,7 +347,7 @@ public void delete(Hora hora) {
     }
 
     public void aprovarHora(int id, String usernameAprovador) {
-        String sql = "UPDATE hora SET status_aprovacao = 'aprovado_gestor', username_aprovador = ? WHERE id = ?";
+        String sql = "UPDATE hora SET status_aprovacao = 'aprovado_gestor', aprovador_gestor = ? WHERE id = ?";
 
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -380,7 +380,7 @@ public void delete(Hora hora) {
 
 
     public void reprovarHora(int id, String justificativaNegacao, String usernameReprovador) {
-    String sql = "UPDATE hora SET status_aprovacao = 'negado', justificativa_negacao = ?, username_aprovador = ? WHERE id = ?";
+    String sql = "UPDATE hora SET status_aprovacao = 'negado', justificativa_negacao = ?, aprovador_gestor = ? WHERE id = ?";
 
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -435,7 +435,7 @@ public void delete(Hora hora) {
                 hora.setTipo(rset.getString("tipo"));
                 hora.setJustificativa_lancamento(rset.getString("justificativa_lancamento"));
                 hora.setProjeto(rset.getString("projeto"));
-                hora.setUsername_aprovador(rset.getString("username_aprovador"));
+                hora.setUsername_aprovador(rset.getString("aprovador_gestor"));
                 hora.setJustificativa_negacao(rset.getString("justificativa_negacao"));
                 hora.setStatus_aprovacao(rset.getString("status_aprovacaoADM"));
 
