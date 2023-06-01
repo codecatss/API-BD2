@@ -146,10 +146,10 @@ public class ExtracaoRelatorioGestorController {
         SimpleDateFormat formatadorData = new SimpleDateFormat("dd.MM.yyyy");
         String formData = formatadorData.format(data.getTime());
         
-        if(tipo==null){
+        if(tipo==null||DataInicio.getValue() == null || DataFim.getValue()==null){
             if(tipo==null)erro("tipo");
             
-            if(DataInicio.getValue() == null) erro("de início e de fim");
+            if(DataInicio.getValue() == null || DataFim.getValue()==null) erro("de início e de fim");
         }
         else{
             if(tipo.equals("Todos")){
@@ -166,9 +166,9 @@ public class ExtracaoRelatorioGestorController {
     
     private void erro(String motivo){
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Preencha o campo"+ motivo);
+        alert.setTitle("Alguns dos campos não foram preenchido");
         alert.setHeaderText(null);
-        alert.setContentText("Alguns dos campos não foi preenchido");
+        alert.setContentText("Preencha o campo "+ motivo);
         alert.showAndWait();   
     }
     
