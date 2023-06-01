@@ -27,12 +27,12 @@ public class Conexao {
         return connection;
     }
 
-    public static void gerarRelatorioCSV(String dataExtrato, String query) throws IOException, Exception {
+    public static void gerarRelatorioCSV(String dataExtrato,String tipo, String query) throws IOException, Exception {
         Connection connection = createConnectionToMySQL();
         Statement stmt = connection.createStatement();
 
         String caminhoDiretorio = System.getProperty("user.home") + "/Downloads/";
-        String caminhoCompleto = caminhoDiretorio + "extrato_" + dataExtrato + ".csv";
+        String caminhoCompleto = caminhoDiretorio + "extrato_" + dataExtrato +tipo+ ".csv";
 
         try (ResultSet rs = stmt.executeQuery(query)) {
 

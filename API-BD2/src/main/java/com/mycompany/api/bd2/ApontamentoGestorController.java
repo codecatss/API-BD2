@@ -177,7 +177,7 @@ public class ApontamentoGestorController implements Initializable {
     
     @FXML
     public void RelatorioCSV(ActionEvent event) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ExtracaoRelatorio.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ExtracaoRelatorioGestor.fxml"));
         Parent root = loader.load();
         Scene cena = new Scene(root);
         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
