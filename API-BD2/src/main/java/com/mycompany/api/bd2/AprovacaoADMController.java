@@ -4,9 +4,6 @@ import com.mycompany.api.bd2.daos.crDAO;
 import com.mycompany.api.bd2.daos.horaDAO;
 import com.mycompany.api.bd2.models.Hora;
 import com.mycompany.api.bd2.models.Usuario;
-import com.mycompany.api.bd2.*;
-import com.mycompany.api.bd2.daos.*;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -83,7 +80,6 @@ public class AprovacaoADMController implements Initializable {
 
     private ObservableList<Hora> observablelisthoras = FXCollections.observableArrayList();
     private horaDAO horadao = new horaDAO();
-    private Hora hora = new Hora();
     private crDAO crgestor = new crDAO();
     private Usuario usuario = new Usuario();
 
@@ -93,10 +89,7 @@ public class AprovacaoADMController implements Initializable {
             Stage stage = (Stage) minimizarTela.getScene().getWindow();
             stage.setIconified(true);
         });
-
         menuAprovar.setDisable(true);
-        botaoAprovar.setOnAction(this::aprovarHora);
-        botaoReprovar.setOnAction(this::reprovarHora);
         carregarTabelaLancamento();
     }
 
@@ -170,40 +163,14 @@ public class AprovacaoADMController implements Initializable {
         observablelisthoras.setAll(horadao.getHorasAprovadas());
         tabelaAprovacao.setItems(observablelisthoras);
         tabelaAprovacao.refresh();
-
     }
 
     @FXML
-    private void aprovarHora(ActionEvent event) {
+    public void BotaoReprovar() {
         Hora horaSelecionada = tabelaAprovacao.getSelectionModel().getSelectedItem();
-        horaDAO dao = new horaDAO();
-
+        System.out.println(horaSelecionada);
         if (horaSelecionada != null) {
-            String codCr = horaSelecionada.getCod_cr();
-            String statusAprovacaoADM = "aprovado_rh";
-
-            dao.atualizarStatusAprovacao(codCr, statusAprovacaoADM);
-
-            horaSelecionada.setStatus_aprovacao(statusAprovacaoADM);
-            tabelaAprovacao.refresh();
-            carregarTabelaLancamento();
-        }
-    }
-
-    public void reprovarHora(ActionEvent event) {
-        horaDAO horaDAO = new horaDAO();
-
-        Hora horaSelecionada = tabelaAprovacao.getSelectionModel().getSelectedItem();
-
-        if (horaSelecionada != null) {
-            horaSelecionada.setStatus_aprovacao("negado");
-            horaSelecionada.setJustificativa_negacao("Negada por RH");
-
-            horaDAO.atualizarStatusAprovacao(horaSelecionada.getCod_cr(), horaSelecionada.getStatus_aprovacao());
-            horaDAO.save(horaSelecionada);
-
-            System.out.println("Hora reprovada com sucesso");
-            tabelaAprovacao.refresh();
+            horadao.reprovarHoraADM(horaSelecionada);
             carregarTabelaLancamento();
         }
     }
