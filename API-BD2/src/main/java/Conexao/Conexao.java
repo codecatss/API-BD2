@@ -27,49 +27,59 @@ public class Conexao {
         return connection;
     }
 
-    public static void gerarRelatorioCSV(String dataExtrato, String query) throws IOException, Exception {
-        Connection connection = createConnectionToMySQL();
-        Statement stmt = connection.createStatement();
+   public static void gerarRelatorioCSV(String dataExtrato, String tipo, String query) throws IOException, Exception {
+    Connection connection = createConnectionToMySQL();
+    Statement stmt = connection.createStatement();
 
-        String caminhoDiretorio = System.getProperty("user.home") + "/Downloads/";
-        String caminhoCompleto = caminhoDiretorio + "extrato_" + dataExtrato + ".csv";
+    String caminhoDiretorio = System.getProperty("user.home") + "/Downloads/";
+    String nomeArquivo = "extrato_" + dataExtrato + tipo + ".csv";
+    String caminhoCompletoOriginal = caminhoDiretorio + nomeArquivo;
+    String caminhoCompleto = caminhoCompletoOriginal;
 
-        try (ResultSet rs = stmt.executeQuery(query)) {
-
-            // Cria o escritor do arquivo CSV
-            CSVWriter writer = new CSVWriter(new FileWriter(caminhoCompleto));
-
-            // Obtem o metadado do resultado da consulta
-            ResultSetMetaData rsmd = rs.getMetaData();
-
-            // Obtem o número de colunas
-            int numColunas = rsmd.getColumnCount();
-
-            // Cria o array de Strings com o cabeçalho
-            String[] cabecalho = new String[numColunas];
-            for (int i = 1; i <= numColunas; i++) {
-                cabecalho[i - 1] = rsmd.getColumnLabel(i);
-            }
-            // Escreve o cabeçalho no arquivo CSV
-            writer.writeNext(cabecalho);
-
-            // Escreve os dados no arquivo CSV
-            while (rs.next()) {
-                String[] linha = new String[numColunas];
-                for (int i = 1; i <= numColunas; i++) {
-                    linha[i - 1] = rs.getString(i);
-                }
-                writer.writeNext(linha);
-            }
-
-            // Fecha o escritor do arquivo CSV
-            writer.close();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        String caminho = System.getProperty("user.home") + "/Downloads/";
-        System.out.println("Relatório 'extrato_" + dataExtrato + "' foi armazenado na pasta Downloads");
+    // Verifica se o arquivo já existe
+    File arquivoExistente = new File(caminhoCompleto);
+    int numeroAdicional = 1;
+    while (arquivoExistente.exists()) {
+        nomeArquivo = "extrato_" + dataExtrato + tipo + "(" + numeroAdicional + ").csv";
+        caminhoCompleto = caminhoDiretorio + nomeArquivo;
+        arquivoExistente = new File(caminhoCompleto);
+        numeroAdicional++;
     }
+
+    try (ResultSet rs = stmt.executeQuery(query)) {
+        // Cria o escritor do arquivo CSV
+        CSVWriter writer = new CSVWriter(new FileWriter(caminhoCompleto));
+
+        // Obtem o metadado do resultado da consulta
+        ResultSetMetaData rsmd = rs.getMetaData();
+
+        // Obtem o número de colunas
+        int numColunas = rsmd.getColumnCount();
+
+        // Cria o array de Strings com o cabeçalho
+        String[] cabecalho = new String[numColunas];
+        for (int i = 1; i <= numColunas; i++) {
+            cabecalho[i - 1] = rsmd.getColumnLabel(i);
+        }
+        // Escreve o cabeçalho no arquivo CSV
+        writer.writeNext(cabecalho);
+
+        // Escreve os dados no arquivo CSV
+        while (rs.next()) {
+            String[] linha = new String[numColunas];
+            for (int i = 1; i <= numColunas; i++) {
+                linha[i - 1] = rs.getString(i);
+            }
+            writer.writeNext(linha);
+        }
+
+        // Fecha o escritor do arquivo CSV
+        writer.close();
+    } catch (Exception e) {
+        throw new RuntimeException(e);
+    }
+    System.out.println("Relatório '" + nomeArquivo + "' foi armazenado na pasta Downloads");
+}
 
     public static void main(String[] args) throws Exception {
         Connection con = createConnectionToMySQL();

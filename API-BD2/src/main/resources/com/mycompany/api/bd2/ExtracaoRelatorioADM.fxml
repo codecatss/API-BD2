@@ -22,13 +22,13 @@
                <children>
                   <AnchorPane layoutX="534.0" layoutY="-80.0" prefHeight="40.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button id="fecharTela" fx:id="fecharTela" layoutX="1270.0" layoutY="5.0" mnemonicParsing="false" styleClass="close" stylesheets="@EstilizacaoTelas.css" text="X" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="5.0">
+                        <Button id="fecharTela" fx:id="fecharTela" layoutX="1270.0" layoutY="5.0" mnemonicParsing="false" onAction="#fecharTela" styleClass="close" stylesheets="@EstilizacaoTelas.css" text="X" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="5.0">
                            <font>
                               <Font name="Arial Bold" size="12.0" />
                            </font>
                         </Button>
-                        <Button id="minimizarTela" fx:id="minimizarTela" layoutX="1245.0" layoutY="5.0" mnemonicParsing="false" styleClass="minimize" stylesheets="@EstilizacaoTelas.css" text="-" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="5.0" />
-                        <Label id="nometelaatual" fx:id="nometelaatual" layoutX="10.0" layoutY="10.0" text="Aprovar Horas" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                        <Button id="minimizarTela" fx:id="minimizarTela" layoutX="1245.0" layoutY="5.0" mnemonicParsing="false" onAction="#botaoMinimizar" styleClass="minimize" stylesheets="@EstilizacaoTelas.css" text="-" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="5.0" />
+                        <Label id="nometelaatual" fx:id="nometelaatual" layoutX="10.0" layoutY="10.0" text="Relatórios" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font>
@@ -54,12 +54,12 @@
                               <Font name="Arial" size="18.0" />
                            </font>
                         </Label>
-                        <Button id="botaoSair" fx:id="botaoSair" layoutX="10.0" layoutY="580.0" mnemonicParsing="false" styleClass="logout" stylesheets="@EstilizacaoTelas.css" text="Sair" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
+                        <Button id="botaoSair" fx:id="BotaoSair" layoutX="10.0" layoutY="580.0" mnemonicParsing="false" onAction="#botaoSair" styleClass="logout" stylesheets="@EstilizacaoTelas.css" text="Sair" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
                            <font>
                               <Font name="Arial Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button id="menuUsuario" fx:id="menuUsuario" layoutX="-1.0" layoutY="140.0" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Gestão Usuários" textAlignment="CENTER" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="140.0">
+                        <Button id="menuUsuario" fx:id="menuUsuario" layoutX="-1.0" layoutY="140.0" mnemonicParsing="false" onAction="#GestaoUsuarios" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Gestão Usuários" textAlignment="CENTER" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="140.0">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -71,7 +71,7 @@
                               <Font name="Arial" size="12.0" />
                            </font>
                         </Button>
-                        <Button id="menuCR" fx:id="menuCR" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Gestão CRs" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="195.0">
+                        <Button id="menuCR" fx:id="menuCR" mnemonicParsing="false" onAction="#GestaoCRs" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Gestão CRs" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="195.0">
                            <graphic>
                               <ImageView fitHeight="26.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -83,7 +83,7 @@
                               <Font name="Arial" size="12.0" />
                            </font>
                         </Button>
-                        <Button id="menuCliente" fx:id="menuCliente" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Gestão Clientes" textAlignment="CENTER" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="250.0">
+                        <Button id="menuCliente" fx:id="menuCliente" mnemonicParsing="false" onAction="#GestaoClientes" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Gestão Clientes" textAlignment="CENTER" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="250.0">
                            <graphic>
                               <ImageView fitHeight="29.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -92,7 +92,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button id="menuAprovar" fx:id="menuAprovar" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Aprovar Horas" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="305.0">
+                        <Button id="menuAprovar" fx:id="menuAprovar" mnemonicParsing="false" onAction="#AprovarHoras" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Aprovar Horas" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="305.0">
                            <graphic>
                               <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -101,7 +101,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button id="menuRelatorio" fx:id="menuRelatorio" mnemonicParsing="false" onAction="#RelatorioCSV" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Relatórios" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="360.0">
+                        <Button id="menuRelatorio" fx:id="menuRelatorio" mnemonicParsing="false" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Relatórios" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="360.0">
                            <graphic>
                               <ImageView fitHeight="28.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -125,6 +125,7 @@
                <children>
                   <AnchorPane layoutX="4.0" prefHeight="746.0" prefWidth="1080.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="0.0">
                      <children>
+                        <DatePicker fx:id="DataFim" layoutX="508.0" layoutY="16.0" prefHeight="30.0" prefWidth="157.0" promptText="Fim" />
                         <TableView id="tabelaContainer" fx:id="tabelaRelatorio" layoutX="14.0" layoutY="57.0" prefHeight="665.0" prefWidth="1044.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0">
                            <columns>
                               <TableColumn fx:id="colunaColaborador" prefWidth="75.0" text="Colaborador" />
@@ -144,14 +145,13 @@
                               <Font name="Arial" size="24.0" />
                            </font>
                         </Label>
-                        <Button id="buttonAprovar" fx:id="botaoExtrair" layoutX="684.0" layoutY="17.0" mnemonicParsing="false" onAction="#botaoExtrair" prefHeight="30.0" prefWidth="102.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Extrair" textFill="WHITE" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="16.0">
+                        <Button id="buttonAprovar" fx:id="botaoExtrair" layoutX="684.0" layoutY="17.0" mnemonicParsing="false" onAction="#gerarRelatorio" prefHeight="30.0" prefWidth="102.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Extrair" textFill="WHITE" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="16.0">
                            <font>
                               <Font name="Arial" size="15.0" />
                            </font>
                         </Button>
-                        <ComboBox fx:id="comboboxStatus" layoutX="158.0" layoutY="16.0" prefHeight="30.0" prefWidth="150.0" promptText="Status" />
-                        <DatePicker fx:id="dataInicioRelatorio" layoutX="329.0" layoutY="16.0" prefHeight="30.0" prefWidth="157.0" promptText="Início" />
-                        <DatePicker fx:id="dataFimRelatorio" layoutX="508.0" layoutY="16.0" prefHeight="30.0" prefWidth="157.0" promptText="Fim" />
+                        <ComboBox fx:id="comboboxStatus" layoutX="158.0" layoutY="16.0" onAction="#statusRelatorio" prefHeight="30.0" prefWidth="150.0" promptText="Status" />
+                        <DatePicker fx:id="DataInicio" layoutX="329.0" layoutY="16.0" prefHeight="30.0" prefWidth="157.0" promptText="Início" />
                      </children>
                      <styleClass>
                         <String fx:value="white-bg" />
