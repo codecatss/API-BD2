@@ -66,5 +66,30 @@ public class ClassificarVerba {
     }
     
     
+    //VERIFICAR PERIODO
+    public boolean seDiurno(Date diaSelecionado, long diferencaMinutosTotal) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(diaSelecionado);
+        
+        int hora = calendar.get(Calendar.HOUR_OF_DAY);
+        long MinutosEmHora = (diferencaMinutosTotal / 60);
+        long horaTotal = hora + MinutosEmHora;
 
+        return horaTotal >= 6 && hora < 22;
+    }
+    
+    public boolean seNoturno(Date diaSelecionado, long diferencaMinutosTotal) {
+        Calendar inicio = Calendar.getInstance();
+        inicio.setTime(diaSelecionado);
+
+        int hora = inicio.get(Calendar.HOUR_OF_DAY);
+        long MinutosEmHora = (int) (diferencaMinutosTotal / 60);
+        long horaTotal = hora + MinutosEmHora;
+
+        return horaTotal >= 0 && hora < 6 || horaTotal >= 22 && hora < 24;
+
+    }
+    
+    
+    
 }
