@@ -247,7 +247,6 @@ public class Hora {
         this.projeto = null;
         this.solicitante = null;
         this.status_aprovacao = null;
-        this.tipo = null;
         this.username_aprovador = null;
         this.username_lancador = null;
 

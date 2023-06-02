@@ -90,6 +90,7 @@ public class AprovacaoADMController implements Initializable {
             stage.setIconified(true);
         });
         menuAprovar.setDisable(true);
+        
         carregarTabelaLancamento();
     }
 
@@ -167,10 +168,18 @@ public class AprovacaoADMController implements Initializable {
 
     @FXML
     public void BotaoReprovar() {
+        if (tabelaAprovacao.getSelectionModel().getSelectedItem() != null) {
+            horadao.reprovarHoraADM(tabelaAprovacao.getSelectionModel().getSelectedItem().getId());
+            carregarTabelaLancamento();
+        }
+    }
+
+    @FXML
+    public void BotaoAprovar() {
         Hora horaSelecionada = tabelaAprovacao.getSelectionModel().getSelectedItem();
         System.out.println(horaSelecionada);
         if (horaSelecionada != null) {
-            horadao.reprovarHoraADM(horaSelecionada);
+            horadao.aprovarHoraADM(horaSelecionada);
             carregarTabelaLancamento();
         }
     }

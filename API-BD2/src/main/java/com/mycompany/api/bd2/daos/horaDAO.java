@@ -26,7 +26,7 @@ import java.util.logging.Logger;
 public class horaDAO {
 
     public void save(Hora hora) {
-        String sql = "INSERT INTO hora(cod_cr, username_lancador, cnpj_cliente, data_hora_inicio, data_hora_fim, tipo, justificativa_lancamento, projeto, aprovador_gestor, justificativa_negacao, status_aprovacaoADM, solicitante_lancamento) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO hora(cod_cr, username_lancador, cnpj_cliente, data_hora_inicio, data_hora_fim, tipo, justificativa_lancamento, projeto, aprovador_gestor, justificativa_negacao, status, solicitante_lancamento) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         Connection conn = null;
         PreparedStatement pstm = null;
 
@@ -67,15 +67,15 @@ public class horaDAO {
 
     }
 
-    public void atualizarStatusAprovacao(String codCr, String statusAprovacao) {
-        String sql = "UPDATE hora SET status_aprovacaoADM = ? WHERE cod_cr = ? ";
+    public void atualizarStatusAprovacao(String codCr, String status) {
+        String sql = "UPDATE hora SET status = ? WHERE cod_cr = ? ";
         Connection conn = null;
         PreparedStatement pstm = null;
 
         try {
             conn = Conexao.createConnectionToMySQL();
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, statusAprovacao);
+            pstm.setString(1, status);
             pstm.setString(2, codCr);
             pstm.executeUpdate();
 
@@ -157,7 +157,7 @@ public class horaDAO {
                 hora.setProjeto(rset.getString("projeto"));
                 hora.setUsername_aprovador(rset.getString("aprovador_gestor"));
                 hora.setJustificativa_negacao(rset.getString("justificativa_negacao"));
-                hora.setStatus_aprovacao(rset.getString("status_aprovacao"));
+                hora.setStatus_aprovacao(rset.getString("status"));
 
                 horas.add(hora);
 
@@ -213,7 +213,7 @@ public class horaDAO {
                 hora.setProjeto(rset.getString("projeto"));
                 hora.setUsername_aprovador(rset.getString("aprovador_gestor"));
                 hora.setJustificativa_negacao(rset.getString("justificativa_negacao"));
-                hora.setStatus_aprovacao(rset.getString("status_aprovacao"));
+                hora.setStatus_aprovacao(rset.getString("status"));
                 hora.setSolicitante(rset.getString("solicitante_lancamento"));
                 hora.setNome_cliente(getNomeClient(rset.getLong("cnpj_cliente")));
 
@@ -247,7 +247,7 @@ public class horaDAO {
 
         LinkedList<TabelaAprovaçãoGestor> horasUser = new LinkedList<>();
         for (Integer i : lis_int_cr) {
-            String sql = "SELECT * FROM 2rp.hora WHERE cod_cr = ? AND status_aprovacao = 'pendente'";
+            String sql = "SELECT * FROM 2rp.hora WHERE cod_cr = ? AND status = 'pendente'";
 
             Connection conn = null;
             PreparedStatement pstm = null;
@@ -347,7 +347,7 @@ public class horaDAO {
     }
 
     public void aprovarHora(int id) {
-        String sql = "UPDATE hora SET status_aprovacao = 'aprovado_gestor' WHERE id = ?";
+        String sql = "UPDATE hora SET status = 'aprovado_gestor' WHERE id = ?";
 
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -378,7 +378,7 @@ public class horaDAO {
     }
 
     public void reprovarHora(int id) {
-        String sql = "UPDATE hora SET status_aprovacao = 'negado_gestor' WHERE id = ?";
+        String sql = "UPDATE hora SET status = 'negado_gestor' WHERE id = ?";
 
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -408,8 +408,40 @@ public class horaDAO {
         }
     }
 
+    public void reprovarHoraADM(int id) {
+        String sql = "UPDATE hora SET status = 'reprovado_adm' where id = ?";
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            try {
+                conn = Conexao.createConnectionToMySQL();
+            } catch (Exception ex) {
+                Logger.getLogger(horaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+
+            System.out.println("Hora reprovada com sucesso");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public Set<Hora> getHorasAprovadas() {
-        String sql = "SELECT * FROM 2rp.hora WHERE status_aprovacao = 'pendente' OR status_aprovacao = 'aprovado_gestor'";
+        String sql = "SELECT * FROM 2rp.hora WHERE status = 'pendente' OR status = 'aprovado_gestor'";
         Set<Hora> horasAprovadas = new HashSet<>();
 
         Connection conn = null;
@@ -433,7 +465,7 @@ public class horaDAO {
                 hora.setProjeto(rset.getString("projeto"));
                 hora.setUsername_aprovador(rset.getString("aprovador_gestor"));
                 hora.setJustificativa_negacao(rset.getString("justificativa_negacao"));
-                hora.setStatus_aprovacao(rset.getString("status_aprovacao"));
+                hora.setStatus_aprovacao(rset.getString("status"));
 
                 horasAprovadas.add(hora);
             }
@@ -459,8 +491,8 @@ public class horaDAO {
         return horasAprovadas;
     }
 
-    public void reprovarHoraADM(Hora hora) {
-        String sql = "UPDATE hora SET status_aprovacao = ?";
+    public void aprovarHoraADM(Hora hora) {
+        String sql = "UPDATE hora SET status = ?";
         Connection conn = null;
         PreparedStatement pstmt = null;
 
@@ -471,10 +503,10 @@ public class horaDAO {
                 Logger.getLogger(horaDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, "negado_adm");
+            pstmt.setString(1, "aprovado_adm");
             pstmt.executeUpdate();
 
-            System.out.println("Hora reprovada com sucesso");
+            System.out.println("Hora aprovada com sucesso");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
