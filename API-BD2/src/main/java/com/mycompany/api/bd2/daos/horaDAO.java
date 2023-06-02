@@ -408,8 +408,8 @@ public class horaDAO {
         }
     }
 
-    public void reprovarHoraADM(int id) {
-        String sql = "UPDATE hora SET status = 'reprovado_adm' where id = ?";
+    public void reprovarHoraADM(Integer id) {
+        String sql = "UPDATE hora SET status = 'negado_adm' where id = ?";
         Connection conn = null;
         PreparedStatement pstmt = null;
 
@@ -455,6 +455,7 @@ public class horaDAO {
 
             while (rset.next()) {
                 Hora hora = new Hora();
+                hora.setId(rset.getInt("id"));
                 hora.setCod_cr(rset.getString("cod_cr"));
                 hora.setUsername_lancador(rset.getString("username_lancador"));
                 hora.setCnpj_cliente(rset.getInt("cnpj_cliente"));
@@ -491,8 +492,8 @@ public class horaDAO {
         return horasAprovadas;
     }
 
-    public void aprovarHoraADM(Hora hora) {
-        String sql = "UPDATE hora SET status = ?";
+    public void aprovarHoraADM(int id) {
+        String sql = "UPDATE hora SET status = 'aprovado_adm' where id = ?";
         Connection conn = null;
         PreparedStatement pstmt = null;
 
@@ -503,7 +504,7 @@ public class horaDAO {
                 Logger.getLogger(horaDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, "aprovado_adm");
+            pstmt.setInt(1, id);
             pstmt.executeUpdate();
 
             System.out.println("Hora aprovada com sucesso");

@@ -6,6 +6,8 @@ import com.mycompany.api.bd2.models.Hora;
 import com.mycompany.api.bd2.models.Usuario;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -84,6 +86,7 @@ public class AprovacaoADMController implements Initializable {
     @FXML
     private TextArea textoJustificativa;
 
+    private List<Hora> lishoras = new ArrayList<>();
     private ObservableList<Hora> observablelisthoras = FXCollections.observableArrayList();
     private horaDAO horadao = new horaDAO();
     private crDAO crgestor = new crDAO();
@@ -96,7 +99,7 @@ public class AprovacaoADMController implements Initializable {
             stage.setIconified(true);
         });
         menuAprovar.setDisable(true);
-        
+
         carregarTabelaLancamento();
     }
 
@@ -159,6 +162,9 @@ public class AprovacaoADMController implements Initializable {
     }
 
     private void carregarTabelaLancamento() {
+        lishoras.addAll(horadao.getHorasAprovadas());
+        observablelisthoras.setAll(horadao.getHorasAprovadas());
+        tabelaAprovacao.setItems(observablelisthoras);
         colunaColaboradorADM.setCellValueFactory(new PropertyValueFactory<>("username_lancador"));
         colunaCRADM.setCellValueFactory(new PropertyValueFactory<>("cod_cr"));
         colunaEmpresaADM.setCellValueFactory(new PropertyValueFactory<>("cnpj_cliente"));
@@ -167,13 +173,12 @@ public class AprovacaoADMController implements Initializable {
         colunaFimADM.setCellValueFactory(new PropertyValueFactory<>("data_hora_fim"));
         colunaJustificativaADM.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
 
-        observablelisthoras.setAll(horadao.getHorasAprovadas());
-        tabelaAprovacao.setItems(observablelisthoras);
         tabelaAprovacao.refresh();
     }
 
     @FXML
     public void BotaoReprovar() {
+        System.out.println("esse é o id" + tabelaAprovacao.getSelectionModel().getSelectedItem().getId());
         if (tabelaAprovacao.getSelectionModel().getSelectedItem() != null) {
             horadao.reprovarHoraADM(tabelaAprovacao.getSelectionModel().getSelectedItem().getId());
             carregarTabelaLancamento();
@@ -185,7 +190,7 @@ public class AprovacaoADMController implements Initializable {
         Hora horaSelecionada = tabelaAprovacao.getSelectionModel().getSelectedItem();
         System.out.println(horaSelecionada);
         if (horaSelecionada != null) {
-            horadao.aprovarHoraADM(horaSelecionada);
+            horadao.aprovarHoraADM(tabelaAprovacao.getSelectionModel().getSelectedItem().getId());
             carregarTabelaLancamento();
         }
     }

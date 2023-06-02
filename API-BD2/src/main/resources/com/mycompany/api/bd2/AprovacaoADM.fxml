@@ -145,17 +145,18 @@
                         </AnchorPane>
                   <AnchorPane layoutX="284.0" prefHeight="603.0" prefWidth="786.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="7.199999999999932" AnchorPane.leftAnchor="284.0000000000001" AnchorPane.rightAnchor="4.000000000000114" AnchorPane.topAnchor="0.0">
                      <children>
-                        <TableView id="tabelaContainer" fx:id="tabelaAprovacao1" layoutX="8.0" layoutY="57.0" prefHeight="534.0" prefWidth="744.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="7.0">
+                        <TableView id="tabelaContainer" fx:id="tabelaAprovacao" layoutX="8.0" layoutY="57.0" prefHeight="534.0" prefWidth="744.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="7.0">
                            <columns>
-                              <TableColumn fx:id="colunaColaboradorADM1" maxWidth="100.0" prefWidth="84.79998779296875" text="Colaborador" />
-                              <TableColumn fx:id="colunaCRADM1" maxWidth="124.80001831054688" prefWidth="60.0" text="CR" />
-                              <TableColumn fx:id="colundaGestorADM1" prefWidth="75.20004272460938" text="Gestor" />
-                              <TableColumn fx:id="colunaEmpresaADM1" maxWidth="138.39996337890625" prefWidth="81.5999755859375" text="Empresa" />
-                              <TableColumn fx:id="colunaProjetoADM1" maxWidth="146.4000244140625" prefWidth="73.60003662109375" text="Projeto" />
-                              <TableColumn fx:id="colunaFuncaoADM1" maxWidth="163.2000732421875" prefWidth="89.60003662109375" text="Função" />
-                              <TableColumn fx:id="colunaInicioADM1" maxWidth="141.5999755859375" prefWidth="97.60009765625" text="Início" />
-                              <TableColumn fx:id="colunaFimADM1" maxWidth="100.0" prefWidth="82.39990234375" text="Fim" />
-                              <TableColumn fx:id="colunaJustificativaADM1" maxWidth="168.0" prefWidth="120.7999267578125" text="Justificativa" />
+                              <TableColumn fx:id="colunaColaboradorADM" maxWidth="100.0" prefWidth="84.79998779296875" text="Colaborador" />
+                              <TableColumn fx:id="colunaCRADM" maxWidth="124.80001831054688" prefWidth="60.0" text="CR" />
+                              <TableColumn fx:id="colundaGestorADM" prefWidth="75.20004272460938" text="Gestor" />
+                              <TableColumn fx:id="colunaEmpresaADM" maxWidth="138.39996337890625" prefWidth="81.5999755859375" text="Empresa" />
+                              <TableColumn fx:id="colunaProjetoADM" maxWidth="146.4000244140625" prefWidth="73.60003662109375" text="Projeto" />
+                              <TableColumn fx:id="colunaFuncaoADM" maxWidth="163.2000732421875" prefWidth="89.60003662109375" text="Função" />
+                              <TableColumn fx:id="colunaInicioADM" maxWidth="141.5999755859375" prefWidth="97.60009765625" text="Início" />
+                              <TableColumn fx:id="colunaFimADM" maxWidth="100.0" prefWidth="82.39990234375" text="Fim" />
+                              <TableColumn fx:id="colunaJustificativaADM" maxWidth="168.0" prefWidth="120.7999267578125" text="Justificativa" />
+                              <TableColumn fx:id="status" maxWidth="141.5999755859375" prefWidth="97.60009765625" text="status" />
                            </columns>
                         </TableView>
                      </children>

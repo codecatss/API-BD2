@@ -114,12 +114,14 @@ create table
 -- Adição de Usuários
 
 INSERT INTO
-    usuario (username, nome, senha, funcao)
+    usuario (username, nome, senha, funcao, id)
 VALUES (
+    id int AUTO_INCREMENT NOT NULL
         'admin',
         'Admin',
         'admin123',
         'admin'
+        '0'
     );
 
 INSERT INTO
