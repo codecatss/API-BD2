@@ -19,9 +19,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -77,6 +79,10 @@ public class AprovacaoADMController implements Initializable {
     private Button botaoReprovar;
     @FXML
     private Button botaoAprovar;
+    @FXML
+    private ComboBox<?> comboboxStatusApontamentos;
+    @FXML
+    private TextArea textoJustificativa;
 
     private ObservableList<Hora> observablelisthoras = FXCollections.observableArrayList();
     private horaDAO horadao = new horaDAO();

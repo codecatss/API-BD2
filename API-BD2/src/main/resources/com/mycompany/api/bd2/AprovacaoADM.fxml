@@ -2,9 +2,11 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -116,42 +118,52 @@
             <center>
                 <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <children>
-                        <AnchorPane layoutY="10.0" prefHeight="601.0" prefWidth="1067.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="5.0">
-                            <children>
-                                <TableView id="tabelaContainer" fx:id="tabelaAprovacao" layoutX="14.0" layoutY="57.0" prefHeight="537.0" prefWidth="1057.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0">
-                                    <columns>
-                                        <TableColumn fx:id="colunaColaboradorADM" prefWidth="232.8000030517578" text="Colaborador" />
-                                        <TableColumn fx:id="colunaCRADM" prefWidth="159.99996948242188" text="CR" />
-                                        <TableColumn fx:id="colundaGestorADM" prefWidth="173.5999755859375" text="Gestor" />
-                                        <TableColumn fx:id="colunaEmpresaADM" prefWidth="155.2000732421875" text="Empresa" />
-                                        <TableColumn fx:id="colunaProjetoADM" prefWidth="160.0" text="Projeto"> </TableColumn>
-                                        <TableColumn fx:id="colunaFuncaoADM" prefWidth="98.39996337890625" text="Função" />
-                                        <TableColumn fx:id="colunaInicioADM" prefWidth="75.0" text="Início" />
-                                        <TableColumn fx:id="colunaFimADM" prefWidth="75.0" text="Fim" />
-                                        <TableColumn fx:id="colunaJustificativaADM" prefWidth="75.0" text="Justificativa" />
-                                    </columns>
-                                </TableView>
-                                <Label layoutX="14.0" layoutY="20.0" prefHeight="27.0" prefWidth="287.0" text="Apontamentos pendentes">
-                                    <font>
-                                        <Font name="Arial" size="24.0" />
-                                    </font>
-                                </Label>
-                                <Button id="buttonReprovar" fx:id="botaoReprovar" layoutX="453.0" layoutY="20.0" mnemonicParsing="false" onAction="#BotaoReprovar" prefHeight="27.0" prefWidth="76.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Reprovar" textFill="WHITE">
-                                    <font>
-                                        <Font name="Arial Narrow" size="12.0" />
-                                    </font>
-                                </Button>
-                                <Button id="buttonAprovar" fx:id="botaoAprovar" layoutX="352.0" layoutY="20.0" mnemonicParsing="false" onAction="#BotaoAprovar" prefHeight="28.0" prefWidth="82.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Aprovar" textFill="WHITE">
-                                    <font>
-                                        <Font name="Arial Narrow" size="12.0" />
-                                    </font>
-                                </Button>
-                            </children>
+                        <AnchorPane layoutX="6.0" layoutY="1.0" prefHeight="602.0" prefWidth="267.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="7.0" AnchorPane.topAnchor="1.0">
                             <styleClass>
                                 <String fx:value="white-bg" />
                                 <String fx:value="shadow" />
                             </styleClass>
+                     <children>
+                                <Label layoutX="15.0" layoutY="14.0" prefHeight="30.0" prefWidth="166.0" text="Apontamentos">
+                                    <font>
+                                        <Font name="Arial" size="25.0" />
+                                    </font>
+                                </Label>
+                                <Button id="buttonAprovar" fx:id="botaoAprovar" layoutX="15.0" layoutY="138.0" mnemonicParsing="false" onAction="#BotaoAprovar" prefHeight="34.0" prefWidth="93.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Aprovar" textFill="WHITE">
+                                    <font>
+                                        <Font name="Arial Narrow" size="12.0" />
+                                    </font>
+                                </Button>
+                                <Button id="buttonReprovar" fx:id="botaoReprovar" layoutX="120.0" layoutY="138.0" mnemonicParsing="false" onAction="#BotaoReprovar" prefHeight="34.0" prefWidth="93.0" styleClass="reprove" stylesheets="@EstilizacaoTelas.css" text="Reprovar" textFill="WHITE">
+                                    <font>
+                                        <Font name="Arial Narrow" size="12.0" />
+                                    </font>
+                                </Button>
+                        <ComboBox fx:id="comboboxStatusApontamentos" layoutX="15.0" layoutY="68.0" prefHeight="34.0" prefWidth="150.0" promptText="Selecione o status" />
+                        <TextArea fx:id="textoJustificativa" layoutX="14.0" layoutY="207.0" prefHeight="134.0" prefWidth="239.0" promptText="Preencha sua justificativa" />
+                     </children>
                         </AnchorPane>
+                  <AnchorPane layoutX="284.0" prefHeight="603.0" prefWidth="786.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="7.199999999999932" AnchorPane.leftAnchor="284.0000000000001" AnchorPane.rightAnchor="4.000000000000114" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <TableView id="tabelaContainer" fx:id="tabelaAprovacao1" layoutX="8.0" layoutY="57.0" prefHeight="534.0" prefWidth="744.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="7.0">
+                           <columns>
+                              <TableColumn fx:id="colunaColaboradorADM1" maxWidth="100.0" prefWidth="84.79998779296875" text="Colaborador" />
+                              <TableColumn fx:id="colunaCRADM1" maxWidth="124.80001831054688" prefWidth="60.0" text="CR" />
+                              <TableColumn fx:id="colundaGestorADM1" prefWidth="75.20004272460938" text="Gestor" />
+                              <TableColumn fx:id="colunaEmpresaADM1" maxWidth="138.39996337890625" prefWidth="81.5999755859375" text="Empresa" />
+                              <TableColumn fx:id="colunaProjetoADM1" maxWidth="146.4000244140625" prefWidth="73.60003662109375" text="Projeto" />
+                              <TableColumn fx:id="colunaFuncaoADM1" maxWidth="163.2000732421875" prefWidth="89.60003662109375" text="Função" />
+                              <TableColumn fx:id="colunaInicioADM1" maxWidth="141.5999755859375" prefWidth="97.60009765625" text="Início" />
+                              <TableColumn fx:id="colunaFimADM1" maxWidth="100.0" prefWidth="82.39990234375" text="Fim" />
+                              <TableColumn fx:id="colunaJustificativaADM1" maxWidth="168.0" prefWidth="120.7999267578125" text="Justificativa" />
+                           </columns>
+                        </TableView>
+                     </children>
+                     <styleClass>
+                        <String fx:value="white-bg" />
+                        <String fx:value="shadow" />
+                     </styleClass>
+                  </AnchorPane>
                     </children>
                 </AnchorPane>
             </center>
