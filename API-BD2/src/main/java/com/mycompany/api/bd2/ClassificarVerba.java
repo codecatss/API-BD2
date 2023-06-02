@@ -91,5 +91,42 @@ public class ClassificarVerba {
     }
     
     
-    
+    //CLASSIFICAR TIPO 'HORA EXTRA'
+    public void classificarHorasExtras(){
+        horaDAO dao = new horaDAO();
+        Set<Hora> horas = dao.getHoras();
+        
+        for (Hora hora : horas) {
+            if (hora.getTipo().equals("hora_extra")) {
+                
+                Calendar inicio = Calendar.getInstance();
+                inicio.setTime(hora.getData_hora_inicio());
+                
+                Calendar fim = Calendar.getInstance();
+                fim.setTime(hora.getData_hora_fim());
+                
+                Calendar calendar = (Calendar) inicio.clone();
+                
+                //UM DIA POR VEZ - 'ALGUNS CONFLITOS (TIPO VARIAV.), EM PROGRESSO DE RESOLUÇÃO...'
+                while (calendar.before(fim) || calendar.equals(fim)) {
+                    int diaSelecionado = calendar.get(Calendar.DAY_OF_WEEK);
+                    int horaInicio = Calendar.HOUR_OF_DAY;
+                    int minutoInicio = Calendar.MINUTE;
+                    int horaFim = fim.HOUR_OF_DAY;
+                    int minutoFim = fim.MINUTE;
+                    long diferencaMinutosDia = calcularDiferencaPorDia(horaInicio, minutoInicio);
+                    long diferencaMinutosTotal = calcularDiferencaTotal(horaInicio, minutoInicio, horaFim, minutoFim);
+                    
+                    
+                    boolean diaUtil = diaUtil(diaSelecionado);
+                    boolean diaNaoUtil = diaNaoUtil(diaSelecionado);
+                    boolean SeMaiorDe120 = verificarDiferenca120 (diferencaMinutosDia);
+                    boolean seDiurno = seDiurno(diaSelecionado, diferencaMinutosTotal);
+                    boolean seNoturno = seNoturno (diaSelecionado, diferencaMinutosTotal);
+                    
+                    
+                }
+            }
+        }
+    }
 }
