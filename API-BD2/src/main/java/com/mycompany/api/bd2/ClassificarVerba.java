@@ -60,5 +60,11 @@ public class ClassificarVerba {
     }
     
     
+    //VERIFICAR SE <= 120 MINUTOS POR DIA
+    public boolean verificarDiferenca120(long diferencaMinutosDia) {
+        return diferencaMinutosDia <= 120;
+    }
     
+    
+
 }
