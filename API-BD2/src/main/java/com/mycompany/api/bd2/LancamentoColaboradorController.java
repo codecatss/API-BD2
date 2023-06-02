@@ -458,8 +458,8 @@ public class LancamentoColaboradorController {
         tabelaSolicitante.setCellValueFactory(new PropertyValueFactory<>("solicitante"));
 
         tabelaLancamento.refresh();
-
     }
+    
     public void atualizarInformacoes() {
         System.out.println(TimeData.getInstance().getHoraInicio());
         // ...

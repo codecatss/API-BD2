@@ -131,18 +131,18 @@ public class ApontamentoGestorController implements Initializable {
     @FXML
     public void carregarTabelaLancamento() {
         lishoras.clear();
-        lishoras.addAll(horadao.getHora(crgestor.getListCrGestor(usuario)));
+        lishoras.addAll(horadao.getHora(crgestor.getListCrGestor(usuario),"TabelaAprovaçãoGestor"));
         observablelisthoras.setAll(lishoras);
         tabelaApontamento.setItems(observablelisthoras);
 
-        colunaUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
+        colunaUsername.setCellValueFactory(new PropertyValueFactory<>("username_lancador"));
         colunaCR.setCellValueFactory(new PropertyValueFactory<>("cod_cr"));
         colunaEmpresa.setCellValueFactory(new PropertyValueFactory<>("empresa"));
         colunaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto"));
         colunaInicio.setCellValueFactory(new PropertyValueFactory<>("inicio"));
         colunaFim.setCellValueFactory(new PropertyValueFactory<>("fim"));
-        //colunaJust.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
-        //colunaFunçao.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
+        colunaJust.setCellValueFactory(new PropertyValueFactory<>("justificativa"));
+        //colunaFunçao.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         tabelaApontamento.refresh();
     }
 

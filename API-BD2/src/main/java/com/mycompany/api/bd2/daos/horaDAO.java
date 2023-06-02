@@ -243,9 +243,9 @@ public void delete(Hora hora) {
         return horasUser;
     }
     
-    public LinkedList<TabelaAprovaçãoGestor> getHora(LinkedList<Integer> lis_int_cr) {//sobrecarga para gerar a tabela de apontamentos
+    public LinkedList getHora(LinkedList<Integer> lis_int_cr, String tipo) {//sobrecarga para gerar a tabela de apontamentos
 
-        LinkedList<TabelaAprovaçãoGestor> horasUser = new LinkedList<>();
+        LinkedList horasUser = new LinkedList<>();
         for (Integer i : lis_int_cr) {
             String sql = "SELECT * FROM 2rp.hora WHERE cod_cr = ? AND status_aprovacao = 'pendente'";
 
@@ -264,18 +264,35 @@ public void delete(Hora hora) {
                 pstm.setInt(1, Integer.parseInt(cod));
                 rset = pstm.executeQuery();
                 while (rset.next()) {
-                    TabelaAprovaçãoGestor info = new TabelaAprovaçãoGestor();
-                    info.setCod_cr(rset.getString("cod_cr"));
-                    info.setUsername(rset.getString("username_lancador"));
-                    info.setInicio(rset.getString("data_hora_inicio"));
-                    info.setFim(rset.getString("data_hora_fim"));
-                    info.setTipo(rset.getString("tipo"));
-                    info.setJustificativa(rset.getString("justificativa_lancamento"));
-                    info.setProjeto(rset.getString("projeto"));
-                    info.setId(rset.getInt("id"));
+                    if(tipo.equals("TabelaAprovaçãoGestor")){
+                        TabelaAprovaçãoGestor info = new TabelaAprovaçãoGestor();
+                        info.setCod_cr(rset.getString("cod_cr"));
+                        info.setUsername(rset.getString("username_lancador"));
+                        info.setInicio(rset.getString("data_hora_inicio"));
+                        info.setFim(rset.getString("data_hora_fim"));
+                        info.setTipo(rset.getString("tipo"));
+                        info.setJustificativa(rset.getString("justificativa_lancamento"));
+                        info.setProjeto(rset.getString("projeto"));
+                        info.setId(rset.getInt("id"));
+                        info.setEmpresa(rset.getInt("cnpj_cliente"));
 
-                    horasUser.add(info);
+                        horasUser.add(info);
+                    }
+                    if(tipo.equals("Hora")){
+                        Hora info = new Hora();
+                        info.setCod_cr(rset.getString("cod_cr"));
+                        info.setUsername_lancador(rset.getString("username_lancador"));
+                        info.setData_hora_inicio(rset.getString("data_hora_inicio"));
+                        info.setData_hora_fim(rset.getString("data_hora_fim"));
+                        info.setTipo(rset.getString("tipo"));
+                        info.setJustificativa_lancamento(rset.getString("justificativa_lancamento"));
+                        info.setProjeto(rset.getString("projeto"));
+                        info.setId(rset.getInt("id"));
+                        info.setCnpj_cliente(rset.getInt("cnpj_cliente"));
+                        info.setStatus_aprovacao(rset.getString("status_aprovacao"));
 
+                        horasUser.add(info);
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();

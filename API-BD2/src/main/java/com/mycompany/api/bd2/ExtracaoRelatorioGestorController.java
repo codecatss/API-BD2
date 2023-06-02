@@ -1,6 +1,9 @@
 package com.mycompany.api.bd2;
 
 import Conexao.Conexao;
+import com.mycompany.api.bd2.daos.horaDAO;
+import com.mycompany.api.bd2.daos.integranteDAO;
+import com.mycompany.api.bd2.models.Hora;
 import com.mycompany.api.bd2.models.Usuario;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -23,6 +26,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
@@ -95,7 +99,7 @@ public class ExtracaoRelatorioGestorController {
     private Label nometelaatual;
 
     @FXML
-    private TableView<?> tabelaRelatorio;
+    private TableView<Hora> tabelaRelatorio;
 
     @FXML
     void RelatorioCSV(ActionEvent event) {
@@ -129,6 +133,7 @@ public class ExtracaoRelatorioGestorController {
         tiporelatorio.add("Negado");
         opcoes.addAll(tiporelatorio);
         comboboxStatus.setItems(opcoes);
+        carregarTabelaLancamento();
 
     }
     
@@ -213,5 +218,28 @@ public class ExtracaoRelatorioGestorController {
         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
         stage.setScene(cena);
         stage.show();
-    }  
+    } 
+    
+    private integranteDAO crgestor = new integranteDAO();
+    private List<Hora> lishoras = new ArrayList<>();
+    private ObservableList<Hora> observablelisthoras = FXCollections.observableArrayList();
+        @FXML
+    public void carregarTabelaLancamento() {
+        horaDAO horadao = new horaDAO();
+        lishoras.clear();
+        lishoras.addAll(horadao.getHora(crgestor.getListCrGestor(usuario),"Hora"));
+        observablelisthoras.setAll(lishoras);
+        tabelaRelatorio.setItems(observablelisthoras);
+        colunaColaborador.setCellValueFactory(new PropertyValueFactory<>("username_lancador"));
+        colunaCR.setCellValueFactory(new PropertyValueFactory<>("nome_cliente"));
+        colunaInicio.setCellValueFactory(new PropertyValueFactory<>("data_hora_inicio"));
+        colunaFim.setCellValueFactory(new PropertyValueFactory<>("data_hora_fim"));
+        colunaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
+        //tabelaCR.setCellValueFactory(new PropertyValueFactory<>("cod_cr"));
+        colunaEmpresa.setCellValueFactory(new PropertyValueFactory<>("nome_cliente"));
+        colunaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto"));
+        colunaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+
+        tabelaRelatorio.refresh();
+    }
 }
