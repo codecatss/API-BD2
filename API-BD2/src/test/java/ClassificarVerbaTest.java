@@ -48,5 +48,25 @@ public class ClassificarVerbaTest {
         assertEquals(60, resultado);
     }
     
-
+    @Test
+    public void testVerificarDiurno() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 9);
+        long diferencaMinutosTotal = 100;
+        
+        boolean result = classificarVerba.seDiurno(calendar.getTime(),diferencaMinutosTotal);
+        
+        assertTrue(result);
+    }
+    
+    @Test
+    public void testVerificarNoturno() {
+        Calendar inicio = Calendar.getInstance();
+        inicio.set(Calendar.HOUR_OF_DAY, 2);
+        long diferencaMinutosTotal = 120;
+        
+        boolean result = classificarVerba.seNoturno(inicio.getTime(), diferencaMinutosTotal);
+        
+        assertTrue(result);
+    }
 }
