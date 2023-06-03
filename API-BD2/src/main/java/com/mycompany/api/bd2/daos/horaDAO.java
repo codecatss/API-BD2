@@ -26,7 +26,7 @@ import java.util.logging.Logger;
 public class horaDAO {
 
     public void save(Hora hora) {
-        String sql = "INSERT INTO hora(cod_cr, username_lancador, cnpj_cliente, data_hora_inicio, data_hora_fim, tipo, justificativa_lancamento, projeto, aprovador_gestor, justificativa_negacao, status, solicitante_lancamento) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO hora(cod_cr, username_lancador, cnpj_cliente, data_hora_inicio, data_hora_fim, tipo, justificativa_lancamento, projeto, aprovador_gestor, justificativa_negacao, status_aprovacao, solicitante_lancamento) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         Connection conn = null;
         PreparedStatement pstm = null;
 
@@ -68,7 +68,7 @@ public class horaDAO {
     }
 
     public void atualizarStatusAprovacao(String codCr, String status) {
-        String sql = "UPDATE hora SET status = ? WHERE cod_cr = ? ";
+        String sql = "UPDATE hora SET status_aprovacao = ? WHERE cod_cr = ? ";
         Connection conn = null;
         PreparedStatement pstm = null;
 
@@ -157,7 +157,7 @@ public class horaDAO {
                 hora.setProjeto(rset.getString("projeto"));
                 hora.setUsername_aprovador(rset.getString("aprovador_gestor"));
                 hora.setJustificativa_negacao(rset.getString("justificativa_negacao"));
-                hora.setStatus_aprovacao(rset.getString("status"));
+                hora.setStatus_aprovacao(rset.getString("status_aprovacao"));
 
                 horas.add(hora);
 
@@ -213,7 +213,7 @@ public class horaDAO {
                 hora.setProjeto(rset.getString("projeto"));
                 hora.setUsername_aprovador(rset.getString("aprovador_gestor"));
                 hora.setJustificativa_negacao(rset.getString("justificativa_negacao"));
-                hora.setStatus_aprovacao(rset.getString("status"));
+                hora.setStatus_aprovacao(rset.getString("status_aprovacao"));
                 hora.setSolicitante(rset.getString("solicitante_lancamento"));
                 hora.setNome_cliente(getNomeClient(rset.getLong("cnpj_cliente")));
 
@@ -247,7 +247,7 @@ public class horaDAO {
 
         LinkedList<TabelaAprovaçãoGestor> horasUser = new LinkedList<>();
         for (Integer i : lis_int_cr) {
-            String sql = "SELECT * FROM 2rp.hora WHERE cod_cr = ? AND status = 'pendente'";
+            String sql = "SELECT * FROM 2rp.hora WHERE cod_cr = ? AND status_aprovacao = 'pendente'";
 
             Connection conn = null;
             PreparedStatement pstm = null;
@@ -347,7 +347,7 @@ public class horaDAO {
     }
 
     public void aprovarHora(int id) {
-        String sql = "UPDATE hora SET status = 'aprovado_gestor' WHERE id = ?";
+        String sql = "UPDATE hora SET status_aprovacao = 'aprovado_gestor' WHERE id = ?";
 
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -378,7 +378,7 @@ public class horaDAO {
     }
 
     public void reprovarHora(int id) {
-        String sql = "UPDATE hora SET status = 'negado_gestor' WHERE id = ?";
+        String sql = "UPDATE hora SET status_aprovacao = 'negado_gestor' WHERE id = ?";
 
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -409,7 +409,7 @@ public class horaDAO {
     }
 
     public void reprovarHoraADM(Integer id) {
-        String sql = "UPDATE hora SET status = 'negado_adm' where id = ?";
+        String sql = "UPDATE hora SET status_aprovacao = 'negado_adm' where id = ?";
         Connection conn = null;
         PreparedStatement pstmt = null;
 
@@ -441,7 +441,7 @@ public class horaDAO {
     }
 
     public Set<Hora> getHorasAprovadas() {
-        String sql = "SELECT * FROM 2rp.hora WHERE status = 'pendente' OR status = 'aprovado_gestor'";
+        String sql = "SELECT * FROM 2rp.hora WHERE status_aprovacao = 'pendente' OR status_aprovacao = 'aprovado_gestor'";
         Set<Hora> horasAprovadas = new HashSet<>();
 
         Connection conn = null;
@@ -466,7 +466,7 @@ public class horaDAO {
                 hora.setProjeto(rset.getString("projeto"));
                 hora.setUsername_aprovador(rset.getString("aprovador_gestor"));
                 hora.setJustificativa_negacao(rset.getString("justificativa_negacao"));
-                hora.setStatus_aprovacao(rset.getString("status"));
+                hora.setStatus_aprovacao(rset.getString("status_aprovacao"));
 
                 horasAprovadas.add(hora);
             }
@@ -493,7 +493,7 @@ public class horaDAO {
     }
 
     public void aprovarHoraADM(int id) {
-        String sql = "UPDATE hora SET status = 'aprovado_adm' where id = ?";
+        String sql = "UPDATE hora SET status_aprovacao = 'aprovado_adm' where id = ?";
         Connection conn = null;
         PreparedStatement pstmt = null;
 
