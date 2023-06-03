@@ -124,12 +124,12 @@
                                 <String fx:value="shadow" />
                             </styleClass>
                      <children>
-                                <Label layoutX="15.0" layoutY="14.0" prefHeight="30.0" prefWidth="166.0" text="Apontamentos">
+                                <Label layoutX="15.0" layoutY="14.0" prefHeight="30.0" prefWidth="166.0" text="Apontamentos" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="14.0">
                                     <font>
                                         <Font name="Arial" size="25.0" />
                                     </font>
                                 </Label>
-                                <Button id="buttonAprovar" fx:id="botaoAprovar" layoutX="15.0" layoutY="138.0" mnemonicParsing="false" onAction="#BotaoAprovar" prefHeight="34.0" prefWidth="93.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Aprovar" textFill="WHITE">
+                                <Button id="buttonAprovar" fx:id="botaoAprovar" layoutX="15.0" layoutY="138.0" mnemonicParsing="false" onAction="#BotaoAprovar" prefHeight="34.0" prefWidth="93.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Aprovar" textFill="WHITE" AnchorPane.leftAnchor="15.0">
                                     <font>
                                         <Font name="Arial Narrow" size="12.0" />
                                     </font>
@@ -139,8 +139,11 @@
                                         <Font name="Arial Narrow" size="12.0" />
                                     </font>
                                 </Button>
-                        <ComboBox fx:id="comboboxStatusApontamentos" layoutX="15.0" layoutY="68.0" prefHeight="34.0" prefWidth="150.0" promptText="Selecione o status" />
-                        <TextArea fx:id="textoJustificativa" layoutX="14.0" layoutY="207.0" prefHeight="134.0" prefWidth="239.0" promptText="Preencha sua justificativa" />
+                        <ComboBox fx:id="comboboxStatusApontamentos" layoutX="15.0" layoutY="68.0" prefHeight="34.0" prefWidth="150.0" promptText="Selecione o status" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="68.0" />
+                        <TextArea fx:id="textoJustificativa" layoutX="14.0" layoutY="207.0" prefHeight="134.0" prefWidth="239.0" promptText="Preencha sua justificativa" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="207.0">
+                           <font>
+                              <Font size="13.0" />
+                           </font></TextArea>
                      </children>
                         </AnchorPane>
                   <AnchorPane layoutX="284.0" prefHeight="603.0" prefWidth="786.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="7.199999999999932" AnchorPane.leftAnchor="284.0000000000001" AnchorPane.rightAnchor="4.000000000000114" AnchorPane.topAnchor="0.0">
