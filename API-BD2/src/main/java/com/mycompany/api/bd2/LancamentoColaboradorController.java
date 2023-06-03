@@ -164,7 +164,7 @@ public class LancamentoColaboradorController {
 
         });
 
-        if (TelaLoginController.usuariologado.getCargo().equals("gestor")) {
+        if (TelaLoginController.usuariologado.getCargo().name().equals("gestor")) {
             menuLancamento.setVisible(true);
             menuLancamento.setDisable(true);
             menuApontamento.setVisible(true);
@@ -357,7 +357,7 @@ public class LancamentoColaboradorController {
             hora.setUsername_lancador(getNomeUsuario().getText());
             hora.setCnpj_cliente((int) cliente.getCliente(nome_cliente).getCnpj());
             hora.setJustificativa_lancamento(getEntradaJustificativa().getText());
-            if (TelaLoginController.usuariologado.getCargo().equalsIgnoreCase("gestor")) {
+            if (TelaLoginController.usuariologado.getCargo().equals("gestor")) {
                 hora.setStatus_aprovacao("aprovado_gestor");
             } else {
                 hora.setStatus_aprovacao("pendente");

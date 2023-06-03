@@ -3,6 +3,7 @@ package com.mycompany.api.bd2;
 import com.mycompany.api.bd2.daos.integranteDAO;
 import com.mycompany.api.bd2.daos.usuarioDAO;
 import com.mycompany.api.bd2.models.Centro_resultado;
+import com.mycompany.api.bd2.models.Funcao;
 import com.mycompany.api.bd2.models.Integrante;
 import com.mycompany.api.bd2.models.Usuario;
 import java.io.IOException;
@@ -129,12 +130,12 @@ public class PopularBancoController {
                 if (crsDoGestor.isEmpty()) {
                     System.out.println("não há CRs associados a este gestor");
                     Usuario usuarioAntigoGestor = usuarioDao.getUsuarioByUsername(antigoGestor.getUsername_integrante());
-                    usuarioAntigoGestor.setCargo("colaborador");
+                    usuarioAntigoGestor.setCargo(Funcao.valueOf("colaborador"));
                     usuarioDao.update(usuarioAntigoGestor);
                 }
 
                 if (novoGestor.getCargo().equals("colaborador")) {
-                    novoGestor.setCargo("gestor");
+                    novoGestor.setCargo(Funcao.valueOf("gestor"));
                     usuarioDao.update(novoGestor);
                 }
             }

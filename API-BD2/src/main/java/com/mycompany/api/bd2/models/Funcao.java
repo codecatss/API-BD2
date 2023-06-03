@@ -9,7 +9,7 @@ package com.mycompany.api.bd2.models;
  * @author danko
  */
 public enum Funcao {
-    admin, colaborador, gestor;    
+    admin, administrador, colaborador, gestor;    
 
     public boolean equals(Funcao cargo_usuario, Funcao cargo_desejado) {
         return cargo_desejado == cargo_usuario;

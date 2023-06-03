@@ -4,9 +4,12 @@ import Conexao.Conexao;
 import com.mycompany.api.bd2.daos.horaDAO;
 import com.mycompany.api.bd2.daos.integranteDAO;
 import com.mycompany.api.bd2.models.Hora;
+import com.mycompany.api.bd2.models.StatusAprovacao;
 import com.mycompany.api.bd2.models.Usuario;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -142,6 +145,7 @@ public class ExtracaoRelatorioGestorController {
     private void statusRelatorio(ActionEvent event) {
         tipo = null;
         tipo = comboboxStatus.getValue();
+        carregarTabelaLancamento();
     }
     
     @FXML
@@ -157,11 +161,13 @@ public class ExtracaoRelatorioGestorController {
             if(DataInicio.getValue() == null || DataFim.getValue()==null) erro("de início e de fim");
         }
         else{
+            DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             if(tipo.equals("Todos")){
-            conexao.gerarRelatorioCSV(formData,tipo,"SELECT * FROM 2rp.hora"); 
+            conexao.gerarRelatorioCSV(formData,tipo,"SELECT * FROM 2rp.hora "
+            + "WHERE data_hora_inicio BETWEEN '"+DataInicio.getValue().format(formato)+"' AND '"+DataFim.getValue().format(formato)+
+            "'AND data_hora_fim BETWEEN '"+DataInicio.getValue().format(formato)+"' AND '"+DataFim.getValue().format(formato)+"'"); 
             }
             else{
-            DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             conexao.gerarRelatorioCSV(formData,tipo,"SELECT * FROM 2rp.hora WHERE status = '"+tipo.toLowerCase()+"' "
             + "AND data_hora_inicio BETWEEN '"+DataInicio.getValue().format(formato)+"' AND '"+DataFim.getValue().format(formato)+
             "'AND data_hora_fim BETWEEN '"+DataInicio.getValue().format(formato)+"' AND '"+DataFim.getValue().format(formato)+"'");           
@@ -220,14 +226,54 @@ public class ExtracaoRelatorioGestorController {
         stage.show();
     } 
     
+    @FXML
+    private void boxIni(){
+        carregarTabelaLancamento();
+    }
+    
+    @FXML
+    private void boxFim(){
+        carregarTabelaLancamento();
+    }
+    
     private integranteDAO crgestor = new integranteDAO();
     private List<Hora> lishoras = new ArrayList<>();
     private ObservableList<Hora> observablelisthoras = FXCollections.observableArrayList();
         @FXML
     public void carregarTabelaLancamento() {
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String ini = "";
+        String fim = "";
+        if(DataInicio.getValue() != null)ini = DataInicio.getValue().format(formato);
+        else{
+            LocalDate hoje = LocalDate.now();
+            LocalDate segundaFeira = hoje.with(DayOfWeek.MONDAY);
+            ini = segundaFeira.format(formato);
+            DataInicio.setValue(segundaFeira);
+        }
+        if(DataFim.getValue() != null)fim = DataFim.getValue().format(formato);
+        else{
+            LocalDate hoje = LocalDate.now();
+            // Obtém o último dia da semana (sexta-feira)
+            LocalDate domingo = hoje.with(DayOfWeek.SUNDAY);
+            fim = domingo.format(formato);
+            DataFim.setValue(domingo);
+        }
         horaDAO horadao = new horaDAO();
         lishoras.clear();
-        lishoras.addAll(horadao.getHora(crgestor.getListCrGestor(usuario),"Hora"));
+        StatusAprovacao tipo = StatusAprovacao.todos;
+        if(comboboxStatus.getValue()!=null){
+            if(comboboxStatus.getValue().equals("Aprovado")){
+                tipo = StatusAprovacao.aprovado_gestor;
+            }
+            if(comboboxStatus.getValue().equals("Negado")){
+                tipo = StatusAprovacao.negado_gestor;
+            }
+            if(comboboxStatus.getValue().equals("Pendente")){
+                tipo = StatusAprovacao.pendente;
+            }
+        }
+        lishoras.addAll(horadao.getHora(crgestor.getListCrs(),"Hora",tipo, ini, fim));
         observablelisthoras.setAll(lishoras);
         tabelaRelatorio.setItems(observablelisthoras);
         colunaColaborador.setCellValueFactory(new PropertyValueFactory<>("username_lancador"));
@@ -235,10 +281,10 @@ public class ExtracaoRelatorioGestorController {
         colunaInicio.setCellValueFactory(new PropertyValueFactory<>("data_hora_inicio"));
         colunaFim.setCellValueFactory(new PropertyValueFactory<>("data_hora_fim"));
         colunaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
-        //tabelaCR.setCellValueFactory(new PropertyValueFactory<>("cod_cr"));
         colunaEmpresa.setCellValueFactory(new PropertyValueFactory<>("nome_cliente"));
         colunaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto"));
         colunaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+        colunaStatus.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao"));
 
         tabelaRelatorio.refresh();
     }

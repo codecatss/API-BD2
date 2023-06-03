@@ -1,9 +1,15 @@
 package com.mycompany.api.bd2;
 
 import Conexao.Conexao;
+import com.mycompany.api.bd2.daos.horaDAO;
+import com.mycompany.api.bd2.daos.integranteDAO;
+import com.mycompany.api.bd2.models.Hora;
+import com.mycompany.api.bd2.models.StatusAprovacao;
 import com.mycompany.api.bd2.models.Usuario;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,6 +30,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
@@ -104,7 +111,7 @@ public class ExtracaoRelatorioADMController {
     private Label nometelaatual;
 
     @FXML
-    private TableView<?> tabelaRelatorio;
+    private TableView<Hora> tabelaRelatorio;
 
     private String usuario = TelaLoginController.usuariologado.getUsername();
     private List<String> tiporelatorio = new ArrayList<>();
@@ -118,14 +125,16 @@ public class ExtracaoRelatorioADMController {
         tiporelatorio.add("Negado");
         opcoes.addAll(tiporelatorio);
         comboboxStatus.setItems(opcoes);
-
+        carregarTabelaLancamento();
     }
     
     private String tipo=null;
     @FXML
-    private void statusRelatorio(ActionEvent event) {
+    private String statusRelatorio() {
         tipo = null;
         tipo = comboboxStatus.getValue();
+        carregarTabelaLancamento();
+        return tipo;
     }
     
     @FXML
@@ -141,11 +150,14 @@ public class ExtracaoRelatorioADMController {
             if(DataInicio.getValue() == null || DataFim.getValue()==null) erro("de início e de fim");
         }
         else{
+            DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             if(tipo.equals("Todos")){
-            conexao.gerarRelatorioCSV(formData,tipo,"SELECT * FROM 2rp.hora"); 
+            conexao.gerarRelatorioCSV(formData,tipo,"SELECT * FROM 2rp.hora "
+            + "WHERE data_hora_inicio BETWEEN '"+DataInicio.getValue().format(formato)+"' AND '"+DataFim.getValue().format(formato)+
+            "'AND data_hora_fim BETWEEN '"+DataInicio.getValue().format(formato)+"' AND '"+DataFim.getValue().format(formato)+"'"); 
             }
             else{
-            DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            
             conexao.gerarRelatorioCSV(formData,tipo,"SELECT * FROM 2rp.hora WHERE status_aprovacao = '"+tipo.toLowerCase()+"' "
             + "AND data_hora_inicio BETWEEN '"+DataInicio.getValue().format(formato)+"' AND '"+DataFim.getValue().format(formato)+
             "'AND data_hora_fim BETWEEN '"+DataInicio.getValue().format(formato)+"' AND '"+DataFim.getValue().format(formato)+"'");           
@@ -217,7 +229,7 @@ public class ExtracaoRelatorioADMController {
     @FXML
     private void AprovarHoras(ActionEvent event) throws IOException {
         /*
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AprovacaoADM.fxml"));
         Parent root = loader.load();
         Scene cena = new Scene(root);
         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
@@ -225,4 +237,67 @@ public class ExtracaoRelatorioADMController {
         stage.show();*/
     }
     
+    @FXML
+    private void boxIni(){
+        carregarTabelaLancamento();
+    }
+    
+    @FXML
+    private void boxFim(){
+        carregarTabelaLancamento();
+    }
+    
+    private integranteDAO crgestor = new integranteDAO();
+    private List<Hora> lishoras = new ArrayList<>();
+    private ObservableList<Hora> observablelisthoras = FXCollections.observableArrayList();
+    @FXML
+    public void carregarTabelaLancamento() {
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String ini = "";
+        String fim = "";
+        if(DataInicio.getValue() != null)ini = DataInicio.getValue().format(formato);
+        else{
+            LocalDate hoje = LocalDate.now();
+            LocalDate segundaFeira = hoje.with(DayOfWeek.MONDAY);
+            ini = segundaFeira.format(formato);
+            DataInicio.setValue(segundaFeira);
+        }
+        if(DataFim.getValue() != null)fim = DataFim.getValue().format(formato);
+        else{
+            LocalDate hoje = LocalDate.now();
+            // Obtém o último dia da semana (sexta-feira)
+            LocalDate domingo = hoje.with(DayOfWeek.SUNDAY);
+            fim = domingo.format(formato);
+            DataFim.setValue(domingo);
+        }
+        horaDAO horadao = new horaDAO();
+        
+        lishoras.clear();
+        StatusAprovacao tipo = StatusAprovacao.todos;
+        if(comboboxStatus.getValue()!=null){
+            if(comboboxStatus.getValue().equals("Aprovado")){
+                tipo = StatusAprovacao.aprovado_gestor;
+            }
+            if(comboboxStatus.getValue().equals("Negado")){
+                tipo = StatusAprovacao.negado_gestor;
+            }
+            if(comboboxStatus.getValue().equals("Pendente")){
+                tipo = StatusAprovacao.pendente;
+            }
+        }
+        lishoras.addAll(horadao.getHora(tipo, ini, fim));
+        observablelisthoras.setAll(lishoras);
+        tabelaRelatorio.setItems(observablelisthoras);
+        colunaColaborador.setCellValueFactory(new PropertyValueFactory<>("username_lancador"));
+        colunaCR.setCellValueFactory(new PropertyValueFactory<>("nome_cliente"));
+        colunaInicio.setCellValueFactory(new PropertyValueFactory<>("data_hora_inicio"));
+        colunaFim.setCellValueFactory(new PropertyValueFactory<>("data_hora_fim"));
+        colunaJustificativa.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
+        colunaEmpresa.setCellValueFactory(new PropertyValueFactory<>("nome_cliente"));
+        colunaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto"));
+        colunaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+        colunaStatus.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao"));
+
+        tabelaRelatorio.refresh();
+    }
 }
