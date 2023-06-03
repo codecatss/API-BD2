@@ -182,7 +182,7 @@
                         <String fx:value="shadow" />
                      </styleClass>
                      <children>
-                        <Button id="buttonAprovar" fx:id="BotaoAprovar" layoutX="13.0" layoutY="135.0" mnemonicParsing="false" onAction="#botaoAprovar" prefHeight="34.0" prefWidth="93.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Aprovar" textFill="WHITE">
+                        <Button id="buttonAprovar" fx:id="BotaoAprovar" layoutX="13.0" layoutY="135.0" mnemonicParsing="false" onAction="#botaoAprovar" prefHeight="34.0" prefWidth="93.0" styleClass="aprove" stylesheets="@EstilizacaoTelas.css" text="Aprovar" textFill="WHITE" AnchorPane.leftAnchor="15.0">
                            <font>
                               <Font name="Arial Narrow" size="14.0" />
                            </font>
@@ -192,17 +192,17 @@
                               <Font name="Arial Narrow" size="14.0" />
                            </font>
                         </Button>
-                        <TextArea fx:id="textoJustificativa" layoutX="13.0" layoutY="208.0" prefHeight="148.0" prefWidth="274.0" promptText="Preencha sua justificativa" styleClass="shadow" stylesheets="@EstilizacaoTelas.css">
+                        <TextArea fx:id="textoJustificativa" layoutX="13.0" layoutY="208.0" prefHeight="134.0" prefWidth="239.0" promptText="Preencha sua justificativa" styleClass="shadow" stylesheets="@EstilizacaoTelas.css" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="207.0">
                            <font>
                               <Font name="Arial" size="15.0" />
                            </font>
                         </TextArea>
-                        <Label layoutX="14.0" layoutY="14.0" text="Apontamentos ">
+                        <Label layoutX="14.0" layoutY="14.0" text="Apontamentos " AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="14.0">
                            <font>
                               <Font name="Arial" size="24.0" />
                            </font>
                         </Label>
-                        <ComboBox layoutX="13.0" layoutY="70.0" prefHeight="34.0" prefWidth="151.0" promptText="Selecione o status" />
+                        <ComboBox fx:id="comboboxStatusApontamentos" layoutX="13.0" layoutY="70.0" prefHeight="34.0" prefWidth="151.0" promptText="Selecione o status" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="68.0" />
                      </children>
                   </AnchorPane>
                </children>

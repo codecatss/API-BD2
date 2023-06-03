@@ -40,15 +40,12 @@ import javafx.stage.Stage;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
 
-/**
- * FXML Controller class
- *
- * @author csous
- */
+
 public class ApontamentoGestorController implements Initializable {
 
     @FXML
@@ -76,8 +73,7 @@ public class ApontamentoGestorController implements Initializable {
     
      @FXML
     private TextArea textoJustificativa;
-    
-
+   
     @FXML
     private TableView<TabelaAprovaçãoGestor> tabelaApontamento;
 
@@ -97,6 +93,8 @@ public class ApontamentoGestorController implements Initializable {
     private TableColumn<TabelaAprovaçãoGestor, String> colunaFim;//ok
     @FXML
     private TableColumn<TabelaAprovaçãoGestor, String> colunaInicio;//ok
+    @FXML
+    private ComboBox<?> comboboxStatusApontamentos;
 
     horaDAO horadao = new horaDAO();
 
