@@ -82,9 +82,10 @@ public class ClassificarVerba {
         long MinutosEmHora = (int) (diferencaMinutosTotal / 60);
         long horaTotal = hora + MinutosEmHora;
 
-        return horaTotal >= 0 && hora < 6 || horaTotal >= 22 && hora < 24;
+        return horaTotal >= 0 && horaTotal < 6 || horaTotal >= 22 && horaTotal < 24;
 
     }
+    
 
     //CLASSIFICAR TIPO 'HORA EXTRA'
     public void classificarHorasExtras() {
@@ -113,6 +114,7 @@ public class ClassificarVerba {
                     int minutoFim = fim.MINUTE;
                     long diferencaMinutosDia = calcularDiferencaPorDia(horaInicio, minutoInicio);
                     long diferencaMinutosTotal = calcularDiferencaTotal(horaInicio, minutoInicio, horaFim, minutoFim);
+                   
 
                     boolean diaUtil = diaUtil(diaSelecionado);
                     boolean diaNaoUtil = diaNaoUtil(diaSelecionado);
@@ -121,20 +123,62 @@ public class ClassificarVerba {
                     boolean seNoturno = seNoturno(diaSelec, diferencaMinutosTotal);
                     
                     //VERIFICAÇOES DAS VERBAS
+                    
                     //DIA UTIL
-                    if (diaUtil && SeMenorDe120 && seDiurno) {
-                    
-                    } else if (diaUtil && SeMenorDe120 && seNoturno) {
-                    
-                    } else if (diaUtil && !SeMenorDe120 && seDiurno) {
-                    
-                    } else if (diaUtil && !SeMenorDe120 && seNoturno) {}
+                    if (diaUtil){
+                        
+                        if(SeMenorDe120) {
+                            if (seDiurno){
+                            //VERBA HE75
+                            } 
+                            else if (seNoturno){
+                            //VERBA HEN75
+                            //VERBA ADN
+                            }
+                            else if (seDiurno && seNoturno){
+                                //???COMO TRATAR???
+                                //VERBA HE75
+                                //VERBA HEN75
+                                //VERBA ADN
+                            }
+                            
+                        //MAIOR DE 120MIN************    
+                        } else {
+                            long restanteDia = diferencaMinutosDia;
+                            if (seDiurno){
+                                //VERBA HE100
+                            } 
+                            else if (seNoturno){
+                                //VERBA HEN100
+                                //VERBA HEN75
+                                //VERBA ADN
+                            }
+                            else if (seDiurno && seNoturno){
+                                //???COMO TRATAR???
+                                //VERBA HE75
+                                //VERBA HEN75
+                                //VERBA ADN
+                            }
+                        }
+                    }
                     
                     //DIA NAO UTIL
-                    else if (diaNaoUtil && seDiurno) {
-                    
-                    } else if (diaNaoUtil && seNoturno) {}
-                    
+                    else if (diaNaoUtil){
+                        
+                        if(seDiurno) {
+                            //VERBA HE100
+                        }
+                        else if (seNoturno) {
+                            //VERBA HEN100 + ADN
+                        }
+                        else if (seDiurno && seNoturno){
+                                //???COMO TRATAR???
+                                //VERBA HE100
+                                //VERBA HEN100
+                                //VERBA ADN
+                            }
+                    } 
+
                     
                     calendar.add(Calendar.DATE, 1);
 
