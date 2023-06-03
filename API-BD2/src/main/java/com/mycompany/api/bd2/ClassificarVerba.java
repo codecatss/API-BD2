@@ -58,7 +58,7 @@ public class ClassificarVerba {
     }
 
     //VERIFICAR SE <= 120 MINUTOS POR DIA
-    public boolean verificarDiferenca120(long diferencaMinutosDia) {
+    public boolean verificarSeMenorDe120(long diferencaMinutosDia) {
         return diferencaMinutosDia <= 120;
     }
 
@@ -102,7 +102,7 @@ public class ClassificarVerba {
 
                 Calendar calendar = (Calendar) inicio.clone();
 
-                //UM DIA POR VEZ - 'ALGUNS CONFLITOS (TIPO VARIAV.), EM PROGRESSO DE RESOLUÇÃO...'
+                //UM DIA POR VEZ
                 while (calendar.before(fim) || calendar.equals(fim)) {
                     int diaSelecionado = calendar.get(Calendar.DAY_OF_WEEK);
                     Date diaSelec = hora.getData_hora_inicio();
@@ -116,20 +116,36 @@ public class ClassificarVerba {
 
                     boolean diaUtil = diaUtil(diaSelecionado);
                     boolean diaNaoUtil = diaNaoUtil(diaSelecionado);
-                    boolean SeMaiorDe120 = verificarDiferenca120(diferencaMinutosDia);
+                    boolean SeMenorDe120 = verificarSeMenorDe120(diferencaMinutosDia);
                     boolean seDiurno = seDiurno(diaSelec, diferencaMinutosTotal);
                     boolean seNoturno = seNoturno(diaSelec, diferencaMinutosTotal);
                     
-                    if (diaUtil && SeMaiorDe120 && seDiurno) {
-
+                    //VERIFICAÇOES DAS VERBAS
+                    //DIA UTIL
+                    if (diaUtil && SeMenorDe120 && seDiurno) {
+                    
+                    } else if (diaUtil && SeMenorDe120 && seNoturno) {
+                    
+                    } else if (diaUtil && !SeMenorDe120 && seDiurno) {
+                    
+                    } else if (diaUtil && !SeMenorDe120 && seNoturno) {}
+                    
+                    //DIA NAO UTIL
+                    else if (diaNaoUtil && seDiurno) {
+                    
+                    } else if (diaNaoUtil && seNoturno) {}
+                    
+                    
                     calendar.add(Calendar.DATE, 1);
 
                 }
             }
         }
     }
-}
-        public enum tipoVerba {
+    
+    
+    //ENUM VERBAS
+    public enum tipoVerba {
         HE_75(1601),
         HE_100(1602),
         HEN_75(3000),
