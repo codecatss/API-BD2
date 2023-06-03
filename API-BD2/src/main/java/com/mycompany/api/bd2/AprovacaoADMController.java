@@ -90,10 +90,11 @@ public class AprovacaoADMController implements Initializable {
     private ObservableList<Hora> observablelisthoras = FXCollections.observableArrayList();
     private horaDAO horadao = new horaDAO();
     private crDAO crgestor = new crDAO();
-    private Usuario usuario = new Usuario();
+    private Usuario usuario = TelaLoginController.usuariologado;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        nomeUsuario.setText(usuario.getUsername());
         minimizarTela.setOnAction(e -> {
             Stage stage = (Stage) minimizarTela.getScene().getWindow();
             stage.setIconified(true);
@@ -190,7 +191,7 @@ public class AprovacaoADMController implements Initializable {
         Hora horaSelecionada = tabelaAprovacao.getSelectionModel().getSelectedItem();
         System.out.println(horaSelecionada);
         if (horaSelecionada != null) {
-            horadao.aprovarHoraADM(tabelaAprovacao.getSelectionModel().getSelectedItem().getId());
+            horadao.aprovarHoraADM(tabelaAprovacao.getSelectionModel().getSelectedItem().getId(),usuario.getUsername());
             carregarTabelaLancamento();
         }
     }
