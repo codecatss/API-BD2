@@ -119,6 +119,8 @@ public class ClassificarVerba {
                     boolean SeMaiorDe120 = verificarDiferenca120(diferencaMinutosDia);
                     boolean seDiurno = seDiurno(diaSelec, diferencaMinutosTotal);
                     boolean seNoturno = seNoturno(diaSelec, diferencaMinutosTotal);
+                    
+                    if (diaUtil && SeMaiorDe120 && seDiurno) {
 
                     calendar.add(Calendar.DATE, 1);
 
@@ -126,8 +128,8 @@ public class ClassificarVerba {
             }
         }
     }
-
-    public enum tipoVerba {
+}
+        public enum tipoVerba {
         HE_75(1601),
         HE_100(1602),
         HEN_75(3000),
@@ -145,5 +147,4 @@ public class ClassificarVerba {
             return valor;
         }
     }
-
 }
