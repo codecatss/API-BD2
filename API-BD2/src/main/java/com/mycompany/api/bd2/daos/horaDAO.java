@@ -492,10 +492,10 @@ public class horaDAO {
         return horasAprovadas;
     }
 
-    public void aprovarHoraADM(int id) {
-        String sql = "UPDATE hora SET status_aprovacao = 'aprovado_adm' where id = ?";
+    public void aprovarHoraADM(int id, String usernameAprovador) {
+        String sql = "UPDATE hora SET status_aprovacao = 'aprovado_adm', aprovador_ADM = ? WHERE id = ?";
         Connection conn = null;
-        PreparedStatement pstmt = null;
+        PreparedStatement pstm = null;
 
         try {
             try {
@@ -503,17 +503,19 @@ public class horaDAO {
             } catch (Exception ex) {
                 Logger.getLogger(horaDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, id);
-            pstmt.executeUpdate();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, usernameAprovador);
+            pstm.setInt(2, id);
+
+            pstm.executeUpdate();
 
             System.out.println("Hora aprovada com sucesso");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
-                if (pstmt != null) {
-                    pstmt.close();
+                if (pstm != null) {
+                    pstm.close();
                 }
                 if (conn != null) {
                     conn.close();
