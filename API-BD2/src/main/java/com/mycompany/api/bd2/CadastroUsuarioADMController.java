@@ -6,6 +6,7 @@
 package com.mycompany.api.bd2;
 
 import com.mycompany.api.bd2.daos.usuarioDAO;
+import com.mycompany.api.bd2.models.Funcao;
 import com.mycompany.api.bd2.models.Usuario;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -141,7 +142,7 @@ public class CadastroUsuarioADMController {
                     valorDoItemSelecionado = item.getUsername();
                     entradaNome.setText(item.getNome());
                     entradaUsername.setText(item.getUsername());
-                    selecaoFuncao.setValue(item.getCargo());
+                    selecaoFuncao.setValue(item.getCargo().name());
                 }
             }
         });
@@ -159,7 +160,7 @@ public class CadastroUsuarioADMController {
         String funcao = selecaoFuncao.getSelectionModel().getSelectedItem();
         usuario.setUsername(username);
         usuario.setNome(nome);
-        usuario.setCargo(funcao);
+        usuario.setCargo(Funcao.valueOf(funcao));
         usuario.setStatus("ativo");
         if (funcao.equals("admin")) {
             usuario.setSenha("admin123");
@@ -237,7 +238,7 @@ public class CadastroUsuarioADMController {
 
                 Usuario usuario = usuarioDao.getUsuarioByUsername(valorDoItemSelecionado);
                 usuario.setNome(nome);
-                usuario.setCargo(funcao);
+                usuario.setCargo(Funcao.valueOf(funcao));
 
                 usuarioDao.update(usuario);
                 limparCampos();

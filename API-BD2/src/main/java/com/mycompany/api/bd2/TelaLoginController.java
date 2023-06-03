@@ -49,7 +49,7 @@ public class TelaLoginController implements Initializable {
 
         try (Connection connection = Conexao.createConnectionToMySQL()) {
             Usuario usuario = new usuarioDAO().getUsuario(user, senha);
-            if (usuario != null && usuario.getUsername().equals(user) && usuario.getSenha().equals(senha) && usuario.getCargo() == "colaborador") {
+            if (usuario != null && usuario.getUsername().equals(user) && usuario.getSenha().equals(senha) && usuario.getCargo().name().equals("colaborador")) {
 
                 System.out.println("Logado como "+usuario.getCargo());
                 System.out.println(usuario.getNome());
@@ -68,7 +68,7 @@ public class TelaLoginController implements Initializable {
 
 
             } else {
-                if (usuario != null && usuario.getUsername().equals(user) && usuario.getSenha().equals(senha) && usuario.getCargo() == "gestor") {
+                if (usuario != null && usuario.getUsername().equals(user) && usuario.getSenha().equals(senha) && usuario.getCargo().name().equals("gestor")) {
 
                     System.out.println("Logado como gestor");
                     System.out.println(usuario.getNome());
@@ -85,7 +85,7 @@ public class TelaLoginController implements Initializable {
                     stage.show();
 
                 } else {
-                    if (usuario != null && usuario.getUsername().equals(user) && usuario.getSenha().equals(senha) && usuario.getCargo() == "admin") {
+                    if (usuario != null && usuario.getUsername().equals(user) && usuario.getSenha().equals(senha) && usuario.getCargo().name().equals("admin")) {
 
                         System.out.println("Logado como administrador");
                         System.out.println(usuario.getNome());

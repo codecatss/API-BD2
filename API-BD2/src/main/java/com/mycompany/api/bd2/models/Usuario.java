@@ -51,14 +51,14 @@ public class Usuario {
     public Funcao getCargoObj() {
         return cargo;
     }
-    public String getCargo() {
-        return cargo.name();
+    public Funcao getCargo() {
+        return cargo;
     }
     
     
 
-    public void setCargo(String cargo) {
-        this.cargo = Funcao.valueOf(cargo.toLowerCase());
+    public void setCargo(Funcao cargo) {
+        this.cargo = cargo;
     }
 
     

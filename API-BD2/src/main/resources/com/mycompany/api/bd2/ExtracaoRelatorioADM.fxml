@@ -125,7 +125,7 @@
                <children>
                   <AnchorPane layoutX="4.0" prefHeight="746.0" prefWidth="1080.0" stylesheets="@EstilizacaoTelas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <DatePicker fx:id="DataFim" layoutX="508.0" layoutY="16.0" prefHeight="30.0" prefWidth="157.0" promptText="Fim" />
+                        <DatePicker fx:id="DataFim" layoutX="508.0" layoutY="16.0" onAction="#boxFim" prefHeight="30.0" prefWidth="157.0" promptText="Fim" />
                         <TableView id="tabelaContainer" fx:id="tabelaRelatorio" layoutX="14.0" layoutY="57.0" prefHeight="665.0" prefWidth="1044.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0">
                            <columns>
                               <TableColumn fx:id="colunaColaborador" prefWidth="75.0" text="Colaborador" />
@@ -151,7 +151,7 @@
                            </font>
                         </Button>
                         <ComboBox fx:id="comboboxStatus" layoutX="158.0" layoutY="16.0" onAction="#statusRelatorio" prefHeight="30.0" prefWidth="150.0" promptText="Status" />
-                        <DatePicker fx:id="DataInicio" layoutX="329.0" layoutY="16.0" prefHeight="30.0" prefWidth="157.0" promptText="Início" />
+                        <DatePicker fx:id="DataInicio" layoutX="329.0" layoutY="16.0" onAction="#boxIni" prefHeight="30.0" prefWidth="157.0" promptText="Início" />
                      </children>
                      <styleClass>
                         <String fx:value="white-bg" />

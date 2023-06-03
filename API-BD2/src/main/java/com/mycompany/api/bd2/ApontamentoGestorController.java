@@ -7,11 +7,15 @@ package com.mycompany.api.bd2;
 import Conexao.Conexao;
 import com.mycompany.api.bd2.daos.horaDAO;
 import com.mycompany.api.bd2.daos.integranteDAO;
+import com.mycompany.api.bd2.models.StatusAprovacao;
 import com.mycompany.api.bd2.models.TabelaAprovaçãoGestor;
 import com.mycompany.api.bd2.models.Usuario;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -131,18 +135,18 @@ public class ApontamentoGestorController implements Initializable {
     @FXML
     public void carregarTabelaLancamento() {
         lishoras.clear();
-        lishoras.addAll(horadao.getHora(crgestor.getListCrGestor(usuario)));
+        lishoras.addAll(horadao.getHora(crgestor.getListCrGestor(usuario),"TabelaAprovaçãoGestor", StatusAprovacao.pendente));
         observablelisthoras.setAll(lishoras);
         tabelaApontamento.setItems(observablelisthoras);
 
-        colunaUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
+        colunaUsername.setCellValueFactory(new PropertyValueFactory<>("username_lancador"));
         colunaCR.setCellValueFactory(new PropertyValueFactory<>("cod_cr"));
         colunaEmpresa.setCellValueFactory(new PropertyValueFactory<>("empresa"));
         colunaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto"));
         colunaInicio.setCellValueFactory(new PropertyValueFactory<>("inicio"));
         colunaFim.setCellValueFactory(new PropertyValueFactory<>("fim"));
-        //colunaJust.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
-        //colunaFunçao.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
+        colunaJust.setCellValueFactory(new PropertyValueFactory<>("justificativa"));
+        //colunaFunçao.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         tabelaApontamento.refresh();
     }
 

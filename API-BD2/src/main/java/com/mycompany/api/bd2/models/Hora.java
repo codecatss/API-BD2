@@ -1,13 +1,10 @@
 package com.mycompany.api.bd2.models;
 
+import com.mycompany.api.bd2.daos.clienteDAO;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Date;
-import com.mycompany.api.bd2.models.TipoHora;
-import java.time.LocalDate;
 
 public class Hora {
 
@@ -15,7 +12,7 @@ public class Hora {
     private Integer id;
     private String cod_cr;
     private String username_lancador;
-    private int cnpj_cliente;
+    private Integer cnpj_cliente;
     private String nome_cliente;
     private Timestamp data_hora_inicio;
     private Timestamp data_hora_fim;
@@ -25,7 +22,7 @@ public class Hora {
     private String solicitante;
     private String username_aprovador;
     private String justificativa_negacao;
-    private StatusAprovacao status_aprovacao;
+    private String status_aprovacao;
 
     //private static Hora instance = null;
     public Hora() {
@@ -42,6 +39,11 @@ public class Hora {
     public void setNome_cliente(String nome_cliente) {
         this.nome_cliente = nome_cliente;
     }
+    
+    public void setNome_cliente(int cnpj) {
+        clienteDAO clientedao = new clienteDAO();
+        this.nome_cliente = clientedao.getClientebyCNPJ(cnpj).getRazao_social();
+    }
 
     public String getSolicitante() {
         return solicitante;
@@ -52,15 +54,15 @@ public class Hora {
     }
 
     public StatusAprovacao getStatus_aprovacaoObj() {
-        return status_aprovacao;
+        return StatusAprovacao.valueOf(status_aprovacao);
     }
 
     public String getStatus_aprovacao() {
-        return status_aprovacao.name();
+        return status_aprovacao;
     }
 
     public void setStatus_aprovacao(String status_aprovacaoADM) {
-        this.status_aprovacao = StatusAprovacao.valueOf(status_aprovacaoADM);
+        this.status_aprovacao = status_aprovacaoADM;
     }
 
     /**
@@ -182,6 +184,7 @@ public class Hora {
      */
     public void setCnpj_cliente(int cnpj_cliente) {
         this.cnpj_cliente = cnpj_cliente;
+        setNome_cliente(cnpj_cliente);
     }
 
     /**

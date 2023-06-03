@@ -1,6 +1,7 @@
 package com.mycompany.api.bd2.daos;
 
 import Conexao.Conexao;
+import com.mycompany.api.bd2.models.Funcao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,7 +23,7 @@ public class usuarioDAO {
             pstm.setString(1, usuario.getUsername());
             pstm.setString(2, usuario.getNome());
             pstm.setString(3, usuario.getSenha());
-            pstm.setString(4, usuario.getCargo());
+            pstm.setString(4, usuario.getCargo().name());
             pstm.setString(5, usuario.getStatus());
             //pstm.setString(6,usuario.getHash());
 
@@ -99,7 +100,7 @@ public class usuarioDAO {
                 usuario.setNome(rset.getString("nome"));
                 //usuario.setHash(rset.getString("senha"));
                 usuario.setSenha(rset.getString("senha"));
-                usuario.setCargo(rset.getString("funcao"));
+                usuario.setCargo(Funcao.valueOf(rset.getString("funcao")));
                 usuario.setStatus(rset.getString("status_user"));
 
                 usuarios.add(usuario);
@@ -150,7 +151,7 @@ public class usuarioDAO {
                 usuario.setUsername(rset.getString("username"));
                 usuario.setNome(rset.getString("nome"));
                 usuario.setSenha(rset.getString("senha"));
-                usuario.setCargo(rset.getString("funcao"));
+                usuario.setCargo(Funcao.valueOf(rset.getString("funcao")));
                 usuario.setStatus(rset.getString("status_user"));
                 //usuario.setHash(rset.getString("hash_senha"));
 
@@ -202,7 +203,7 @@ public class usuarioDAO {
                 usuario.setUsername(rset.getString("username"));
                 usuario.setNome(rset.getString("nome"));
                 usuario.setSenha(rset.getString("senha"));
-                usuario.setCargo(rset.getString("funcao"));
+                usuario.setCargo(Funcao.valueOf(rset.getString("funcao")));
                 usuario.setStatus(rset.getString("status_user"));
                 //usuario.setHash(rset.getString("hash_senha"));
 
@@ -254,7 +255,7 @@ public class usuarioDAO {
                 usuario.setUsername(rset.getString("username"));
                 usuario.setNome(rset.getString("nome"));
                 usuario.setSenha(rset.getString("senha"));
-                usuario.setCargo(rset.getString("funcao"));
+                usuario.setCargo(Funcao.valueOf(rset.getString("funcao")));
                 usuario.setStatus(rset.getString("status_user"));
 
                 usuarios.add(usuario);
@@ -293,7 +294,7 @@ public class usuarioDAO {
             pstm = (PreparedStatement) conn.prepareStatement(sql);
             pstm.setString(1, usuario.getNome());
             pstm.setString(2, usuario.getSenha());
-            pstm.setString(3, usuario.getCargo());
+            pstm.setString(3, usuario.getCargo().name());
             pstm.setString(4, usuario.getStatus());
             pstm.setString(5, usuario.getUsername());
 

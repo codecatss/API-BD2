@@ -5,8 +5,13 @@
 package com.mycompany.api.bd2.daos;
 
 import Conexao.Conexao;
+import com.mycompany.api.bd2.TelaLoginController;
+import com.mycompany.api.bd2.models.Funcao;
 import com.mycompany.api.bd2.models.Hora;
+import com.mycompany.api.bd2.models.StatusAprovacao;
 import com.mycompany.api.bd2.models.TabelaAprovaçãoGestor;
+import com.mycompany.api.bd2.models.TipoHora;
+import com.mycompany.api.bd2.models.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -243,12 +248,78 @@ public void delete(Hora hora) {
         return horasUser;
     }
     
-    public LinkedList<TabelaAprovaçãoGestor> getHora(LinkedList<Integer> lis_int_cr) {//sobrecarga para gerar a tabela de apontamentos
+    public List getHora(StatusAprovacao status, String ini, String fim) {
 
-        LinkedList<TabelaAprovaçãoGestor> horasUser = new LinkedList<>();
+        String sql = "SELECT * FROM 2rp.hora WHERE data_hora_inicio BETWEEN ? AND ? AND data_hora_fim BETWEEN ? AND ?";
+        if(!status.name().equals("todos"))sql = sql + "AND status_aprovacao = ?";
+        
+        List horasUser = new LinkedList();
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        //Classe que vai recuperar os dados do banco. ***SELECT****
+        ResultSet rset = null;
+        //Hora hora = Hora.getInstance();
+
+        try {
+            conn = Conexao.createConnectionToMySQL();
+
+            pstm = (PreparedStatement) conn.prepareStatement(sql);
+            pstm.setString(1,ini);
+            pstm.setString(2,fim);
+            pstm.setString(3,ini);
+            pstm.setString(4,fim);
+            if(!status.name().equals("todos")) pstm.setString(5, status.name());
+            rset = pstm.executeQuery();
+            
+            while (rset.next()) {
+                Hora hora = new Hora();
+                hora.setCod_cr(rset.getString("cod_cr"));
+                hora.setUsername_lancador(rset.getString("username_lancador"));
+                hora.setCnpj_cliente(rset.getInt("cnpj_cliente"));
+                hora.setData_hora_inicio(rset.getString("data_hora_inicio"));
+                hora.setData_hora_fim(rset.getString("data_hora_fim"));
+                hora.setTipo(rset.getString("tipo"));
+                hora.setJustificativa_lancamento(rset.getString("justificativa_lancamento"));
+                hora.setProjeto(rset.getString("projeto"));
+                hora.setUsername_aprovador(rset.getString("aprovador_gestor"));
+                hora.setJustificativa_negacao(rset.getString("justificativa_negacao"));
+                hora.setStatus_aprovacao(rset.getString("status_aprovacao"));
+                hora.setSolicitante(rset.getString("solicitante_lancamento"));
+
+                horasUser.add(hora);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rset != null) {
+                    rset.close();
+                }
+
+                if (pstm != null) {
+                    pstm.close();
+                }
+
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println(horasUser);
+        return horasUser;
+    }
+
+    public LinkedList getHora(LinkedList<Integer> lis_int_cr, String tipo, StatusAprovacao status, String ini, String fim) {//sobrecarga para gerar a tabela de apontamentos
+
+        LinkedList horasUser = new LinkedList<>();
+       
+        String sql = "SELECT * FROM 2rp.hora WHERE cod_cr = ? AND data_hora_inicio BETWEEN ? AND ? AND data_hora_fim BETWEEN ? AND ?";
+        if(status != StatusAprovacao.todos) sql = sql + " AND status_aprovacao = ?";
+            
         for (Integer i : lis_int_cr) {
-            String sql = "SELECT * FROM 2rp.hora WHERE cod_cr = ? AND status_aprovacao = 'pendente'";
-
+            
             Connection conn = null;
             PreparedStatement pstm = null;
             //Classe que vai recuperar os dados do banco. ***SELECT****
@@ -262,20 +333,123 @@ public void delete(Hora hora) {
 
                 pstm = (PreparedStatement) conn.prepareStatement(sql);
                 pstm.setInt(1, Integer.parseInt(cod));
+                pstm.setString(2,ini);
+                pstm.setString(3,fim);
+                pstm.setString(4,ini);
+                pstm.setString(5,fim);
+                if(status != StatusAprovacao.todos) pstm.setString(6, status.name());
+                
                 rset = pstm.executeQuery();
                 while (rset.next()) {
-                    TabelaAprovaçãoGestor info = new TabelaAprovaçãoGestor();
-                    info.setCod_cr(rset.getString("cod_cr"));
-                    info.setUsername(rset.getString("username_lancador"));
-                    info.setInicio(rset.getString("data_hora_inicio"));
-                    info.setFim(rset.getString("data_hora_fim"));
-                    info.setTipo(rset.getString("tipo"));
-                    info.setJustificativa(rset.getString("justificativa_lancamento"));
-                    info.setProjeto(rset.getString("projeto"));
-                    info.setId(rset.getInt("id"));
+                    if(tipo.equals("TabelaAprovaçãoGestor")){
+                        TabelaAprovaçãoGestor info = new TabelaAprovaçãoGestor();
+                        info.setCod_cr(rset.getString("cod_cr"));
+                        info.setUsername(rset.getString("username_lancador"));
+                        info.setInicio(rset.getString("data_hora_inicio"));
+                        info.setFim(rset.getString("data_hora_fim"));
+                        info.setTipo(rset.getString("tipo"));
+                        info.setJustificativa(rset.getString("justificativa_lancamento"));
+                        info.setProjeto(rset.getString("projeto"));
+                        info.setId(rset.getInt("id"));
+                        info.setEmpresa(rset.getInt("cnpj_cliente"));
 
-                    horasUser.add(info);
+                        horasUser.add(info);
+                    }
+                    if(tipo.equals("Hora")){
+                        Hora info = new Hora();
+                        info.setCod_cr(rset.getString("cod_cr"));
+                        info.setUsername_lancador(rset.getString("username_lancador"));
+                        info.setData_hora_inicio(rset.getString("data_hora_inicio"));
+                        info.setData_hora_fim(rset.getString("data_hora_fim"));
+                        info.setTipo(rset.getString("tipo"));
+                        info.setJustificativa_lancamento(rset.getString("justificativa_lancamento"));
+                        info.setProjeto(rset.getString("projeto"));
+                        info.setId(rset.getInt("id"));
+                        info.setCnpj_cliente(rset.getInt("cnpj_cliente"));
+                        info.setStatus_aprovacao(rset.getString("status_aprovacao"));
 
+                        horasUser.add(info);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (rset != null) {
+                        rset.close();
+                    }
+
+                    if (pstm != null) {
+                        pstm.close();
+                    }
+
+                    if (conn != null) {
+                        conn.close();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        System.out.println(horasUser);
+        return horasUser;
+    }
+    
+    public LinkedList getHora(LinkedList<Integer> lis_int_cr, String tipo, StatusAprovacao status) {//sobrecarga para gerar a tabela de apontamentos
+
+        LinkedList horasUser = new LinkedList<>();
+       
+        String sql = "SELECT * FROM 2rp.hora WHERE cod_cr = ?";
+        if(status != StatusAprovacao.todos) sql = sql + " AND status_aprovacao = ?";
+            
+        for (Integer i : lis_int_cr) {
+            
+            Connection conn = null;
+            PreparedStatement pstm = null;
+            //Classe que vai recuperar os dados do banco. ***SELECT****
+            ResultSet rset = null;
+            //Hora hora = Hora.getInstance();
+
+            try {
+                String cod = i.toString();
+
+                conn = Conexao.createConnectionToMySQL();
+
+                pstm = (PreparedStatement) conn.prepareStatement(sql);
+                pstm.setInt(1, Integer.parseInt(cod));
+                if(status != StatusAprovacao.todos) pstm.setString(2, status.name());
+                
+                rset = pstm.executeQuery();
+                while (rset.next()) {
+                    if(tipo.equals("TabelaAprovaçãoGestor")){
+                        TabelaAprovaçãoGestor info = new TabelaAprovaçãoGestor();
+                        info.setCod_cr(rset.getString("cod_cr"));
+                        info.setUsername(rset.getString("username_lancador"));
+                        info.setInicio(rset.getString("data_hora_inicio"));
+                        info.setFim(rset.getString("data_hora_fim"));
+                        info.setTipo(rset.getString("tipo"));
+                        info.setJustificativa(rset.getString("justificativa_lancamento"));
+                        info.setProjeto(rset.getString("projeto"));
+                        info.setId(rset.getInt("id"));
+                        info.setEmpresa(rset.getInt("cnpj_cliente"));
+
+                        horasUser.add(info);
+                    }
+                    if(tipo.equals("Hora")){
+                        Hora info = new Hora();
+                        info.setCod_cr(rset.getString("cod_cr"));
+                        info.setUsername_lancador(rset.getString("username_lancador"));
+                        info.setData_hora_inicio(rset.getString("data_hora_inicio"));
+                        info.setData_hora_fim(rset.getString("data_hora_fim"));
+                        info.setTipo(rset.getString("tipo"));
+                        info.setJustificativa_lancamento(rset.getString("justificativa_lancamento"));
+                        info.setProjeto(rset.getString("projeto"));
+                        info.setId(rset.getInt("id"));
+                        info.setCnpj_cliente(rset.getInt("cnpj_cliente"));
+                        info.setStatus_aprovacao(rset.getString("status_aprovacao"));
+
+                        horasUser.add(info);
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -380,10 +554,21 @@ public void delete(Hora hora) {
 
 
     public void reprovarHora(int id, String justificativaNegacao, String usernameReprovador) {
-    String sql = "UPDATE hora SET status_aprovacao = 'negado', justificativa_negacao = ?, aprovador_gestor = ? WHERE id = ?";
-
-        Connection conn = null;
-        PreparedStatement pstm = null;
+    Usuario usuario = TelaLoginController.usuariologado;
+    String negacao="";
+    
+    if(usuario.getCargo().equals(Funcao.administrador)){
+        negacao = "'aprovado_adm'"; 
+        System.out.println("adm");
+    }
+    if(usuario.getCargo().equals(Funcao.gestor)){
+        negacao = "'negado_gestor'";
+        System.out.println("gestor");
+    }
+    
+    String sql = "UPDATE hora SET status_aprovacao = "+negacao+", justificativa_negacao = ?, aprovador_gestor = ? WHERE id = ?";
+    Connection conn = null;
+    PreparedStatement pstm = null;
 
     try {
         conn = Conexao.createConnectionToMySQL();

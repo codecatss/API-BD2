@@ -126,8 +126,8 @@
                            </font>
                         </Button>
                         <ComboBox fx:id="comboboxStatus" layoutX="149.0" layoutY="17.0" onAction="#statusRelatorio" prefHeight="30.0" prefWidth="150.0" promptText="Status" />
-                        <DatePicker fx:id="DataInicio" layoutX="322.0" layoutY="16.0" prefHeight="30.0" prefWidth="157.0" promptText="Início" />
-                        <DatePicker fx:id="DataFim" layoutX="499.0" layoutY="16.0" prefHeight="30.0" prefWidth="157.0" promptText="Fim" />
+                        <DatePicker fx:id="DataInicio" layoutX="322.0" layoutY="16.0" onAction="#boxIni" prefHeight="30.0" prefWidth="157.0" promptText="Início" />
+                        <DatePicker fx:id="DataFim" layoutX="499.0" layoutY="16.0" onAction="#boxFim" prefHeight="30.0" prefWidth="157.0" promptText="Fim" />
                      </children>
                      <styleClass>
                         <String fx:value="white-bg" />

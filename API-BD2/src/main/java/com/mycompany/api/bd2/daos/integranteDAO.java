@@ -293,6 +293,50 @@ public class integranteDAO {
         return liscr;
     }
 
+    public LinkedList<Integer> getListCrs() {
+
+        String sql = "SELECT * FROM 2rp.centro_resultado";
+
+        LinkedList<Integer> liscr = new LinkedList<>();
+
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        //Classe que vai recuperar os dados do banco. ***SELECT****
+        ResultSet rset = null;
+
+        try {
+            conn = Conexao.createConnectionToMySQL();
+            pstm = conn.prepareStatement(sql);
+            rset = pstm.executeQuery();
+
+            while (rset.next()) {
+
+                liscr.add(Integer.valueOf((rset.getString("codigo_cr"))));
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rset != null) {
+                    rset.close();
+                }
+
+                if (pstm != null) {
+                    pstm.close();
+                }
+
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("getListCrs: " + liscr);
+        return liscr;
+    }
+    
     public void removeFromCr(String cod_cr, String username_integrante) {
         String sql = "DELETE FROM integrante " + "WHERE username_integrante=? AND cod_cr = ?";
         Connection conn = null;
