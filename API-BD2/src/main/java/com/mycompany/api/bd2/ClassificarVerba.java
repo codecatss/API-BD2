@@ -299,7 +299,7 @@ public class ClassificarVerba {
     }
 }
     
-    private Map<Integer, Verba> verbas;
+    public Map<Integer, Verba> verbas;
 
     public ClassificarVerba() {
         verbas = new HashMap<>();
@@ -310,5 +310,6 @@ public class ClassificarVerba {
         verbas.put(1809, new Verba(1809, 0));
         verbas.put(3016, new Verba(3016, 0));
     }
+    
     
 }
