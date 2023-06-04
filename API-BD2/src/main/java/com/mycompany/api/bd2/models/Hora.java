@@ -257,4 +257,14 @@ public class Hora {
 
     }
 
+    private String aprovador_gestor;
+
+    public String getAprovador_gestor() {
+        return aprovador_gestor;
+    }
+
+    public void setAprovador_gestor(String aprovador_gestor) {
+        this.aprovador_gestor = aprovador_gestor;
+    }
+
 }
