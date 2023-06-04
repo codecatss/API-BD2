@@ -26,7 +26,7 @@ public class Hora {
     private String username_aprovador;
     private String justificativa_negacao;
     private StatusAprovacao status_aprovacao;
-    
+
     //private static Hora instance = null;
     public Hora() {
         //if (instance == null) {
@@ -66,7 +66,12 @@ public class Hora {
     }
 
     public void setStatus_aprovacao(String status_aprovacaoADM) {
-        this.status_aprovacao = StatusAprovacao.valueOf(status_aprovacaoADM);
+        try {
+            this.status_aprovacao = StatusAprovacao.valueOf(status_aprovacaoADM);
+        } catch (IllegalArgumentException e) {
+            // Valor inválido, trate o erro de acordo com sua lógica
+            System.out.println("Valor de status_aprovacao inválido: " + status_aprovacaoADM);
+        }
     }
 
     /**
