@@ -44,6 +44,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
@@ -80,7 +81,8 @@ public class ApontamentoGestorController implements Initializable {
 
     @FXML
     private TextArea textoJustificativa;
-
+    @FXML
+    private ComboBox<String> comboboxStatusApontamentos;
     @FXML
     private TableView<TabelaAprovaçãoGestor> tabelaApontamento;
 
@@ -113,6 +115,26 @@ public class ApontamentoGestorController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        comboboxStatusApontamentos.getItems().addAll( "APROVADAS", "REPROVADAS", "PENDENTES");
+        comboboxStatusApontamentos.setValue("PENDENTES");
+
+        comboboxStatusApontamentos.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.equals("TODAS HORAS")) {
+                carregarTabelaLancamento();
+                System.out.println("Todas");
+            } else if (newValue.equals("REPROVADAS")) {
+                carregarTabelaLancamento();
+                System.out.println("Reprovada");
+                // Lógica para exibir as horas reprovadas
+            } else if (newValue.equals("APROVADAS")) {
+                carregarTabelaLancamento();
+                System.out.println("Aprovadas");
+            } else if (newValue.equals("PENDENTES")) {
+                carregarTabelaLancamento();
+                // Lógica para exibir as horas pendentes
+            }
+        });
         // TODO
         nomeUsuario.setText(usuario);
         menuApontamento.setDisable(true);
@@ -131,23 +153,37 @@ public class ApontamentoGestorController implements Initializable {
 
     private integranteDAO crgestor = new integranteDAO();
 
-    @FXML
-    public void carregarTabelaLancamento() {
-        lishoras.clear();
-        lishoras.addAll(horadao.getHora(crgestor.getListCrGestor(usuario), "TabelaAprovaçãoGestor", StatusAprovacao.pendente));
-        observablelisthoras.setAll(lishoras);
-        tabelaApontamento.setItems(observablelisthoras);
 
-        colunaUsername.setCellValueFactory(new PropertyValueFactory<>("username_lancador"));
-        colunaCR.setCellValueFactory(new PropertyValueFactory<>("cod_cr"));
-        colunaEmpresa.setCellValueFactory(new PropertyValueFactory<>("empresa"));
-        colunaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto"));
-        colunaInicio.setCellValueFactory(new PropertyValueFactory<>("inicio"));
-        colunaFim.setCellValueFactory(new PropertyValueFactory<>("fim"));
-        colunaJust.setCellValueFactory(new PropertyValueFactory<>("justificativa"));
-        //colunaFunçao.setCellValueFactory(new PropertyValueFactory<>("tipo"));
-        tabelaApontamento.refresh();
+
+@FXML
+public void carregarTabelaLancamento() {
+    lishoras.clear();
+
+    String opcaoSelecionada = comboboxStatusApontamentos.getValue();
+
+    if (opcaoSelecionada.equals("APROVADAS")) {
+        lishoras.addAll(horadao.getHora(crgestor.getListCrGestor(usuario), "TabelaAprovaçãoGestor", StatusAprovacao.aprovado_gestor));
+    } else if (opcaoSelecionada.equals("TODAS HORAS")) {
+        lishoras.addAll(horadao.getHora(crgestor.getListCrGestor(usuario), "TabelaAprovaçãoGestor", null));
+    } else if (opcaoSelecionada.equals("PENDENTES")) {
+        lishoras.addAll(horadao.getHora(crgestor.getListCrGestor(usuario), "TabelaAprovaçãoGestor", StatusAprovacao.pendente));
+    } else if (opcaoSelecionada.equals("REPROVADAS")) {
+        lishoras.addAll(horadao.getHora(crgestor.getListCrGestor(usuario), "TabelaAprovaçãoGestor", StatusAprovacao.negado_gestor));
     }
+
+    observablelisthoras.setAll(lishoras);
+    tabelaApontamento.setItems(observablelisthoras);
+
+    colunaUsername.setCellValueFactory(new PropertyValueFactory<>("username_lancador"));
+    colunaCR.setCellValueFactory(new PropertyValueFactory<>("cod_cr"));
+    colunaEmpresa.setCellValueFactory(new PropertyValueFactory<>("empresa"));
+    colunaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto"));
+    colunaInicio.setCellValueFactory(new PropertyValueFactory<>("inicio"));
+    colunaFim.setCellValueFactory(new PropertyValueFactory<>("fim"));
+    colunaJust.setCellValueFactory(new PropertyValueFactory<>("justificativa"));
+
+    tabelaApontamento.refresh();
+}
 
     @FXML
     public void botaoAprovar() {

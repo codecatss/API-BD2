@@ -27,6 +27,11 @@ public class TabelaAprovaçãoGestor {
     public String getUsername() {
         return username_lancador;
     }
+    
+     public String getUsername_lancador() {
+        return username_lancador;
+    }
+
 
     public void setUsername(String username) {
         this.username_lancador = username;
