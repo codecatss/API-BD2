@@ -9,6 +9,12 @@ import java.util.concurrent.TimeUnit;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import Conexao.Conexao;
+import com.opencsv.CSVWriter;
+import java.io.FileWriter;
+import java.util.HashMap;
+import java.util.Map;
+
 public class ClassificarVerba {
 
     //VERIFICACÃO DIAS DA SEMANA
@@ -143,16 +149,16 @@ public class ClassificarVerba {
                         if(SeMenorDe120) {
                             
                             if (seDiurno && seNoturno){
-                                //VERBA HE75: diurno75 = diferencaMinutosDiurno;
-                                //VERBA HEN75: noturno75 = diferencaMinutosTotal - diurno75;
-                                //VERBA ADN: adn = noturno75;
+                                diurno75 = diferencaMinutosDiurno; //VERBA HE75: 
+                                noturno75 = diferencaMinutosTotal - diurno75; //VERBA HEN75: 
+                                adn = noturno75; //VERBA ADN: 
                             } 
                             else if (seDiurno){
-                                //VERBA HE75: diurno75 = diferencaMinutosTotal;
+                                diurno75 = diferencaMinutosTotal; //VERBA HE75: 
                             } 
                             else if (seNoturno){
-                                //VERBA HEN75: noturno75 = diferencaMinutosTotal;
-                                //VERBA ADN: adn = noturno75;
+                                noturno75 = diferencaMinutosTotal; //VERBA HEN75: 
+                                adn = noturno75; //VERBA ADN: 
                             }
                             
                         //MAIOR DE 120MIN
@@ -161,33 +167,33 @@ public class ClassificarVerba {
                             if (seDiurno && seNoturno){
                                 
                                 if (horaFim >= 22 && diferencaMinutosDiurno > 120) {
-                                        //VERBA HE75: diurno75 = 120;
-                                        //VERBA HE100: diurno100 = diferencaMinutosDiurno - 120;
-                                        //VERBA HEN100: noturno100 = diferencaMinutosTotal - diferencaMinutosDiurno;
-                                        //VERBA ADN: adn = noturno100;
+                                        diurno75 = 120; //VERBA HE75: 
+                                        diurno100 = diferencaMinutosDiurno - 120; //VERBA HE100: 
+                                        noturno100 = diferencaMinutosTotal - diferencaMinutosDiurno; //VERBA HEN100: 
+                                        adn = noturno100; //VERBA ADN: 
                                         
                                 } else if (horaFim >= 22 && diferencaMinutosDiurno <= 120) {
-                                        //VERBA HE75: diurno75 = diferencaMinutosDiurno;
-                                        //VERBA HEN75: noturno75 = 120 - diferencaMinutosDiurno;
-                                        //VERBA HEN100: noturno100 = diferencaMinutosTotal - 120;
-                                        //VERBA ADN: adn = noturno75 + noturno100;
+                                        diurno75 = diferencaMinutosDiurno; //VERBA HE75: 
+                                        noturno75 = 120 - diferencaMinutosDiurno; //VERBA HEN75: 
+                                        noturno100 = diferencaMinutosTotal - 120; //VERBA HEN100: 
+                                        adn = noturno75 + noturno100; //VERBA ADN: 
                                         
                                 } else if (horaFim < 6) {
-                                        //VERBA HEN75: noturno75 = 120;
-                                        //VERBA HEN100: noturno100 = calcularDiferencaTotal(horaInicio, minutoInicio, 5, 59) - noturno75;
-                                        //VERBA HE 100: diurno100 = diferencaMinutosTotal - (noturno75 + noturno100)
-                                        //VERBA ADN: adn = noturno75 + noturno100;
+                                        noturno75 = 120; //VERBA HEN75: 
+                                        noturno100 = calcularDiferencaTotal(horaInicio, minutoInicio, 5, 59) - noturno75; //VERBA HEN100: 
+                                        diurno100 = diferencaMinutosTotal - (noturno75 + noturno100); //VERBA HE 100: 
+                                        adn = noturno75 + noturno100; //VERBA ADN: 
                                 }
                                     
                             }
                             else if (seDiurno){
-                            //VERBA HE75: diurno75 = 120;
-                            //VERBA HE100: diurno100 = diferencaMinutosTotal - diurno75; 
+                            diurno75 = 120; //VERBA HE75: 
+                            diurno100 = diferencaMinutosTotal - diurno75;  //VERBA HE100: 
                             } 
                             else if (seNoturno){
-                                //VERBA HEN75: noturno75 = 120;
-                                //VERBA HEN100: noturno100 = diferencaMinutosTotal - noturno75;
-                                //VERBA ADN: adn = noturno75 + noturno100;
+                                noturno75 = 120; //VERBA HEN75: 
+                                noturno100 = diferencaMinutosTotal - noturno75; //VERBA HEN100: 
+                                adn = noturno75 + noturno100; //VERBA ADN: 
                             }
                         }
                     }
@@ -197,33 +203,33 @@ public class ClassificarVerba {
                         
                         if(seDiurno && seNoturno) {
                             if (horaFim >= 22 && diferencaMinutosDiurno > 120) {
-                                //VERBA HE100: diurno100 = diferencaMinutosDiurno;
-                                //VERBA HEN100: noturno100 = diferencaMinutosTotal - diferencaMinutosDiurno;
-                                //VERBA ADN: adn = noturno100;
+                                diurno100 = diferencaMinutosDiurno; //VERBA HE100: 
+                                noturno100 = diferencaMinutosTotal - diferencaMinutosDiurno; //VERBA HEN100: 
+                                adn = noturno100; //VERBA ADN: 
                                         
                                 } else if (horaFim >= 22 && diferencaMinutosDiurno <= 120) {
-                                    //VERBA HE100: diurno100 = diferencaMinutosDiurno;
-                                    //VERBA HEN100: noturno100 = diferencaMinutosTotal - diferencaMinutosDiurno;
-                                    //VERBA ADN: adn = noturno100;
+                                    diurno100 = diferencaMinutosDiurno; //VERBA HE100: 
+                                    noturno100 = diferencaMinutosTotal - diferencaMinutosDiurno; //VERBA HEN100: 
+                                    adn = noturno100; //VERBA ADN: 
                                 
                                 } else if (horaFim < 6) {
-                                    //VERBA HEN100: noturno100 = calcularDiferencaTotal(horaInicio, minutoInicio, 5, 59);
-                                    //VERBA HE 100: diurno100 = diferencaMinutosTotal - noturno100;
-                                    //VERBA ADN: adn = noturno100;
+                                    noturno100 = calcularDiferencaTotal(horaInicio, minutoInicio, 5, 59); //VERBA HEN100: 
+                                    diurno100 = diferencaMinutosTotal - noturno100; //VERBA HE 100: 
+                                    adn = noturno100; //VERBA ADN: 
                                 }
                         }
                         
                         else if (seDiurno) {
-                            //VERBA HE100: diurno100 = diferencaMinutosTotal;
+                            diurno100 = diferencaMinutosTotal; //VERBA HE100: 
                         }
                         
                         else if (seNoturno){
-                            //VERBA HEN100: noturno100 = diferencaMinutosTotal;
-                            //VERBA ADN: adn = noturno100;
+                            noturno100 = diferencaMinutosTotal; //VERBA HEN100: 
+                            adn = noturno100; //VERBA ADN: 
                                 }
                     }
                     }
-                    
+
                 calendar.add(Calendar.DATE, 1);
             }
         }
@@ -250,4 +256,30 @@ public class ClassificarVerba {
             return valor;
         }
     }
+    
+    
+    public class Verba {
+    private String nome;
+    private int codigo;
+    private long valor;
+
+    public Verba(String nome, int codigo, long valor) {
+        this.nome = nome;
+        this.codigo = codigo;
+        this.valor = valor;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public long getValor() {
+        return valor;
+    }
+    }
+    
 }
