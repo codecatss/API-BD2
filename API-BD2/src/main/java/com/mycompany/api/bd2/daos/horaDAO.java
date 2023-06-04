@@ -408,37 +408,40 @@ public class horaDAO {
         }
     }
 
-    public void reprovarHoraADM(Integer id) {
-        String sql = "UPDATE hora SET status_aprovacao = 'negado_adm' where id = ?";
-        Connection conn = null;
-        PreparedStatement pstmt = null;
+public void reprovarHoraADM(Integer id, String justificativaNegacao, String usernameReprovador) {
+    String sql = "UPDATE hora SET status_aprovacao = 'negado_adm', justificativa_negacao = ?, aprovador_gestor = ? WHERE id = ?";
+    Connection conn = null;
+    PreparedStatement pstmt = null;
 
+    try {
         try {
-            try {
-                conn = Conexao.createConnectionToMySQL();
-            } catch (Exception ex) {
-                Logger.getLogger(horaDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, id);
-            pstmt.executeUpdate();
+            conn = Conexao.createConnectionToMySQL();
+        } catch (Exception ex) {
+            Logger.getLogger(horaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, justificativaNegacao);
+        pstmt.setString(2, usernameReprovador);
+        pstmt.setInt(3, id);
+        pstmt.executeUpdate();
 
-            System.out.println("Hora reprovada com sucesso");
+        System.out.println("Hora reprovada com sucesso");
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (pstmt != null) {
+                pstmt.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
+}
+
 
     public Set<Hora> getHorasAprovadas() {
         String sql = "SELECT * FROM 2rp.hora WHERE status_aprovacao = 'pendente' OR status_aprovacao = 'aprovado_gestor'";
