@@ -77,10 +77,9 @@ public class ApontamentoGestorController implements Initializable {
     private Button BotaoAprovar;
     @FXML
     private Button BotaoReprovar;
-    
-     @FXML
+
+    @FXML
     private TextArea textoJustificativa;
-    
 
     @FXML
     private TableView<TabelaAprovaçãoGestor> tabelaApontamento;
@@ -135,7 +134,7 @@ public class ApontamentoGestorController implements Initializable {
     @FXML
     public void carregarTabelaLancamento() {
         lishoras.clear();
-        lishoras.addAll(horadao.getHora(crgestor.getListCrGestor(usuario),"TabelaAprovaçãoGestor", StatusAprovacao.pendente));
+        lishoras.addAll(horadao.getHora(crgestor.getListCrGestor(usuario), "TabelaAprovaçãoGestor", StatusAprovacao.pendente));
         observablelisthoras.setAll(lishoras);
         tabelaApontamento.setItems(observablelisthoras);
 
@@ -152,55 +151,62 @@ public class ApontamentoGestorController implements Initializable {
 
     @FXML
     public void botaoAprovar() {
-    if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
-        // Exibe um popup de confirmação
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmação");
-        alert.setHeaderText(null);
-        alert.setContentText("Tem certeza de que deseja aprovar a hora?");
+        if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
+            if (!textoJustificativa.getText().isEmpty()) {
+                // Exibe um popup informando que a justificativa deve estar em branco
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Justificativa não permitida");
+                alert.setHeaderText(null);
+                alert.setContentText("Por favor, deixe o campo de justificativa em branco para aprovar a hora.");
 
-        ButtonType buttonNao = new ButtonType("Não");
-        ButtonType buttonSim = new ButtonType("Sim");
+                alert.showAndWait();
+            } else {
+                // Exibe um popup de confirmação
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirmação");
+                alert.setHeaderText(null);
+                alert.setContentText("Tem certeza de que deseja aprovar a hora?");
 
-        alert.getButtonTypes().setAll(buttonNao, buttonSim);
+                ButtonType buttonNao = new ButtonType("Não");
+                ButtonType buttonSim = new ButtonType("Sim");
 
-        alert.showAndWait().ifPresent(buttonType -> {
-            if (buttonType == buttonSim) {
-                String usernameAprovador = usuario; // Obtenha o nome do usuário aprovador
-                horadao.aprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId(), usernameAprovador);
-                carregarTabelaLancamento();
+                alert.getButtonTypes().setAll(buttonNao, buttonSim);
+
+                alert.showAndWait().ifPresent(buttonType -> {
+                    if (buttonType == buttonSim) {
+                        String usernameAprovador = usuario; // Obtenha o nome do usuário aprovador
+                        horadao.aprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId(), usernameAprovador);
+                        carregarTabelaLancamento();
+                    }
+                });
             }
-        });
-    }
-}
-
-@FXML
-public void botaoReprovar() {
-    if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
-        String justificativa = textoJustificativa.getText();
-        if (!justificativa.isEmpty()) {
-            int id = tabelaApontamento.getSelectionModel().getSelectedItem().getId();
-            String usernameReprovador = usuario; // Obtenha o nome do usuário reprovador
-            horadao.reprovarHora(id, justificativa, usernameReprovador);
-            carregarTabelaLancamento();
-            textoJustificativa.clear(); // Limpa o campo de justificativa
-        } else {
-            // Exibe um popup informando que a justificativa é obrigatória e cancela a reprovação
-            Dialog<ButtonType> dialog = new Dialog<>();
-            dialog.setTitle("Justificativa Necessária");
-            dialog.setHeaderText(null);
-            dialog.setContentText("Por favor, digite uma justificativa para a negação.");
-
-            ButtonType cancelButton = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
-            dialog.getDialogPane().getButtonTypes().addAll(cancelButton);
-
-            dialog.showAndWait();
         }
     }
-}
 
+    @FXML
+    public void botaoReprovar() {
+        if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
+            String justificativa = textoJustificativa.getText();
+            if (!justificativa.isEmpty()) {
+                int id = tabelaApontamento.getSelectionModel().getSelectedItem().getId();
+                String usernameReprovador = usuario; // Obtenha o nome do usuário reprovador
+                horadao.reprovarHora(id, justificativa, usernameReprovador);
+                carregarTabelaLancamento();
+                textoJustificativa.clear(); // Limpa o campo de justificativa
+            } else {
+                // Exibe um popup informando que a justificativa é obrigatória e cancela a reprovação
+                Dialog<ButtonType> dialog = new Dialog<>();
+                dialog.setTitle("Justificativa Necessária");
+                dialog.setHeaderText(null);
+                dialog.setContentText("Por favor, digite uma justificativa para a negação.");
 
+                ButtonType cancelButton = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+                dialog.getDialogPane().getButtonTypes().addAll(cancelButton);
 
+                dialog.showAndWait();
+            }
+        }
+    }
 
     @FXML
     public void navLancamentoColaborador(ActionEvent event) throws IOException {
@@ -224,7 +230,7 @@ public void botaoReprovar() {
         stage.setScene(cena);
         stage.show();
     }
-    
+
     @FXML
     public void RelatorioCSV(ActionEvent event) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ExtracaoRelatorioGestor.fxml"));
