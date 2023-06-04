@@ -30,7 +30,7 @@ public class Hora {
         //  instance = new Hora();
         //}
         //return instance;
-        this.status_aprovacao = StatusAprovacao.pendente;
+        this.status_aprovacao = StatusAprovacao.pendente.name();
     }
 
     public String getNome_cliente() {
@@ -61,7 +61,7 @@ public class Hora {
     public String getStatus_aprovacao() {
 
         if (status_aprovacao != null) {
-            return status_aprovacao.name();
+            return status_aprovacao;
         } else {
             return null; // Ou qualquer outro valor que faça sentido para o seu caso
         }
@@ -69,7 +69,7 @@ public class Hora {
 
     public void setStatus_aprovacao(String status_aprovacaoADM) {
         try {
-            this.status_aprovacao = StatusAprovacao.valueOf(status_aprovacaoADM);
+            this.status_aprovacao = StatusAprovacao.valueOf(status_aprovacaoADM).name();
         } catch (IllegalArgumentException e) {
             // Valor inválido, trate o erro de acordo com sua lógica
             System.out.println("Valor de status_aprovacao inválido: " + status_aprovacaoADM);

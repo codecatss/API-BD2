@@ -121,8 +121,8 @@ public class ClassificarVerba {
                     boolean diaUtil = diaUtil(diaSelecionado);
                     boolean diaNaoUtil = diaNaoUtil(diaSelecionado);
                     boolean SeMaiorDe120 = verificarDiferenca120 (diferencaMinutosDia);
-                    boolean seDiurno = seDiurno(diaSelecionado, diferencaMinutosTotal);
-                    boolean seNoturno = seNoturno (diaSelecionado, diferencaMinutosTotal);
+                    //boolean seDiurno = seDiurno(diaSelecionado, diferencaMinutosTotal);
+                    //boolean seNoturno = seNoturno (diaSelecionado, diferencaMinutosTotal);
                     
                     
                 }

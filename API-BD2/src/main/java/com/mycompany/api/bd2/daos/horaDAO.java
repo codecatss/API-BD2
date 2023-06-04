@@ -553,10 +553,7 @@ public class horaDAO {
         }
     }
 
-    public void reprovarHora(int id) {
-        String sql = "UPDATE hora SET status_aprovacao = 'negado_gestor' WHERE id = ?";
-
-    public void reprovarHora(int id, String justificativaNegacao, String usernameReprovador) {
+    public void reprovarHora(Integer id, String justificativaNegacao, String usernameReprovador){
     Usuario usuario = TelaLoginController.usuariologado;
     String negacao="";
     
