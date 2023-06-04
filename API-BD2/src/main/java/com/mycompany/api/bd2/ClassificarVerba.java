@@ -130,9 +130,13 @@ public class ClassificarVerba {
                     boolean SeMenorDe120 = verificarSeMenorDe120(diferencaMinutosTotal);
                     boolean seDiurno = seDiurno(diaSelec, diferencaMinutosTotal);
                     boolean seNoturno = seNoturno(diaSelec, diferencaMinutosTotal);
+                    boolean apenasUmDia = inicio.get(Calendar.DAY_OF_YEAR) == fim.get(Calendar.DAY_OF_YEAR);
                     
+                    //VERIFICAÇOES DAS VERBAS:
                     
-                    //VERIFICAÇOES DAS VERBAS:                    
+                    //SE APENAS UM DIA
+                    if (!apenasUmDia){
+                    
                     //DIA UTIL
                     if (diaUtil){
                         
@@ -147,19 +151,8 @@ public class ClassificarVerba {
                                 //VERBA HE75: diurno75 = diferencaMinutosTotal;
                             } 
                             else if (seNoturno){
-                                if (horaInicio < horaFim){
-                                    if (horaInicio >= 22 && horaFim < 24){
-                                        //VERBA HEN75: noturno75 = diferencaMinutosDia;
-                                        //VERBA ADN: adn = noturno75;
-                                    } else {
-                                        //VERBA HEN75: noturno75 = calcularDiferencaTotal(horaInicio, minutoInicio, 5, 59);
-                                        //VERBA ADN: adn = noturno75;
-                                    }
-                                } else {
-                                    //MAIS DE 1 DIA
-                                    //VERBA HEN75: noturno75 = calcularDiferencaTotal(horaInicio, minutoInicio, 5, 59);
-                                }
-                                                                   
+                                //VERBA HEN75: noturno75 = diferencaMinutosTotal;
+                                //VERBA ADN: adn = noturno75;
                             }
                             
                         //MAIOR DE 120MIN
@@ -167,47 +160,34 @@ public class ClassificarVerba {
                             
                             if (seDiurno && seNoturno){
                                 
-                                if (diferencaMinutosDiurno <= 120) {
-                                    if (horaInicio < horaFim){ //MESMO DIA*
-                                        //VERBA HE75: diurno75 = diferencaMinutosDiurno;
-                                        //VERBA HEN75: noturno75 = 120 - diurno75;
-                                        //VERBA HEN100: noturno100 = diferencaMinutosTotal - 120;
-                                        //VERBA ADN: adn = noturno75 + noturno100;
-                                    } else { //+ DE 1 DIA******
-                                        //VERBA HE75: diurno75 = diferencaMinutosDiurno;
-                                        //VERBA HEN75: noturno75 = 120 - diurno75;
-                                        //VERBA HEN100: noturno100 = diferencaMinutosDia - 120;
-                                        //VERBA ADN: adn = noturno75 + noturno100;
-                                    }
-                                    
-                                } else {
-                                    if (horaInicio < horaFim){ //MESMO DIA*
+                                if (horaFim >= 22 && diferencaMinutosDiurno > 120) {
                                         //VERBA HE75: diurno75 = 120;
-                                        //VERBA HE100: diurno100 = diferencaMinutosDiurno - diurno75;
+                                        //VERBA HE100: diurno100 = diferencaMinutosDiurno - 120;
                                         //VERBA HEN100: noturno100 = diferencaMinutosTotal - diferencaMinutosDiurno;
                                         //VERBA ADN: adn = noturno100;
-                                    } else { //+ DE 1 DIA******
-                                        //VERBA HE75: diurno75 = 120;
-                                        //VERBA HE100: diurno100 = diferencaMinutosDiurno - diurno75;
-                                        //VERBA HEN100: noturno100 = diferencaMinutosDia - 120;
-                                        //VERBA ADN: adn = noturno75 + noturno 100;
-                                    }
+                                        
+                                } else if (horaFim >= 22 && diferencaMinutosDiurno <= 120) {
+                                        //VERBA HE75: diurno75 = diferencaMinutosDiurno;
+                                        //VERBA HEN75: noturno75 = 120 - diferencaMinutosDiurno;
+                                        //VERBA HEN100: noturno100 = diferencaMinutosTotal - 120;
+                                        //VERBA ADN: adn = noturno75 + noturno100;
+                                        
+                                } else if (horaFim < 6) {
+                                        //VERBA HEN75: noturno75 = 120;
+                                        //VERBA HEN100: noturno100 = calcularDiferencaTotal(horaInicio, minutoInicio, 5, 59) - noturno75;
+                                        //VERBA HE 100: diurno100 = diferencaMinutosTotal - (noturno75 + noturno100)
+                                        //VERBA ADN: adn = noturno75 + noturno100;
                                 }
+                                    
                             }
                             else if (seDiurno){
                             //VERBA HE75: diurno75 = 120;
-                            //VERBA HE100: diurno100 = diferencaMinutosDiurno - diurno75; 
+                            //VERBA HE100: diurno100 = diferencaMinutosTotal - diurno75; 
                             } 
                             else if (seNoturno){
-                                if (horaInicio < horaFim){ //MESMO DIA*
-                                        //VERBA HEN75: noturno75 = 120;
-                                        //VERBA HEN100: noturno100 = diferencaMinutosTotal - noturno75;
-                                        //VERBA ADN: adn = noturno75 + noturno100;
-                                } else { //+ DE 1 DIA******
-                                    //VERBA HEN75: noturno75 = 120;
-                                    //VERBA HEN100: noturno100 = ??? - noturno75;
-                                    //VERBA ADN: adn = noturno75 + noturno100;
-                                }
+                                //VERBA HEN75: noturno75 = 120;
+                                //VERBA HEN100: noturno100 = diferencaMinutosTotal - noturno75;
+                                //VERBA ADN: adn = noturno75 + noturno100;
                             }
                         }
                     }
@@ -216,40 +196,39 @@ public class ClassificarVerba {
                     else if (diaNaoUtil){
                         
                         if(seDiurno && seNoturno) {
-                            if (diferencaMinutosDiurno <= 120) {
+                            if (horaFim >= 22 && diferencaMinutosDiurno > 120) {
+                                //VERBA HE100: diurno100 = diferencaMinutosDiurno;
+                                //VERBA HEN100: noturno100 = diferencaMinutosTotal - diferencaMinutosDiurno;
+                                //VERBA ADN: adn = noturno100;
+                                        
+                                } else if (horaFim >= 22 && diferencaMinutosDiurno <= 120) {
                                     //VERBA HE100: diurno100 = diferencaMinutosDiurno;
-                                    //VERBA HEN100: noturno100 = "???"
+                                    //VERBA HEN100: noturno100 = diferencaMinutosTotal - diferencaMinutosDiurno;
                                     //VERBA ADN: adn = noturno100;
-                                } else {
-                                    //VERBA HE100: diurno100 = diferencaMinutosDiurno;
-                                    //VERBA HEN100: noturno100 = "???"
+                                
+                                } else if (horaFim < 6) {
+                                    //VERBA HEN100: noturno100 = calcularDiferencaTotal(horaInicio, minutoInicio, 5, 59);
+                                    //VERBA HE 100: diurno100 = diferencaMinutosTotal - noturno100;
                                     //VERBA ADN: adn = noturno100;
                                 }
                         }
+                        
                         else if (seDiurno) {
                             //VERBA HE100: diurno100 = diferencaMinutosTotal;
                         }
+                        
                         else if (seNoturno){
-                            if (horaInicio < horaFim){
-                                if (horaInicio >= 22 && horaFim < 24){
-                                    //VERBA HEN100: noturno100 = diferencaMinutosDia;
-                                    //VERBA ADN: adn = noturno100;
-                                } else {
-                                    //VERBA HEN100: noturno100 = calcularDiferencaTotal(horaInicio, minutoInicio, 5, 59);
-                                    //VERBA ADN: adn = noturno100;
+                            //VERBA HEN100: noturno100 = diferencaMinutosTotal;
+                            //VERBA ADN: adn = noturno100;
                                 }
-                            } else { //+ DE 1 DIA
-                                
-                            }
-                                
-                            }
-                    } 
-
-                    calendar.add(Calendar.DATE, 1);
-                }
+                    }
+                    }
+                    
+                calendar.add(Calendar.DATE, 1);
             }
         }
     }
+}
     
     
     //ENUM VERBAS
