@@ -4,11 +4,10 @@ import com.mycompany.api.bd2.daos.crDAO;
 import com.mycompany.api.bd2.daos.horaDAO;
 import com.mycompany.api.bd2.models.Hora;
 import com.mycompany.api.bd2.models.Usuario;
-import com.mycompany.api.bd2.*;
-import com.mycompany.api.bd2.daos.*;
-
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -22,9 +21,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -58,6 +62,7 @@ public class AprovacaoADMController implements Initializable {
     private Button menuRelatorio;
     @FXML
     private TableView<Hora> tabelaAprovacao;
+
     @FXML
     private TableColumn<Hora, String> colunaColaboradorADM;
     @FXML
@@ -77,27 +82,55 @@ public class AprovacaoADMController implements Initializable {
     @FXML
     private TableColumn<Hora, String> colunaJustificativaADM;
     @FXML
+    private TableColumn<Hora, String> status;
+
+    @FXML
     private Button botaoReprovar;
     @FXML
     private Button botaoAprovar;
+    @FXML
+    private ComboBox<String> comboboxStatusApontamentos;
 
+    @FXML
+    private TextArea textoJustificativa;
+
+    private List<Hora> lishoras = new ArrayList<>();
     private ObservableList<Hora> observablelisthoras = FXCollections.observableArrayList();
     private horaDAO horadao = new horaDAO();
-    private Hora hora = new Hora();
     private crDAO crgestor = new crDAO();
-    private Usuario usuario = new Usuario();
+    private Usuario usuario = TelaLoginController.usuariologado;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        comboboxStatusApontamentos.getItems().addAll("TODAS HORAS", "APROVADAS", "REPROVADAS", "PENDENTES");
+        comboboxStatusApontamentos.setValue("PENDENTES");
+
+        comboboxStatusApontamentos.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.equals("TODAS HORAS")) {
+                System.out.println("Todas");
+                carregarTabelaLancamento();
+            } else if (newValue.equals("REPROVADAS")) {
+                System.out.println("Reprovada");
+                carregarTabelaLancamento();
+                // Lógica para exibir as horas reprovadas
+            } else if (newValue.equals("APROVADAS")) {
+                System.out.println("Aprovadas");
+                carregarTabelaLancamento(); // Chama o método para carregar as horas aprovadas
+            } else if (newValue.equals("PENDENTES")) {
+                // Lógica para exibir as horas pendentes
+                carregarTabelaLancamento();
+            }
+        });
+
+        // Restante do código...
+        nomeUsuario.setText(usuario.getUsername());
         minimizarTela.setOnAction(e -> {
             Stage stage = (Stage) minimizarTela.getScene().getWindow();
             stage.setIconified(true);
         });
-
         menuAprovar.setDisable(true);
-        botaoAprovar.setOnAction(this::aprovarHora);
 
-        carregarTabelaLancamento();
+        carregarTabelaLancamento(); // Carrega as horas iniciais
     }
 
     public void fechaTela() {
@@ -159,35 +192,96 @@ public class AprovacaoADMController implements Initializable {
     }
 
     private void carregarTabelaLancamento() {
+        String opcaoSelecionada = comboboxStatusApontamentos.getValue();
+
+        lishoras.clear(); // Limpa a lista antes de adicionar as horas corretas
+
+        if (opcaoSelecionada.equals("APROVADAS")) {
+            lishoras.addAll(horadao.getAprovadaHoras());
+        } else if (opcaoSelecionada.equals("TODAS HORAS")) {
+            lishoras.addAll(horadao.getTodasHoras());
+        } else if (opcaoSelecionada.equals("PENDENTES")) {
+            lishoras.addAll(horadao.getHorasAprovadas());
+        } else if (opcaoSelecionada.equals("REPROVADAS")) {
+            lishoras.addAll(horadao.getReprovadaHoras());
+        }
+
+        observablelisthoras.setAll(lishoras);
+
+        tabelaAprovacao.setItems(observablelisthoras);
         colunaColaboradorADM.setCellValueFactory(new PropertyValueFactory<>("username_lancador"));
         colunaCRADM.setCellValueFactory(new PropertyValueFactory<>("cod_cr"));
+        colundaGestorADM.setCellValueFactory(new PropertyValueFactory<>("aprovador_gestor"));
         colunaEmpresaADM.setCellValueFactory(new PropertyValueFactory<>("cnpj_cliente"));
         colunaProjetoADM.setCellValueFactory(new PropertyValueFactory<>("projeto"));
         colunaInicioADM.setCellValueFactory(new PropertyValueFactory<>("data_hora_inicio"));
         colunaFimADM.setCellValueFactory(new PropertyValueFactory<>("data_hora_fim"));
         colunaJustificativaADM.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
+        status.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao"));
 
-        observablelisthoras.setAll(horadao.getHorasAprovadas());
-        tabelaAprovacao.setItems(observablelisthoras);
         tabelaAprovacao.refresh();
-
     }
 
-    @FXML
-    private void aprovarHora(ActionEvent event) {
-        Hora horaSelecionada = tabelaAprovacao.getSelectionModel().getSelectedItem();
-        horaDAO dao = new horaDAO();
-
-        if (horaSelecionada != null) {
-            String codCr = horaSelecionada.getCod_cr();
-            String statusAprovacaoADM = "aprovado_rh";
-
-            dao.atualizarStatusAprovacao(codCr, statusAprovacaoADM);
-
-            horaSelecionada.setStatus_aprovacao(statusAprovacaoADM);
-            tabelaAprovacao.refresh();
+@FXML
+public void BotaoReprovar() {
+    Hora horaSelecionada = tabelaAprovacao.getSelectionModel().getSelectedItem();
+    if (horaSelecionada != null) {
+        String justificativaNegacao = textoJustificativa.getText();
+        if (!justificativaNegacao.isEmpty()) {
+            String usernameReprovador = usuario.getUsername();
+            horadao.reprovarHoraADM(horaSelecionada.getId(), justificativaNegacao, usernameReprovador);
             carregarTabelaLancamento();
+            textoJustificativa.clear(); // Limpa o campo de justificativa
+        } else {
+            // Exibe um popup informando que a justificativa é obrigatória e cancela a reprovação
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setTitle("Justificativa Necessária");
+            dialog.setHeaderText(null);
+            dialog.setContentText("Por favor, digite uma justificativa para a negação.");
+
+            ButtonType cancelButton = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+            dialog.getDialogPane().getButtonTypes().addAll(cancelButton);
+
+            dialog.showAndWait();
         }
     }
+}
+
+    @FXML
+    public void BotaoAprovar() {
+        if (tabelaAprovacao.getSelectionModel().getSelectedItem() != null) {
+            Hora horaSelecionada = tabelaAprovacao.getSelectionModel().getSelectedItem();
+
+            if (!textoJustificativa.getText().isEmpty()) {
+                // Exibe um popup informando que a justificativa deve estar em branco
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Justificativa não permitida");
+                alert.setHeaderText(null);
+                alert.setContentText("Por favor, deixe o campo de justificativa em branco para aprovar a hora.");
+
+                alert.showAndWait();
+            } else {
+                // Exibe um popup de confirmação
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirmação");
+                alert.setHeaderText(null);
+                alert.setContentText("Tem certeza de que deseja aprovar a hora?");
+
+                ButtonType buttonNao = new ButtonType("Não");
+                ButtonType buttonSim = new ButtonType("Sim");
+
+                alert.getButtonTypes().setAll(buttonNao, buttonSim);
+
+                alert.showAndWait().ifPresent(buttonType -> {
+                    if (buttonType == buttonSim) {
+                        String usernameAprovador = usuario.getUsername();
+                        horadao.aprovarHoraADM(horaSelecionada.getId(), usernameAprovador);
+                        carregarTabelaLancamento();
+                    }
+                });
+            }
+        }
+    }
+
 
 }

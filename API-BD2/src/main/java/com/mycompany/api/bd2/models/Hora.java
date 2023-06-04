@@ -30,6 +30,7 @@ public class Hora {
         //  instance = new Hora();
         //}
         //return instance;
+        this.status_aprovacao = StatusAprovacao.pendente;
     }
 
     public String getNome_cliente() {
@@ -58,11 +59,21 @@ public class Hora {
     }
 
     public String getStatus_aprovacao() {
-        return status_aprovacao;
+
+        if (status_aprovacao != null) {
+            return status_aprovacao.name();
+        } else {
+            return null; // Ou qualquer outro valor que faça sentido para o seu caso
+        }
     }
 
     public void setStatus_aprovacao(String status_aprovacaoADM) {
-        this.status_aprovacao = status_aprovacaoADM;
+        try {
+            this.status_aprovacao = StatusAprovacao.valueOf(status_aprovacaoADM);
+        } catch (IllegalArgumentException e) {
+            // Valor inválido, trate o erro de acordo com sua lógica
+            System.out.println("Valor de status_aprovacao inválido: " + status_aprovacaoADM);
+        }
     }
 
     /**
@@ -245,10 +256,19 @@ public class Hora {
         this.projeto = null;
         this.solicitante = null;
         this.status_aprovacao = null;
-        this.tipo = null;
         this.username_aprovador = null;
         this.username_lancador = null;
 
+    }
+
+    private String aprovador_gestor;
+
+    public String getAprovador_gestor() {
+        return aprovador_gestor;
+    }
+
+    public void setAprovador_gestor(String aprovador_gestor) {
+        this.aprovador_gestor = aprovador_gestor;
     }
 
 }

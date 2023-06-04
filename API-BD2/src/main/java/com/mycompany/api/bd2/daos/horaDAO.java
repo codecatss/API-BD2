@@ -15,11 +15,14 @@ import com.mycompany.api.bd2.models.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -70,15 +73,15 @@ public class horaDAO {
 
     }
 
-    public void atualizarStatusAprovacao(String codCr, String statusAprovacao) {
-        String sql = "UPDATE hora SET status_aprovacaoADM = ? WHERE cod_cr = ? ";
+    public void atualizarStatusAprovacao(String codCr, String status) {
+        String sql = "UPDATE hora SET status_aprovacao = ? WHERE cod_cr = ? ";
         Connection conn = null;
         PreparedStatement pstm = null;
 
         try {
             conn = Conexao.createConnectionToMySQL();
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, statusAprovacao);
+            pstm.setString(1, status);
             pstm.setString(2, codCr);
             pstm.executeUpdate();
 
@@ -99,9 +102,7 @@ public class horaDAO {
         }
     }
 
-
-
-public void delete(Hora hora) {
+    public void delete(Hora hora) {
         String sql = "DELETE FROM hora " + "WHERE id=?";
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -552,6 +553,8 @@ public void delete(Hora hora) {
         }
     }
 
+    public void reprovarHora(int id) {
+        String sql = "UPDATE hora SET status_aprovacao = 'negado_gestor' WHERE id = ?";
 
     public void reprovarHora(int id, String justificativaNegacao, String usernameReprovador) {
     Usuario usuario = TelaLoginController.usuariologado;
@@ -597,8 +600,43 @@ public void delete(Hora hora) {
         }
     }
 
+public void reprovarHoraADM(Integer id, String justificativaNegacao, String usernameReprovador) {
+    String sql = "UPDATE hora SET status_aprovacao = 'negado_adm', justificativa_negacao = ?, aprovador_gestor = ? WHERE id = ?";
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+
+    try {
+        try {
+            conn = Conexao.createConnectionToMySQL();
+        } catch (Exception ex) {
+            Logger.getLogger(horaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, justificativaNegacao);
+        pstmt.setString(2, usernameReprovador);
+        pstmt.setInt(3, id);
+        pstmt.executeUpdate();
+
+        System.out.println("Hora reprovada com sucesso");
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (pstmt != null) {
+                pstmt.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
     public Set<Hora> getHorasAprovadas() {
-        String sql = "SELECT * FROM 2rp.hora WHERE status_aprovacaoADM = 'pendente' and status_aprovacao = 'aprovado_gestor'";
+        String sql = "SELECT * FROM 2rp.hora WHERE status_aprovacao = 'pendente' OR status_aprovacao = 'aprovado_gestor'";
         Set<Hora> horasAprovadas = new HashSet<>();
 
         Connection conn = null;
@@ -612,6 +650,7 @@ public void delete(Hora hora) {
 
             while (rset.next()) {
                 Hora hora = new Hora();
+                hora.setId(rset.getInt("id"));
                 hora.setCod_cr(rset.getString("cod_cr"));
                 hora.setUsername_lancador(rset.getString("username_lancador"));
                 hora.setCnpj_cliente(rset.getInt("cnpj_cliente"));
@@ -622,7 +661,7 @@ public void delete(Hora hora) {
                 hora.setProjeto(rset.getString("projeto"));
                 hora.setUsername_aprovador(rset.getString("aprovador_gestor"));
                 hora.setJustificativa_negacao(rset.getString("justificativa_negacao"));
-                hora.setStatus_aprovacao(rset.getString("status_aprovacaoADM"));
+                hora.setStatus_aprovacao(rset.getString("status_aprovacao"));
 
                 horasAprovadas.add(hora);
             }
@@ -648,4 +687,250 @@ public void delete(Hora hora) {
         return horasAprovadas;
     }
 
+    public void aprovarHoraADM(int id, String usernameAprovador) {
+        String sql = "UPDATE hora SET status_aprovacao = 'aprovado_adm', aprovador_ADM = ? WHERE id = ?";
+        Connection conn = null;
+        PreparedStatement pstm = null;
+
+        try {
+            try {
+                conn = Conexao.createConnectionToMySQL();
+            } catch (Exception ex) {
+                Logger.getLogger(horaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, usernameAprovador);
+            pstm.setInt(2, id);
+
+            pstm.executeUpdate();
+
+            System.out.println("Hora aprovada com sucesso");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstm != null) {
+                    pstm.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public Set<Hora> getAprovadaHoras() {
+        String sql = "SELECT * FROM 2rp.hora WHERE status_aprovacao = 'aprovado_gestor' OR status_aprovacao = 'aprovado_adm'";
+        Set<Hora> horasAprovadas = new HashSet<>();
+
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rset = null;
+
+        try {
+            conn = Conexao.createConnectionToMySQL();
+            pstm = conn.prepareStatement(sql);
+            rset = pstm.executeQuery();
+
+            while (rset.next()) {
+                Hora hora = new Hora();
+                hora.setId(rset.getInt("id"));
+                hora.setCod_cr(rset.getString("cod_cr"));
+                hora.setUsername_lancador(rset.getString("username_lancador"));
+                hora.setCnpj_cliente(rset.getInt("cnpj_cliente"));
+                hora.setData_hora_inicio(rset.getString("data_hora_inicio"));
+                hora.setData_hora_fim(rset.getString("data_hora_fim"));
+                hora.setTipo(rset.getString("tipo"));
+                hora.setJustificativa_lancamento(rset.getString("justificativa_lancamento"));
+                hora.setProjeto(rset.getString("projeto"));
+                hora.setUsername_aprovador(rset.getString("aprovador_gestor"));
+                hora.setJustificativa_negacao(rset.getString("justificativa_negacao"));
+                hora.setStatus_aprovacao(rset.getString("status_aprovacao"));
+
+                horasAprovadas.add(hora);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rset != null) {
+                    rset.close();
+                }
+
+                if (pstm != null) {
+                    pstm.close();
+                }
+
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return horasAprovadas;
+    }
+
+    public Set<Hora> getPendenteHoras() {
+        String sql = "SELECT * FROM 2rp.hora WHERE status_aprovacao = 'pendente'";
+        Set<Hora> horasAprovadas = new HashSet<>();
+
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rset = null;
+
+        try {
+            conn = Conexao.createConnectionToMySQL();
+            pstm = conn.prepareStatement(sql);
+            rset = pstm.executeQuery();
+
+            while (rset.next()) {
+                Hora hora = new Hora();
+                hora.setId(rset.getInt("id"));
+                hora.setCod_cr(rset.getString("cod_cr"));
+                hora.setUsername_lancador(rset.getString("username_lancador"));
+                hora.setCnpj_cliente(rset.getInt("cnpj_cliente"));
+                hora.setData_hora_inicio(rset.getString("data_hora_inicio"));
+                hora.setData_hora_fim(rset.getString("data_hora_fim"));
+                hora.setTipo(rset.getString("tipo"));
+                hora.setJustificativa_lancamento(rset.getString("justificativa_lancamento"));
+                hora.setProjeto(rset.getString("projeto"));
+                hora.setUsername_aprovador(rset.getString("aprovador_gestor"));
+                hora.setJustificativa_negacao(rset.getString("justificativa_negacao"));
+                hora.setStatus_aprovacao(rset.getString("status_aprovacao"));
+
+                horasAprovadas.add(hora);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rset != null) {
+                    rset.close();
+                }
+
+                if (pstm != null) {
+                    pstm.close();
+                }
+
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return horasAprovadas;
+    }
+
+    public Set<Hora> getReprovadaHoras() {
+        String sql = "SELECT * FROM 2rp.hora WHERE status_aprovacao = 'negado_gestor' OR status_aprovacao = 'negado_adm'";
+
+        Set<Hora> horasAprovadas = new HashSet<>();
+
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rset = null;
+
+        try {
+            conn = Conexao.createConnectionToMySQL();
+            pstm = conn.prepareStatement(sql);
+            rset = pstm.executeQuery();
+
+            while (rset.next()) {
+                Hora hora = new Hora();
+                hora.setId(rset.getInt("id"));
+                hora.setCod_cr(rset.getString("cod_cr"));
+                hora.setUsername_lancador(rset.getString("username_lancador"));
+                hora.setCnpj_cliente(rset.getInt("cnpj_cliente"));
+                hora.setData_hora_inicio(rset.getString("data_hora_inicio"));
+                hora.setData_hora_fim(rset.getString("data_hora_fim"));
+                hora.setTipo(rset.getString("tipo"));
+                hora.setJustificativa_lancamento(rset.getString("justificativa_lancamento"));
+                hora.setProjeto(rset.getString("projeto"));
+                hora.setUsername_aprovador(rset.getString("aprovador_gestor"));
+                hora.setJustificativa_negacao(rset.getString("justificativa_negacao"));
+                hora.setStatus_aprovacao(rset.getString("status_aprovacao"));
+
+                horasAprovadas.add(hora);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rset != null) {
+                    rset.close();
+                }
+
+                if (pstm != null) {
+                    pstm.close();
+                }
+
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return horasAprovadas;
+    }
+
+    public Set<Hora> getTodasHoras() {
+        String sql = "SELECT * FROM 2rp.hora";
+        Set<Hora> todasHoras = new HashSet<>();
+
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rset = null;
+
+        try {
+            conn = Conexao.createConnectionToMySQL();
+            pstm = conn.prepareStatement(sql);
+            rset = pstm.executeQuery();
+
+            while (rset.next()) {
+                Hora hora = new Hora();
+                hora.setId(rset.getInt("id"));
+                hora.setCod_cr(rset.getString("cod_cr"));
+                hora.setUsername_lancador(rset.getString("username_lancador"));
+                hora.setCnpj_cliente(rset.getInt("cnpj_cliente"));
+                hora.setData_hora_inicio(rset.getString("data_hora_inicio"));
+                hora.setData_hora_fim(rset.getString("data_hora_fim"));
+                hora.setTipo(rset.getString("tipo"));
+                hora.setJustificativa_lancamento(rset.getString("justificativa_lancamento"));
+                hora.setProjeto(rset.getString("projeto"));
+                hora.setUsername_aprovador(rset.getString("aprovador_gestor"));
+                hora.setJustificativa_negacao(rset.getString("justificativa_negacao"));
+                hora.setStatus_aprovacao(rset.getString("status_aprovacao"));
+
+                todasHoras.add(hora);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rset != null) {
+                    rset.close();
+                }
+
+                if (pstm != null) {
+                    pstm.close();
+                }
+
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return todasHoras;
+    }
 }
