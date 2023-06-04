@@ -9,5 +9,5 @@ package com.mycompany.api.bd2.models;
  * @author mikaela.begotti
  */
 public enum StatusAprovacao {
-    pendente, aprovado_gestor, aprovado_rh, negado;
+    pendente, aprovado_gestor, aprovado_adm, negado_gestor,negado_adm;
 }
