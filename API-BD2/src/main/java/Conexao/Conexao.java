@@ -1,5 +1,6 @@
 package Conexao;
 
+import com.mycompany.api.bd2.ClassificarVerba;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -54,13 +55,20 @@ public class Conexao {
         ResultSetMetaData rsmd = rs.getMetaData();
 
         // Obtem o número de colunas
-        int numColunas = rsmd.getColumnCount();
+        int numColunas = rsmd.getColumnCount() + 6;
 
         // Cria o array de Strings com o cabeçalho
         String[] cabecalho = new String[numColunas];
         for (int i = 1; i <= numColunas; i++) {
             cabecalho[i - 1] = rsmd.getColumnLabel(i);
         }
+        cabecalho[numColunas - 6] = "1601";
+        cabecalho[numColunas - 5] = "1602";
+        cabecalho[numColunas - 4] = "3000";
+        cabecalho[numColunas - 3] = "3001";
+        cabecalho[numColunas - 2] = "1809";
+        cabecalho[numColunas - 1] = "3016";
+        
         // Escreve o cabeçalho no arquivo CSV
         writer.writeNext(cabecalho);
 
@@ -70,6 +78,16 @@ public class Conexao {
             for (int i = 1; i <= numColunas; i++) {
                 linha[i - 1] = rs.getString(i);
             }
+            
+            ClassificarVerba classificador = new ClassificarVerba();
+            
+            linha[numColunas - 6] = Long.toString(classificador.verbas.get(1601).getValor());
+            linha[numColunas - 5] = Long.toString(classificador.verbas.get(1602).getValor());
+            linha[numColunas - 4] = Long.toString(classificador.verbas.get(3000).getValor());
+            linha[numColunas - 3] = Long.toString(classificador.verbas.get(3001).getValor());
+            linha[numColunas - 2] = Long.toString(classificador.verbas.get(1809).getValor());
+            linha[numColunas - 1] = Long.toString(classificador.verbas.get(3016).getValor());
+            
             writer.writeNext(linha);
         }
 
