@@ -82,7 +82,8 @@ public class AprovacaoADMController implements Initializable {
     @FXML
     private Button botaoAprovar;
     @FXML
-    private ComboBox<?> comboboxStatusApontamentos;
+    private ComboBox<String> comboboxStatusApontamentos;
+
     @FXML
     private TextArea textoJustificativa;
 
@@ -94,6 +95,27 @@ public class AprovacaoADMController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        comboboxStatusApontamentos.getItems().addAll("TODAS HORAS", "REPROVADAS", "APROVADAS", "PENDENTES");
+        comboboxStatusApontamentos.setValue("TODAS HORAS");
+
+        comboboxStatusApontamentos.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.equals("TODAS HORAS")) {
+                System.out.println("Todas");
+                carregarTabelaLancamento();
+            } else if (newValue.equals("REPROVADAS")) {
+                System.out.println("Reprovada");
+                carregarTabelaLancamento();
+                // Lógica para exibir as horas reprovadas
+            } else if (newValue.equals("APROVADAS")) {
+                System.out.println("Aprovadas");
+                carregarTabelaLancamento(); // Chama o método para carregar as horas aprovadas
+            } else if (newValue.equals("PENDENTES")) {
+                // Lógica para exibir as horas pendentes
+                carregarTabelaLancamento();
+            }
+        });
+
+        // Restante do código...
         nomeUsuario.setText(usuario.getUsername());
         minimizarTela.setOnAction(e -> {
             Stage stage = (Stage) minimizarTela.getScene().getWindow();
@@ -101,7 +123,7 @@ public class AprovacaoADMController implements Initializable {
         });
         menuAprovar.setDisable(true);
 
-        carregarTabelaLancamento();
+        carregarTabelaLancamento(); // Carrega as horas iniciais
     }
 
     public void fechaTela() {
@@ -163,8 +185,22 @@ public class AprovacaoADMController implements Initializable {
     }
 
     private void carregarTabelaLancamento() {
-        lishoras.addAll(horadao.getHorasAprovadas());
-        observablelisthoras.setAll(horadao.getHorasAprovadas());
+        String opcaoSelecionada = comboboxStatusApontamentos.getValue();
+
+        lishoras.clear(); // Limpa a lista antes de adicionar as horas corretas
+
+        if (opcaoSelecionada.equals("APROVADAS")) {
+            lishoras.addAll(horadao.getAprovadaHoras());
+        } else if (opcaoSelecionada.equals("TODAS HORAS")) {
+            lishoras.addAll(horadao.getTodasHoras());
+        } else if (opcaoSelecionada.equals("PENDENTES")) {
+            lishoras.addAll(horadao.getPendenteHoras());
+        } else if (opcaoSelecionada.equals("REPROVADAS")) {
+            lishoras.addAll(horadao.getReprovadaHoras());
+        }
+
+        observablelisthoras.setAll(lishoras);
+
         tabelaAprovacao.setItems(observablelisthoras);
         colunaColaboradorADM.setCellValueFactory(new PropertyValueFactory<>("username_lancador"));
         colunaCRADM.setCellValueFactory(new PropertyValueFactory<>("cod_cr"));
@@ -191,7 +227,7 @@ public class AprovacaoADMController implements Initializable {
         Hora horaSelecionada = tabelaAprovacao.getSelectionModel().getSelectedItem();
         System.out.println(horaSelecionada);
         if (horaSelecionada != null) {
-            horadao.aprovarHoraADM(tabelaAprovacao.getSelectionModel().getSelectedItem().getId(),usuario.getUsername());
+            horadao.aprovarHoraADM(tabelaAprovacao.getSelectionModel().getSelectedItem().getId(), usuario.getUsername());
             carregarTabelaLancamento();
         }
     }
