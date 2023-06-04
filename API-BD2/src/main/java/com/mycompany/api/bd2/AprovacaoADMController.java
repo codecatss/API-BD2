@@ -59,6 +59,7 @@ public class AprovacaoADMController implements Initializable {
     private Button menuRelatorio;
     @FXML
     private TableView<Hora> tabelaAprovacao;
+
     @FXML
     private TableColumn<Hora, String> colunaColaboradorADM;
     @FXML
@@ -78,6 +79,9 @@ public class AprovacaoADMController implements Initializable {
     @FXML
     private TableColumn<Hora, String> colunaJustificativaADM;
     @FXML
+    private TableColumn<Hora, String> status;
+
+    @FXML
     private Button botaoReprovar;
     @FXML
     private Button botaoAprovar;
@@ -95,8 +99,8 @@ public class AprovacaoADMController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        comboboxStatusApontamentos.getItems().addAll("TODAS HORAS", "REPROVADAS", "APROVADAS", "PENDENTES");
-        comboboxStatusApontamentos.setValue("TODAS HORAS");
+        comboboxStatusApontamentos.getItems().addAll("TODAS HORAS", "APROVADAS", "REPROVADAS", "PENDENTES");
+        comboboxStatusApontamentos.setValue("PENDENTES");
 
         comboboxStatusApontamentos.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.equals("TODAS HORAS")) {
@@ -194,7 +198,7 @@ public class AprovacaoADMController implements Initializable {
         } else if (opcaoSelecionada.equals("TODAS HORAS")) {
             lishoras.addAll(horadao.getTodasHoras());
         } else if (opcaoSelecionada.equals("PENDENTES")) {
-            lishoras.addAll(horadao.getPendenteHoras());
+            lishoras.addAll(horadao.getHorasAprovadas());
         } else if (opcaoSelecionada.equals("REPROVADAS")) {
             lishoras.addAll(horadao.getReprovadaHoras());
         }
@@ -204,11 +208,13 @@ public class AprovacaoADMController implements Initializable {
         tabelaAprovacao.setItems(observablelisthoras);
         colunaColaboradorADM.setCellValueFactory(new PropertyValueFactory<>("username_lancador"));
         colunaCRADM.setCellValueFactory(new PropertyValueFactory<>("cod_cr"));
+        colundaGestorADM.setCellValueFactory(new PropertyValueFactory<>("aprovador_gestor"));
         colunaEmpresaADM.setCellValueFactory(new PropertyValueFactory<>("cnpj_cliente"));
         colunaProjetoADM.setCellValueFactory(new PropertyValueFactory<>("projeto"));
         colunaInicioADM.setCellValueFactory(new PropertyValueFactory<>("data_hora_inicio"));
         colunaFimADM.setCellValueFactory(new PropertyValueFactory<>("data_hora_fim"));
         colunaJustificativaADM.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
+        status.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao"));
 
         tabelaAprovacao.refresh();
     }
@@ -228,7 +234,7 @@ public class AprovacaoADMController implements Initializable {
         System.out.println(horaSelecionada);
         if (horaSelecionada != null) {
             horadao.aprovarHoraADM(tabelaAprovacao.getSelectionModel().getSelectedItem().getId(), usuario.getUsername());
-            carregarTabelaLancamento();
+            carregarTabelaLancamento(); // Atualiza a tabela após aprovar a hora
         }
     }
 
