@@ -114,14 +114,18 @@ create table
 -- Adição de Usuários
 
 INSERT INTO
-    usuario (username, nome, senha, funcao, id)
+    usuario (
+        username,
+        nome,
+        senha,
+        funcao,
+        id
+    )
 VALUES (
-    id int AUTO_INCREMENT NOT NULL
-        'admin',
+        id int AUTO_INCREMENT NOT NULL 'admin',
         'Admin',
         'admin123',
-        'admin'
-        '0'
+        'admin' '0'
     );
 
 INSERT INTO
@@ -166,6 +170,129 @@ VALUES (
         'Willian Danko',
         'dev123',
         'colaborador'
+    ), (
+        'larissa',
+        'Larissa Fernanda',
+        'dev123',
+        'colaborador'
+    ), (
+        'laroy',
+        'Laroy Prado',
+        'dev123',
+        'colaborador'
+    ), (
+        'caio',
+        'Caio Sousa',
+        'dev123',
+        'colaborador'
+    );
+
+INSERT INTO
+    usuario (username, nome, senha, funcao)
+VALUES (
+        'ana',
+        'Ana',
+        987654321,
+        'colaborador'
+    ), (
+        'maria',
+        'Maria',
+        123456789,
+        'colaborador'
+    ), (
+        'pedro',
+        'Pedro',
+        987654321,
+        'colaborador'
+    ), (
+        'joão',
+        'João',
+        123456789,
+        'colaborador'
+    ), (
+        'gustavo',
+        'Gustavo',
+        987654321,
+        'colaborador'
+    ), (
+        'fernanda',
+        'Fernanda',
+        123456789,
+        'colaborador'
+    ), (
+        'carlos',
+        'Carlos',
+        987654321,
+        'colaborador'
+    ), (
+        'rafael',
+        'Rafael',
+        123456789,
+        'colaborador'
+    ), (
+        'lucas',
+        'Lucas',
+        987654321,
+        'colaborador'
+    ), (
+        'mariana',
+        'Mariana',
+        123456789,
+        'colaborador'
+    );
+
+INSERT INTO
+    usuario (username, nome, senha, funcao)
+VALUES (
+        'ana',
+        'Ana',
+        987654321,
+        'Desenvolvedora'
+    ), (
+        'maria',
+        'Maria',
+        123456789,
+        'Desenvolvedora'
+    ), (
+        'pedro',
+        'Pedro',
+        987654321,
+        'Desenvolvedor'
+    ), (
+        'joão',
+        'João',
+        123456789,
+        'Analista de Sistemas'
+    ), (
+        'gustavo',
+        'Gustavo',
+        987654321,
+        'Desenvolvedor'
+    ), (
+        'fernanda',
+        'Fernanda',
+        123456789,
+        'Analista de Sistemas'
+    ), (
+        'carlos',
+        'Carlos',
+        987654321,
+        'Desenvolvedor'
+    ), (
+        'rafael',
+        'Rafael',
+        123456789,
+        'Desenvolvedor'
+    ), (
+        'lucas',
+        'Lucas',
+        987654321,
+        'Desenvolvedor'
+    ), (
+        'mariana',
+        'Mariana',
+        123456789,
+        'Analista de Sistemas'
     );
 
 -- Adição de centro de resultados
@@ -240,8 +367,117 @@ VALUES (
         "Conexão de banco de dados JDBC",
         "Projeto Integrador",
         "Mineda"
+    ), (
+        13652,
+        'ana',
+        987654321,
+        '2023-04-16 09:00:00',
+        '2023-04-16 12:00:00',
+        'NORMAL',
+        'Reunião de equipe',
+        'Projeto X',
+        'Carlos'
+    ), (
+        13652,
+        'maria',
+        123456789,
+        '2023-04-16 14:00:00',
+        '2023-04-16 16:30:00',
+        'NORMAL',
+        'Desenvolvimento de funcionalidade',
+        'Projeto Y',
+        'Lucas'
+    ), (
+        13652,
+        'pedro',
+        987654321,
+        '2023-04-17 10:30:00',
+        '2023-04-17 12:30:00',
+        'NORMAL',
+        'Testes de integração',
+        'Projeto Z',
+        'Fernanda'
+    ), (
+        13652,
+        'joão',
+        123456789,
+        '2023-04-18 08:00:00',
+        '2023-04-18 10:00:00',
+        'NORMAL',
+        'Análise de requisitos',
+        'Projeto X',
+        'Rafaela'
+    ), (
+        13652,
+        'gustavo',
+        987654321,
+        '2023-04-19 13:30:00',
+        '2023-04-19 16:00:00',
+        'NORMAL',
+        'Revisão de código',
+        'Projeto Y',
+        'Mariana'
+    ), (
+        13652,
+        'fernanda',
+        123456789,
+        '2023-04-20 09:30:00',
+        '2023-04-20 11:00:00',
+        'NORMAL',
+        'Planejamento de sprint',
+        'Projeto Z',
+        'Gustavo'
+    ), (
+        13652,
+        'carlos',
+        987654321,
+        '2023-04-21 08:30:00',
+        '2023-04-21 10:30:00',
+        'NORMAL',
+        'Reunião com o cliente',
+        'Projeto X',
+        'João'
+    ), (
+        13652,
+        'rafael',
+        123456789,
+        '2023-04-22 14:00:00',
+        '2023-04-22 16:30:00',
+        'NORMAL',
+        'Desenvolvimento de funcionalidade',
+        'Projeto Y',
+        'Maria'
+    ), (
+        13652,
+        'lucas',
+        987654321,
+        '2023-04-23 10:00:00',
+        '2023-04-23 12:30:00',
+        'NORMAL',
+        'Testes de integração',
+        'Projeto Z',
+        'Fernanda'
+    ), (
+        13652,
+        'mariana',
+        123456789,
+        '2023-04-24 08:30:00',
+        '2023-04-24 10:30:00',
+        'NORMAL',
+        'Análise de requisitos',
+        'Projeto X',
+        'Rafaela'
     );
 
+Certifique - se de ajustar as informações conforme necessário.User oq significa isso ? Search results Free1Cost: 34 ms Cannot
+add or
+update
+    a child row: a foreign key constraint fails (
+        `2rp`.`hora`,
+        CONSTRAINT `hora_ibfk_2` FOREIGN KEY (`username_lancador`) REFERENCES `usuario` (`username`)
+    ) ChatGPT Desculpe pelo erro.O erro que você está vendo ocorre porque o valor fornecido para o campo "username_lancador" na tabela "hora" não corresponde a um valor existente na tabela "usuario".Parece haver uma restrição de chave estrangeira entre essas duas tabelas.Certifique - se de que o valor fornecido para "username_lancador" corresponda a um valor válido existente na tabela "usuario".Verifique se os dados estão corretos e tente novamente.Se você estiver inserindo um novo registro na tabela "hora",
+    verifique se o valor fornecido para "username_lancador" já existe na tabela "usuario" antes de realizar a inserção.Se o problema persistir,
+    revise as restrições de chave estrangeira definidas nas tabelas relevantes para garantir que estejam corretas.Regenerate response
 INSERT INTO
     verba (
         cod_verba,
