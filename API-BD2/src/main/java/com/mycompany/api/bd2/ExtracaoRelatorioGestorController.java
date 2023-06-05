@@ -23,6 +23,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -149,30 +150,49 @@ public class ExtracaoRelatorioGestorController {
     }
     
     @FXML
-    public void gerarRelatorio() throws Exception{
+    public void gerarRelatorio() throws Exception {
         Conexao conexao = new Conexao();
         Calendar data = Calendar.getInstance();
         SimpleDateFormat formatadorData = new SimpleDateFormat("dd.MM.yyyy");
         String formData = formatadorData.format(data.getTime());
-        
-        if(tipo==null||DataInicio.getValue() == null || DataFim.getValue()==null){
-            if(tipo==null)erro("tipo");
-            
-            if(DataInicio.getValue() == null || DataFim.getValue()==null) erro("de início e de fim");
-        }
-        else{
-            DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            if(tipo.equals("Todos")){
-            conexao.gerarRelatorioCSV(formData,tipo,"SELECT * FROM 2rp.hora "
-            + "WHERE data_hora_inicio BETWEEN '"+DataInicio.getValue().format(formato)+"' AND '"+DataFim.getValue().format(formato)+
-            "'AND data_hora_fim BETWEEN '"+DataInicio.getValue().format(formato)+"' AND '"+DataFim.getValue().format(formato)+"'"); 
+
+        if (tipo == null || DataInicio.getValue() == null || DataFim.getValue() == null) {
+            if (tipo == null) {
+                erro("tipo");
             }
-            else{
-            conexao.gerarRelatorioCSV(formData,tipo,"SELECT * FROM 2rp.hora WHERE status = '"+tipo.toLowerCase()+"' "
-            + "AND data_hora_inicio BETWEEN '"+DataInicio.getValue().format(formato)+"' AND '"+DataFim.getValue().format(formato)+
-            "'AND data_hora_fim BETWEEN '"+DataInicio.getValue().format(formato)+"' AND '"+DataFim.getValue().format(formato)+"'");           
-                }
+
+            if (DataInicio.getValue() == null || DataFim.getValue() == null) {
+                erro("de início e de fim");
+            }
+        } else {
+            DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            if (tipo.equals("Todos")) {
+                conexao.gerarRelatorioCSV(formData, tipo,
+                        "SELECT * FROM 2rp.hora " + "WHERE data_hora_inicio BETWEEN '"
+                        + DataInicio.getValue().format(formato) + "' AND '"
+                        + DataFim.getValue().format(formato) + "'AND data_hora_fim BETWEEN '"
+                        + DataInicio.getValue().format(formato) + "' AND '"
+                        + DataFim.getValue().format(formato) + "'");
+            } else {
+                conexao.gerarRelatorioCSV(formData, tipo,
+                        "SELECT * FROM 2rp.hora WHERE status = '" + tipo.toLowerCase() + "' "
+                        + "AND data_hora_inicio BETWEEN '" + DataInicio.getValue().format(formato) + "' AND '"
+                        + DataFim.getValue().format(formato) + "'AND data_hora_fim BETWEEN '"
+                        + DataInicio.getValue().format(formato) + "' AND '"
+                        + DataFim.getValue().format(formato) + "'");
+
+            }
+
+            exibirPopUpAviso("Arquivo extraído com sucesso!");
         }
+    }
+
+    private void exibirPopUpAviso(String mensagem) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Aviso");
+        alert.setHeaderText(null);
+        alert.setContentText(mensagem);
+        alert.showAndWait();
     }
     
     private void erro(String motivo){
