@@ -162,9 +162,19 @@ public class ExtracaoRelatorioADMController {
             conexao.gerarRelatorioCSV(formData,tipo,"SELECT * FROM 2rp.hora WHERE status_aprovacao = '"+tipo.toLowerCase()+"' "
             + "AND data_hora_inicio BETWEEN '"+DataInicio.getValue().format(formato)+"' AND '"+DataFim.getValue().format(formato)+
             "'AND data_hora_fim BETWEEN '"+DataInicio.getValue().format(formato)+"' AND '"+DataFim.getValue().format(formato)+"'");           
-                }
+
+            }
+
+            exibirPopUpAviso("Arquivo extraído com sucesso!");
         }
-        
+    }
+
+    private void exibirPopUpAviso(String mensagem) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Aviso");
+        alert.setHeaderText(null);
+        alert.setContentText(mensagem);
+        alert.showAndWait();
     }
     
     private void erro(String motivo){
