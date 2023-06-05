@@ -164,7 +164,7 @@
                               <TableColumn fx:id="colunaCR" prefWidth="68.0" text="CR" />
                               <TableColumn fx:id="colunaEmpresa" prefWidth="96.80001831054688" text="Empresa" />
                               <TableColumn fx:id="colunaProjeto" prefWidth="123.20001220703125" text="Projeto" />
-                              <TableColumn fx:id="colunaFuncao" prefWidth="111.99993896484375" text="Tipo" />
+                              <TableColumn fx:id="colunaTipo" prefWidth="111.99993896484375" text="Tipo" />
                               <TableColumn fx:id="colunaInicio" prefWidth="68.0" text="Inicio" />
                               <TableColumn fx:id="colunaFim" prefWidth="73.5999755859375" text="Fim" />
                               <TableColumn fx:id="colunaJust" prefWidth="102.80002441406259" text="Justificativa" />

@@ -91,7 +91,7 @@ public class ApontamentoGestorController implements Initializable {
     @FXML
     private TableColumn<TabelaAprovaçãoGestor, String> colunaEmpresa;//ok
     @FXML
-    private TableColumn<TabelaAprovaçãoGestor, String> colunaFunçao;//ok
+    private TableColumn<TabelaAprovaçãoGestor, String> colunaTipo;//ok
     @FXML
     private TableColumn<TabelaAprovaçãoGestor, String> colunaProjeto;//ok
     @FXML
@@ -181,6 +181,7 @@ public void carregarTabelaLancamento() {
     colunaInicio.setCellValueFactory(new PropertyValueFactory<>("inicio"));
     colunaFim.setCellValueFactory(new PropertyValueFactory<>("fim"));
     colunaJust.setCellValueFactory(new PropertyValueFactory<>("justificativa"));
+    colunaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
 
     tabelaApontamento.refresh();
 }
