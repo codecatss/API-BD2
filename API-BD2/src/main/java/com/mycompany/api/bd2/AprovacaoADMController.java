@@ -213,7 +213,7 @@ public class AprovacaoADMController implements Initializable {
         tabelaAprovacao.setItems(observablelisthoras);
         colunaColaboradorADM.setCellValueFactory(new PropertyValueFactory<>("username_lancador"));
         colunaCRADM.setCellValueFactory(new PropertyValueFactory<>("cod_cr"));
-        colundaGestorADM.setCellValueFactory(new PropertyValueFactory<>("aprovador_gestor"));
+        colundaGestorADM.setCellValueFactory(new PropertyValueFactory<>("username_aprovador"));
         colunaEmpresaADM.setCellValueFactory(new PropertyValueFactory<>("cnpj_cliente"));
         colunaProjetoADM.setCellValueFactory(new PropertyValueFactory<>("projeto"));
         colunaInicioADM.setCellValueFactory(new PropertyValueFactory<>("data_hora_inicio"));
