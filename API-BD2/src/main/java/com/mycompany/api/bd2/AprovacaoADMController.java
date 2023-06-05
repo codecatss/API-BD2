@@ -74,8 +74,6 @@ public class AprovacaoADMController implements Initializable {
     @FXML
     private TableColumn<Hora, String> colunaProjetoADM;
     @FXML
-    private TableColumn<Hora, String> colunaFuncaoADM;
-    @FXML
     private TableColumn<Hora, String> colunaInicioADM;
     @FXML
     private TableColumn<Hora, String> colunaFimADM;
@@ -102,11 +100,11 @@ public class AprovacaoADMController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        comboboxStatusApontamentos.getItems().addAll("TODAS HORAS", "APROVADAS", "REPROVADAS", "PENDENTES");
+        comboboxStatusApontamentos.getItems().addAll("TODAS AS HORAS", "APROVADAS", "REPROVADAS", "PENDENTES");
         comboboxStatusApontamentos.setValue("PENDENTES");
 
         comboboxStatusApontamentos.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.equals("TODAS HORAS")) {
+            if (newValue.equals("TODAS AS HORAS")) {
                 System.out.println("Todas");
                 carregarTabelaLancamento();
             } else if (newValue.equals("REPROVADAS")) {
@@ -200,7 +198,7 @@ public class AprovacaoADMController implements Initializable {
 
         if (opcaoSelecionada.equals("APROVADAS")) {
             lishoras.addAll(horadao.getAprovadaHoras());
-        } else if (opcaoSelecionada.equals("TODAS HORAS")) {
+        } else if (opcaoSelecionada.equals("TODAS AS HORAS")) {
             lishoras.addAll(horadao.getTodasHoras());
         } else if (opcaoSelecionada.equals("PENDENTES")) {
             lishoras.addAll(horadao.getHorasAprovadas());

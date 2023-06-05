@@ -153,9 +153,8 @@
                               <TableColumn fx:id="colunaColaboradorADM" maxWidth="100.0" prefWidth="84.79998779296875" text="Colaborador" />
                               <TableColumn fx:id="colunaCRADM" maxWidth="124.80001831054688" prefWidth="60.0" text="CR" />
                               <TableColumn fx:id="colundaGestorADM" prefWidth="75.20004272460938" text="Gestor" />
-                              <TableColumn fx:id="colunaEmpresaADM" maxWidth="138.39996337890625" prefWidth="81.5999755859375" text="Empresa" />
+                              <TableColumn fx:id="colunaEmpresaADM" maxWidth="138.39996337890625" prefWidth="81.5999755859375" text="Cliente" />
                               <TableColumn fx:id="colunaProjetoADM" maxWidth="146.4000244140625" prefWidth="73.60003662109375" text="Projeto" />
-                              <TableColumn fx:id="colunaFuncaoADM" maxWidth="163.2000732421875" prefWidth="89.60003662109375" text="Função" />
                               <TableColumn fx:id="colunaInicioADM" maxWidth="141.5999755859375" prefWidth="97.60009765625" text="Início" />
                               <TableColumn fx:id="colunaFimADM" maxWidth="100.0" prefWidth="82.39990234375" text="Fim" />
                               <TableColumn fx:id="colunaJustificativaADM" maxWidth="168.0" prefWidth="120.7999267578125" text="Justificativa" />

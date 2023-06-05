@@ -251,7 +251,12 @@ public class horaDAO {
     
     public List getHora(StatusAprovacao status, String ini, String fim) {
 
-        String sql = "SELECT * FROM 2rp.hora WHERE data_hora_inicio BETWEEN ? AND ? AND data_hora_fim BETWEEN ? AND ?";
+        String sql = "SELECT hora.*, integrante.username_integrante as gestor "
+                + "FROM 2rp.hora left join 2rp.integrante "
+                + "ON hora.cod_cr = integrante.cod_cr "
+                + "WHERE integrante.gestor = true "
+                + "AND data_hora_inicio BETWEEN ? AND ? "
+                + "AND data_hora_fim BETWEEN ? AND ?";
         if(!status.name().equals("todos"))sql = sql + "AND status_aprovacao = ?";
         
         List horasUser = new LinkedList();
@@ -282,7 +287,7 @@ public class horaDAO {
                 hora.setTipo(rset.getString("tipo"));
                 hora.setJustificativa_lancamento(rset.getString("justificativa_lancamento"));
                 hora.setProjeto(rset.getString("projeto"));
-                hora.setUsername_aprovador(rset.getString("aprovador_gestor"));
+                hora.setUsername_aprovador(rset.getString("gestor"));
                 hora.setJustificativa_negacao(rset.getString("justificativa_negacao"));
                 hora.setStatus_aprovacao(rset.getString("status_aprovacao"));
                 hora.setSolicitante(rset.getString("solicitante_lancamento"));

@@ -4,7 +4,6 @@
  */
 package com.mycompany.api.bd2;
 
-import Conexao.Conexao;
 import com.mycompany.api.bd2.daos.horaDAO;
 import com.mycompany.api.bd2.daos.integranteDAO;
 import com.mycompany.api.bd2.models.StatusAprovacao;
@@ -12,17 +11,9 @@ import com.mycompany.api.bd2.models.TabelaAprovaçãoGestor;
 import com.mycompany.api.bd2.models.Usuario;
 import java.io.IOException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,19 +26,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -120,7 +109,7 @@ public class ApontamentoGestorController implements Initializable {
         comboboxStatusApontamentos.setValue("PENDENTES");
 
         comboboxStatusApontamentos.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.equals("TODAS HORAS")) {
+            if (newValue.equals("TODAS AS HORAS")) {
                 carregarTabelaLancamento();
                 System.out.println("Todas");
             } else if (newValue.equals("REPROVADAS")) {
@@ -163,7 +152,7 @@ public void carregarTabelaLancamento() {
 
     if (opcaoSelecionada.equals("APROVADAS")) {
         lishoras.addAll(horadao.getHora(crgestor.getListCrGestor(usuario), "TabelaAprovaçãoGestor", StatusAprovacao.aprovado_gestor));
-    } else if (opcaoSelecionada.equals("TODAS HORAS")) {
+    } else if (opcaoSelecionada.equals("TODAS AS HORAS")) {
         lishoras.addAll(horadao.getHora(crgestor.getListCrGestor(usuario), "TabelaAprovaçãoGestor", null));
     } else if (opcaoSelecionada.equals("PENDENTES")) {
         lishoras.addAll(horadao.getHora(crgestor.getListCrGestor(usuario), "TabelaAprovaçãoGestor", StatusAprovacao.pendente));

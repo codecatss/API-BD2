@@ -308,6 +308,7 @@ public class ExtracaoRelatorioADMController {
         colunaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto"));
         colunaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         colunaStatus.setCellValueFactory(new PropertyValueFactory<>("status_aprovacao"));
+        colunaGestor.setCellValueFactory(new PropertyValueFactory<>("username_aprovador"));
 
         tabelaRelatorio.refresh();
     }
