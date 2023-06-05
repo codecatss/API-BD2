@@ -175,7 +175,7 @@ public class ExtracaoRelatorioGestorController {
                         + DataFim.getValue().format(formato) + "'");
             } else {
                 conexao.gerarRelatorioCSV(formData, tipo,
-                        "SELECT * FROM 2rp.hora WHERE status = '" + tipo.toLowerCase() + "' "
+                        "SELECT * FROM 2rp.hora WHERE status_aprovacao = '" + tipo.toLowerCase() + "_gestor' or status_aprovacao = '" + tipo.toLowerCase() + "_adm' "
                         + "AND data_hora_inicio BETWEEN '" + DataInicio.getValue().format(formato) + "' AND '"
                         + DataFim.getValue().format(formato) + "'AND data_hora_fim BETWEEN '"
                         + DataInicio.getValue().format(formato) + "' AND '"
