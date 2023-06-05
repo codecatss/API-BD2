@@ -139,6 +139,7 @@ public class ExtracaoRelatorioADMController {
     
     @FXML
     public void gerarRelatorio() throws Exception{
+        
         Conexao conexao = new Conexao();
         Calendar data = Calendar.getInstance();
         SimpleDateFormat formatadorData = new SimpleDateFormat("dd.MM.yyyy");
@@ -163,6 +164,7 @@ public class ExtracaoRelatorioADMController {
             "'AND data_hora_fim BETWEEN '"+DataInicio.getValue().format(formato)+"' AND '"+DataFim.getValue().format(formato)+"'");           
                 }
         }
+        
     }
     
     private void erro(String motivo){
