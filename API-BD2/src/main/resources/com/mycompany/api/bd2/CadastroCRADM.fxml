@@ -101,7 +101,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button id="menuRelatorio" fx:id="menuRelatorio" mnemonicParsing="false" onAction="#Relatorios" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Relatórios" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="360.0">
+                        <Button id="menuRelatorio" fx:id="menuRelatorio" mnemonicParsing="false" onAction="#RelatorioCSV" styleClass="nav-btn" stylesheets="@EstilizacaoTelas.css" text="Relatórios" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="360.0">
                            <graphic>
                               <ImageView fitHeight="28.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

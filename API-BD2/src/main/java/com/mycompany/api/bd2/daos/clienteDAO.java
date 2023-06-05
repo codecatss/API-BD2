@@ -101,7 +101,7 @@ public class clienteDAO {
 				
 				Cliente cliente = new Cliente();
 				
-				cliente.setCnpj(rset.getLong("cnpj"));
+				cliente.setCnpj(rset.getInt("cnpj"));
 				cliente.setRazao_social(rset.getString("razao_social"));
 				cliente.setStatus_cliente(rset.getString("status_cliente"));
 				clientes.add(cliente);
@@ -149,7 +149,7 @@ public class clienteDAO {
 			
 			if (rset.next()) {
 				
-				cliente.setCnpj(rset.getLong("cnpj"));
+				cliente.setCnpj(rset.getInt("cnpj"));
 				cliente.setRazao_social(rset.getString("razao_social"));
 				cliente.setStatus_cliente(rset.getString("status_cliente"));
 				
@@ -197,7 +197,7 @@ public class clienteDAO {
 			
                         if (rset.next()) {
 				
-				cliente.setCnpj(rset.getLong("cnpj"));
+				cliente.setCnpj(rset.getInt("cnpj"));
 				cliente.setRazao_social(rset.getString("razao_social"));
                                 cliente.setStatus_cliente(rset.getString("status_cliente"));
 				                                

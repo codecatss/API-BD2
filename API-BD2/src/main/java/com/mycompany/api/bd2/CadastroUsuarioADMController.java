@@ -6,6 +6,7 @@
 package com.mycompany.api.bd2;
 
 import com.mycompany.api.bd2.daos.usuarioDAO;
+import com.mycompany.api.bd2.models.Funcao;
 import com.mycompany.api.bd2.models.Usuario;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -141,7 +142,7 @@ public class CadastroUsuarioADMController {
                     valorDoItemSelecionado = item.getUsername();
                     entradaNome.setText(item.getNome());
                     entradaUsername.setText(item.getUsername());
-                    selecaoFuncao.setValue(item.getCargo());
+                    selecaoFuncao.setValue(item.getCargo().name());
                 }
             }
         });
@@ -159,7 +160,7 @@ public class CadastroUsuarioADMController {
         String funcao = selecaoFuncao.getSelectionModel().getSelectedItem();
         usuario.setUsername(username);
         usuario.setNome(nome);
-        usuario.setCargo(funcao);
+        usuario.setCargo(Funcao.valueOf(funcao));
         usuario.setStatus("ativo");
         if (funcao.equals("admin")) {
             usuario.setSenha("admin123");
@@ -237,7 +238,7 @@ public class CadastroUsuarioADMController {
 
                 Usuario usuario = usuarioDao.getUsuarioByUsername(valorDoItemSelecionado);
                 usuario.setNome(nome);
-                usuario.setCargo(funcao);
+                usuario.setCargo(Funcao.valueOf(funcao));
 
                 usuarioDao.update(usuario);
                 limparCampos();
@@ -315,20 +316,24 @@ public class CadastroUsuarioADMController {
     }
 
     @FXML
-    void AprovarHoras(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Em progresso");
-        alert.setHeaderText(null);
-        alert.setContentText("Desculpe o transtorno, estamos sempre trabalhando em melhorias");
-        alert.showAndWait();
+    void AprovarHoras(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AprovacaoADM.fxml"));
+        Parent root = loader.load();
+        Scene cena = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+        stage.setScene(cena);
+        stage.centerOnScreen();
+        stage.show();
     }
-
+    
     @FXML
-    void Relatorios(ActionEvent event) throws IOException {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Em progresso");
-        alert.setHeaderText(null);
-        alert.setContentText("Desculpe o transtorno, estamos sempre trabalhando em melhorias");
-        alert.showAndWait();
+        public void RelatorioCSV(ActionEvent event) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ExtracaoRelatorioADM.fxml"));
+        Parent root = loader.load();
+        Scene cena = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+        stage.setScene(cena);
+        stage.centerOnScreen();
+        stage.show();
     }
 }

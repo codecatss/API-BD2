@@ -4,30 +4,37 @@
  */
 package com.mycompany.api.bd2.models;
 
+import com.mycompany.api.bd2.daos.clienteDAO;
+
 /**
  *
  * @author csous
  */
 public class TabelaAprovaçãoGestor {
     
-    private int id;
-    private String username;
-    private int cod_cr;
+    private Integer id;
+    private String username_lancador;
+    private Integer cod_cr;
     private String nome_cr;
     private String empresa;
     private String projeto;
-    private TipoHora tipo;
+    private String tipo;
     private String inicio;
     private String fim;
     private String justificativa;
     private String justificativa_lancamento;
 
     public String getUsername() {
-        return username;
+        return username_lancador;
+    }
+    
+     public String getUsername_lancador() {
+        return username_lancador;
     }
 
+
     public void setUsername(String username) {
-        this.username = username;
+        this.username_lancador = username;
     }
 
     public int getCod_cr() {
@@ -50,8 +57,9 @@ public class TabelaAprovaçãoGestor {
         return empresa;
     }
 
-    public void setEmpresa(String empresa) {
-        this.empresa = empresa;
+    public void setEmpresa(int cnpj) {
+        clienteDAO clientedao = new clienteDAO();
+        this.empresa = clientedao.getClientebyCNPJ(cnpj).getRazao_social();
     }
 
     public String getProjeto() {
@@ -62,12 +70,12 @@ public class TabelaAprovaçãoGestor {
         this.projeto = projeto;
     }
 
-    public TipoHora getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
     public void setTipo(String tipo) {
-        this.tipo = TipoHora.valueOf(tipo);
+        this.tipo = tipo;
     }
 
     public String getInicio() {

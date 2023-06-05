@@ -199,3 +199,26 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-font-family:"Arial";
 
 }
+
+.text-just{
+    -fx-font-family:"Arial";
+    -fx-background-color:#ddd;
+}
+
+.add{
+    -fx-background-color:#2b913c;
+    -fx-font-family:"Arial";
+    -fx-cursor:hand;
+}
+.add:hover{
+    -fx-background-color:#1f6b2a;
+}
+
+.cancel{
+    -fx-background-color:#df1a1a;
+    -fx-font-family:"Arial";
+    -fx-cursor:hand;
+}
+.cancel:hover{
+    -fx-background-color:#991a1a;
+}

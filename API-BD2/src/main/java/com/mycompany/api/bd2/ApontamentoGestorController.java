@@ -4,19 +4,25 @@
  */
 package com.mycompany.api.bd2;
 
-import static com.mycompany.api.bd2.TelaLoginController.usuariologado;
+import Conexao.Conexao;
 import com.mycompany.api.bd2.daos.horaDAO;
 import com.mycompany.api.bd2.daos.integranteDAO;
-import com.mycompany.api.bd2.models.Hora;
+import com.mycompany.api.bd2.models.StatusAprovacao;
 import com.mycompany.api.bd2.models.TabelaAprovaçãoGestor;
 import com.mycompany.api.bd2.models.Usuario;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,6 +33,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -34,6 +41,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextInputDialog;
 
 /**
  * FXML Controller class
@@ -66,6 +80,10 @@ public class ApontamentoGestorController implements Initializable {
     private Button BotaoReprovar;
 
     @FXML
+    private TextArea textoJustificativa;
+    @FXML
+    private ComboBox<String> comboboxStatusApontamentos;
+    @FXML
     private TableView<TabelaAprovaçãoGestor> tabelaApontamento;
 
     @FXML
@@ -86,14 +104,10 @@ public class ApontamentoGestorController implements Initializable {
     private TableColumn<TabelaAprovaçãoGestor, String> colunaInicio;//ok
 
     horaDAO horadao = new horaDAO();
-    
+
     private List<TabelaAprovaçãoGestor> lishoras = new ArrayList<>();
     private ObservableList<TabelaAprovaçãoGestor> observablelisthoras = FXCollections.observableArrayList();
 
-    public static Usuario getUsuario1() {
-        return usuariologado;
-    }
-    public static Usuario usuariologado = new Usuario();
     private String usuario = TelaLoginController.usuariologado.getUsername();
 
     /**
@@ -101,6 +115,26 @@ public class ApontamentoGestorController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        comboboxStatusApontamentos.getItems().addAll( "APROVADAS", "REPROVADAS", "PENDENTES");
+        comboboxStatusApontamentos.setValue("PENDENTES");
+
+        comboboxStatusApontamentos.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.equals("TODAS HORAS")) {
+                carregarTabelaLancamento();
+                System.out.println("Todas");
+            } else if (newValue.equals("REPROVADAS")) {
+                carregarTabelaLancamento();
+                System.out.println("Reprovada");
+                // Lógica para exibir as horas reprovadas
+            } else if (newValue.equals("APROVADAS")) {
+                carregarTabelaLancamento();
+                System.out.println("Aprovadas");
+            } else if (newValue.equals("PENDENTES")) {
+                carregarTabelaLancamento();
+                // Lógica para exibir as horas pendentes
+            }
+        });
         // TODO
         nomeUsuario.setText(usuario);
         menuApontamento.setDisable(true);
@@ -119,40 +153,97 @@ public class ApontamentoGestorController implements Initializable {
 
     private integranteDAO crgestor = new integranteDAO();
 
-    @FXML
-    public void carregarTabelaLancamento() {
-        lishoras.clear();
-        lishoras.addAll(horadao.getHora(crgestor.getListCrGestor(usuario)));
-        observablelisthoras.setAll(lishoras);
-        tabelaApontamento.setItems(observablelisthoras);
 
-        colunaUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
-        colunaCR.setCellValueFactory(new PropertyValueFactory<>("cod_cr"));
-        colunaEmpresa.setCellValueFactory(new PropertyValueFactory<>("empresa"));
-        colunaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto"));
-        colunaInicio.setCellValueFactory(new PropertyValueFactory<>("inicio"));
-        colunaFim.setCellValueFactory(new PropertyValueFactory<>("fim"));
-        //colunaJust.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
-        //colunaFunçao.setCellValueFactory(new PropertyValueFactory<>("justificativa_lancamento"));
-        tabelaApontamento.refresh();
+
+@FXML
+public void carregarTabelaLancamento() {
+    lishoras.clear();
+
+    String opcaoSelecionada = comboboxStatusApontamentos.getValue();
+
+    if (opcaoSelecionada.equals("APROVADAS")) {
+        lishoras.addAll(horadao.getHora(crgestor.getListCrGestor(usuario), "TabelaAprovaçãoGestor", StatusAprovacao.aprovado_gestor));
+    } else if (opcaoSelecionada.equals("TODAS HORAS")) {
+        lishoras.addAll(horadao.getHora(crgestor.getListCrGestor(usuario), "TabelaAprovaçãoGestor", null));
+    } else if (opcaoSelecionada.equals("PENDENTES")) {
+        lishoras.addAll(horadao.getHora(crgestor.getListCrGestor(usuario), "TabelaAprovaçãoGestor", StatusAprovacao.pendente));
+    } else if (opcaoSelecionada.equals("REPROVADAS")) {
+        lishoras.addAll(horadao.getHora(crgestor.getListCrGestor(usuario), "TabelaAprovaçãoGestor", StatusAprovacao.negado_gestor));
     }
+
+    observablelisthoras.setAll(lishoras);
+    tabelaApontamento.setItems(observablelisthoras);
+
+    colunaUsername.setCellValueFactory(new PropertyValueFactory<>("username_lancador"));
+    colunaCR.setCellValueFactory(new PropertyValueFactory<>("cod_cr"));
+    colunaEmpresa.setCellValueFactory(new PropertyValueFactory<>("empresa"));
+    colunaProjeto.setCellValueFactory(new PropertyValueFactory<>("projeto"));
+    colunaInicio.setCellValueFactory(new PropertyValueFactory<>("inicio"));
+    colunaFim.setCellValueFactory(new PropertyValueFactory<>("fim"));
+    colunaJust.setCellValueFactory(new PropertyValueFactory<>("justificativa"));
+
+    tabelaApontamento.refresh();
+}
 
     @FXML
     public void botaoAprovar() {
         if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
-            horadao.aprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId());
-            carregarTabelaLancamento();
+            if (!textoJustificativa.getText().isEmpty()) {
+                // Exibe um popup informando que a justificativa deve estar em branco
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Justificativa não permitida");
+                alert.setHeaderText(null);
+                alert.setContentText("Por favor, deixe o campo de justificativa em branco para aprovar a hora.");
+
+                alert.showAndWait();
+            } else {
+                // Exibe um popup de confirmação
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirmação");
+                alert.setHeaderText(null);
+                alert.setContentText("Tem certeza de que deseja aprovar a hora?");
+
+                ButtonType buttonNao = new ButtonType("Não");
+                ButtonType buttonSim = new ButtonType("Sim");
+
+                alert.getButtonTypes().setAll(buttonNao, buttonSim);
+
+                alert.showAndWait().ifPresent(buttonType -> {
+                    if (buttonType == buttonSim) {
+                        String usernameAprovador = usuario; // Obtenha o nome do usuário aprovador
+                        horadao.aprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId(), usernameAprovador);
+                        carregarTabelaLancamento();
+                    }
+                });
+            }
         }
     }
 
     @FXML
     public void botaoReprovar() {
         if (tabelaApontamento.getSelectionModel().getSelectedItem() != null) {
-            horadao.reprovarHora(tabelaApontamento.getSelectionModel().getSelectedItem().getId());
-            carregarTabelaLancamento();
+            String justificativa = textoJustificativa.getText();
+            if (!justificativa.isEmpty()) {
+                int id = tabelaApontamento.getSelectionModel().getSelectedItem().getId();
+                String usernameReprovador = usuario; // Obtenha o nome do usuário reprovador
+                horadao.reprovarHora(id, justificativa, usernameReprovador);
+                carregarTabelaLancamento();
+                textoJustificativa.clear(); // Limpa o campo de justificativa
+            } else {
+                // Exibe um popup informando que a justificativa é obrigatória e cancela a reprovação
+                Dialog<ButtonType> dialog = new Dialog<>();
+                dialog.setTitle("Justificativa Necessária");
+                dialog.setHeaderText(null);
+                dialog.setContentText("Por favor, digite uma justificativa para a negação.");
+
+                ButtonType cancelButton = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+                dialog.getDialogPane().getButtonTypes().addAll(cancelButton);
+
+                dialog.showAndWait();
+            }
         }
     }
-    
+
     @FXML
     public void navLancamentoColaborador(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LancamentoColaborador.fxml"));
@@ -163,8 +254,8 @@ public class ApontamentoGestorController implements Initializable {
         stage.centerOnScreen();
         stage.show();
     }
-    
-        @FXML
+
+    @FXML
     private void BotaoSair(ActionEvent event) throws IOException {
         Usuario usuario = new Usuario();
         usuario.logout();
@@ -173,6 +264,17 @@ public class ApontamentoGestorController implements Initializable {
         Scene cena = new Scene(root);
         Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
         stage.setScene(cena);
+        stage.show();
+    }
+
+    @FXML
+    public void RelatorioCSV(ActionEvent event) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ExtracaoRelatorioGestor.fxml"));
+        Parent root = loader.load();
+        Scene cena = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+        stage.setScene(cena);
+        stage.centerOnScreen();
         stage.show();
     }
 }
