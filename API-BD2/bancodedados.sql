@@ -4,7 +4,7 @@ create database 2rp;
 
 -- Configurando user e password padrão do banco de dados para conectar ao JDbC
 
-CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin123';
+CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'admin123';
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON 2rp.* TO 'admin'@'localhost';
 
@@ -224,7 +224,7 @@ VALUES (
 
 INSERT INTO
     centro_resultado (nome, codigo_cr, sigla)
-VALUES ('Codecats', '13652', 'CCTS');
+VALUES ('Codecats', '13652', 'CCTS'), ('Prado & Reis', '14615', 'PER'), ('2RP', '14256', '2RP');
 
 -- Adição de Clientes
 
@@ -298,7 +298,7 @@ VALUES (
         987654321,
         '2023-04-16 09:00:00',
         '2023-04-16 12:00:00',
-        'NORMAL',
+        'EXTRA',
         'Reunião de equipe',
         'Projeto X',
         'Carlos'
@@ -308,7 +308,7 @@ VALUES (
         123456789,
         '2023-04-16 14:00:00',
         '2023-04-16 16:30:00',
-        'NORMAL',
+        'EXTRA',
         'Desenvolvimento de funcionalidade',
         'Projeto Y',
         'Lucas'
@@ -318,7 +318,7 @@ VALUES (
         987654321,
         '2023-04-17 10:30:00',
         '2023-04-17 12:30:00',
-        'NORMAL',
+        'EXTRA',
         'Testes de integração',
         'Projeto Z',
         'Fernanda'
@@ -328,7 +328,7 @@ VALUES (
         123456789,
         '2023-04-18 08:00:00',
         '2023-04-18 10:00:00',
-        'NORMAL',
+        'EXTRA',
         'Análise de requisitos',
         'Projeto X',
         'Rafaela'
@@ -338,7 +338,7 @@ VALUES (
         987654321,
         '2023-04-19 13:30:00',
         '2023-04-19 16:00:00',
-        'NORMAL',
+        'EXTRA',
         'Revisão de código',
         'Projeto Y',
         'Mariana'
@@ -348,7 +348,7 @@ VALUES (
         123456789,
         '2023-04-20 09:30:00',
         '2023-04-20 11:00:00',
-        'NORMAL',
+        'EXTRA',
         'Planejamento de sprint',
         'Projeto Z',
         'Gustavo'
@@ -358,7 +358,7 @@ VALUES (
         987654321,
         '2023-04-21 08:30:00',
         '2023-04-21 10:30:00',
-        'NORMAL',
+        'EXTRA',
         'Reunião com o cliente',
         'Projeto X',
         'João'
@@ -368,7 +368,7 @@ VALUES (
         123456789,
         '2023-04-22 14:00:00',
         '2023-04-22 16:30:00',
-        'NORMAL',
+        'EXTRA',
         'Desenvolvimento de funcionalidade',
         'Projeto Y',
         'Maria'
@@ -378,7 +378,7 @@ VALUES (
         987654321,
         '2023-04-23 10:00:00',
         '2023-04-23 12:30:00',
-        'NORMAL',
+        'EXTRA',
         'Testes de integração',
         'Projeto Z',
         'Fernanda'
@@ -388,7 +388,7 @@ VALUES (
         123456789,
         '2023-04-24 08:30:00',
         '2023-04-24 10:30:00',
-        'NORMAL',
+        'EXTRA',
         'Análise de requisitos',
         'Projeto X',
         'Rafaela'
